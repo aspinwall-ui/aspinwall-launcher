@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+	<requires lib="gtk" version="4.0"/>
+
+	<template class="AspWidgetHeader" parent="GtkBox">
+		<property name="hexpand">True</property>
+
+		<property name="spacing">5</property>
+
+		<style>
+			<class name="aspinwall-widget-header"/>
+		</style>
+
+		<!-- Header icon and title -->
+		<child>
+			<object class="GtkImage" id="widget_header_icon">
+				<property name="visible">True</property>
+				<property name="icon-name">list-drag-handle-symbolic</property>
+			</object>
+		</child>
+
+		<child>
+			<object class="GtkLabel" id="widget_header_title">
+				<property name="label">Widget</property>
+			</object>
+		</child>
+
+		<!-- Edit mode buttons -->
+		<child>
+			<object class="GtkButton" id="widget_header_settings">
+				<property name="visible">False</property>
+				<property name="halign">end</property>
+				<property name="hexpand">True</property>
+			</object>
+		</child>
+	</template>
+</interface>

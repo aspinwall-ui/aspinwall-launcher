@@ -1,0 +1,2 @@
+#!/bin/sh
+GTK_DEBUG=interactive python3 -m aspinwall.launcher.window

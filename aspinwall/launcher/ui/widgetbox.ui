@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+	<requires lib="gtk" version="4.0"/>
+	<template class="WidgetBox" parent="GtkBox">
+		<property name="orientation">vertical</property>
+		<property name="visible">True</property>
+		<property name="valign">end</property>
+		<property name="halign">start</property>
+		<property name="spacing">15></property>
+		<property name="hexpand">True</property>
+		<property name="vexpand">True</property>
+	</template>
+</interface>
