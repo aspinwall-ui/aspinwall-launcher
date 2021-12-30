@@ -8,7 +8,8 @@ import threading
 import time
 import os
 
-import aspinwall.launcher.widgets
+from aspinwall.launcher.config import config
+from aspinwall.launcher.widgets import AspWidget
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'widgetbox.ui'))
 class WidgetBox(Gtk.Box):
@@ -21,21 +22,16 @@ class WidgetBox(Gtk.Box):
 		"""Initializes the widget box."""
 		super().__init__()
 
-		# TEMP: Fill the widget box with some widgets
-		# This will be handled by a proper config once that's set up
-		self.add(aspinwall.launcher.widgets.Welcome())
-		self.add(aspinwall.launcher.widgets.Welcome())
-		self.add(aspinwall.launcher.widgets.Welcome())
-		self.add(aspinwall.launcher.widgets.Welcome())
-
-	def add(self, widget, position=-1):
+	def add(self, widget_class, config={}, position=-1):
 		"""Adds a widget to the WidgetBox."""
-		aspwidget = aspinwall.launcher.widgets.AspWidget(widget)
+		aspwidget = AspWidget(widget_class, config)
 		self._widgets.insert(position, aspwidget)
 		if position == -1:
 			super().append(aspwidget)
 		else:
 			super().insert_child_after(aspwidget, self._widgets[position])
+
+		self.save_widgets()
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'clockbox.ui'))
 class ClockBox(Gtk.Box):
@@ -80,7 +76,11 @@ def on_activate(app):
 	)
 	win.present()
 
+def on_shutdown(app):
+	config.save()
+
 if __name__ == "__main__":
 	app = Gtk.Application(application_id='org.dithernet.AspinwallLauncher')
 	app.connect('activate', on_activate)
+	app.connect('shutdown', on_shutdown)
 	app.run()
