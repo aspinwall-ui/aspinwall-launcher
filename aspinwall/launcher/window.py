@@ -10,6 +10,7 @@ import os
 
 from aspinwall.launcher.config import config
 from aspinwall.launcher.widgets import AspWidget
+from aspinwall.widgets.loader import get_widget_class_by_id, load_widgets
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'widgetbox.ui'))
 class WidgetBox(Gtk.Box):
@@ -32,6 +33,22 @@ class WidgetBox(Gtk.Box):
 			super().insert_child_after(aspwidget, self._widgets[position])
 
 		self.save_widgets()
+
+	def load_widgets(self):
+		"""Loads widgets from the config."""
+		config.reload()
+		widgets = config.get('widgets')
+		if widgets:
+			for widget in widgets:
+				self.add(AspWidget(get_widget_class_by_id(widget['class']), widget['config']))
+
+	def save_widgets(self):
+		"""Saves the current widget configuration to the config."""
+		widget_list = []
+		for widget in self._widgets:
+			widget_list.append({'class': widget.__class__, 'config': widget._widget.config})
+		config.set('widgets', widget_list)
+		config.save()
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'clockbox.ui'))
 class ClockBox(Gtk.Box):
@@ -65,6 +82,8 @@ class Launcher(Gtk.ApplicationWindow):
 		super().__init__(title='Aspinwall Launcher', application=app)
 
 def on_activate(app):
+	load_widgets()
+
 	win = Launcher()
 	style_provider = Gtk.CssProvider()
 	style_provider.load_from_path(os.path.join(os.path.dirname(__file__), 'launcher.css'))
