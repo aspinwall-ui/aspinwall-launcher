@@ -2,12 +2,46 @@
 <interface>
 	<requires lib="gtk" version="4.0"/>
 	<template class="WidgetBox" parent="GtkBox">
-		<property name="orientation">vertical</property>
-		<property name="visible">True</property>
-		<property name="valign">end</property>
-		<property name="halign">start</property>
-		<property name="spacing">15></property>
-		<property name="hexpand">True</property>
-		<property name="vexpand">True</property>
+		<child>
+			<object class="GtkOverlay">
+				<property name="vexpand">True</property>
+				<child>
+					<object class="GtkScrolledWindow">
+						<property name="hscrollbar-policy">never</property>
+						<child>
+							<object class="GtkBox" id="widget-container">
+								<property name="orientation">vertical</property>
+								<property name="visible">True</property>
+								<property name="valign">end</property>
+								<property name="halign">fill</property>
+								<property name="hexpand">True</property>
+								<property name="vexpand">True</property>
+
+								<property name="margin-top">30</property>
+								<property name="margin-bottom">30</property>
+								<property name="margin-start">30</property>
+								<property name="margin-end">30</property>
+								<property name="spacing">15></property>
+							</object>
+						</child>
+					</object>
+				</child>
+
+				<child type="overlay">
+					<object class="GtkBox">
+						<property name="halign">end</property>
+						<child>
+							<object class="GtkButton">
+								<property name="icon-name">list-add</property>
+								<property name="valign">start</property>
+								<property name="halign">end</property>
+								<property name="margin-top">10</property>
+								<property name="margin-end">10</property>
+							</object>
+						</child>
+					</object>
+				</child>
+			</object>
+		</child>
 	</template>
 </interface>
