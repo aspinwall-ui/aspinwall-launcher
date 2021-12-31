@@ -45,6 +45,6 @@ def get_widget_class_by_id(widget_id):
 	provided ID, if available. Returns None if not found.
 	"""
 	for widget in available_widgets:
-		if widget.metadata[id]:
+		if widget.metadata['id']:
 			return widget
 	return None
