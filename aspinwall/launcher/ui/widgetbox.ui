@@ -37,9 +37,13 @@
 								<property name="halign">end</property>
 								<property name="margin-top">10</property>
 								<property name="margin-end">10</property>
+								<signal name="clicked" handler="show_chooser"/>
 							</object>
 						</child>
 					</object>
+				</child>
+				<child type="overlay">
+					<object class="WidgetChooser" id="widget-chooser-container"/>
 				</child>
 			</object>
 		</child>

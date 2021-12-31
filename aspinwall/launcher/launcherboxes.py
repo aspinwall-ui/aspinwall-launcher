@@ -9,6 +9,7 @@ import time
 
 from aspinwall.launcher.config import config
 from aspinwall.launcher.widgets import AspWidget
+import aspinwall.launcher.widgetchooser
 from aspinwall.widgets.loader import get_widget_class_by_id, load_widgets
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'widgetbox.ui'))
@@ -19,10 +20,20 @@ class WidgetBox(Gtk.Box):
 	_widgets = []
 
 	widget_container = Gtk.Template.Child('widget-container')
+	widget_chooser = Gtk.Template.Child('widget-chooser-container')
 
 	def __init__(self):
 		"""Initializes the widget box."""
 		super().__init__()
+
+		# WORKAROUND: For some reason, the revealer type in the widget chooser
+		# resets itself to slide_down during this step. Force-set the type here
+		# to avoid this.
+		self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
+
+		# Let the widget chooser know a widgetbox has been created
+		aspinwall.launcher.widgetchooser.widgetbox = self
+
 		self.load_widgets()
 
 	def add(self, widget_class, config={}, position=-1):
@@ -51,6 +62,12 @@ class WidgetBox(Gtk.Box):
 			widget_list.append({'id': widget._widget.metadata['id'], 'config': widget._widget.config})
 		config.set('widgets', widget_list)
 		config.save()
+
+	@Gtk.Template.Callback()
+	def show_chooser(self, *args):
+		"""Shows the widget chooser."""
+		self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
+		self.widget_chooser.set_reveal_child(True)
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'clockbox.ui'))
 class ClockBox(Gtk.Box):

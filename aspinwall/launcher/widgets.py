@@ -2,7 +2,7 @@
 """
 Contains basic code for the launcher's widget handling.
 """
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk
 import os
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'widgetheader.ui'))
