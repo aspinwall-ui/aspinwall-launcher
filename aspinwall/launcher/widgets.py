@@ -13,12 +13,18 @@ class AspWidgetHeader(Gtk.Box):
 	icon = Gtk.Template.Child('widget_header_icon')
 	title = Gtk.Template.Child('widget_header_title')
 
-	def __init__(self, widget):
+	def __init__(self, widget, aspwidget):
 		"""Initializes an AspWidgetHeader."""
 		super().__init__()
 		self._widget = widget
+		self._aspwidget = aspwidget
 		self.icon.set_from_icon_name(self._widget.icon)
 		self.title.set_label(self._widget.title)
+
+	@Gtk.Template.Callback()
+	def remove(self, *args):
+		"""Removes the parent AspWidget."""
+		self._aspwidget.remove()
 
 class AspWidget(Gtk.Box):
 	"""
@@ -36,7 +42,7 @@ class AspWidget(Gtk.Box):
 		super().__init__(orientation=Gtk.Orientation.VERTICAL, visible=True, valign=Gtk.Align.END, hexpand=True)
 		self._widget = widget_class(config)
 
-		self.widget_header = AspWidgetHeader(self._widget)
+		self.widget_header = AspWidgetHeader(self._widget, self)
 		self.append(self.widget_header)
 
 		self.widget_content = self._widget
@@ -44,3 +50,7 @@ class AspWidget(Gtk.Box):
 		self.append(self.widget_content)
 
 		self.add_css_class('aspinwall-widget')
+
+	def remove(self):
+		"""Removes the widget from its parent WidgetBox."""
+		self.get_parent().remove(self)

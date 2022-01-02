@@ -26,10 +26,12 @@
 
 		<!-- Edit mode buttons -->
 		<child>
-			<object class="GtkButton" id="widget_header_settings">
-				<property name="visible">False</property>
+			<object class="GtkButton" id="widget_header_delete">
+				<property name="icon-name">window-close</property>
+				<property name="visible">True</property>
 				<property name="halign">end</property>
 				<property name="hexpand">True</property>
+				<signal name="clicked" handler="remove"/>
 			</object>
 		</child>
 	</template>

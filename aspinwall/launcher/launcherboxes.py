@@ -36,15 +36,17 @@ class WidgetBox(Gtk.Box):
 
 		self.load_widgets()
 
-	def add(self, widget_class, config={}, position=-1):
+	def add(self, widget_class, config={}):
 		"""Adds a widget to the WidgetBox."""
 		aspwidget = AspWidget(widget_class, config)
-		self._widgets.insert(position, aspwidget)
-		if position == -1:
-			self.widget_container.append(aspwidget)
-		else:
-			self.widget_container.insert_child_after(aspwidget, self._widgets[position])
+		self._widgets.append(aspwidget)
+		self.widget_container.append(aspwidget)
+		self.save_widgets()
 
+	def remove(self, aspwidget):
+		"""Removes a widget from the WidgetBox."""
+		self._widgets.remove(aspwidget)
+		self.widget_container.remove(aspwidget)
 		self.save_widgets()
 
 	def load_widgets(self):
