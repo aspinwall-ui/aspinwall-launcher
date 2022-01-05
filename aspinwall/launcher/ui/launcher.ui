@@ -16,7 +16,7 @@
 				</child>
 
 				<child>
-					<object class="WidgetBox"/>
+					<object class="WidgetBox" id="widgetbox"/>
 				</child>
 			</object>
 		</child>

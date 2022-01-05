@@ -2,7 +2,7 @@
 """
 Contains code for the ClockBox and WidgetBox.
 """
-from gi.repository import Gtk
+from gi.repository import Gtk, Gio
 import os
 import threading
 import time
@@ -25,6 +25,9 @@ class WidgetBox(Gtk.Box):
 	def __init__(self):
 		"""Initializes the widget box."""
 		super().__init__()
+
+		self._show_chooser_action = Gio.SimpleAction.new("show_widget_chooser", None)
+		self._show_chooser_action.connect("activate", self.show_chooser)
 
 		# WORKAROUND: For some reason, the revealer type in the widget chooser
 		# resets itself to slide_down during this step. Force-set the type here
@@ -65,7 +68,6 @@ class WidgetBox(Gtk.Box):
 		config.set('widgets', widget_list)
 		config.save()
 
-	@Gtk.Template.Callback()
 	def show_chooser(self, *args):
 		"""Shows the widget chooser."""
 		self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)

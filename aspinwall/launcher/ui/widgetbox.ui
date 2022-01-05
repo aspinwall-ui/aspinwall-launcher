@@ -31,13 +31,14 @@
 					<object class="GtkBox">
 						<property name="halign">end</property>
 						<child>
-							<object class="GtkButton">
-								<property name="icon-name">list-add</property>
+							<object class="GtkMenuButton">
+								<property name="icon-name">open-menu-symbolic</property>
 								<property name="valign">start</property>
 								<property name="halign">end</property>
 								<property name="margin-top">10</property>
 								<property name="margin-end">10</property>
-								<signal name="clicked" handler="show_chooser"/>
+								<property name="menu-model">widgetbox-menu</property>
+								<property name="primary">true</property>
 							</object>
 						</child>
 					</object>
@@ -48,4 +49,30 @@
 			</object>
 		</child>
 	</template>
+	<menu id="widgetbox-menu">
+		<section>
+			<item>
+				<attribute name='icon'>list-add-symbolic</attribute>
+				<attribute name='label' translatable='yes'>_Add Widgets</attribute>
+				<attribute name='action'>win.show_widget_chooser</attribute>
+			</item>
+			<item>
+				<attribute name='icon'>list-add-symbolic</attribute>
+				<attribute name='label' translatable='yes'>_Manage Widgets</attribute>
+				<attribute name='action'>win.manage_widgets</attribute>
+			</item>
+		</section>
+		<section>
+			<item>
+				<attribute name='icon'>preferences-system-symbolic</attribute>
+				<attribute name='label' translatable='yes'>_Launcher Settings</attribute>
+				<attribute name='action'>win.settings</attribute>
+			</item>
+			<item>
+				<attribute name='icon'>help-about-symbolic</attribute>
+				<attribute name='label' translatable='yes'>A_bout Aspinwall</attribute>
+				<attribute name='action'>win.about</attribute>
+			</item>
+		</section>
+	</menu>
 </interface>

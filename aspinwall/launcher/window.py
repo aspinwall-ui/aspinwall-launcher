@@ -14,6 +14,8 @@ class Launcher(Gtk.ApplicationWindow):
 	"""Base class for launcher window."""
 	__gtype_name__ = 'Launcher'
 
+	widgetbox = Gtk.Template.Child()
+
 	def __init__(self):
 		"""Initializes the launcher window."""
 		super().__init__(title='Aspinwall Launcher', application=app)
@@ -30,6 +32,9 @@ def on_activate(app):
 		style_provider,
 		Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
 	)
+
+	win.add_action(win.widgetbox._show_chooser_action)
+
 	win.present()
 
 def on_shutdown(app):
