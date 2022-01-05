@@ -41,7 +41,7 @@ class WidgetBox(Gtk.Box):
 
 	def add(self, widget_class, config={}):
 		"""Adds a widget to the WidgetBox."""
-		aspwidget = AspWidget(widget_class, config)
+		aspwidget = AspWidget(widget_class, self, config)
 		self._widgets.append(aspwidget)
 		self.widget_container.append(aspwidget)
 		self.save_widgets()
