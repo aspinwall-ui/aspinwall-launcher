@@ -6,8 +6,10 @@ from gi.repository import Gtk, Gdk
 import os
 
 from aspinwall.launcher.config import config
-from aspinwall.launcher.launcherboxes import ClockBox, WidgetBox
 from aspinwall.widgets.loader import load_widgets
+
+# The ClockBox and WidgetBox classes are imported to avoid "invalid object type" errors.
+from aspinwall.launcher.launcher_boxes import ClockBox, WidgetBox # noqa: F401
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'launcher.ui'))
 class Launcher(Gtk.ApplicationWindow):

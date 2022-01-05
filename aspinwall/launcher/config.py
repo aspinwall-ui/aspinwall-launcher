@@ -49,4 +49,3 @@ if not os.path.exists(config_dir):
 	os.makedirs(config_dir)
 
 config = LauncherConfig(config_file)
-

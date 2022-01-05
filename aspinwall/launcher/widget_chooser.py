@@ -30,13 +30,17 @@ class WidgetInfobox(Gtk.Box):
 		self.widget = widget
 
 		self.widget_icon.set_from_icon_name(widget.icon)
-		self.widget_name.set_markup('<span size="large" font="bold">' + widget.metadata['name'] + '</span>')
-		self.widget_description.set_markup('<span size="medium">' + widget.metadata['description'] + '</span>')
+		self.widget_name.set_markup(
+			'<span size="large" font="bold">' + widget.metadata['name'] + '</span>'
+		)
+		self.widget_description.set_markup(
+			'<span size="medium">' + widget.metadata['description'] + '</span>'
+		)
 
 	@Gtk.Template.Callback()
 	def add_widget_from_infobox(self, *args):
 		"""Adds the widget to the widget box."""
-		widgetbox.add(self.widget)
+		widgetbox.add_widget(self.widget)
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'widgetchooser.ui'))
 class WidgetChooser(Gtk.Revealer):
@@ -45,7 +49,7 @@ class WidgetChooser(Gtk.Revealer):
 	"""
 	__gtype_name__ = 'WidgetChooser'
 
-	_content = Gtk.Template.Child('widget-chooser-content')
+	_content = Gtk.Template.Child('widget_chooser_content')
 
 	def __init__(self):
 		"""Initializes a widget chooser."""

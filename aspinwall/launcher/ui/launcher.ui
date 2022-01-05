@@ -12,7 +12,7 @@
 				<property name="column-spacing">15</property>
 
 				<child>
-					<object class="ClockBox"/>
+					<object class="ClockBox" id="clockbox"/>
 				</child>
 
 				<child>

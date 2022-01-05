@@ -5,8 +5,6 @@ Contains basic code for the launcher's widget handling.
 from gi.repository import Gtk
 import os
 
-from aspinwall.launcher.widgetchooser import widgetbox
-
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'widgetheader.ui'))
 class AspWidgetHeader(Gtk.Box):
 	"""Header for AspWidget."""
@@ -41,7 +39,16 @@ class AspWidget(Gtk.Box):
 
 	def __init__(self, widget_class, widgetbox, config={}):
 		"""Initializes a widget display."""
-		super().__init__(orientation=Gtk.Orientation.VERTICAL, visible=True, valign=Gtk.Align.END, hexpand=True)
+		# Inheriting from objects created with templates isn't possible, so
+		# we create the object manually.
+		super().__init__(
+			orientation=Gtk.Orientation.VERTICAL,
+			visible=True,
+			valign=Gtk.Align.END,
+			hexpand=True,
+			focusable=True
+		)
+
 		self._widget = widget_class(config)
 		self._widgetbox = widgetbox
 
@@ -56,4 +63,4 @@ class AspWidget(Gtk.Box):
 
 	def remove(self):
 		"""Removes the widget from its parent WidgetBox."""
-		self._widgetbox.remove(self)
+		self._widgetbox.remove_widget(self)

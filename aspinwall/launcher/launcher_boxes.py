@@ -9,8 +9,8 @@ import time
 
 from aspinwall.launcher.config import config
 from aspinwall.launcher.widgets import AspWidget
-import aspinwall.launcher.widgetchooser
-from aspinwall.widgets.loader import get_widget_class_by_id, load_widgets
+import aspinwall.launcher.widget_chooser
+from aspinwall.widgets.loader import get_widget_class_by_id
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'widgetbox.ui'))
 class WidgetBox(Gtk.Box):
@@ -35,11 +35,11 @@ class WidgetBox(Gtk.Box):
 		self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
 
 		# Let the widget chooser know a widgetbox has been created
-		aspinwall.launcher.widgetchooser.widgetbox = self
+		aspinwall.launcher.widget_chooser.widgetbox = self
 
 		self.load_widgets()
 
-	def add(self, widget_class, config={}, no_save=False):
+	def add_widget(self, widget_class, config={}, no_save=False):
 		"""Adds a widget to the WidgetBox."""
 		aspwidget = AspWidget(widget_class, self, config)
 		self._widgets.append(aspwidget)
@@ -47,7 +47,7 @@ class WidgetBox(Gtk.Box):
 		if not no_save:
 			self.save_widgets()
 
-	def remove(self, aspwidget):
+	def remove_widget(self, aspwidget):
 		"""Removes a widget from the WidgetBox."""
 		self._widgets.remove(aspwidget)
 		self.widget_container.remove(aspwidget)
@@ -59,7 +59,7 @@ class WidgetBox(Gtk.Box):
 		widgets = config.get('widgets')
 		if widgets:
 			for widget in widgets:
-				self.add(get_widget_class_by_id(widget['id']), widget['config'], no_save=True)
+				self.add_widget(get_widget_class_by_id(widget['id']), widget['config'], no_save=True)
 
 	def save_widgets(self):
 		"""Saves the current widget configuration to the config."""

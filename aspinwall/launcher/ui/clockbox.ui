@@ -23,6 +23,7 @@
 				</style>
 			</object>
 		</child>
+
 		<child>
 			<object class="GtkLabel" id="clockbox_date">
 				<property name="halign">start</property>

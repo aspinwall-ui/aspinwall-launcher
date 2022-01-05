@@ -3,7 +3,6 @@
 	<requires lib="gtk" version="4.0"/>
 	<template class="AspWidgetHeader" parent="GtkBox">
 		<property name="hexpand">True</property>
-
 		<property name="spacing">5</property>
 
 		<style>
