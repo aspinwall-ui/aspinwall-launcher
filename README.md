@@ -37,6 +37,8 @@ The project is still in early development; we'd recommend holding off from contr
 
 We plan to add translations for Aspinwall projects, which will most likely be hosted on Weblate; however, this has not been set up yet.
 
+The current TODO list for the shell can be found [here](https://github.com/aspinwall-ui/aspinwall/issues/1).
+
 ## FAQ
 
 ### **Q:** Where does the name come from?
