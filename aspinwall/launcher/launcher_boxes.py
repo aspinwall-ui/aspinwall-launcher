@@ -56,6 +56,7 @@ class WidgetBox(Gtk.Box):
 		"""Removes a widget from the WidgetBox."""
 		self._widgets.remove(aspwidget)
 		self.widget_container.remove(aspwidget)
+		self.update_move_buttons()
 		self.save_widgets()
 
 	def update_move_buttons(self):
