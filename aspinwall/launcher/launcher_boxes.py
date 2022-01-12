@@ -45,6 +45,10 @@ class WidgetBox(Gtk.Box):
 		aspwidget = AspWidget(widget_class, self, config)
 		self._widgets.append(aspwidget)
 		self.widget_container.append(aspwidget)
+
+		# We can only do this once the widget has been appended to the widgets list
+		self.update_move_buttons()
+
 		if not no_save:
 			self.save_widgets()
 
@@ -53,6 +57,11 @@ class WidgetBox(Gtk.Box):
 		self._widgets.remove(aspwidget)
 		self.widget_container.remove(aspwidget)
 		self.save_widgets()
+
+	def update_move_buttons(self):
+		"""Updates the move buttons in all child AspWidget headers"""
+		for widget in self._widgets:
+			widget.widget_header.update_move_buttons()
 
 	def get_widget_position(self, aspwidget):
 		"""
@@ -89,6 +98,22 @@ class WidgetBox(Gtk.Box):
 			else:
 				self.widget_container.reorder_child_after(widget, self.get_widget_at_position(new_pos - 1))
 				self._widgets.insert(new_pos, self._widgets.pop(old_pos))
+
+		self.update_move_buttons()
+
+	def move_up(self, widget):
+		"""Moves an AspWidget up in the box."""
+		old_pos = self.get_widget_position(widget)
+		if old_pos == 0:
+			return None
+		self.move_widget(old_pos, old_pos - 1)
+
+	def move_down(self, widget):
+		"""Moves an AspWidget down in the box."""
+		old_pos = self.get_widget_position(widget)
+		if old_pos == len(self._widgets) - 1:
+			return None
+		self.move_widget(old_pos, old_pos + 2)
 
 	def load_widgets(self):
 		"""Loads widgets from the config."""

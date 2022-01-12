@@ -13,6 +13,9 @@ class AspWidgetHeader(Gtk.Box):
 	icon = Gtk.Template.Child('widget_header_icon')
 	title = Gtk.Template.Child('widget_header_title')
 
+	move_up_button = Gtk.Template.Child('widget_header_move_up')
+	move_down_button = Gtk.Template.Child('widget_header_move_down')
+
 	def __init__(self, widget, aspwidget):
 		"""Initializes an AspWidgetHeader."""
 		super().__init__()
@@ -25,9 +28,38 @@ class AspWidgetHeader(Gtk.Box):
 		self.add_controller(self._aspwidget.drag_source)
 
 	@Gtk.Template.Callback()
+	def move_up(self, *args):
+		"""Moves the parent AspWidget up."""
+		self._aspwidget._widgetbox.move_up(self._aspwidget)
+		self.update_move_buttons()
+
+	@Gtk.Template.Callback()
+	def move_down(self, *args):
+		"""Moves the parent AspWidget down."""
+		self._aspwidget._widgetbox.move_down(self._aspwidget)
+		self.update_move_buttons()
+
+	@Gtk.Template.Callback()
 	def remove(self, *args):
 		"""Removes the parent AspWidget."""
 		self._aspwidget.remove()
+
+	def update_move_buttons(self):
+		"""
+		Makes the move buttons sensitive or non-sensitive based on whether
+		moving the widget up/down is possible.
+		"""
+		position = self._aspwidget.get_position()
+
+		if position == 0:
+			self.move_up_button.set_sensitive(False)
+		else:
+			self.move_up_button.set_sensitive(True)
+
+		if position == len(self._aspwidget._widgetbox._widgets) - 1:
+			self.move_down_button.set_sensitive(False)
+		else:
+			self.move_down_button.set_sensitive(True)
 
 class AspWidget(Gtk.Box):
 	"""
@@ -94,10 +126,14 @@ class AspWidget(Gtk.Box):
 		"""Removes the widget from its parent WidgetBox."""
 		self._widgetbox.remove_widget(self)
 
+	def get_position(self):
+		"""Returns the AspWidget's position in its parent widgetbox."""
+		return self._widgetbox.get_widget_position(self)
+
 	def drag_prepare(self, *args):
 		"""Returns the GdkContentProvider for the drag operation"""
 		return Gdk.ContentProvider.new_for_value(
-			self._widgetbox.get_widget_position(self)
+			self.get_position()
 		)
 
 	def drag_begin(self, drag_source, *args):

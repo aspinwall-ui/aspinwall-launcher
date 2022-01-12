@@ -25,17 +25,47 @@
 
 		<!-- Edit mode buttons -->
 		<child>
-			<object class="GtkButton" id="widget_header_remove">
-				<property name="icon-name">window-close-symbolic</property>
-				<property name="visible">true</property>
+			<object class="GtkBox" id="widget_header_buttons">
 				<property name="halign">end</property>
 				<property name="hexpand">true</property>
-				<property name="has-frame">false</property>
-				<signal name="clicked" handler="remove"/>
 
-				<style>
-					<class name="aspinwall-widget-remove"/>
-				</style>
+				<child>
+					<object class="GtkButton" id="widget_header_move_up">
+						<property name="icon-name">pan-up-symbolic</property>
+						<property name="has-frame">false</property>
+						<property name="sensitive">false</property>
+						<signal name="clicked" handler="move_up"/>
+
+						<style>
+							<class name="aspinwall-widget-move-up"/>
+						</style>
+					</object>
+				</child>
+
+				<child>
+					<object class="GtkButton" id="widget_header_move_down">
+						<property name="icon-name">pan-down-symbolic</property>
+						<property name="has-frame">false</property>
+						<property name="sensitive">false</property>
+						<signal name="clicked" handler="move_down"/>
+
+						<style>
+							<class name="aspinwall-widget-move-down"/>
+						</style>
+					</object>
+				</child>
+
+				<child>
+					<object class="GtkButton" id="widget_header_remove">
+						<property name="icon-name">window-close-symbolic</property>
+						<property name="has-frame">false</property>
+						<signal name="clicked" handler="remove"/>
+
+						<style>
+							<class name="aspinwall-widget-remove"/>
+						</style>
+					</object>
+				</child>
 			</object>
 		</child>
 	</template>
