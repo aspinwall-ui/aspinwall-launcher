@@ -145,19 +145,16 @@ class AspWidget(Gtk.Box):
 		"""Operations to perform when the drag operation ends."""
 		self.remove_css_class('dragged')
 
-	def on_drop(self, stub, target, x, y):
+	def on_drop(self, stub, dropped_widget_pos, x, y):
 		"""
 		Performs the widget move when a dragged widget dropped.
 
-		Note that this is performed from the perspective of the drag target;
+		Note that this is performed from the perspective of the drop target;
 		thus, self in this context is the widget which the dragged widget was
 		dropped onto.
 		"""
-		current_pos = self._widgetbox.get_widget_position(self)
-		if target > current_pos:
-			self._widgetbox.move_widget(target, current_pos)
-		else:
-			self._widgetbox.move_widget(target, current_pos + 1)
+		drop_target_pos = self._widgetbox.get_widget_position(self)
+		self._widgetbox.move_widget(dropped_widget_pos, drop_target_pos)
 		self.remove_css_class('on-enter')
 
 	def on_enter(self, *args):

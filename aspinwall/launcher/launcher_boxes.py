@@ -93,8 +93,8 @@ class WidgetBox(Gtk.Box):
 			self._widgets.insert(0, self._widgets.pop(old_pos))
 		else:
 			if new_pos > old_pos:
-				self.widget_container.reorder_child_after(widget, self.get_widget_at_position(new_pos - 1))
-				self._widgets.insert(new_pos - 1, self._widgets.pop(old_pos))
+				self.widget_container.reorder_child_after(widget, self.get_widget_at_position(new_pos))
+				self._widgets.insert(new_pos, self._widgets.pop(old_pos))
 			else:
 				self.widget_container.reorder_child_after(widget, self.get_widget_at_position(new_pos - 1))
 				self._widgets.insert(new_pos, self._widgets.pop(old_pos))
@@ -113,7 +113,7 @@ class WidgetBox(Gtk.Box):
 		old_pos = self.get_widget_position(widget)
 		if old_pos == len(self._widgets) - 1:
 			return None
-		self.move_widget(old_pos, old_pos + 2)
+		self.move_widget(old_pos, old_pos + 1)
 
 	def load_widgets(self):
 		"""Loads widgets from the config."""
