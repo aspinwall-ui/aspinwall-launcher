@@ -2,6 +2,9 @@
 <interface>
 	<requires lib="gtk" version="4.0"/>
 	<template class="WidgetBox" parent="GtkBox">
+		<style>
+			<class name="widgetbox"/>
+		</style>
 		<child>
 			<object class="GtkOverlay">
 				<property name="vexpand">True</property>
@@ -11,17 +14,17 @@
 						<child>
 							<object class="GtkBox" id="widget-container">
 								<property name="orientation">vertical</property>
-								<property name="visible">True</property>
 								<property name="valign">end</property>
 								<property name="halign">fill</property>
 								<property name="hexpand">True</property>
 								<property name="vexpand">True</property>
 
-								<property name="margin-top">30</property>
-								<property name="margin-bottom">30</property>
-								<property name="margin-start">30</property>
-								<property name="margin-end">30</property>
-								<property name="spacing">15></property>
+								<property name="margin-start">10</property>
+								<property name="margin-end">10</property>
+
+								<style>
+									<class name="widget-container"/>
+								</style>
 							</object>
 						</child>
 					</object>

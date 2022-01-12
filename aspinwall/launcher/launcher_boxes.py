@@ -18,6 +18,7 @@ class WidgetBox(Gtk.Box):
 	__gtype_name__ = 'WidgetBox'
 
 	_widgets = []
+	_drag_targets = []
 
 	widget_container = Gtk.Template.Child('widget-container')
 	widget_chooser = Gtk.Template.Child('widget-chooser-container')
@@ -52,6 +53,42 @@ class WidgetBox(Gtk.Box):
 		self._widgets.remove(aspwidget)
 		self.widget_container.remove(aspwidget)
 		self.save_widgets()
+
+	def get_widget_position(self, aspwidget):
+		"""
+		Returns the position of the AspWidget in the list (starting at 0),
+		or None if the widget wasn't found.
+		"""
+		try:
+			return self._widgets.index(aspwidget)
+		except ValueError:
+			return None
+
+	def get_widget_at_position(self, pos):
+		"""
+		Returns the widget at the given position.
+		"""
+		return self._widgets[pos]
+
+	def move_widget(self, old_pos, new_pos):
+		"""
+		Moves a widget from the provided position to the target position.
+		"""
+		if old_pos == new_pos:
+			return True
+
+		widget = self.get_widget_at_position(old_pos)
+
+		if new_pos == 0:
+			self.widget_container.reorder_child_after(widget)
+			self._widgets.insert(0, self._widgets.pop(old_pos))
+		else:
+			if new_pos > old_pos:
+				self.widget_container.reorder_child_after(widget, self.get_widget_at_position(new_pos - 1))
+				self._widgets.insert(new_pos - 1, self._widgets.pop(old_pos))
+			else:
+				self.widget_container.reorder_child_after(widget, self.get_widget_at_position(new_pos - 1))
+				self._widgets.insert(new_pos, self._widgets.pop(old_pos))
 
 	def load_widgets(self):
 		"""Loads widgets from the config."""
