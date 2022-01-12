@@ -7,10 +7,30 @@
 
 .aspinwall-widget-header {
 	font-weight: bold;
-	padding: 10px;
-	border-bottom: 2px solid mix(@theme_bg_color, darker(@theme_bg_color), 0.5);
+	padding-left: 7px;
+	border-radius: 10px 10px 0 0;
+	background-color: @theme_bg_color;
+	/*border-bottom: 2px solid @theme_bg_color;*/
+}
+
+.aspinwall-widget-remove {
+	border-radius: 0 10px 0 0;
+	transition-duration: 0.2s;
 }
 
 .aspinwall-widget-content {
 	padding: 10px;
+}
+
+/* Widget chooser */
+
+.widget-infobox {
+	background-color: @theme_bg_color;
+	padding: 5px 10px 10px;
+	border-radius: 10px;
+	box-shadow: 2px 2px 6px darker(@theme_bg_color);
+}
+
+.widget-infobox .add {
+	padding: 2px;
 }

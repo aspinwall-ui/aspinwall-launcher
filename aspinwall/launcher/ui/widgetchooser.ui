@@ -39,7 +39,7 @@
 							<object class="GtkButton" id="widget_chooser_close">
 								<property name="halign">end</property>
 								<property name="valign">center</property>
-								<property name="icon-name">window-close</property>
+								<property name="icon-name">window-close-symbolic</property>
 								<signal name="clicked" handler="hide"/>
 								<style>
 									<class name="close"/>
@@ -61,8 +61,8 @@
 								<property name="spacing">10</property>
 								<property name="margin-top">20</property>
 								<property name="margin-bottom">20</property>
-								<property name="margin-start">20</property>
-								<property name="margin-end">20</property>
+								<property name="margin-start">15</property>
+								<property name="margin-end">15</property>
 							</object>
 						</child>
 					</object>

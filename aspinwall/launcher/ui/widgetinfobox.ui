@@ -33,12 +33,16 @@
 
 				<child>
 					<object class="GtkButton" id="widget_infobox_add">
-						<property name="icon-name">list-add</property>
-						<property name="label" translatable="true">_Add</property>
-						<property name="use_underline">true</property>
+						<property name="icon-name">list-add-symbolic</property>
+						<!--<property name="label" translatable="true">_Add</property>
+						<property name="use_underline">true</property>-->
 						<property name="halign">end</property>
 						<property name="hexpand">true</property>
 						<signal name="clicked" handler="add_widget_from_infobox"></signal>
+
+						<style>
+							<class name="add"/>
+						</style>
 					</object>
 				</child>
 			</object>

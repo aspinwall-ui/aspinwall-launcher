@@ -29,6 +29,7 @@
 
 				<child type="overlay">
 					<object class="GtkBox">
+						<property name="valign">start</property>
 						<property name="halign">end</property>
 						<child>
 							<object class="GtkMenuButton">
@@ -53,7 +54,7 @@
 		<section>
 			<item>
 				<attribute name='icon'>list-add-symbolic</attribute>
-				<attribute name='label' translatable='yes'>_Add Widgets</attribute>
+				<attribute name='label' translatable='yes'>_Add Widgets…</attribute>
 				<attribute name='action'>win.show_widget_chooser</attribute>
 			</item>
 			<item>
