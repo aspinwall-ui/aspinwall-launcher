@@ -53,16 +53,11 @@
 					<object class="GtkScrolledWindow">
 						<property name="hscrollbar-policy">never</property>
 						<child>
-							<object class="GtkBox" id="widget_chooser_content">
+							<object class="GtkListBox" id="widget_chooser_content">
 								<property name="hexpand">true</property>
 								<property name="vexpand">true</property>
-								<property name="orientation">vertical</property>
-
-								<property name="spacing">10</property>
-								<property name="margin-top">20</property>
-								<property name="margin-bottom">20</property>
-								<property name="margin-start">15</property>
-								<property name="margin-end">15</property>
+								<property name="show-separators">true</property>
+								<property name="selection-mode">0</property>
 							</object>
 						</child>
 					</object>
