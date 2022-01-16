@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+	<requires lib="gtk" version="4.0"/>
+	<template class="AppIcon" parent="GtkBox">
+		<property name="orientation">vertical</property>
+		<style>
+			<class name="app-icon"/>
+		</style>
+
+		<child>
+			<object class="GtkImage" id="app_icon">
+				<property name="icon-name">image-missing</property>
+				<property name="icon-size">2</property>
+			</object>
+		</child>
+
+		<child>
+			<object class="GtkLabel" id="app_name">
+				<property name="wrap">true</property>
+				<property name="justify">center</property>
+			</object>
+		</child>
+	</template>
+</interface>

@@ -2,7 +2,7 @@
 <interface>
 	<requires lib="gtk" version="4.0"/>
 	<template class="WidgetChooser" parent="GtkRevealer">
-		<property name="transition-type">slide-right</property>
+		<property name="transition-type">slide-left</property>
 		<property name="halign">end</property>
 		<child>
 			<object class="GtkBox" id="widget_chooser">

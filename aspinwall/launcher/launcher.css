@@ -46,3 +46,10 @@
 .widget-infobox .add {
 	padding: 2px;
 }
+
+/* App chooser */
+
+.app-chooser {
+	padding: 10px;
+	background-color: lighter(@theme_bg_color);
+}

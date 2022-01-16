@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+	<requires lib="gtk" version="4.0"/>
+	<template class="AppChooser" parent="GtkRevealer">
+		<property name="halign">start</property>
+		<property name="transition-type">slide-right</property>
+		<child>
+			<object class="GtkBox">
+				<property name="orientation">vertical</property>
+				<property name="spacing">10</property>
+				<style>
+					<class name="app-chooser"/>
+				</style>
+
+				<child>
+					<object class="GtkSearchEntry" id="search">
+						<property name="valign">start</property>
+						<property name="placeholder_text" translatable="yes">Search apps…</property>
+					</object>
+				</child>
+
+				<child>
+					<object class="GtkScrolledWindow" id="app_grid_container">
+						<property name="vexpand">true</property>
+						<property name="hscrollbar-policy">never</property>
+						<!-- The child grid is added in the code, see launcher/app_chooser.py -->
+					</object>
+				</child>
+			</object>
+		</child>
+	</template>
+</interface>

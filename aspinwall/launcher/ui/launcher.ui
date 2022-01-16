@@ -5,18 +5,39 @@
 	<template class="Launcher" parent="GtkApplicationWindow">
 		<property name="decorated">False</property>
 		<child>
-			<object class="GtkGrid">
-				<property name="orientation">horizontal</property>
-				<property name="visible">True</property>
-				<property name="column-homogeneous">True</property>
-				<property name="column-spacing">15</property>
-
+			<object class="GtkOverlay">
 				<child>
-					<object class="ClockBox" id="clockbox"/>
+					<object class="GtkGrid">
+						<property name="orientation">horizontal</property>
+						<property name="visible">True</property>
+						<property name="column-homogeneous">True</property>
+						<property name="column-spacing">15</property>
+
+						<child>
+							<object class="ClockBox" id="clockbox"/>
+						</child>
+
+						<child>
+							<object class="WidgetBox" id="widgetbox"/>
+						</child>
+					</object>
 				</child>
 
-				<child>
-					<object class="WidgetBox" id="widgetbox"/>
+				<child type="overlay">
+					<object class="GtkButton" id="app_chooser_show">
+						<property name="valign">start</property>
+						<property name="halign">start</property>
+						<property name="margin-top">10</property>
+						<property name="margin-start">10</property>
+						<property name="margin-end">10</property>
+						<property name="icon-name">view-grid-symbolic</property>
+
+						<signal name="clicked" handler="show_app_chooser"/>
+					</object>
+				</child>
+
+				<child type="overlay">
+					<object class="AppChooser" id="app_chooser"/>
 				</child>
 			</object>
 		</child>
