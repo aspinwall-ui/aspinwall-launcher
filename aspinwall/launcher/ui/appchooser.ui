@@ -13,9 +13,27 @@
 				</style>
 
 				<child>
-					<object class="GtkSearchEntry" id="search">
-						<property name="valign">start</property>
-						<property name="placeholder_text" translatable="yes">Search apps…</property>
+					<object class="GtkBox" id="app_chooser_header">
+						<property name="spacing">5</property>
+						<style>
+							<class name="header"/>
+						</style>
+
+						<child>
+							<object class="GtkSearchEntry" id="search">
+								<property name="valign">start</property>
+								<property name="hexpand">true</property>
+								<property name="placeholder_text" translatable="yes">Search apps…</property>
+							</object>
+						</child>
+
+						<child>
+							<object class="GtkButton" id="close_app_chooser">
+								<property name="halign">end</property>
+								<property name="icon-name">window-close-symbolic</property>
+								<signal name="clicked" handler="hide"/>
+							</object>
+						</child>
 					</object>
 				</child>
 

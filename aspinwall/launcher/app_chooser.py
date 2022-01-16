@@ -73,3 +73,8 @@ class AppChooser(Gtk.Revealer):
 		app_info = app_grid.get_model().get_item(app_position)
 		context = Gdk.Display.get_app_launch_context(app_grid.get_display())
 		app_info.launch(None, context)
+
+	@Gtk.Template.Callback()
+	def hide(self, *args):
+		"""Hides the app chooser."""
+		self.set_reveal_child(False)

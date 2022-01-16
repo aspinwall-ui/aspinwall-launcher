@@ -50,6 +50,10 @@
 /* App chooser */
 
 .app-chooser {
-	padding: 10px;
+	padding: 10px 0;
 	background-color: lighter(@theme_bg_color);
+}
+
+.app-chooser .header {
+	padding: 0 10px;
 }
