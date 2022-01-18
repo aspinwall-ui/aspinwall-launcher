@@ -84,14 +84,28 @@ class AppChooser(Gtk.Revealer):
 		query = self.search.get_text()
 		if not query:
 			return True
+		query = query.lower()
 
-		if query.lower() in appinfo.get_name().lower():
+		if query in appinfo.get_name().lower():
 			return True
+
+		if appinfo.get_generic_name():
+			if query in appinfo.get_generic_name().lower():
+				return True
+
+		for keyword in appinfo.get_keywords():
+			if query in keyword.lower():
+				return True
+
 		return False
 
 	def search_changed(self, *args):
 		"""Notifies the filter about search changes."""
 		self.filter.changed(Gtk.FilterChange.DIFFERENT)
+		# Select first item in list
+		selection_model = self.app_grid_container.get_child().get_model()
+		selection_model.set_selected(0)
+		# TODO: Scroll back to top of list
 
 	@Gtk.Template.Callback()
 	def hide(self, *args):
