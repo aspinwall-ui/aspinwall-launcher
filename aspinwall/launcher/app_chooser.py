@@ -21,9 +21,8 @@ class AppIcon(Gtk.Box):
 	def bind_to_app(self, app):
 		"""Fills the AppIcon with an app's information."""
 		self.app = app
-		self.app_icon.set_from_icon_name(app.get_string('Icon'))
-		self.app_name.set_label(app.get_string('Name'))
-
+		self.app_icon.set_from_gicon(app.get_icon())
+		self.app_name.set_label(app.get_name())
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'appchooser.ui'))
 class AppChooser(Gtk.Revealer):
@@ -31,11 +30,13 @@ class AppChooser(Gtk.Revealer):
 	__gtype_name__ = 'AppChooser'
 
 	app_grid_container = Gtk.Template.Child()
+	search = Gtk.Template.Child()
 
 	def __init__(self):
 		"""Initializes an app chooser."""
 		super().__init__()
 
+		# Set up model and factory
 		store = Gio.ListStore(item_type=Gio.AppInfo)
 		appinfo = Gio.AppInfo.get_all()
 		for app in appinfo:
@@ -47,13 +48,17 @@ class AppChooser(Gtk.Revealer):
 		factory.connect('setup', self.setup)
 		factory.connect('bind', self.bind)
 
-		app_grid = Gtk.GridView(model=Gtk.SingleSelection(model=store), factory=factory)
+		# Set up filter model
+		filter_model = Gtk.FilterListModel(model=store)
+		self.filter = Gtk.CustomFilter.new(self.filter_by_name, filter_model)
+		filter_model.set_filter(self.filter)
+		self.search.connect('search-changed', self.search_changed)
 
-		app_grid.set_min_columns(3)
+		# Set up app grid
+		app_grid = Gtk.GridView(model=Gtk.SingleSelection(model=filter_model), factory=factory)
 		app_grid.set_max_columns(3)
 		app_grid.set_single_click_activate(True)
 		app_grid.set_enable_rubberband(False)
-
 		app_grid.connect('activate', self.activate)
 
 		self.app_grid_container.set_child(app_grid)
@@ -73,6 +78,20 @@ class AppChooser(Gtk.Revealer):
 		app_info = app_grid.get_model().get_item(app_position)
 		context = Gdk.Display.get_app_launch_context(app_grid.get_display())
 		app_info.launch(None, context)
+
+	def filter_by_name(self, appinfo, user_data):
+		"""Fill-in for custom filter for app grid."""
+		query = self.search.get_text()
+		if not query:
+			return True
+
+		if query.lower() in appinfo.get_name().lower():
+			return True
+		return False
+
+	def search_changed(self, *args):
+		"""Notifies the filter about search changes."""
+		self.filter.changed(Gtk.FilterChange.DIFFERENT)
 
 	@Gtk.Template.Callback()
 	def hide(self, *args):
