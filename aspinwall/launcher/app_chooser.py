@@ -2,7 +2,7 @@
 """
 Contains code for the app chooser.
 """
-from gi.repository import Gdk, Gio, Gtk
+from gi.repository import Gdk, GLib, Gio, Gtk
 import os
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'appicon.ui'))
@@ -48,8 +48,13 @@ class AppChooser(Gtk.Revealer):
 		factory.connect('setup', self.setup)
 		factory.connect('bind', self.bind)
 
+		# Set up sort model
+		sort_model = Gtk.SortListModel(model=store)
+		sorter = Gtk.CustomSorter.new(self.sort_func, None)
+		sort_model.set_sorter(sorter)
+
 		# Set up filter model
-		filter_model = Gtk.FilterListModel(model=store)
+		filter_model = Gtk.FilterListModel(model=sort_model)
 		self.filter = Gtk.CustomFilter.new(self.filter_by_name, filter_model)
 		filter_model.set_filter(self.filter)
 		self.search.connect('search-changed', self.search_changed)
@@ -78,26 +83,37 @@ class AppChooser(Gtk.Revealer):
 		app_info = app_grid.get_model().get_item(app_position)
 		context = Gdk.Display.get_app_launch_context(app_grid.get_display())
 		app_info.launch(None, context)
+		self.set_reveal_child(False)
 
 	def filter_by_name(self, appinfo, user_data):
 		"""Fill-in for custom filter for app grid."""
 		query = self.search.get_text()
 		if not query:
 			return True
-		query = query.lower()
+		query = query.casefold()
 
-		if query in appinfo.get_name().lower():
+		if query in appinfo.get_name().casefold():
 			return True
 
 		if appinfo.get_generic_name():
-			if query in appinfo.get_generic_name().lower():
+			if query in appinfo.get_generic_name().casefold():
 				return True
 
 		for keyword in appinfo.get_keywords():
-			if query in keyword.lower():
+			if query in keyword.casefold():
 				return True
 
 		return False
+
+	def sort_func(self, a, b, *args):
+		"""Sort function for the app grid icon sorter."""
+		a_name = GLib.utf8_casefold(a.get_name(), -1)
+		if not a_name:
+			a_name = ''
+		b_name = GLib.utf8_casefold(b.get_name(), -1)
+		if not b_name:
+			b_name = ''
+		return GLib.utf8_collate(a_name, b_name)
 
 	def search_changed(self, *args):
 		"""Notifies the filter about search changes."""

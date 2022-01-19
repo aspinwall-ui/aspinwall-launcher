@@ -18,6 +18,8 @@
 			<object class="GtkLabel" id="app_name">
 				<property name="wrap">true</property>
 				<property name="justify">center</property>
+				<property name="width-chars">10</property>
+				<property name="max-width-chars">10</property>
 			</object>
 		</child>
 	</template>
