@@ -1,0 +1,11 @@
+/* HighContrast theme variant */
+
+@define-color aspinwall_fg_color black;
+@define-color aspinwall_bg_color white;
+@define-color aspinwall_button_bg_color #e0e0e0;
+@define-color aspinwall_notification_bg_color #e0e0e0;
+@define-color aspinwall_splash_bg_color @theme_bg_color;
+@define-color aspinwall_splash_fg_color @theme_fg_color;
+@define-color aspinwall_activity_bg_color #e5e5e5;
+
+@import url('launcher.css');

@@ -2,7 +2,7 @@
 """Contains window creation code for the Aspinwall launcher"""
 import gi
 gi.require_version("Gtk", "4.0")
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, GObject
 import os
 
 from aspinwall.launcher.config import config
@@ -31,18 +31,32 @@ class Launcher(Gtk.ApplicationWindow):
 		"""Shows the app chooser."""
 		self.app_chooser.set_reveal_child(True)
 
+def on_gtk_theme_change(settings, theme_name, theme_name_is_str, style_provider):
+	"""Reloads the CSS provider as needed."""
+	if settings.get_property('gtk-theme-name') in ('HighContrast', 'Default-hc'):
+		stylesheet = 'default-hc.css'
+	else:
+		stylesheet = 'default-dark.css'
+
+	style_provider.load_from_path(os.path.join(os.path.dirname(__file__), '..', 'stylesheet', stylesheet))
+
 def on_activate(app):
 	load_widgets()
 
 	win = Launcher()
-	style_provider = Gtk.CssProvider()
-	style_provider.load_from_path(os.path.join(os.path.dirname(__file__), 'launcher.css'))
 
+	gtk_settings = Gtk.Settings.get_default()
+	gtk_settings.set_property('gtk-application-prefer-dark-theme', True)
+
+	style_provider = Gtk.CssProvider()
 	Gtk.StyleContext.add_provider_for_display(
 		Gdk.Display.get_default(),
 		style_provider,
 		Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
 	)
+
+	on_gtk_theme_change(gtk_settings, gtk_settings.get_property('gtk-theme-name'), True, style_provider)
+	gtk_settings.connect('notify::gtk-theme-name', on_gtk_theme_change, False, style_provider)
 
 	win.add_action(win.widgetbox._show_chooser_action)
 
