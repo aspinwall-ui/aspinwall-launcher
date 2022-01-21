@@ -61,6 +61,7 @@ class AspWidgetHeader(Gtk.Box):
 		else:
 			self.move_down_button.set_sensitive(True)
 
+@Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'aspwidget.ui'))
 class AspWidget(Gtk.Box):
 	"""
 	Box containing a widget, alongside with its header.
@@ -72,12 +73,11 @@ class AspWidget(Gtk.Box):
 	"""
 	__gtype_name__ = 'AspWidget'
 
+	container = Gtk.Template.Child()
+
 	def __init__(self, widget_class, widgetbox, config={}):
 		"""Initializes a widget display."""
-		# Inheriting from objects created with templates isn't possible, so
-		# we create the object manually.
-		super().__init__(orientation=Gtk.Orientation.VERTICAL)
-		self.add_css_class('aspinwall-widget-wrapper')
+		super().__init__()
 
 		self._widget = widget_class(config)
 		self._widgetbox = widgetbox
@@ -99,28 +99,12 @@ class AspWidget(Gtk.Box):
 		self.drop_target.connect('leave', self.on_leave)
 		# End drop target setup
 
-		# Set up widget content
-		self.container = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, valign=Gtk.Align.END, hexpand=True)
-
 		self.widget_header = AspWidgetHeader(self._widget, self)
 		self.container.append(self.widget_header)
 
 		self.widget_content = self._widget
 		self.widget_content.add_css_class('aspinwall-widget-content')
 		self.container.append(self.widget_content)
-
-		self.append(self.container)
-
-		# Set up widget "margins"
-		self.w_margin_top = AspWidgetMargin('top', self)
-		self.prepend(self.w_margin_top)
-		self.w_margin_bottom = AspWidgetMargin('bottom', self)
-		self.append(self.w_margin_bottom)
-
-		self.container.add_css_class('aspinwall-widget')
-
-	def __str__(self):
-		return self._widget.num
 
 	def remove(self):
 		"""Removes the widget from its parent WidgetBox."""
@@ -164,12 +148,3 @@ class AspWidget(Gtk.Box):
 	def on_leave(self, *args):
 		self.remove_css_class('on-enter')
 		return 0
-
-class AspWidgetMargin(Gtk.Box):
-	"""Margin that lights up when a widget is dragged on top"""
-
-	def __init__(self, attachment, widget):
-		"""Initializes the AspWidgetMargin"""
-		super().__init__(height_request=7)
-		self.attachment = attachment
-		self._widget = widget

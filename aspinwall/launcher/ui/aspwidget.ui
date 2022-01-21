@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+	<requires lib="gtk" version="4.0"/>
+	<template class="AspWidget" parent="GtkBox">
+		<property name="orientation">vertical</property>
+
+		<style>
+			<class name="aspinwall-widget-wrapper"/>
+		</style>
+
+		<child>
+			<object class="GtkBox" id="container">
+				<property name="orientation">vertical</property>
+				<property name="valign">end</property>
+				<property name="hexpand">true</property>
+
+				<style>
+					<class name="aspinwall-widget"/>
+				</style>
+
+				<!-- The widget header and content is added in-code, see launcher/widgets.py -->
+			</object>
+		</child>
+	</template>
+</interface>
