@@ -2,7 +2,8 @@
 """Contains window creation code for the Aspinwall launcher"""
 import gi
 gi.require_version("Gtk", "4.0")
-from gi.repository import Gtk, Gdk, GObject
+gi.require_version('Adw', '1')
+from gi.repository import Adw, Gtk, Gdk, GObject
 import os
 
 from aspinwall.launcher.config import config
@@ -46,7 +47,6 @@ def on_activate(app):
 	win = Launcher()
 
 	gtk_settings = Gtk.Settings.get_default()
-	gtk_settings.set_property('gtk-application-prefer-dark-theme', True)
 
 	style_provider = Gtk.CssProvider()
 	Gtk.StyleContext.add_provider_for_display(
@@ -66,7 +66,7 @@ def on_shutdown(app):
 	config.save()
 
 if __name__ == "__main__":
-	app = Gtk.Application(application_id='org.dithernet.AspinwallLauncher')
+	app = Adw.Application(application_id='org.dithernet.AspinwallLauncher')
 	app.connect('activate', on_activate)
 	app.connect('shutdown', on_shutdown)
 	app.run()

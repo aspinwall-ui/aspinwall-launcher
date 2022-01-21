@@ -1,11 +1,20 @@
-/* Default colors for Aspinwall */
+/* Default colors for Aspinwall - default */
 
-@define-color aspinwall_fg_color white;
-@define-color aspinwall_bg_color black;
-@define-color aspinwall_button_bg_color #282828;
-@define-color aspinwall_notification_bg_color #282828;
-@define-color aspinwall_splash_bg_color #f6f5f4;
-@define-color aspinwall_splash_fg_color #282828;
-@define-color aspinwall_activity_bg_color #1a1a1a;
+@define-color aspinwall_widget_bg     #ffffff;
+@define-color aspinwall_widget_fg     #000000;
+@define-color aspinwall_widget_border #deddda;
+@define-color aspinwall_widget_shade  rgba(0, 0, 0, 0.07); /* @card_shade_color */
+
+@define-color aspinwall_widget_header_bg #f6f5f4;
+@define-color aspinwall_widget_header_fg rgba(0, 0, 0, 0.8);
+
+@define-color aspinwall_widget_header_close_bg rgba(0, 0, 0, 0.08);
+
+@define-color aspinwall_menu_bg #fafafa;
+@define-color aspinwall_menu_fg #000000;
+@define-color aspinwall_menu_border #cfcfcf;
+
+@define-color aspinwall_menu_header_bg #ebebeb; /* @headerbar_bg_color */
+@define-color aspinwall_menu_header_fg rgba(0, 0, 0, 0.8); /* @headerbar_fg_color */
 
 @import url('launcher.css');

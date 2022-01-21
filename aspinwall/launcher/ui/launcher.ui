@@ -4,6 +4,9 @@
 	<requires lib="libadwaita" version="1.0"/>
 	<template class="Launcher" parent="GtkApplicationWindow">
 		<property name="decorated">False</property>
+		<style>
+			<class name="aspinwall-launcher"/>
+		</style>
 		<child>
 			<object class="GtkOverlay">
 				<child>

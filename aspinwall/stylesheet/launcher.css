@@ -3,14 +3,15 @@
 }
 
 .aspinwall-widget {
-	background-color: lighter(@theme_bg_color);
+	background-color: @aspinwall_widget_bg;
+	color: @aspinwall_widget_fg;
 	border-radius: 10px;
 	font-size: 1.25em;
 	transition-property: opacity;
 	transition-duration: 0.1s;
 	transition-timing-function: ease-out;
-	color: @theme_fg_color;
 	margin: 4px 10px;
+	box-shadow: 2px 1px 1px @aspinwall_widget_shade;
 }
 
 .aspinwall-widget.dragged {
@@ -20,24 +21,49 @@
 
 .aspinwall-widget-header {
 	font-weight: bold;
-	padding-left: 7px;
+	padding: 2px 5px;
 	border-radius: 10px 10px 0 0;
-	background-color: @theme_bg_color;
-	border: 1px solid darker(@theme_bg_color);
+	background-color: @aspinwall_widget_header_bg;
+	color: @aspinwall_widget_header_fg;
+	border: 1px solid @aspinwall_widget_border;
 	border-bottom: none;
 }
 
-.aspinwall-widget-remove {
-	border-radius: 0 10px 0 0;
-	transition-duration: 0.2s;
+.aspinwall-widget-header button {
+	padding: 4px;
+}
+
+.aspinwall-widget-header .linked.border button {
+	border: 1px solid @aspinwall_widget_border;	
+}
+
+.aspinwall-widget-header .close {
+	border-radius: 100%;
+	padding: 2px;
+}
+
+.aspinwall-widget-header .close:hover {
+	background-color: @aspinwall_widget_header_close_bg;
 }
 
 .aspinwall-widget-content {
 	padding: 10px;
-	border: 1px solid darker(@theme_bg_color);
+	border: 1px solid @aspinwall_widget_border;
+	border-radius: 0 0 10px 10px;
 }
 
 /* Widget chooser */
+
+.widget-chooser {
+	background-color: @aspinwall_menu_bg;
+	color: @aspinwall_menu_fg;
+}
+
+.widget-chooser .header {
+	background-color: @aspinwall_menu_header_bg;
+	color: @aspinwall_menu_header_fg;
+	border-bottom: 1px @aspinwall_menu_border solid;
+}
 
 .widget-infobox {
 	padding: 5px 10px 10px;
@@ -50,10 +76,17 @@
 /* App chooser */
 
 .app-chooser {
-	padding: 10px 0;
-	background-color: lighter(@theme_bg_color);
+	background-color: @aspinwall_menu_bg;
+	color: @aspinwall_menu_fg;
 }
 
 .app-chooser .header {
-	padding: 0 10px;
+	background-color: @aspinwall_menu_header_bg;
+	color: @aspinwall_menu_header_fg;
+	border-bottom: 1px @aspinwall_menu_border solid;
+	padding: 10px;
+}
+
+.app-chooser .app-grid child {
+	padding: 10px;
 }

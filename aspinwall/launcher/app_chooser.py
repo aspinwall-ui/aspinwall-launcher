@@ -64,6 +64,7 @@ class AppChooser(Gtk.Revealer):
 		app_grid.set_max_columns(3)
 		app_grid.set_single_click_activate(True)
 		app_grid.set_enable_rubberband(False)
+		app_grid.add_css_class('app-grid')
 		app_grid.connect('activate', self.activate)
 
 		self.app_grid_container.set_child(app_grid)

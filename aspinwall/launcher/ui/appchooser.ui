@@ -7,7 +7,6 @@
 		<child>
 			<object class="GtkBox">
 				<property name="orientation">vertical</property>
-				<property name="spacing">10</property>
 				<style>
 					<class name="app-chooser"/>
 				</style>

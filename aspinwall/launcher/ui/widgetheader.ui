@@ -30,28 +30,43 @@
 				<property name="hexpand">true</property>
 
 				<child>
-					<object class="GtkButton" id="widget_header_move_up">
-						<property name="icon-name">pan-up-symbolic</property>
-						<property name="has-frame">false</property>
-						<property name="sensitive">false</property>
-						<signal name="clicked" handler="move_up"/>
-
+					<object class="GtkBox" id="widget_header_move_group">
 						<style>
-							<class name="aspinwall-widget-move-up"/>
+							<class name="border"/>
+							<class name="linked"/>
 						</style>
+						<child>
+							<object class="GtkButton" id="widget_header_move_up">
+								<property name="icon-name">pan-up-symbolic</property>
+								<property name="has-frame">false</property>
+								<property name="sensitive">false</property>
+								<signal name="clicked" handler="move_up"/>
+
+								<style>
+									<class name="aspinwall-widget-move-up"/>
+								</style>
+							</object>
+						</child>
+
+						<child>
+							<object class="GtkButton" id="widget_header_move_down">
+								<property name="icon-name">pan-down-symbolic</property>
+								<property name="has-frame">false</property>
+								<property name="sensitive">false</property>
+								<signal name="clicked" handler="move_down"/>
+
+								<style>
+									<class name="aspinwall-widget-move-down"/>
+								</style>
+							</object>
+						</child>
 					</object>
 				</child>
 
 				<child>
-					<object class="GtkButton" id="widget_header_move_down">
-						<property name="icon-name">pan-down-symbolic</property>
-						<property name="has-frame">false</property>
-						<property name="sensitive">false</property>
-						<signal name="clicked" handler="move_down"/>
-
-						<style>
-							<class name="aspinwall-widget-move-down"/>
-						</style>
+					<object class="GtkSeparator">
+						<property name="margin-start">5</property>
+						<property name="margin-end">5</property>
 					</object>
 				</child>
 
@@ -59,10 +74,12 @@
 					<object class="GtkButton" id="widget_header_remove">
 						<property name="icon-name">window-close-symbolic</property>
 						<property name="has-frame">false</property>
+						<property name="valign">center</property>
 						<signal name="clicked" handler="remove"/>
 
 						<style>
 							<class name="aspinwall-widget-remove"/>
+							<class name="close"/>
 						</style>
 					</object>
 				</child>
