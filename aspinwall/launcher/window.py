@@ -20,17 +20,17 @@ class Launcher(Gtk.ApplicationWindow):
 	__gtype_name__ = 'Launcher'
 
 	widgetbox = Gtk.Template.Child()
+	launcher_flap = Gtk.Template.Child()
 	app_chooser = Gtk.Template.Child()
 
 	def __init__(self):
 		"""Initializes the launcher window."""
 		super().__init__(title='Aspinwall Launcher', application=app)
-		self.app_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_RIGHT)
 
 	@Gtk.Template.Callback()
 	def show_app_chooser(self, *args):
 		"""Shows the app chooser."""
-		self.app_chooser.set_reveal_child(True)
+		self.launcher_flap.set_reveal_flap(True)
 
 def on_gtk_theme_change(settings, theme_name, theme_name_is_str, style_provider):
 	"""Reloads the CSS provider as needed."""

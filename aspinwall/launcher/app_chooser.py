@@ -25,7 +25,7 @@ class AppIcon(Gtk.Box):
 		self.app_name.set_label(app.get_name())
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'appchooser.ui'))
-class AppChooser(Gtk.Revealer):
+class AppChooser(Gtk.Box):
 	"""App chooser widget."""
 	__gtype_name__ = 'AppChooser'
 
@@ -61,7 +61,8 @@ class AppChooser(Gtk.Revealer):
 
 		# Set up app grid
 		app_grid = Gtk.GridView(model=Gtk.SingleSelection(model=filter_model), factory=factory)
-		app_grid.set_max_columns(3)
+		app_grid.set_min_columns(2)
+		app_grid.set_max_columns(2)
 		app_grid.set_single_click_activate(True)
 		app_grid.set_enable_rubberband(False)
 		app_grid.add_css_class('app-grid')
@@ -127,4 +128,4 @@ class AppChooser(Gtk.Revealer):
 	@Gtk.Template.Callback()
 	def hide(self, *args):
 		"""Hides the app chooser."""
-		self.set_reveal_child(False)
+		self.get_parent().set_reveal_flap(False)

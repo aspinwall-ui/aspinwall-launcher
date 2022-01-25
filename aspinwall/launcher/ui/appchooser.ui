@@ -1,48 +1,45 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <interface>
 	<requires lib="gtk" version="4.0"/>
-	<template class="AppChooser" parent="GtkRevealer">
+	<template class="AppChooser" parent="GtkBox">
+		<property name="orientation">vertical</property>
 		<property name="halign">start</property>
-		<property name="transition-type">slide-right</property>
+		<property name="hexpand">false</property>
+		<property name="width-request">300</property>
+		<style>
+			<class name="app-chooser"/>
+		</style>
+
 		<child>
-			<object class="GtkBox">
-				<property name="orientation">vertical</property>
+			<object class="GtkBox" id="app_chooser_header">
+				<property name="spacing">5</property>
 				<style>
-					<class name="app-chooser"/>
+					<class name="header"/>
 				</style>
 
 				<child>
-					<object class="GtkBox" id="app_chooser_header">
-						<property name="spacing">5</property>
-						<style>
-							<class name="header"/>
-						</style>
-
-						<child>
-							<object class="GtkSearchEntry" id="search">
-								<property name="valign">start</property>
-								<property name="hexpand">true</property>
-								<property name="placeholder_text" translatable="yes">Search apps…</property>
-							</object>
-						</child>
-
-						<child>
-							<object class="GtkButton" id="close_app_chooser">
-								<property name="halign">end</property>
-								<property name="icon-name">window-close-symbolic</property>
-								<signal name="clicked" handler="hide"/>
-							</object>
-						</child>
+					<object class="GtkSearchEntry" id="search">
+						<property name="valign">start</property>
+						<property name="hexpand">true</property>
+						<property name="placeholder_text" translatable="yes">Search apps…</property>
 					</object>
 				</child>
 
 				<child>
-					<object class="GtkScrolledWindow" id="app_grid_container">
-						<property name="vexpand">true</property>
-						<property name="hscrollbar-policy">never</property>
-						<!-- The child grid is added in the code, see launcher/app_chooser.py -->
+					<object class="GtkButton" id="close_app_chooser">
+						<property name="halign">end</property>
+						<property name="icon-name">window-close-symbolic</property>
+						<signal name="clicked" handler="hide"/>
 					</object>
 				</child>
+			</object>
+		</child>
+
+		<child>
+			<object class="GtkScrolledWindow" id="app_grid_container">
+				<property name="vexpand">true</property>
+				<property name="hscrollbar-policy">never</property>
+				<!-- The child grid is added in the code, see launcher/app_chooser.py -->
 			</object>
 		</child>
 	</template>
