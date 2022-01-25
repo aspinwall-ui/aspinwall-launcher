@@ -6,13 +6,14 @@ from aspinwall.widgets import Widget
 from gi.repository import Gtk
 
 class Welcome(Widget):
-	title = "Welcome to Aspinwall"
-	icon = 'dialog-information'
 	metadata = {
 		"name": "Welcome",
-		"description": "Editable welcome widget; displays a simple tutorial and any distro-specific text",
+		"icon": 'dialog-information-symbolic',
+		"description": "Displays basic information about Aspinwall.",
 		"id": "org.dithernet.aspinwall.welcome"
 	}
+
+	config = False
 
 	def __init__(self, config={}):
 		super().__init__()
@@ -22,6 +23,6 @@ class Welcome(Widget):
 		container.append(Gtk.Image.new_from_icon_name('open-menu-symbolic'))
 		container.append(Gtk.Label(label=' button in the top right corner.'))
 
-		self.append(container)
+		self.content = container
 
 _widget_class = Welcome
