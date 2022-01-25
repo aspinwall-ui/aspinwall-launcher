@@ -30,6 +30,9 @@ class Launcher(Gtk.ApplicationWindow):
 	@Gtk.Template.Callback()
 	def show_app_chooser(self, *args):
 		"""Shows the app chooser."""
+		# Reload apps
+		self.launcher_flap.get_flap().update_model()
+		# Show chooser
 		self.launcher_flap.set_reveal_flap(True)
 
 def on_gtk_theme_change(settings, theme_name, theme_name_is_str, style_provider):

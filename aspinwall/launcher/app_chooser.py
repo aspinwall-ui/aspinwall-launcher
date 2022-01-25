@@ -36,6 +36,10 @@ class AppChooser(Gtk.Box):
 		"""Initializes an app chooser."""
 		super().__init__()
 
+		factory = Gtk.SignalListItemFactory()
+		factory.connect('setup', self.setup)
+		factory.connect('bind', self.bind)
+
 		# Set up model and factory
 		store = Gio.ListStore(item_type=Gio.AppInfo)
 		appinfo = Gio.AppInfo.get_all()
@@ -44,23 +48,21 @@ class AppChooser(Gtk.Box):
 				continue
 			store.append(app)
 
-		factory = Gtk.SignalListItemFactory()
-		factory.connect('setup', self.setup)
-		factory.connect('bind', self.bind)
-
 		# Set up sort model
-		sort_model = Gtk.SortListModel(model=store)
-		sorter = Gtk.CustomSorter.new(self.sort_func, None)
-		sort_model.set_sorter(sorter)
+		self.sort_model = Gtk.SortListModel(model=store)
+		self.sorter = Gtk.CustomSorter.new(self.sort_func, None)
+		self.sort_model.set_sorter(self.sorter)
 
 		# Set up filter model
-		filter_model = Gtk.FilterListModel(model=sort_model)
+		filter_model = Gtk.FilterListModel(model=self.sort_model)
 		self.filter = Gtk.CustomFilter.new(self.filter_by_name, filter_model)
 		filter_model.set_filter(self.filter)
 		self.search.connect('search-changed', self.search_changed)
 
+		self.model = filter_model
+
 		# Set up app grid
-		app_grid = Gtk.GridView(model=Gtk.SingleSelection(model=filter_model), factory=factory)
+		app_grid = Gtk.GridView(model=Gtk.SingleSelection(model=self.model), factory=factory)
 		app_grid.set_min_columns(2)
 		app_grid.set_max_columns(2)
 		app_grid.set_single_click_activate(True)
@@ -73,6 +75,17 @@ class AppChooser(Gtk.Box):
 	def setup(self, factory, list_item):
 		"""Sets up the app grid."""
 		list_item.set_child(AppIcon())
+
+	def update_model(self):
+		"""Updates the app grid model."""
+		store = Gio.ListStore(item_type=Gio.AppInfo)
+		appinfo = Gio.AppInfo.get_all()
+		for app in appinfo:
+			if not Gio.AppInfo.should_show(app):
+				continue
+			store.append(app)
+
+		self.sort_model.set_model(store)
 
 	def bind(self, factory, list_item):
 		"""Binds the list items in the app grid."""
