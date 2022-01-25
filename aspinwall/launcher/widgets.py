@@ -6,9 +6,9 @@ from gi.repository import Gtk, Gdk, GObject
 import os
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'widgetheader.ui'))
-class AspWidgetHeader(Gtk.Box):
-	"""Header for AspWidget."""
-	__gtype_name__ = 'AspWidgetHeader'
+class LauncherWidgetHeader(Gtk.Box):
+	"""Header for LauncherWidget."""
+	__gtype_name__ = 'LauncherWidgetHeader'
 
 	icon = Gtk.Template.Child('widget_header_icon')
 	title = Gtk.Template.Child('widget_header_title')
@@ -17,25 +17,25 @@ class AspWidgetHeader(Gtk.Box):
 	move_down_button = Gtk.Template.Child('widget_header_move_down')
 
 	def __init__(self, widget, aspwidget):
-		"""Initializes an AspWidgetHeader."""
+		"""Initializes a LauncherWidgetHeader."""
 		super().__init__()
 		self._widget = widget
 		self._aspwidget = aspwidget
 
-		self.icon.set_from_icon_name(self._widget.icon)
-		self.title.set_label(self._widget.title)
+		self.icon.set_from_icon_name(self._widget.metadata['icon'])
+		self.title.set_label(self._widget.metadata['name'])
 
 		self.add_controller(self._aspwidget.drag_source)
 
 	@Gtk.Template.Callback()
 	def move_up(self, *args):
-		"""Moves the parent AspWidget up."""
+		"""Moves the parent LauncherWidget up."""
 		self._aspwidget._widgetbox.move_up(self._aspwidget)
 		self.update_move_buttons()
 
 	@Gtk.Template.Callback()
 	def move_down(self, *args):
-		"""Moves the parent AspWidget down."""
+		"""Moves the parent LauncherWidget down."""
 		self._aspwidget._widgetbox.move_down(self._aspwidget)
 		self.update_move_buttons()
 
@@ -61,17 +61,15 @@ class AspWidgetHeader(Gtk.Box):
 		else:
 			self.move_down_button.set_sensitive(True)
 
-@Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'aspwidget.ui'))
-class AspWidget(Gtk.Box):
+@Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'launcherwidget.ui'))
+class LauncherWidget(Gtk.Box):
 	"""
 	Box containing a widget, alongside with its header.
-
-	This class is used to display widgets, and uses the Widget class as
-	the widget content.
+	This class is used in the launcher to display widgets.
 
 	For information on creating widgets, see docs/widgets/creating-widgets.md.
 	"""
-	__gtype_name__ = 'AspWidget'
+	__gtype_name__ = 'LauncherWidget'
 
 	container = Gtk.Template.Child()
 
@@ -99,10 +97,10 @@ class AspWidget(Gtk.Box):
 		self.drop_target.connect('leave', self.on_leave)
 		# End drop target setup
 
-		self.widget_header = AspWidgetHeader(self._widget, self)
+		self.widget_header = LauncherWidgetHeader(self._widget, self)
 		self.container.append(self.widget_header)
 
-		self.widget_content = self._widget
+		self.widget_content = self._widget.content
 		self.widget_content.add_css_class('aspinwall-widget-content')
 		self.container.append(self.widget_content)
 
@@ -111,7 +109,7 @@ class AspWidget(Gtk.Box):
 		self._widgetbox.remove_widget(self)
 
 	def get_position(self):
-		"""Returns the AspWidget's position in its parent widgetbox."""
+		"""Returns the LauncherWidget's position in its parent widgetbox."""
 		return self._widgetbox.get_widget_position(self)
 
 	def drag_prepare(self, *args):

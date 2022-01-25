@@ -29,7 +29,7 @@ class WidgetInfobox(Gtk.Box):
 
 		self.widget = widget
 
-		self.widget_icon.set_from_icon_name(widget.icon)
+		self.widget_icon.set_from_icon_name(widget.metadata['icon'])
 		self.widget_name.set_markup(
 			'<span size="large" font="bold">' + widget.metadata['name'] + '</span>'
 		)

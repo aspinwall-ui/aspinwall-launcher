@@ -8,7 +8,7 @@ import threading
 import time
 
 from aspinwall.launcher.config import config
-from aspinwall.launcher.widgets import AspWidget
+from aspinwall.launcher.widgets import LauncherWidget
 import aspinwall.launcher.widget_chooser
 from aspinwall.widgets.loader import get_widget_class_by_id
 
@@ -42,7 +42,7 @@ class WidgetBox(Gtk.Box):
 
 	def add_widget(self, widget_class, config={}, no_save=False):
 		"""Adds a widget to the WidgetBox."""
-		aspwidget = AspWidget(widget_class, self, config)
+		aspwidget = LauncherWidget(widget_class, self, config)
 		self._widgets.append(aspwidget)
 		self.widget_container.append(aspwidget)
 
@@ -60,13 +60,13 @@ class WidgetBox(Gtk.Box):
 		self.save_widgets()
 
 	def update_move_buttons(self):
-		"""Updates the move buttons in all child AspWidget headers"""
+		"""Updates the move buttons in all child LauncherWidget headers"""
 		for widget in self._widgets:
 			widget.widget_header.update_move_buttons()
 
 	def get_widget_position(self, aspwidget):
 		"""
-		Returns the position of the AspWidget in the list (starting at 0),
+		Returns the position of the LauncherWidget in the list (starting at 0),
 		or None if the widget wasn't found.
 		"""
 		try:
@@ -103,14 +103,14 @@ class WidgetBox(Gtk.Box):
 		self.update_move_buttons()
 
 	def move_up(self, widget):
-		"""Moves an AspWidget up in the box."""
+		"""Moves a LauncherWidget up in the box."""
 		old_pos = self.get_widget_position(widget)
 		if old_pos == 0:
 			return None
 		self.move_widget(old_pos, old_pos - 1)
 
 	def move_down(self, widget):
-		"""Moves an AspWidget down in the box."""
+		"""Moves a LauncherWidget down in the box."""
 		old_pos = self.get_widget_position(widget)
 		if old_pos == len(self._widgets) - 1:
 			return None
