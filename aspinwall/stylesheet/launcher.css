@@ -11,16 +11,18 @@
 	color: @aspinwall_widget_fg;
 	border-radius: 10px;
 	font-size: 1.25em;
-	transition-property: opacity;
-	transition-duration: 0.1s;
-	transition-timing-function: ease-out;
 	margin: 4px 10px;
 	box-shadow: 2px 1px 1px @aspinwall_widget_shade;
 }
 
-.aspinwall-widget.dragged {
+.aspinwall-widget-wrapper {
+	transition-property: opacity;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-out;
+}
+
+.aspinwall-widget-wrapper.dragged {
 	opacity: 0.35;
-	transition-duration: 0.15s;
 }
 
 .aspinwall-widget-header {
