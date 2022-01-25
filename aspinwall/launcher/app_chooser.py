@@ -85,7 +85,7 @@ class AppChooser(Gtk.Box):
 		app_info = app_grid.get_model().get_item(app_position)
 		context = Gdk.Display.get_app_launch_context(app_grid.get_display())
 		app_info.launch(None, context)
-		self.set_reveal_child(False)
+		self.hide()
 
 	def filter_by_name(self, appinfo, user_data):
 		"""Fill-in for custom filter for app grid."""
