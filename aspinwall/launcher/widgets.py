@@ -122,7 +122,10 @@ class AspWidget(Gtk.Box):
 
 	def drag_begin(self, drag_source, *args):
 		"""Operations to perform when the drag operation starts."""
-		drag_source.set_icon(Gtk.WidgetPaintable(widget=self), self.get_allocation().width / 2, 10)
+		drag_source.set_icon(
+			Gtk.WidgetPaintable(widget=self.container),
+			self.container.get_allocation().width / 2, 10
+		)
 		self.add_css_class('dragged')
 
 	def drag_end(self, *args):
