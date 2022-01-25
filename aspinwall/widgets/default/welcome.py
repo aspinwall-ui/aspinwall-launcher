@@ -10,7 +10,8 @@ class Welcome(Widget):
 		"name": "Welcome",
 		"icon": 'dialog-information-symbolic',
 		"description": "Displays basic information about Aspinwall.",
-		"id": "org.dithernet.aspinwall.welcome"
+		"id": "org.dithernet.aspinwall.welcome",
+		"tags": ['welcome', 'first startup']
 	}
 
 	config = False
