@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <interface>
-	<requires lib="adw" version="1.0"/>
 	<requires lib="gtk" version="4.0"/>
 	<template class="WidgetChooser" parent="GtkRevealer">
 		<property name="transition-type">slide-left</property>
@@ -19,51 +18,34 @@
 
 				<child>
 					<object class="GtkBox" id="widget_chooser_header">
-						<property name="halign">fill</property>
-						<property name="hexpand">true</property>
-
+						<property name="spacing">5</property>
 						<style>
 							<class name="header"/>
-							<class name="toolbar"/>
 						</style>
 
 						<child>
-							<object class="GtkLabel" id="widget_chooser_header_title">
-								<property name="halign">center</property>
+							<object class="GtkSearchEntry" id="search">
+								<property name="valign">start</property>
 								<property name="hexpand">true</property>
-								<property name="label" translatable="true">Add a widget</property>
-								<style>
-									<class name="title"/>
-								</style>
+								<property name="placeholder_text" translatable="yes">Search widgets…</property>
 							</object>
 						</child>
 
 						<child>
-							<object class="GtkButton" id="widget_chooser_close">
+							<object class="GtkButton" id="close_widget_chooser">
 								<property name="halign">end</property>
-								<property name="valign">center</property>
 								<property name="icon-name">window-close-symbolic</property>
 								<signal name="clicked" handler="hide"/>
-								<style>
-									<class name="raised"/>
-									<class name="close"/>
-								</style>
 							</object>
 						</child>
 					</object>
 				</child>
 
 				<child>
-					<object class="GtkScrolledWindow">
+					<object class="GtkScrolledWindow" id="widget_list_container">
+						<property name="vexpand">true</property>
 						<property name="hscrollbar-policy">never</property>
-						<child>
-							<object class="GtkListBox" id="widget_chooser_content">
-								<property name="hexpand">true</property>
-								<property name="vexpand">true</property>
-								<property name="show-separators">true</property>
-								<property name="selection-mode">0</property>
-							</object>
-						</child>
+						<!-- The child widget list is added in-code, see launcher/widget_chooser.py -->
 					</object>
 				</child>
 			</object>

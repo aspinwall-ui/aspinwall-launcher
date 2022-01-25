@@ -2,9 +2,10 @@
 """
 Contains code for the widget chooser and widget infoboxes for the chooser.
 """
-from gi.repository import Gtk
+from gi.repository import Gtk, Gio
 import os
 
+from aspinwall.widgets import Widget
 from aspinwall.widgets.loader import available_widgets
 
 # Pointer to the widget box; set up by the WidgetBox __init__ function,
@@ -23,11 +24,13 @@ class WidgetInfobox(Gtk.Box):
 	widget_name = Gtk.Template.Child('widget_infobox_name')
 	widget_description = Gtk.Template.Child('widget_infobox_description')
 
-	def __init__(self, widget):
+	def __init__(self):
 		"""Initializes a widget infobox."""
 		super().__init__()
 
-		self.widget = widget
+	def bind_to_widget(self, widget):
+		"""Binds the infobox to a widget."""
+		self.widget = widget.__class__
 
 		self.widget_icon.set_from_icon_name(widget.metadata['icon'])
 		self.widget_name.set_markup(
@@ -44,22 +47,97 @@ class WidgetInfobox(Gtk.Box):
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'widgetchooser.ui'))
 class WidgetChooser(Gtk.Revealer):
-	"""
-	Widget chooser dialog.
-	"""
+	"""Widget chooser widget."""
 	__gtype_name__ = 'WidgetChooser'
 
-	_content = Gtk.Template.Child('widget_chooser_content')
+	widget_list_container = Gtk.Template.Child()
+	search = Gtk.Template.Child()
 
 	def __init__(self):
 		"""Initializes a widget chooser."""
 		super().__init__()
-		self.fill()
 
-	def fill(self):
-		"""Fills the widget chooser."""
+		factory = Gtk.SignalListItemFactory()
+		factory.connect('setup', self.setup)
+		factory.connect('bind', self.bind)
+
+		# Set up model and factory
+		store = Gio.ListStore(item_type=Widget)
 		for widget in available_widgets:
-			self._content.append(WidgetInfobox(widget))
+			store.append(widget())
+
+		# Set up sort model
+		self.sort_model = Gtk.SortListModel(model=store)
+		self.sorter = Gtk.CustomSorter.new(self.sort_func, None)
+		self.sort_model.set_sorter(self.sorter)
+
+		# Set up filter model
+		filter_model = Gtk.FilterListModel(model=self.sort_model)
+		self.filter = Gtk.CustomFilter.new(self.filter_by_name, filter_model)
+		filter_model.set_filter(self.filter)
+		self.search.connect('search-changed', self.search_changed)
+
+		self.model = filter_model
+
+		# Set up widget list
+		widget_list = Gtk.ListView(model=Gtk.SingleSelection(model=self.model), factory=factory)
+		widget_list.set_enable_rubberband(False)
+		widget_list.add_css_class('widget-chooser-list')
+		#widget_list.connect('activate', self.activate)
+
+		self.widget_list_container.set_child(widget_list)
+
+	def setup(self, factory, list_item):
+		"""Sets up the widget list."""
+		list_item.set_child(WidgetInfobox())
+
+	def update_model(self):
+		"""Updates the widget list model."""
+		store = Gio.ListStore(item_type=Widget)
+		for widget in available_widgets:
+			store.append(widget())
+
+		self.sort_model.set_model(store)
+
+	def bind(self, factory, list_item):
+		"""Binds the list items in the widget list."""
+		widget_infobox = list_item.get_child()
+		widget = list_item.get_item()
+		widget_infobox.bind_to_widget(widget)
+
+	def filter_by_name(self, widget, user_data):
+		"""Fill-in for custom filter for widget list."""
+		query = self.search.get_text()
+		if not query:
+			return True
+		query = query.casefold()
+
+		if query in widget.name.casefold():
+			return True
+
+		for tag in widget.tags:
+			if query in tag.casefold():
+				return True
+
+		return False
+
+	def sort_func(self, a, b, *args):
+		"""Sort function for the widget list sorter."""
+		a_name = GLib.utf8_casefold(a.name, -1)
+		if not a_name:
+			a_name = ''
+		b_name = GLib.utf8_casefold(b.name, -1)
+		if not b_name:
+			b_name = ''
+		return GLib.utf8_collate(a_name, b_name)
+
+	def search_changed(self, *args):
+		"""Notifies the filter about search changes."""
+		self.filter.changed(Gtk.FilterChange.DIFFERENT)
+		# Select first item in list
+		selection_model = self.widget_list_container.get_child().get_model()
+		selection_model.set_selected(0)
+		# TODO: Scroll back to top of list
 
 	@Gtk.Template.Callback()
 	def hide(self, *args):

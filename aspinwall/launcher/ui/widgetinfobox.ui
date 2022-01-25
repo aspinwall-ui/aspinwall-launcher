@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <interface>
+	<requires lib="libadwaita" version="1.0"/>
 	<requires lib="gtk" version="4.0"/>
 	<template class="WidgetInfobox" parent="GtkBox">
 		<property name="hexpand">True</property>
@@ -33,12 +34,17 @@
 
 				<child>
 					<object class="GtkButton" id="widget_infobox_add">
-						<property name="icon-name">list-add-symbolic</property>
-						<!--<property name="label" translatable="true">_Add</property>
-						<property name="use_underline">true</property>-->
 						<property name="halign">end</property>
 						<property name="hexpand">true</property>
 						<signal name="clicked" handler="add_widget_from_infobox"></signal>
+
+						<property name="child">
+							<object class="AdwButtonContent">
+								<property name="icon-name">list-add-symbolic</property>
+								<property name="label" translatable="true">_Add</property>
+								<property name="use_underline">true</property>
+							</object>
+						</property>
 
 						<style>
 							<class name="add"/>
