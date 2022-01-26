@@ -4,6 +4,7 @@ Contains code for handling wallpapers
 """
 import math
 import os
+import threading
 from gi.repository import Gtk, Gdk, GdkPixbuf
 from aspinwall.launcher.config import config
 
@@ -34,6 +35,9 @@ class Wallpaper(Gtk.Box):
 		"""Initializes a Wallpaper object."""
 		super().__init__()
 		self.pixbuf = GdkPixbuf.Pixbuf()
+
+		self.set_image_from_config()
+
 		self.wallpaper.set_draw_func(self.draw)
 		self.wallpaper.connect('resize', self.update)
 
@@ -65,7 +69,6 @@ class Wallpaper(Gtk.Box):
 		width = window.get_width()
 		height = window.get_height()
 
-		self.set_image_from_config()
 		if self.image:
 			self.pixbuf = self.scale_to_min(width, height)
 		else:
