@@ -70,6 +70,11 @@ def on_activate(app):
 
 	win.present()
 
+	if not 'GTK_DEBUG' in os.environ or not os.environ['GTK_DEBUG']:
+		win_surface = win.get_surface()
+		win.set_size_request(win_surface.get_width(), win_surface.get_height())
+		win.fullscreen()
+
 def on_shutdown(app):
 	config.save()
 
