@@ -8,6 +8,13 @@ window {
 	background: #000;
 }
 
+/* Clock */
+
+.clockbox {
+	color: #fff;
+	text-shadow: 2px 2px 2px @aspinwall_widget_shade;
+}
+
 /* Widgets */
 
 .aspinwall-widget-wrapper {
