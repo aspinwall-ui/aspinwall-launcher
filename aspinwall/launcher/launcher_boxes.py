@@ -135,6 +135,7 @@ class WidgetBox(Gtk.Box):
 	def show_chooser(self, *args):
 		"""Shows the widget chooser."""
 		self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
+		self.widget_chooser.search.grab_focus()
 		self.widget_chooser.set_reveal_child(True)
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'clockbox.ui'))

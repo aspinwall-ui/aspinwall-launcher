@@ -35,6 +35,7 @@ class Launcher(Gtk.ApplicationWindow):
 		self.app_chooser.search.set_text('')
 		# Show chooser
 		self.launcher_flap.set_reveal_flap(True)
+		self.app_chooser.search.grab_focus()
 
 def on_gtk_theme_change(settings, theme_name, theme_name_is_str, style_provider):
 	"""Reloads the CSS provider as needed."""
