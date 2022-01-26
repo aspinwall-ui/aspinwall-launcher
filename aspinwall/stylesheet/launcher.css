@@ -1,3 +1,15 @@
+/* Wallpaper */
+
+window {
+	background: #000;
+}
+
+.wallpaper-container {
+	background: #000;
+}
+
+/* Widgets */
+
 .aspinwall-widget-wrapper {
 	padding: 5px 0;
 }

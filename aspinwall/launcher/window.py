@@ -13,6 +13,7 @@ from aspinwall.widgets.loader import load_widgets
 # "invalid object type" errors.
 from aspinwall.launcher.launcher_boxes import ClockBox, WidgetBox # noqa: F401
 from aspinwall.launcher.app_chooser import AppChooser # noqa: F401
+from aspinwall.launcher.wallpaper import Wallpaper # noqa: F401
 
 @Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'launcher.ui'))
 class Launcher(Gtk.ApplicationWindow):
@@ -20,12 +21,14 @@ class Launcher(Gtk.ApplicationWindow):
 	__gtype_name__ = 'Launcher'
 
 	widgetbox = Gtk.Template.Child()
+	launcher_wallpaper_overlay = Gtk.Template.Child()
 	launcher_flap = Gtk.Template.Child()
 	app_chooser = Gtk.Template.Child()
 
 	def __init__(self):
 		"""Initializes the launcher window."""
 		super().__init__(title='Aspinwall Launcher', application=app)
+		self.launcher_wallpaper_overlay.set_measure_overlay(self.launcher_flap, True)
 
 	@Gtk.Template.Callback()
 	def show_app_chooser(self, *args):

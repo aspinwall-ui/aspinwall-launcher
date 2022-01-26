@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+	<requires lib="gtk" version="4.0"/>
+	<template class="Wallpaper" parent="GtkBox">
+		<property name="hexpand">true</property>
+		<style>
+			<class name="wallpaper-container"/>
+		</style>
+		<child>
+			<object class="GtkDrawingArea" id="wallpaper">
+				<property name="hexpand">true</property>
+			</object>
+		</child>
+	</template>
+</interface>
