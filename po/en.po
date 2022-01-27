@@ -1,3 +1,9 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:6
 msgid "Widgets"
 msgstr "Widgets"
@@ -14,17 +20,40 @@ msgstr "Path to wallpaper"
 msgid "Path to a wallpaper file."
 msgstr "Path to a wallpaper file."
 
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:22
+msgid "Time format string"
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:23
+msgid ""
+"Time format string for the clock, using the format described in the "
+"documentation at https://docs.python.org/3/library/time.html#time.strftime."
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:30
+msgid "Date format string"
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:31
+msgid ""
+"Date format string for the clock, using the format described in the "
+"documentation at https://docs.python.org/3/library/time.html#time.strftime."
+msgstr ""
+
 #: src/launcher/ui/appchooser.ui:24
-msgid "Search apps"
-msgstr "Search apps"
+#, fuzzy
+msgid "Search apps…"
+msgstr "Search apps…"
 
 #: src/launcher/ui/widgetchooser.ui:30
-msgid "Search widgets"
-msgstr "Search widgets"
+#, fuzzy
+msgid "Search widgets…"
+msgstr "Search widgets…"
 
 #: src/launcher/ui/widgetbox.ui:60
-msgid "_Add Widgets"
-msgstr "_Add Widgets"
+#, fuzzy
+msgid "_Add Widgets…"
+msgstr "_Add Widgets…"
 
 #: src/launcher/ui/widgetbox.ui:65
 msgid "_Manage Widgets"

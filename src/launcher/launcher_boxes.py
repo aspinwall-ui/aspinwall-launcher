@@ -158,6 +158,6 @@ class ClockBox(Gtk.Box):
 	def update(self):
 		"""Updates the time and date on the clock."""
 		while True:
-			self.clockbox_time.set_markup('<span weight="bold" font="28">' + time.strftime("%X") + '</span>')
-			self.clockbox_date.set_markup('<span font="22">' + time.strftime("%A, %x") + '</span>')
+			self.clockbox_time.set_markup('<span weight="bold" font="28">' + time.strftime(config["time-format"]) + '</span>')
+			self.clockbox_date.set_markup('<span font="22">' + time.strftime(config['date-format']) + '</span>')
 			time.sleep(1)

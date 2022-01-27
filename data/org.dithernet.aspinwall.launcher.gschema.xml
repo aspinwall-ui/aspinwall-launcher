@@ -16,5 +16,21 @@
 				Path to a wallpaper file.
 			</description>
 		</key>
+
+		<key name="time-format" type="s">
+			<default>"%H:%M"</default>
+			<summary>Time format string</summary>
+			<description>
+				Time format string for the clock, using the format described in the documentation at https://docs.python.org/3/library/time.html#time.strftime.
+			</description>
+		</key>
+
+		<key name="date-format" type="s">
+			<default>"%A, %x"</default>
+			<summary>Date format string</summary>
+			<description>
+				Date format string for the clock, using the format described in the documentation at https://docs.python.org/3/library/time.html#time.strftime.
+			</description>
+		</key>
 	</schema>
 </schemalist>

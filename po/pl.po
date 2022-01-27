@@ -1,3 +1,11 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-27 22:28+0100\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:6
 msgid "Widgets"
 msgstr "Widżety"
@@ -14,17 +22,44 @@ msgstr "Ścieżka tapety"
 msgid "Path to a wallpaper file."
 msgstr "Ścieżka pliku tapety."
 
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:22
+msgid "Time format string"
+msgstr "Format czasu"
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:23
+msgid ""
+"Time format string for the clock, using the format described in the "
+"documentation at https://docs.python.org/3/library/time.html#time.strftime."
+msgstr ""
+"Ciąg zawierający format czasu dla zegara, używający formatu opisanego w "
+"dokumentacji: https://docs.python.org/3/library/time.html#time.strftime."
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:30
+msgid "Date format string"
+msgstr "Format daty"
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:31
+msgid ""
+"Date format string for the clock, using the format described in the "
+"documentation at https://docs.python.org/3/library/time.html#time.strftime."
+msgstr ""
+"Ciąg zawierający format daty dla zegara, używający formatu opisanego w "
+"dokumentacji: https://docs.python.org/3/library/time.html#time.strftime."
+
 #: src/launcher/ui/appchooser.ui:24
-msgid "Search apps"
-msgstr "Szukaj aplikacji"
+#, fuzzy
+msgid "Search apps…"
+msgstr "Szukaj aplikacji…"
 
 #: src/launcher/ui/widgetchooser.ui:30
-msgid "Search widgets"
-msgstr "Szukaj widżetów"
+#, fuzzy
+msgid "Search widgets…"
+msgstr "Szukaj widżetów…"
 
 #: src/launcher/ui/widgetbox.ui:60
-msgid "_Add Widgets"
-msgstr "_Dodaj widżety"
+#, fuzzy
+msgid "_Add Widgets…"
+msgstr "_Dodaj widżety…"
 
 #: src/launcher/ui/widgetbox.ui:65
 msgid "_Manage Widgets"

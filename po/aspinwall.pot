@@ -1,13 +1,14 @@
-# Aspinwall translations
+# Aspinwall
 # Copyright (C) 2022 Aspinwall developers
 # This file is distributed under the same license as the aspinwall package.
+# knuxify <knuxify@gmail.com>, 2022.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-27 19:02+0100\n"
+"POT-Creation-Date: 2022-01-27 22:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,6 +31,26 @@ msgstr ""
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:15
 msgid "Path to a wallpaper file."
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:22
+msgid "Time format string"
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:23
+msgid ""
+"Time format string for the clock, using the format described in the "
+"documentation at https://docs.python.org/3/library/time.html#time.strftime."
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:30
+msgid "Date format string"
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:31
+msgid ""
+"Date format string for the clock, using the format described in the "
+"documentation at https://docs.python.org/3/library/time.html#time.strftime."
 msgstr ""
 
 #: src/launcher/ui/appchooser.ui:24
