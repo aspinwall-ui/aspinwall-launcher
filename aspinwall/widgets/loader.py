@@ -26,16 +26,21 @@ def load_widgets():
 	returns the list of available widgets.
 	"""
 	for dir in widget_dirs:
-		for widget_file in os.listdir(dir):
-			if widget_file.endswith('.py'):
-				widget = os.path.splitext(widget_file)[0]
-				widget_path = os.path.join(dir, widget_file)
+		for widget_dir in os.listdir(dir):
+			if widget_dir == '__pycache__':
+				continue
+			for widget_file in os.listdir(os.path.join(dir, widget_dir)):
+				if widget_file.endswith('.py'):
+					widget = os.path.splitext(widget_file)[0]
+					widget_path = os.path.join(dir, widget_dir, widget_file)
 
-				spec = importlib.util.spec_from_file_location(widget, widget_path)
-				module = importlib.util.module_from_spec(spec)
-				spec.loader.exec_module(module)
+					spec = importlib.util.spec_from_file_location(widget, widget_path)
+					module = importlib.util.module_from_spec(spec)
+					spec.loader.exec_module(module)
 
-				available_widgets.append(module._widget_class)
+					module._widget_class.widget_path = widget_path
+
+					available_widgets.append(module._widget_class)
 
 	return available_widgets
 

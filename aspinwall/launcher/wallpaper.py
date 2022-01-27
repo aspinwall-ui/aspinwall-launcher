@@ -57,8 +57,8 @@ class Wallpaper(Gtk.Box):
 		Sets the image to a pixbuf created from the image file provided
 		in the config file.
 		"""
-		wallpaper_path = config.get('wallpaper')
-		if wallpaper_path and os.path.exists(wallpaper_path):
+		wallpaper_path = config['wallpaper']
+		if wallpaper_path and not wallpaper_path == '/' and os.path.exists(wallpaper_path):
 			self.image = GdkPixbuf.Pixbuf.new_from_file(wallpaper_path)
 		else:
 			self.image = None

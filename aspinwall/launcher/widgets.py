@@ -73,11 +73,11 @@ class LauncherWidget(Gtk.Box):
 
 	container = Gtk.Template.Child()
 
-	def __init__(self, widget_class, widgetbox, config={}):
+	def __init__(self, widget_class, widgetbox, instance):
 		"""Initializes a widget display."""
 		super().__init__()
 
-		self._widget = widget_class(config)
+		self._widget = widget_class(instance)
 		self._widgetbox = widgetbox
 
 		# Set up drag source

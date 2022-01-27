@@ -5,6 +5,14 @@ Contains base class and helper functions for creating widgets.
 Code for loading widgets can be found in the loader submodule.
 """
 from gi.repository import Gtk, GObject
+import os
+
+def widget_path_to_schema_source(widget_path):
+	"""
+	Takes a widget path and returns the schema source path relative to the
+	path.
+	"""
+	return os.join(os.path.basedir(widget_path), 'schemas')
 
 class Widget(GObject.GObject):
 	"""
@@ -29,18 +37,33 @@ class Widget(GObject.GObject):
 	__gtype_name__ = 'AspWidget'
 
 	metadata = {}
-	config = {}
+	has_config = False
 
-	def __init__(self, config=None):
+	widget_path = None
+	instance = None
+
+	def __init__(self, instance=0):
 		super().__init__()
 		self.content = Gtk.Box(hexpand=True)
-		if config:
-			self.config = config
+		self.instance = instance
+
+		# Set up config
+		if self.has_config:
+			self.schema_source = Gio.SettingsSchemaSource.new_from_directory(
+				widget_path_to_schema_source_path(self.widget_path)
+			)
+			schema = Gio.SettingsSchemaSource.lookup(self.schema_source, self.metadata['id'], False)
+			self.config = Gio.Settings.new_full(schema, None, self.schema_path + '/' + instance)
 
 	def refresh(self):
 		"""(Optional) Runs in the background at the widget refresh interval.
 		For more information, see docs/widgets/creating-widgets.md."""
 		return
+
+	@GObject.Property
+	def id(self):
+		"""The ID of the widget, as defined in its metadata."""
+		return self.metadata['id']
 
 	@GObject.Property
 	def name(self):

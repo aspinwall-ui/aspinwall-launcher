@@ -70,23 +70,25 @@ The code used for widget creation must be added to the `__init__()` function of 
 
 ## Widget configuration
 
-Widgets can store configuration data in the `config` variable. Usually this will be stored as a dict.
+Widgets use [GSettings](https://docs.gtk.org/gio/class.Settings.html) for storing data, and are expected to ship pre-compiled files. A `Gio.Settings` object is provided in the `config` variable on the object, and can be interacted with like a regular dict (`config['key']` gets a key, `config['key'] = value` sets it).
 
-The launcher takes care of saving and loading the data in this variable.
+Loading/saving is handled by the launcher.
 
-If you're planning to use the `config` variable, you can define the default variables by adding the following above the `def __init__(self):` line:
+If you're planning to use the `config` variable, you must set the `has_config` value to True.
 
-```python
-	config = {
-		"my_setting": "default-value"
-	}
-```
+If your widget has no configuration options, don't set the `has_config` value; it is set to False by default.
 
-If your widget has no configuration options, set the config variable to `False` by adding the following above the `def __init__(self):` line:
+## Installing the widget
 
-```python
-	config = False
-```
+The default local folder for widgets is `~/.local/share/aspinwall/widgets`.
+
+To prepare a widget for installation:
+
+  - Create a folder with the widget's ID in lowercase as the name
+  - Place your widget's `.py` file into the folder
+  - If your widgets have schemas, place the compiled `gschemas.compiled` file into a subfolder named `schemas`.
+
+To install the widget, move it to the widget folder, whether it's the local one or the system one.
 
 ## Refreshing widget content
 

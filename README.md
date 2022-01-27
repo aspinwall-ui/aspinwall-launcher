@@ -24,6 +24,8 @@ Before you can use the `./run` script, you will need to install the aspinwall pa
 $ pip3 install --editable .
 ```
 
+You may also need to copy the contents of the `aspinwall/widgets/default` folder to `~/.local/share/aspinwall/widgets`.
+
 ### Requirements
 
 - GTK 4.0

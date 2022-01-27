@@ -75,11 +75,7 @@ def on_activate(app):
 		win.set_size_request(win_surface.get_width(), win_surface.get_height())
 		win.fullscreen()
 
-def on_shutdown(app):
-	config.save()
-
 if __name__ == "__main__":
-	app = Adw.Application(application_id='org.dithernet.AspinwallLauncher')
+	app = Adw.Application(application_id='org.dithernet.aspinwall.Launcher')
 	app.connect('activate', on_activate)
-	app.connect('shutdown', on_shutdown)
 	app.run()

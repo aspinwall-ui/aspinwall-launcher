@@ -6,6 +6,7 @@ from gi.repository import Gtk, Gio
 import os
 import threading
 import time
+import uuid
 
 from aspinwall.launcher.config import config
 from aspinwall.launcher.widgets import LauncherWidget
@@ -40,23 +41,25 @@ class WidgetBox(Gtk.Box):
 
 		self.load_widgets()
 
-	def add_widget(self, widget_class, config={}, no_save=False):
+	def add_widget(self, widget_class, instance=None):
 		"""Adds a widget to the WidgetBox."""
-		aspwidget = LauncherWidget(widget_class, self, config)
+		if not instance:
+			instance = str(uuid.uuid4())
+		aspwidget = LauncherWidget(widget_class, self, instance)
 		self._widgets.append(aspwidget)
 		self.widget_container.append(aspwidget)
 
 		# We can only do this once the widget has been appended to the widgets list
 		self.update_move_buttons()
 
-		if not no_save:
-			self.save_widgets()
+		self.save_widgets()
 
 	def remove_widget(self, aspwidget):
 		"""Removes a widget from the WidgetBox."""
 		self._widgets.remove(aspwidget)
 		self.widget_container.remove(aspwidget)
 		self.update_move_buttons()
+
 		self.save_widgets()
 
 	def update_move_buttons(self):
@@ -101,6 +104,7 @@ class WidgetBox(Gtk.Box):
 				self._widgets.insert(new_pos, self._widgets.pop(old_pos))
 
 		self.update_move_buttons()
+		self.save_widgets()
 
 	def move_up(self, widget):
 		"""Moves a LauncherWidget up in the box."""
@@ -116,21 +120,19 @@ class WidgetBox(Gtk.Box):
 			return None
 		self.move_widget(old_pos, old_pos + 1)
 
-	def load_widgets(self):
-		"""Loads widgets from the config."""
-		config.reload()
-		widgets = config.get('widgets')
-		if widgets:
-			for widget in widgets:
-				self.add_widget(get_widget_class_by_id(widget['id']), widget['config'], no_save=True)
-
 	def save_widgets(self):
-		"""Saves the current widget configuration to the config."""
+		"""Saves widgets to the config."""
 		widget_list = []
 		for widget in self._widgets:
-			widget_list.append({'id': widget._widget.metadata['id'], 'config': widget._widget.config})
-		config.set('widgets', widget_list)
-		config.save()
+			widget_list.append((widget._widget.metadata['id'], widget._widget.instance))
+		config['widgets'] = widget_list
+
+	def load_widgets(self):
+		"""Loads widgets from the config."""
+		widgets = config['widgets']
+		if widgets:
+			for widget in widgets:
+				self.add_widget(get_widget_class_by_id(widget[0]), widget[1])
 
 	def show_chooser(self, *args):
 		"""Shows the widget chooser."""

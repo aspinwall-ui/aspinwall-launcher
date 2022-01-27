@@ -10,14 +10,12 @@ class Welcome(Widget):
 		"name": "Welcome",
 		"icon": 'dialog-information-symbolic',
 		"description": "Displays basic information about Aspinwall.",
-		"id": "org.dithernet.aspinwall.welcome",
+		"id": "org.dithernet.aspinwall.widgets.Welcome",
 		"tags": ['welcome', 'first startup']
 	}
 
-	config = False
-
-	def __init__(self, config={}):
-		super().__init__()
+	def __init__(self, instance=0):
+		super().__init__(instance)
 
 		container = Gtk.Box(halign=Gtk.Align.FILL, hexpand=True)
 		container.append(Gtk.Label(label='To add new widgets, press the '))
