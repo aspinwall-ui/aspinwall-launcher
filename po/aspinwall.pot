@@ -1,0 +1,57 @@
+# Aspinwall translations
+# Copyright (C) 2022 Aspinwall developers
+# This file is distributed under the same license as the aspinwall package.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: aspinwall\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-27 19:02+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:6
+msgid "Widgets"
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:7
+msgid "List of added widgets."
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:14
+msgid "Path to wallpaper"
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:15
+msgid "Path to a wallpaper file."
+msgstr ""
+
+#: src/launcher/ui/appchooser.ui:24
+msgid "Search apps…"
+msgstr ""
+
+#: src/launcher/ui/widgetchooser.ui:30
+msgid "Search widgets…"
+msgstr ""
+
+#: src/launcher/ui/widgetbox.ui:60
+msgid "_Add Widgets…"
+msgstr ""
+
+#: src/launcher/ui/widgetbox.ui:65
+msgid "_Manage Widgets"
+msgstr ""
+
+#: src/launcher/ui/widgetbox.ui:72
+msgid "_Launcher Settings"
+msgstr ""
+
+#: src/launcher/ui/widgetbox.ui:77
+msgid "A_bout Aspinwall"
+msgstr ""

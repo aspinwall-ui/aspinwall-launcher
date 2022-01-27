@@ -1,7 +1,5 @@
-data/org.dithernet.aspinwall.desktop.in
-data/org.dithernet.aspinwall.appdata.xml.in
-data/org.dithernet.aspinwall.gschema.xml
-src/window.ui
-src/main.py
-src/window.py
-
+data/org.dithernet.aspinwall.launcher.gschema.xml
+src/launcher/ui/appchooser.ui
+src/launcher/ui/widgetchooser.ui
+src/launcher/ui/widgetbox.ui
+src/launcher/ui/widgetinfobox.ui
