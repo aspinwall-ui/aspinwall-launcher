@@ -15,7 +15,7 @@ from aspinwall.launcher.launcher_boxes import ClockBox, WidgetBox # noqa: F401
 from aspinwall.launcher.app_chooser import AppChooser # noqa: F401
 from aspinwall.launcher.wallpaper import Wallpaper # noqa: F401
 
-@Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'launcher.ui'))
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/launcher.ui')
 class Launcher(Gtk.ApplicationWindow):
 	"""Base class for launcher window."""
 	__gtype_name__ = 'Launcher'
@@ -25,7 +25,7 @@ class Launcher(Gtk.ApplicationWindow):
 	launcher_flap = Gtk.Template.Child()
 	app_chooser = Gtk.Template.Child()
 
-	def __init__(self):
+	def __init__(self, app):
 		"""Initializes the launcher window."""
 		super().__init__(title='Aspinwall Launcher', application=app)
 		self.launcher_wallpaper_overlay.set_measure_overlay(self.launcher_flap, True)
@@ -47,12 +47,12 @@ def on_gtk_theme_change(settings, theme_name, theme_name_is_str, style_provider)
 	else:
 		stylesheet = 'default-dark.css'
 
-	style_provider.load_from_path(os.path.join(os.path.dirname(__file__), '..', 'stylesheet', stylesheet))
+	style_provider.load_from_resource('/org/dithernet/aspinwall/stylesheet/' + stylesheet)
 
 def on_activate(app):
 	load_widgets()
 
-	win = Launcher()
+	win = Launcher(app)
 
 	gtk_settings = Gtk.Settings.get_default()
 
@@ -75,7 +75,7 @@ def on_activate(app):
 		win.set_size_request(win_surface.get_width(), win_surface.get_height())
 		win.fullscreen()
 
-if __name__ == "__main__":
+def main(version):
 	app = Adw.Application(application_id='org.dithernet.aspinwall.Launcher')
 	app.connect('activate', on_activate)
 	app.run()

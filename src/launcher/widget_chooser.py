@@ -2,7 +2,7 @@
 """
 Contains code for the widget chooser and widget infoboxes for the chooser.
 """
-from gi.repository import Gtk, Gio
+from gi.repository import Gtk, Gio, GLib
 import os
 
 from aspinwall.widgets import Widget
@@ -13,7 +13,7 @@ from aspinwall.widgets.loader import available_widgets
 # This is defined in this file and set externally to avoid circular imports.
 widgetbox = None
 
-@Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'widgetinfobox.ui'))
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetinfobox.ui')
 class WidgetInfobox(Gtk.Box):
 	"""
 	Infobox for widgets displayed in the widget chooser dialog.
@@ -45,7 +45,7 @@ class WidgetInfobox(Gtk.Box):
 		"""Adds the widget to the widget box."""
 		widgetbox.add_widget(self.widget)
 
-@Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'widgetchooser.ui'))
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetchooser.ui')
 class WidgetChooser(Gtk.Revealer):
 	"""Widget chooser widget."""
 	__gtype_name__ = 'WidgetChooser'

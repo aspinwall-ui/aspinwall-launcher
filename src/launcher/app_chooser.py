@@ -5,7 +5,7 @@ Contains code for the app chooser.
 from gi.repository import Gdk, GLib, Gio, Gtk
 import os
 
-@Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'appicon.ui'))
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/appicon.ui')
 class AppIcon(Gtk.Box):
 	"""Contains an app icon for the app chooser."""
 	__gtype_name__ = 'AppIcon'
@@ -24,7 +24,7 @@ class AppIcon(Gtk.Box):
 		self.app_icon.set_from_gicon(app.get_icon())
 		self.app_name.set_label(app.get_name())
 
-@Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'appchooser.ui'))
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/appchooser.ui')
 class AppChooser(Gtk.Box):
 	"""App chooser widget."""
 	__gtype_name__ = 'AppChooser'

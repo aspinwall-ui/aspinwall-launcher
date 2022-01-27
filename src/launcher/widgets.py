@@ -5,7 +5,7 @@ Contains basic code for the launcher's widget handling.
 from gi.repository import Gtk, Gdk, GObject
 import os
 
-@Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'widgetheader.ui'))
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetheader.ui')
 class LauncherWidgetHeader(Gtk.Box):
 	"""Header for LauncherWidget."""
 	__gtype_name__ = 'LauncherWidgetHeader'
@@ -61,7 +61,7 @@ class LauncherWidgetHeader(Gtk.Box):
 		else:
 			self.move_down_button.set_sensitive(True)
 
-@Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'launcherwidget.ui'))
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/launcherwidget.ui')
 class LauncherWidget(Gtk.Box):
 	"""
 	Box containing a widget, alongside with its header.

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+	<gresource prefix="/org/dithernet/aspinwall/launcher">
+		<file preprocess="xml-stripblanks">ui/appchooser.ui</file>
+		<file preprocess="xml-stripblanks">ui/appicon.ui</file>
+		<file preprocess="xml-stripblanks">ui/clockbox.ui</file>
+		<file preprocess="xml-stripblanks">ui/launcher.ui</file>
+		<file preprocess="xml-stripblanks">ui/launcherwidget.ui</file>
+		<file preprocess="xml-stripblanks">ui/wallpaper.ui</file>
+		<file preprocess="xml-stripblanks">ui/widgetbox.ui</file>
+		<file preprocess="xml-stripblanks">ui/widgetchooser.ui</file>
+		<file preprocess="xml-stripblanks">ui/widgetheader.ui</file>
+		<file preprocess="xml-stripblanks">ui/widgetinfobox.ui</file>
+	</gresource>
+</gresources>

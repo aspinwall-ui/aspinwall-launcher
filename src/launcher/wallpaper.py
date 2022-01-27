@@ -21,7 +21,7 @@ def color_to_pixel(color):
 			(((blue  * 255)) << 8)  | \
 			((alpha * 255)))
 
-@Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'wallpaper.ui'))
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/wallpaper.ui')
 class Wallpaper(Gtk.Box):
 	"""Wallpaper image that reads wallpaper data from the config."""
 	__gtype_name__ = 'Wallpaper'

@@ -1,0 +1,7 @@
+data/org.dithernet.aspinwall.desktop.in
+data/org.dithernet.aspinwall.appdata.xml.in
+data/org.dithernet.aspinwall.gschema.xml
+src/window.ui
+src/main.py
+src/window.py
+

@@ -13,7 +13,7 @@ from aspinwall.launcher.widgets import LauncherWidget
 import aspinwall.launcher.widget_chooser
 from aspinwall.widgets.loader import get_widget_class_by_id
 
-@Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'widgetbox.ui'))
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetbox.ui')
 class WidgetBox(Gtk.Box):
 	"""Box that contains the widgets."""
 	__gtype_name__ = 'WidgetBox'
@@ -140,7 +140,7 @@ class WidgetBox(Gtk.Box):
 		self.widget_chooser.search.grab_focus()
 		self.widget_chooser.set_reveal_child(True)
 
-@Gtk.Template(filename=os.path.join(os.path.dirname(__file__), 'ui', 'clockbox.ui'))
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/clockbox.ui')
 class ClockBox(Gtk.Box):
 	"""Box that contains the launcher's clock."""
 	__gtype_name__ = 'ClockBox'
