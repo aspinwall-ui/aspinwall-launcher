@@ -1,39 +1,39 @@
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:6
 msgid "Widgets"
-msgstr ""
+msgstr "Widżety"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:7
 msgid "List of added widgets."
-msgstr ""
+msgstr "Lista dodanych widżetów."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:14
 msgid "Path to wallpaper"
-msgstr ""
+msgstr "Ścieżka tapety"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:15
 msgid "Path to a wallpaper file."
-msgstr ""
+msgstr "Ścieżka pliku tapety."
 
 #: src/launcher/ui/appchooser.ui:24
 msgid "Search apps"
-msgstr ""
+msgstr "Szukaj aplikacji"
 
 #: src/launcher/ui/widgetchooser.ui:30
 msgid "Search widgets"
-msgstr ""
+msgstr "Szukaj widżetów"
 
 #: src/launcher/ui/widgetbox.ui:60
 msgid "_Add Widgets"
-msgstr ""
+msgstr "_Dodaj widżety"
 
 #: src/launcher/ui/widgetbox.ui:65
 msgid "_Manage Widgets"
-msgstr ""
+msgstr "_Zarządzaj widżetami"
 
 #: src/launcher/ui/widgetbox.ui:72
 msgid "_Launcher Settings"
-msgstr ""
+msgstr "_Ustawienia launchera"
 
 #: src/launcher/ui/widgetbox.ui:77
 msgid "A_bout Aspinwall"
-msgstr ""
+msgstr "_O Aspinwall"
