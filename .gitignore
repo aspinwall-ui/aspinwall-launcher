@@ -10,5 +10,6 @@ coverage.xml
 
 dist/
 build/
+output/
 *.egg-info/
 

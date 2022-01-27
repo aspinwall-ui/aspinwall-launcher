@@ -14,17 +14,17 @@ Aspinwall is a Linux interface for tablets and touchscreen devices. It offers:
 
 ## Installing
 
-The project is in very early stages of development, so it is not yet possible to "install" the shell.
+The project can be built and installed with Meson:
+
+```shell
+$ meson . build
+$ meson compile -C build
+$ sudo meson install -C build
+```
 
 For development purposes, the launcher can be started using the provided `./run` script, which will automatically launch the GTK4 debugger.
 
-Before you can use the `./run` script, you will need to install the aspinwall package:\
-
-```
-$ pip3 install --editable .
-```
-
-You may also need to copy the contents of the `aspinwall/widgets/default` folder to `~/.local/share/aspinwall/widgets`.
+Before you can use the `./run` script, you will need to install Meson.
 
 ### Requirements
 

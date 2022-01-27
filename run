@@ -1,2 +1,7 @@
 #!/bin/sh
-GTK_DEBUG=interactive python3 -m aspinwall.launcher.window
+rm -r output
+rm -r /tmp/aspinwall
+meson --prefix=/tmp/aspinwall . output
+meson compile -C output
+meson install -C output
+GTK_DEBUG=interactive /tmp/aspinwall/bin/aspinwall-launcher
