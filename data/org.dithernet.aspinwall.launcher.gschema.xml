@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schemalist>
+	<schema path="/org/dithernet/aspinwall/launcher/" id="org.dithernet.aspinwall.launcher">
+		<key name="widgets" type="a(ss)">
+			<default>[('org.dithernet.aspinwall.widgets.Welcome', '')]</default>
+			<summary>Widgets</summary>
+			<description>
+				List of added widgets.
+			</description>
+		</key>
+
+		<key name="wallpaper" type="s">
+			<default>"/usr/share/backgrounds/gnome/adwaita-day.png"</default>
+			<summary>Path to wallpaper</summary>
+			<description>
+				Path to a wallpaper file.
+			</description>
+		</key>
+	</schema>
+</schemalist>
