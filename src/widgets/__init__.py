@@ -44,7 +44,7 @@ class Widget(GObject.GObject):
 
 	def __init__(self, instance=0):
 		super().__init__()
-		self.content = Gtk.Box(hexpand=True)
+		self.content = Gtk.Box(hexpand=True, orientation=Gtk.Orientation.VERTICAL)
 		self.instance = instance
 
 		# Set up config
