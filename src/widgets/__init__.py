@@ -7,13 +7,6 @@ Code for loading widgets can be found in the loader submodule.
 from gi.repository import Gtk, GObject
 import os
 
-def widget_path_to_schema_source(widget_path):
-	"""
-	Takes a widget path and returns the schema source path relative to the
-	path.
-	"""
-	return os.join(os.path.basedir(widget_path), 'schemas')
-
 class Widget(GObject.GObject):
 	"""
 	Base class for Aspinwall widgets.
@@ -50,10 +43,14 @@ class Widget(GObject.GObject):
 		# Set up config
 		if self.has_config:
 			self.schema_source = Gio.SettingsSchemaSource.new_from_directory(
-				widget_path_to_schema_source_path(self.widget_path)
+				self.join_with_data_path('schemas')
 			)
 			schema = Gio.SettingsSchemaSource.lookup(self.schema_source, self.metadata['id'], False)
 			self.config = Gio.Settings.new_full(schema, None, self.schema_path + '/' + instance)
+
+	def join_with_data_path(*args):
+		"""Joins path relative to widget data directory."""
+		return os.path.join(os.path.basedir(self.widget_path), args)
 
 	def refresh(self):
 		"""(Optional) Runs in the background at the widget refresh interval.
