@@ -18,7 +18,13 @@
 					<class name="aspinwall-widget"/>
 				</style>
 
-				<!-- The widget header and content is added in-code, see launcher/widgets.py -->
+				<child>
+					<object class="GtkRevealer" id="widget_header_revealer">
+						<property name="hexpand">true</property>
+						<property name="transition-type">slide-up</property>
+						<!-- The widget header and content is added in-code, see launcher/widgets.py -->
+					</object>
+				</child>
 			</object>
 		</child>
 	</template>

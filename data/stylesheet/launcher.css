@@ -32,6 +32,7 @@ window {
 	font-size: 1.25em;
 	margin: 4px 10px;
 	box-shadow: 2px 1px 1px @aspinwall_widget_shade;
+	border: 1px solid @aspinwall_widget_border;
 }
 
 .aspinwall-widget-wrapper {
@@ -50,8 +51,7 @@ window {
 	border-radius: 10px 10px 0 0;
 	background-color: @aspinwall_widget_header_bg;
 	color: @aspinwall_widget_header_fg;
-	border: 1px solid @aspinwall_widget_border;
-	border-bottom: none;
+	border-bottom: 1px solid @aspinwall_widget_border;
 }
 
 .aspinwall-widget-header button {
@@ -73,7 +73,6 @@ window {
 
 .aspinwall-widget-content {
 	padding: 10px;
-	border: 1px solid @aspinwall_widget_border;
 	border-radius: 0 0 10px 10px;
 }
 

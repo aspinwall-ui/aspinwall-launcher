@@ -9,17 +9,40 @@
 			<class name="aspinwall-widget-header"/>
 		</style>
 
-		<!-- Header icon and title -->
+		<!-- Delete button -->
+
 		<child>
-			<object class="GtkImage" id="widget_header_icon">
-				<property name="visible">true</property>
-				<property name="icon-name">list-drag-handle-symbolic</property>
+			<object class="GtkButton" id="widget_header_delete">
+				<property name="icon-name">user-trash-symbolic</property>
+				<signal name="clicked" handler="remove"/>
+
+				<style>
+					<class name="destructive-action"/>
+				</style>
 			</object>
 		</child>
 
 		<child>
-			<object class="GtkLabel" id="widget_header_title">
-				<property name="label">Widget</property>
+			<object class="GtkSeparator"/>
+		</child>
+
+		<!-- Header icon and title -->
+		<child>
+			<object class="GtkBox">
+				<property name="hexpand">true</property>
+				<property name="spacing">5</property>
+				<child>
+					<object class="GtkImage" id="widget_header_icon">
+						<property name="visible">true</property>
+						<property name="icon-name">list-drag-handle-symbolic</property>
+					</object>
+				</child>
+
+				<child>
+					<object class="GtkLabel" id="widget_header_title">
+						<property name="label">Widget</property>
+					</object>
+				</child>
 			</object>
 		</child>
 
@@ -71,14 +94,14 @@
 				</child>
 
 				<child>
-					<object class="GtkButton" id="widget_header_remove">
+					<object class="GtkButton" id="widget_header_hide">
 						<property name="icon-name">window-close-symbolic</property>
 						<property name="has-frame">false</property>
 						<property name="valign">center</property>
-						<signal name="clicked" handler="remove"/>
+						<signal name="clicked" handler="hide"/>
 
 						<style>
-							<class name="aspinwall-widget-remove"/>
+							<class name="aspinwall-widget-hide"/>
 							<class name="close"/>
 						</style>
 					</object>

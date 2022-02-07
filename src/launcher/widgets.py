@@ -44,6 +44,11 @@ class LauncherWidgetHeader(Gtk.Box):
 		"""Removes the parent AspWidget."""
 		self._aspwidget.remove()
 
+	@Gtk.Template.Callback()
+	def hide(self, *args):
+		"""Hides the widget header."""
+		self.get_parent().set_reveal_child(False)
+
 	def update_move_buttons(self):
 		"""
 		Makes the move buttons sensitive or non-sensitive based on whether
@@ -72,6 +77,7 @@ class LauncherWidget(Gtk.Box):
 	__gtype_name__ = 'LauncherWidget'
 
 	container = Gtk.Template.Child()
+	widget_header_revealer = Gtk.Template.Child()
 
 	def __init__(self, widget_class, widgetbox, instance):
 		"""Initializes a widget display."""
@@ -98,11 +104,18 @@ class LauncherWidget(Gtk.Box):
 		# End drop target setup
 
 		self.widget_header = LauncherWidgetHeader(self._widget, self)
-		self.container.append(self.widget_header)
+		self.widget_header_revealer.set_child(self.widget_header)
 
 		self.widget_content = self._widget.content
 		self.widget_content.add_css_class('aspinwall-widget-content')
 		self.container.append(self.widget_content)
+
+		# Set up long-press target
+		longpress = Gtk.GestureLongPress()
+		longpress.connect('pressed', self.reveal_header)
+		self.widget_content.add_controller(longpress)
+
+		# TODO: Set up hover target
 
 	def remove(self):
 		"""Removes the widget from its parent WidgetBox."""
@@ -111,6 +124,10 @@ class LauncherWidget(Gtk.Box):
 	def get_position(self):
 		"""Returns the LauncherWidget's position in its parent widgetbox."""
 		return self._widgetbox.get_widget_position(self)
+
+	def reveal_header(self, *args):
+		"""Reveals the widget's header."""
+		self.widget_header_revealer.set_reveal_child(True)
 
 	def drag_prepare(self, *args):
 		"""Returns the GdkContentProvider for the drag operation"""
