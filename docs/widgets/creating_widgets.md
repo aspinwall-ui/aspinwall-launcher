@@ -90,6 +90,15 @@ To prepare a widget for installation:
 
 To install the widget, move it to the widget folder, whether it's the local one or the system one.
 
+## Styling widgets
+
+Widgets are automatically set up with a `GtkCssProvider`, which is stored in the `self.css_provider` variable.
+
+CSS properties can be loaded from a file (here we use `stylesheet.css` in the widget folder):
+```python
+	self.css_provider.load_from_path(self.join_with_data_path('stylesheet.css'))
+```
+
 ## Refreshing widget content
 
 Widget classes can have a `refresh` function, which will automatically run in the background at a certain time, and/or whenever the launcher is started (this depends on user settings).

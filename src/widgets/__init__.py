@@ -40,6 +40,11 @@ class Widget(GObject.GObject):
 		self.content = Gtk.Box(hexpand=True, orientation=Gtk.Orientation.VERTICAL)
 		self.instance = instance
 
+		# Set up style context, CSS provider
+		style_context = self.content.get_style_context()
+		self.css_provider = Gtk.CssProvider()
+		style_context.add_provider(self.css_provider, 0)
+
 		# Set up config
 		if self.has_config:
 			self.schema_source = Gio.SettingsSchemaSource.new_from_directory(
@@ -48,9 +53,9 @@ class Widget(GObject.GObject):
 			schema = Gio.SettingsSchemaSource.lookup(self.schema_source, self.metadata['id'], False)
 			self.config = Gio.Settings.new_full(schema, None, self.schema_path + '/' + instance)
 
-	def join_with_data_path(*args):
+	def join_with_data_path(self, *args):
 		"""Joins path relative to widget data directory."""
-		return os.path.join(os.path.basedir(self.widget_path), args)
+		return os.path.join(os.path.dirname(self.widget_path), *args)
 
 	def refresh(self):
 		"""(Optional) Runs in the background at the widget refresh interval.
