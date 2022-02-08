@@ -53,6 +53,11 @@
 								<property name="margin-end">10</property>
 								<property name="menu-model">widgetbox-menu</property>
 								<property name="primary">true</property>
+
+								<style>
+									<class name="osd"/>
+									<class name="aspinwall-osd"/>
+								</style>
 							</object>
 						</child>
 					</object>

@@ -45,6 +45,11 @@
 										<property name="icon-name">view-grid-symbolic</property>
 
 										<signal name="clicked" handler="show_app_chooser"/>
+
+										<style>
+											<class name="osd"/>
+											<class name="aspinwall-osd"/>
+										</style>
 									</object>
 								</child>
 							</object>

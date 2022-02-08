@@ -76,6 +76,10 @@ window {
 	border-radius: 0 0 10px 10px;
 }
 
+.aspinwall-osd {
+	opacity: 0.75;
+}
+
 /* Widget chooser */
 
 .widget-chooser {
