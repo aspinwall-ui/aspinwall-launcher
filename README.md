@@ -28,7 +28,8 @@ Before you can use the `./run` script, you will need to install Meson.
 
 ### Requirements
 
-- GTK 4.0
+- GTK 4.0 (>4.5.0 required for libadwaita 1.0.0)
+- libadwaita >= 1.0.0
 - GLib
 - Python >= 3.6
 - PyGObject
