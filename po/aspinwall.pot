@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 19:39+0100\n"
+"POT-Creation-Date: 2022-02-08 21:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,28 +26,20 @@ msgid "List of added widgets."
 msgstr ""
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:14
-msgid "Path to wallpaper"
-msgstr ""
-
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:15
-msgid "Path to a wallpaper file."
-msgstr ""
-
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:22
 msgid "Time format string"
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:23
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:15
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:30
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:22
 msgid "Date format string"
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:31
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:23
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."

@@ -6,7 +6,9 @@ import math
 import os
 import threading
 from gi.repository import Gtk, Gdk, GdkPixbuf
-from aspinwall.launcher.config import config
+from urllib.parse import urlparse
+
+from aspinwall.launcher.config import bg_config
 
 def color_to_pixel(color):
 	"""Turns RGB color value to pixel value."""
@@ -57,7 +59,8 @@ class Wallpaper(Gtk.Box):
 		Sets the image to a pixbuf created from the image file provided
 		in the config file.
 		"""
-		wallpaper_path = config['wallpaper']
+		uri = urlparse(bg_config['picture-uri'])
+		wallpaper_path = os.path.abspath(os.path.join(uri.netloc, uri.path))
 		if wallpaper_path and not wallpaper_path == '/' and os.path.exists(wallpaper_path):
 			self.image = GdkPixbuf.Pixbuf.new_from_file(wallpaper_path)
 		else:

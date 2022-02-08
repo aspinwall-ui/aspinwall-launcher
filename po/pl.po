@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 19:39+0100\n"
+"POT-Creation-Date: 2022-02-08 21:30+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -15,18 +15,10 @@ msgid "List of added widgets."
 msgstr "Lista dodanych widżetów."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:14
-msgid "Path to wallpaper"
-msgstr "Ścieżka tapety"
-
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:15
-msgid "Path to a wallpaper file."
-msgstr "Ścieżka pliku tapety."
-
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:22
 msgid "Time format string"
 msgstr "Format czasu"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:23
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:15
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -34,11 +26,11 @@ msgstr ""
 "Ciąg zawierający format czasu dla zegara, używający formatu opisanego w "
 "dokumentacji: https://docs.python.org/3/library/time.html#time.strftime."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:30
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:22
 msgid "Date format string"
 msgstr "Format daty"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:31
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:23
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -83,3 +75,9 @@ msgstr "Usunięto „%s”"
 #: src/launcher/launcher_boxes.py:96
 msgid "Undo"
 msgstr "Przywróć"
+
+#~ msgid "Path to wallpaper"
+#~ msgstr "Ścieżka tapety"
+
+#~ msgid "Path to a wallpaper file."
+#~ msgstr "Ścieżka pliku tapety."
