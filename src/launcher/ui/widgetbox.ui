@@ -1,10 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <interface>
+	<requires lib="adw" version="1.0"/>
 	<requires lib="gtk" version="4.0"/>
 	<template class="WidgetBox" parent="GtkBox">
 		<style>
 			<class name="widgetbox"/>
 		</style>
+
 		<child>
 			<object class="GtkOverlay">
 				<property name="vexpand">True</property>
@@ -31,6 +33,14 @@
 				</child>
 
 				<child type="overlay">
+					<object class="AdwToastOverlay" id="toast_overlay">
+						<property name="valign">start</property>
+						<!--<property name="halign">center</property>
+						<property name="hexpand">true</property>-->
+					</object>
+				</child>
+
+				<child type="overlay">
 					<object class="GtkBox">
 						<property name="valign">start</property>
 						<property name="halign">end</property>
@@ -47,6 +57,7 @@
 						</child>
 					</object>
 				</child>
+
 				<child type="overlay">
 					<object class="WidgetChooser" id="widget-chooser-container"/>
 				</child>

@@ -2,7 +2,7 @@
 """
 Contains code for the ClockBox and WidgetBox.
 """
-from gi.repository import Gtk, Gio
+from gi.repository import Adw, GLib, Gtk, Gio
 import os
 import threading
 import time
@@ -20,9 +20,11 @@ class WidgetBox(Gtk.Box):
 
 	_widgets = []
 	_drag_targets = []
+	_removed_widgets = {}
 
 	widget_container = Gtk.Template.Child('widget-container')
 	widget_chooser = Gtk.Template.Child('widget-chooser-container')
+	toast_overlay = Gtk.Template.Child()
 
 	def __init__(self):
 		"""Initializes the widget box."""
@@ -36,31 +38,66 @@ class WidgetBox(Gtk.Box):
 		# to avoid this.
 		self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
 
+		# Set up the undo action
+		self.install_action('toast.undo_remove', 's', self.undo_remove)
+
 		# Let the widget chooser know a widgetbox has been created
 		aspinwall.launcher.widget_chooser.widgetbox = self
 
 		self.load_widgets()
+
+	def add_launcherwidget(self, launcherwidget):
+		"""Adds a LauncherWidget to the WidgetBox."""
+		self._widgets.append(launcherwidget)
+		self.widget_container.append(launcherwidget)
 
 	def add_widget(self, widget_class, instance=None):
 		"""Adds a widget to the WidgetBox."""
 		if not instance:
 			instance = str(uuid.uuid4())
 		aspwidget = LauncherWidget(widget_class, self, instance)
-		self._widgets.append(aspwidget)
-		self.widget_container.append(aspwidget)
+		self.add_launcherwidget(aspwidget)
 
 		# We can only do this once the widget has been appended to the widgets list
 		self.update_move_buttons()
 
 		self.save_widgets()
 
+	def undo_remove(self, a, b, instance):
+		"""Un-does a widget remove."""
+		_instance = instance.get_string()
+		if not _instance in self._removed_widgets.keys():
+			return False
+
+		self.add_launcherwidget(self._removed_widgets[_instance])
+
+	def drop_from_remove_buffer(self, dummy, instance):
+		"""Removes a widget from the widget removal undo buffer."""
+		if not instance in self._removed_widgets.keys():
+			return False
+
+		self._removed_widgets.pop(instance)
+
 	def remove_widget(self, aspwidget):
 		"""Removes a widget from the WidgetBox."""
+		aspwidget.widget_header_revealer.set_reveal_child(False)
 		self._widgets.remove(aspwidget)
 		self.widget_container.remove(aspwidget)
 		self.update_move_buttons()
 
 		self.save_widgets()
+
+		self._removed_widgets[aspwidget._widget.instance] = aspwidget
+
+		# TRANSLATORS: Used in the popup that appears when you remove a widget
+		toast = Adw.Toast.new(_("Removed “%s”" % aspwidget._widget.name))
+		toast.set_priority(Adw.ToastPriority.HIGH)
+		# TRANSLATORS: Used in the popup that appears when you remove a widget
+		toast.set_button_label(_('Undo'))
+		toast.set_detailed_action_name('toast.undo_remove')
+		toast.set_action_target_value(GLib.Variant('s', aspwidget._widget.instance))
+		toast.connect('dismissed', self.drop_from_remove_buffer, aspwidget._widget.instance)
+		self.toast_overlay.add_toast(toast)
 
 	def update_move_buttons(self):
 		"""Updates the move buttons in all child LauncherWidget headers"""

@@ -3,3 +3,4 @@ src/launcher/ui/appchooser.ui
 src/launcher/ui/widgetchooser.ui
 src/launcher/ui/widgetbox.ui
 src/launcher/ui/widgetinfobox.ui
+src/launcher/launcher_boxes.py

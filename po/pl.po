@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-27 22:28+0100\n"
+"POT-Creation-Date: 2022-02-08 19:39+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -56,19 +56,30 @@ msgstr "Szukaj aplikacji…"
 msgid "Search widgets…"
 msgstr "Szukaj widżetów…"
 
-#: src/launcher/ui/widgetbox.ui:60
+#: src/launcher/ui/widgetbox.ui:71
 #, fuzzy
 msgid "_Add Widgets…"
 msgstr "_Dodaj widżety…"
 
-#: src/launcher/ui/widgetbox.ui:65
+#: src/launcher/ui/widgetbox.ui:76
 msgid "_Manage Widgets"
 msgstr "_Zarządzaj widżetami"
 
-#: src/launcher/ui/widgetbox.ui:72
+#: src/launcher/ui/widgetbox.ui:83
 msgid "_Launcher Settings"
 msgstr "_Ustawienia launchera"
 
-#: src/launcher/ui/widgetbox.ui:77
+#: src/launcher/ui/widgetbox.ui:88
 msgid "A_bout Aspinwall"
 msgstr "_O Aspinwall"
+
+#. TRANSLATORS: Used in the popup that appears when you remove a widget
+#: src/launcher/launcher_boxes.py:93
+#, python-format
+msgid "Removed “%s”"
+msgstr "Usunięto „%s”"
+
+#. TRANSLATORS: Used in the popup that appears when you remove a widget
+#: src/launcher/launcher_boxes.py:96
+msgid "Undo"
+msgstr "Przywróć"
