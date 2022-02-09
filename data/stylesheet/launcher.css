@@ -8,7 +8,7 @@
 }
 
 .dimmable.dim {
-	filter: brightness(0.6);
+	filter: brightness(0.75);
 }
 
 /* Wallpaper */
@@ -19,6 +19,10 @@ window {
 
 .wallpaper-container {
 	background: #000;
+}
+
+.wallpaper-container.dim {
+	filter: brightness(0.6);
 }
 
 /* Clock */

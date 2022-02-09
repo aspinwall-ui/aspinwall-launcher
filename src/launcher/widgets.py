@@ -5,6 +5,8 @@ Contains basic code for the launcher's widget handling.
 from gi.repository import Gtk, Gdk, GObject
 import os
 
+from aspinwall.utils.dimmable import Dimmable
+
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetheader.ui')
 class LauncherWidgetHeader(Gtk.Box):
 	"""Header for LauncherWidget."""
@@ -50,6 +52,8 @@ class LauncherWidgetHeader(Gtk.Box):
 		window = self.get_native()
 		window.wallpaper.undim()
 		window.clockbox.undim()
+		for widget in self._aspwidget._widgetbox._widgets:
+			widget.undim()
 		self.get_parent().set_reveal_child(False)
 
 	def update_move_buttons(self):
@@ -70,7 +74,7 @@ class LauncherWidgetHeader(Gtk.Box):
 			self.move_down_button.set_sensitive(True)
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/launcherwidget.ui')
-class LauncherWidget(Gtk.Box):
+class LauncherWidget(Gtk.Box, Dimmable):
 	"""
 	Box containing a widget, alongside with its header.
 	This class is used in the launcher to display widgets.
@@ -133,6 +137,12 @@ class LauncherWidget(Gtk.Box):
 		window = self.get_native()
 		window.wallpaper.dim()
 		window.clockbox.dim()
+		for widget in self._widgetbox._widgets:
+			if widget._widget.instance != self._widget.instance:
+				widget.widget_header_revealer.set_reveal_child(False)
+				widget.dim()
+			else:
+				widget.undim()
 		self.widget_header_revealer.set_reveal_child(True)
 
 	def drag_prepare(self, *args):

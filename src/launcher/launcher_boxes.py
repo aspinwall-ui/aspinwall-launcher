@@ -81,7 +81,7 @@ class WidgetBox(Gtk.Box):
 
 	def remove_widget(self, aspwidget):
 		"""Removes a widget from the WidgetBox."""
-		aspwidget.widget_header_revealer.set_reveal_child(False)
+		aspwidget.widget_header.hide()
 		self._widgets.remove(aspwidget)
 		self.widget_container.remove(aspwidget)
 		self.update_move_buttons()
