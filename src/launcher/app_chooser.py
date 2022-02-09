@@ -63,11 +63,16 @@ class AppChooser(Gtk.Box):
 
 		# Set up app grid
 		app_grid = Gtk.GridView(model=Gtk.SingleSelection(model=self.model), factory=factory)
+
 		app_grid.set_min_columns(2)
 		app_grid.set_max_columns(2)
 		app_grid.set_single_click_activate(True)
 		app_grid.set_enable_rubberband(False)
+
+		app_grid.set_hexpand(True)
+
 		app_grid.add_css_class('app-grid')
+		app_grid.add_css_class('navigation-sidebar')
 		app_grid.connect('activate', self.activate)
 
 		self.app_grid_container.set_child(app_grid)
