@@ -3,4 +3,5 @@ moduledir = join_paths(pkgdatadir, 'aspinwall')
 gnome = import('gnome')
 
 subdir('launcher')
+subdir('utils')
 subdir('widgets')

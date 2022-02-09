@@ -1,3 +1,16 @@
+/* Common */
+
+.dimmable {
+	filter: brightness(1);
+	transition-property: filter;
+	transition-duration: 0.3s;
+	transition-timing-function: ease-out;
+}
+
+.dimmable.dim {
+	filter: brightness(0.6);
+}
+
 /* Wallpaper */
 
 window {
@@ -6,14 +19,6 @@ window {
 
 .wallpaper-container {
 	background: #000;
-	filter: brightness(1);
-	transition-property: filter;
-	transition-duration: 0.3s;
-	transition-timing-function: ease-out;
-}
-
-.wallpaper-container.dim {
-	filter: brightness(0.6);
 }
 
 /* Clock */

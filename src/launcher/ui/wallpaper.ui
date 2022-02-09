@@ -5,6 +5,7 @@
 		<property name="hexpand">true</property>
 		<style>
 			<class name="wallpaper-container"/>
+			<class name="dimmable"/>
 		</style>
 		<child>
 			<object class="GtkDrawingArea" id="wallpaper">
