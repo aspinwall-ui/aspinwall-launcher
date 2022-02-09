@@ -11,7 +11,7 @@
 			<object class="GtkOverlay" id="launcher_wallpaper_overlay">
 				<property name="hexpand">true</property>
 				<child>
-					<object class="Wallpaper"/>
+					<object class="Wallpaper" id="launcher_wallpaper"/>
 				</child>
 				<child type="overlay">
 					<object class="AdwFlap" id="launcher_flap">

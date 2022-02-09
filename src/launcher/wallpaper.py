@@ -43,6 +43,14 @@ class Wallpaper(Gtk.Box):
 		self.wallpaper.set_draw_func(self.draw)
 		self.wallpaper.connect('resize', self.update)
 
+	def dim(self):
+		"""Dims the wallpaper."""
+		self.add_css_class('dim')
+
+	def undim(self):
+		"""Undims the wallpaper."""
+		self.remove_css_class('dim')
+
 	def draw(self, area, cr, *args):
 		"""Draws the background."""
 		x = 0

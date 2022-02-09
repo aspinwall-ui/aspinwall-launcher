@@ -22,6 +22,7 @@ class Launcher(Gtk.ApplicationWindow):
 
 	widgetbox = Gtk.Template.Child()
 	launcher_wallpaper_overlay = Gtk.Template.Child()
+	wallpaper = Gtk.Template.Child('launcher_wallpaper')
 	launcher_flap = Gtk.Template.Child()
 	app_chooser = Gtk.Template.Child()
 
