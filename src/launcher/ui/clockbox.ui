@@ -16,6 +16,7 @@
 
 		<style>
 			<class name="clockbox"/>
+			<class name="dimmable"/>
 		</style>
 
 		<child>

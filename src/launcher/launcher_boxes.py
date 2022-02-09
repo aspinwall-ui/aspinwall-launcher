@@ -8,6 +8,7 @@ import threading
 import time
 import uuid
 
+from aspinwall.utils.dimmable import Dimmable
 from aspinwall.launcher.config import config
 from aspinwall.launcher.widgets import LauncherWidget
 import aspinwall.launcher.widget_chooser
@@ -178,7 +179,7 @@ class WidgetBox(Gtk.Box):
 		self.widget_chooser.set_reveal_child(True)
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/clockbox.ui')
-class ClockBox(Gtk.Box):
+class ClockBox(Gtk.Box, Dimmable):
 	"""Box that contains the launcher's clock."""
 	__gtype_name__ = 'ClockBox'
 

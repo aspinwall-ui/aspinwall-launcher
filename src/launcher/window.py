@@ -20,10 +20,13 @@ class Launcher(Gtk.ApplicationWindow):
 	"""Base class for launcher window."""
 	__gtype_name__ = 'Launcher'
 
-	widgetbox = Gtk.Template.Child()
 	launcher_wallpaper_overlay = Gtk.Template.Child()
 	wallpaper = Gtk.Template.Child('launcher_wallpaper')
+
 	launcher_flap = Gtk.Template.Child()
+
+	clockbox = Gtk.Template.Child()
+	widgetbox = Gtk.Template.Child()
 	app_chooser = Gtk.Template.Child()
 
 	def __init__(self, app):

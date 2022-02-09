@@ -47,7 +47,9 @@ class LauncherWidgetHeader(Gtk.Box):
 	@Gtk.Template.Callback()
 	def hide(self, *args):
 		"""Hides the widget header."""
-		self.get_native().wallpaper.undim()
+		window = self.get_native()
+		window.wallpaper.undim()
+		window.clockbox.undim()
 		self.get_parent().set_reveal_child(False)
 
 	def update_move_buttons(self):
@@ -128,7 +130,9 @@ class LauncherWidget(Gtk.Box):
 
 	def reveal_header(self, *args):
 		"""Reveals the widget's header."""
-		self.get_native().wallpaper.dim()
+		window = self.get_native()
+		window.wallpaper.dim()
+		window.clockbox.dim()
 		self.widget_header_revealer.set_reveal_child(True)
 
 	def drag_prepare(self, *args):
