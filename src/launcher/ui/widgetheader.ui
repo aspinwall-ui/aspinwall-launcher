@@ -12,12 +12,12 @@
 		<!-- Delete button -->
 
 		<child>
-			<object class="GtkButton" id="widget_header_delete">
+			<object class="GtkButton" id="widget_header_remove">
 				<property name="icon-name">user-trash-symbolic</property>
 				<signal name="clicked" handler="remove"/>
 
 				<style>
-					<class name="destructive-action"/>
+					<class name="aspinwall-widget-remove"/>
 				</style>
 			</object>
 		</child>
