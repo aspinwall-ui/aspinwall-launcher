@@ -53,7 +53,7 @@ class LauncherWidgetHeader(Gtk.Box):
 		window.wallpaper.undim()
 		window.clockbox.undim()
 		for widget in self._aspwidget._widgetbox._widgets:
-			widget.undim()
+			widget.container.remove_css_class('dim')
 		self.get_parent().set_reveal_child(False)
 
 	def update_move_buttons(self):
@@ -74,7 +74,7 @@ class LauncherWidgetHeader(Gtk.Box):
 			self.move_down_button.set_sensitive(True)
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/launcherwidget.ui')
-class LauncherWidget(Gtk.Box, Dimmable):
+class LauncherWidget(Gtk.Box):
 	"""
 	Box containing a widget, alongside with its header.
 	This class is used in the launcher to display widgets.
@@ -140,9 +140,9 @@ class LauncherWidget(Gtk.Box, Dimmable):
 		for widget in self._widgetbox._widgets:
 			if widget._widget.instance != self._widget.instance:
 				widget.widget_header_revealer.set_reveal_child(False)
-				widget.dim()
+				widget.container.add_css_class('dim')
 			else:
-				widget.undim()
+				widget.container.remove_css_class('dim')
 		self.widget_header_revealer.set_reveal_child(True)
 
 	def drag_prepare(self, *args):

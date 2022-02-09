@@ -6,7 +6,6 @@
 
 		<style>
 			<class name="aspinwall-widget-wrapper"/>
-			<class name="dimmable"/>
 		</style>
 
 		<child>
@@ -17,6 +16,7 @@
 
 				<style>
 					<class name="aspinwall-widget"/>
+					<class name="dimmable"/>
 				</style>
 
 				<child>
