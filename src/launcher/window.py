@@ -1,8 +1,8 @@
 # coding: utf-8
 """Contains window creation code for the Aspinwall launcher"""
-import gi
-gi.require_version("Gtk", "4.0")
-gi.require_version('Adw', '1')
+from gi import require_version as gi_require_version
+gi_require_version("Gtk", "4.0")
+gi_require_version('Adw', '1')
 from gi.repository import Adw, Gtk, Gdk, GObject
 import os
 

@@ -50,7 +50,7 @@ class WidgetChooser(Gtk.Revealer):
 	"""Widget chooser widget."""
 	__gtype_name__ = 'WidgetChooser'
 
-	widget_list_container = Gtk.Template.Child()
+	widget_list = Gtk.Template.Child()
 	search = Gtk.Template.Child()
 
 	def __init__(self):
@@ -80,12 +80,8 @@ class WidgetChooser(Gtk.Revealer):
 		self.model = filter_model
 
 		# Set up widget list
-		widget_list = Gtk.ListView(model=Gtk.SingleSelection(model=self.model), factory=factory)
-		widget_list.set_enable_rubberband(False)
-		widget_list.add_css_class('widget-chooser-list')
-		#widget_list.connect('activate', self.activate)
-
-		self.widget_list_container.set_child(widget_list)
+		self.widget_list.set_model(Gtk.SingleSelection(model=self.model))
+		self.widget_list.set_factory(factory)
 
 	def setup(self, factory, list_item):
 		"""Sets up the widget list."""
@@ -135,7 +131,7 @@ class WidgetChooser(Gtk.Revealer):
 		"""Notifies the filter about search changes."""
 		self.filter.changed(Gtk.FilterChange.DIFFERENT)
 		# Select first item in list
-		selection_model = self.widget_list_container.get_child().get_model()
+		selection_model = self.widget_list.get_model()
 		selection_model.set_selected(0)
 		# TODO: Scroll back to top of list
 

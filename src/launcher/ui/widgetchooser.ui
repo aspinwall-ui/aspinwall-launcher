@@ -45,7 +45,15 @@
 					<object class="GtkScrolledWindow" id="widget_list_container">
 						<property name="vexpand">true</property>
 						<property name="hscrollbar-policy">never</property>
-						<!-- The child widget list is added in-code, see launcher/widget_chooser.py -->
+
+						<child>
+							<object class="GtkListView" id="widget_list">
+								<property name="enable-rubberband">false</property>
+								<style>
+									<class name="widget-chooser-list"/>
+								</style>
+							</object>
+						</child>
 					</object>
 				</child>
 			</object>

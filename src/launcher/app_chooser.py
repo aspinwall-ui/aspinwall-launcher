@@ -29,7 +29,7 @@ class AppChooser(Gtk.Box):
 	"""App chooser widget."""
 	__gtype_name__ = 'AppChooser'
 
-	app_grid_container = Gtk.Template.Child()
+	app_grid = Gtk.Template.Child()
 	search = Gtk.Template.Child()
 
 	def __init__(self):
@@ -62,20 +62,9 @@ class AppChooser(Gtk.Box):
 		self.model = filter_model
 
 		# Set up app grid
-		app_grid = Gtk.GridView(model=Gtk.SingleSelection(model=self.model), factory=factory)
-
-		app_grid.set_min_columns(2)
-		app_grid.set_max_columns(2)
-		app_grid.set_single_click_activate(True)
-		app_grid.set_enable_rubberband(False)
-
-		app_grid.set_hexpand(True)
-
-		app_grid.add_css_class('app-grid')
-		app_grid.add_css_class('navigation-sidebar')
-		app_grid.connect('activate', self.activate)
-
-		self.app_grid_container.set_child(app_grid)
+		self.app_grid.set_model(Gtk.SingleSelection(model=self.model))
+		self.app_grid.set_factory(factory)
+		self.app_grid.connect('activate', self.app_grid_activate)
 
 	def setup(self, factory, list_item):
 		"""Sets up the app grid."""
@@ -98,7 +87,7 @@ class AppChooser(Gtk.Box):
 		application = list_item.get_item()
 		app_icon.bind_to_app(application)
 
-	def activate(self, app_grid, app_position):
+	def app_grid_activate(self, app_grid, app_position):
 		"""Opens the app selected in the app grid."""
 		app_info = app_grid.get_model().get_item(app_position)
 		context = Gdk.Display.get_app_launch_context(app_grid.get_display())
@@ -139,7 +128,7 @@ class AppChooser(Gtk.Box):
 		"""Notifies the filter about search changes."""
 		self.filter.changed(Gtk.FilterChange.DIFFERENT)
 		# Select first item in list
-		selection_model = self.app_grid_container.get_child().get_model()
+		selection_model = self.app_grid.get_model()
 		selection_model.set_selected(0)
 		# TODO: Scroll back to top of list
 
