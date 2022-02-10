@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-08 21:30+0100\n"
+"POT-Creation-Date: 2022-02-10 09:36+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -15,10 +15,23 @@ msgid "List of added widgets."
 msgstr "Lista dodanych widżetów."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:14
+msgid "Widget autorefresh delay"
+msgstr "Opóźnienie automatycznego odświeżania widżetów"
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:15
+msgid ""
+"Amount of time (in seconds) between automatic widget refreshing. Set to 0 to "
+"disable autorefresh. (Default: 900 seconds - 15 minutes)"
+msgstr ""
+"Ilość czasu (w sekundach) między automatycznym odświeżaniem widżetów. Ustaw "
+"na 0 żeby wyłąćzyć automatyczne odświeżanie. (Domyślnie: 900 sekund - 15 "
+"minut)"
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:22
 msgid "Time format string"
 msgstr "Format czasu"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:15
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:23
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -26,11 +39,11 @@ msgstr ""
 "Ciąg zawierający format czasu dla zegara, używający formatu opisanego w "
 "dokumentacji: https://docs.python.org/3/library/time.html#time.strftime."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:22
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:30
 msgid "Date format string"
 msgstr "Format daty"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:23
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:31
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -48,36 +61,30 @@ msgstr "Szukaj aplikacji…"
 msgid "Search widgets…"
 msgstr "Szukaj widżetów…"
 
-#: src/launcher/ui/widgetbox.ui:71
+#: src/launcher/ui/widgetbox.ui:76
 #, fuzzy
 msgid "_Add Widgets…"
 msgstr "_Dodaj widżety…"
 
-#: src/launcher/ui/widgetbox.ui:76
+#: src/launcher/ui/widgetbox.ui:81
 msgid "_Manage Widgets"
 msgstr "_Zarządzaj widżetami"
 
-#: src/launcher/ui/widgetbox.ui:83
+#: src/launcher/ui/widgetbox.ui:88
 msgid "_Launcher Settings"
 msgstr "_Ustawienia launchera"
 
-#: src/launcher/ui/widgetbox.ui:88
+#: src/launcher/ui/widgetbox.ui:93
 msgid "A_bout Aspinwall"
 msgstr "_O Aspinwall"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/launcher_boxes.py:93
+#: src/launcher/launcher_boxes.py:116
 #, python-format
 msgid "Removed “%s”"
 msgstr "Usunięto „%s”"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/launcher_boxes.py:96
+#: src/launcher/launcher_boxes.py:119
 msgid "Undo"
 msgstr "Przywróć"
-
-#~ msgid "Path to wallpaper"
-#~ msgstr "Ścieżka tapety"
-
-#~ msgid "Path to a wallpaper file."
-#~ msgstr "Ścieżka pliku tapety."

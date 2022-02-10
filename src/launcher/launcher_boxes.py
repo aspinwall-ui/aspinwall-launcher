@@ -42,10 +42,43 @@ class WidgetBox(Gtk.Box):
 		# Set up the undo action
 		self.install_action('toast.undo_remove', 's', self.undo_remove)
 
+		# Set up autorefresh
+		self.autorefresh_delay = config['autorefresh-delay']
+		config.connect('changed::autorefresh-delay', self.set_autorefresh_delay)
+
+		self.autorefresh_thread = threading.Thread(target=self.autorefresh, daemon=True)
+		self.autorefresh_thread.start()
+
 		# Let the widget chooser know a widgetbox has been created
 		aspinwall.launcher.widget_chooser.widgetbox = self
 
 		self.load_widgets()
+
+	def set_autorefresh_delay(self, *args):
+		"""Sets autorefresh delay from config."""
+		self.autorefresh_delay = config['autorefresh-delay']
+
+	def autorefresh(self):
+		"""Automatically refreshes widgets at a given interval."""
+		initial_delay = self.autorefresh_delay
+		self.autorefresh_timer = self.autorefresh_delay
+		while True:
+			# If autorefresh is disabled, don't do anything
+			if self.autorefresh_delay == 0:
+				while self.autorefresh_delay != 0:
+					time.sleep(1)
+
+			self.autorefresh_timer -= 1
+			if self.autorefresh_timer <= 0:
+				for widget in self._widgets:
+					widget._widget.refresh()
+				self.autorefresh_timer = self.autorefresh_delay
+			else:
+				# Reset count if the delay is changed
+				if initial_delay != self.autorefresh_delay:
+					initial_delay = self.autorefresh_delay
+					self.autorefresh_timer = self.autorefresh_delay
+			time.sleep(1)
 
 	def add_launcherwidget(self, launcherwidget):
 		"""Adds a LauncherWidget to the WidgetBox."""

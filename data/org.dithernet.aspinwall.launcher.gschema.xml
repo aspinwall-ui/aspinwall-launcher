@@ -9,6 +9,14 @@
 			</description>
 		</key>
 
+		<key name="autorefresh-delay" type="i">
+			<default>900</default>
+			<summary>Widget autorefresh delay</summary>
+			<description>
+				Amount of time (in seconds) between automatic widget refreshing. Set to 0 to disable autorefresh. (Default: 900 seconds - 15 minutes)
+			</description>
+		</key>
+
 		<key name="time-format" type="s">
 			<default>"%H:%M"</default>
 			<summary>Time format string</summary>
