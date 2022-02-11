@@ -135,6 +135,22 @@ window {
 	padding: 10px;
 }
 
-.app-chooser .app-grid child {
-	padding: 10px;
+.app-icon {
+	font-weight: 400;
+}
+
+.app-icon, .app-icon:hover {
+	background: none;
+	padding: 0;
+	margin: 0;
+	border: 1px solid transparent;
+}
+
+.app-icon:hover, .app-icon:focus {
+  background: @aspinwall_widget_shade;
+  border-radius: 5px;
+}
+
+.app-icon:focus {
+  border-color: @accent_color;
 }

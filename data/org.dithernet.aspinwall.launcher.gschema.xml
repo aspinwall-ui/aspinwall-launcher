@@ -17,6 +17,15 @@
 			</description>
 		</key>
 
+		<key name="favorite-apps" type="as">
+			<default>[]</default>
+			<summary>Favorite apps</summary>
+			<!-- TRANSLATORS: ".desktop files" refers to a specific filetype. Do not translate the ".desktop" bit. -->
+			<description>
+				List of favorite apps for the app chooser, stored as paths to their .desktop files.
+			</description>
+		</key>
+
 		<key name="time-format" type="s">
 			<default>"%H:%M"</default>
 			<summary>Time format string</summary>

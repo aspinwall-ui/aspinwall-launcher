@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-10 09:36+0100\n"
+"POT-Creation-Date: 2022-02-11 21:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,20 +36,31 @@ msgid ""
 msgstr ""
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:22
+msgid "Favorite apps"
+msgstr ""
+
+#. TRANSLATORS: ".desktop files" refers to a specific filetype. Do not translate the ".desktop" bit.
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:24
+msgid ""
+"List of favorite apps for the app chooser, stored as paths to their .desktop "
+"files."
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:31
 msgid "Time format string"
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:23
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:32
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:30
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:39
 msgid "Date format string"
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:31
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:40
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -57,6 +68,14 @@ msgstr ""
 
 #: src/launcher/ui/appchooser.ui:24
 msgid "Search apps…"
+msgstr ""
+
+#: src/launcher/ui/appicon.ui:62
+msgid "_Remove from favorites"
+msgstr ""
+
+#: src/launcher/ui/appicon.ui:67
+msgid "_Add to favorites"
 msgstr ""
 
 #: src/launcher/ui/widgetchooser.ui:30
@@ -80,12 +99,12 @@ msgid "A_bout Aspinwall"
 msgstr ""
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/launcher_boxes.py:116
+#: src/launcher/launcher_boxes.py:127
 #, python-format
 msgid "Removed “%s”"
 msgstr ""
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/launcher_boxes.py:119
+#: src/launcher/launcher_boxes.py:130
 msgid "Undo"
 msgstr ""

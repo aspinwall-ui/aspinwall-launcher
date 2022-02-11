@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-10 09:36+0100\n"
+"POT-Creation-Date: 2022-02-11 21:29+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -27,10 +27,23 @@ msgstr ""
 "disable autorefresh. (Default: 900 seconds - 15 minutes)"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:22
+msgid "Favorite apps"
+msgstr "Favorite apps"
+
+#. TRANSLATORS: ".desktop files" refers to a specific filetype. Do not translate the ".desktop" bit.
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:24
+msgid ""
+"List of favorite apps for the app chooser, stored as paths to their .desktop "
+"files."
+msgstr ""
+"List of favorite apps for the app chooser, stored as paths to their .desktop "
+"files."
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:31
 msgid "Time format string"
 msgstr "Time format string"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:23
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:32
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -38,11 +51,11 @@ msgstr ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:30
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:39
 msgid "Date format string"
 msgstr "Date format string"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:31
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:40
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -51,17 +64,22 @@ msgstr ""
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
 
 #: src/launcher/ui/appchooser.ui:24
-#, fuzzy
 msgid "Search apps…"
 msgstr "Search apps…"
 
+#: src/launcher/ui/appicon.ui:62
+msgid "_Remove from favorites"
+msgstr "_Remove from favorites"
+
+#: src/launcher/ui/appicon.ui:67
+msgid "_Add to favorites"
+msgstr "_Add to favorites"
+
 #: src/launcher/ui/widgetchooser.ui:30
-#, fuzzy
 msgid "Search widgets…"
 msgstr "Search widgets…"
 
 #: src/launcher/ui/widgetbox.ui:76
-#, fuzzy
 msgid "_Add Widgets…"
 msgstr "_Add Widgets…"
 
@@ -78,12 +96,12 @@ msgid "A_bout Aspinwall"
 msgstr "A_bout Aspinwall"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/launcher_boxes.py:116
+#: src/launcher/launcher_boxes.py:127
 #, python-format
 msgid "Removed “%s”"
 msgstr "Removed “%s”"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/launcher_boxes.py:119
+#: src/launcher/launcher_boxes.py:130
 msgid "Undo"
 msgstr "Undo"
