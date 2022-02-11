@@ -3,7 +3,6 @@
 Contains code for the ClockBox and WidgetBox.
 """
 from gi.repository import Adw, GLib, Gtk, Gio
-import os
 import threading
 import time
 import uuid
@@ -100,14 +99,14 @@ class WidgetBox(Gtk.Box):
 	def undo_remove(self, a, b, instance):
 		"""Un-does a widget remove."""
 		_instance = instance.get_string()
-		if not _instance in self._removed_widgets.keys():
+		if _instance not in self._removed_widgets.keys():
 			return False
 
 		self.add_launcherwidget(self._removed_widgets[_instance])
 
 	def drop_from_remove_buffer(self, dummy, instance):
 		"""Removes a widget from the widget removal undo buffer."""
-		if not instance in self._removed_widgets.keys():
+		if instance not in self._removed_widgets.keys():
 			return False
 
 		self._removed_widgets.pop(instance)
@@ -124,10 +123,10 @@ class WidgetBox(Gtk.Box):
 		self._removed_widgets[aspwidget._widget.instance] = aspwidget
 
 		# TRANSLATORS: Used in the popup that appears when you remove a widget
-		toast = Adw.Toast.new(_("Removed “%s”" % aspwidget._widget.name))
+		toast = Adw.Toast.new(_("Removed “%s”" % aspwidget._widget.name)) # noqa: F821
 		toast.set_priority(Adw.ToastPriority.HIGH)
 		# TRANSLATORS: Used in the popup that appears when you remove a widget
-		toast.set_button_label(_('Undo'))
+		toast.set_button_label(_('Undo')) # noqa: F821
 		toast.set_detailed_action_name('toast.undo_remove')
 		toast.set_action_target_value(GLib.Variant('s', aspwidget._widget.instance))
 		toast.connect('dismissed', self.drop_from_remove_buffer, aspwidget._widget.instance)
@@ -229,6 +228,10 @@ class ClockBox(Gtk.Box, Dimmable):
 	def update(self):
 		"""Updates the time and date on the clock."""
 		while True:
-			self.clockbox_time.set_markup('<span weight="bold" font="36">' + time.strftime(config["time-format"]) + '</span>')
-			self.clockbox_date.set_markup('<span font="24">' + time.strftime(config['date-format']) + '</span>')
+			self.clockbox_time.set_markup(
+				'<span weight="bold" font="36">' + time.strftime(config["time-format"]) + '</span>'
+			)
+			self.clockbox_date.set_markup(
+				'<span font="24">' + time.strftime(config['date-format']) + '</span>'
+			)
 			time.sleep(1)

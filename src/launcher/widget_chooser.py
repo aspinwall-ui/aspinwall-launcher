@@ -3,7 +3,6 @@
 Contains code for the widget chooser and widget infoboxes for the chooser.
 """
 from gi.repository import Gtk, Gio, GLib
-import os
 
 from aspinwall.widgets import Widget
 from aspinwall.widgets.loader import available_widgets

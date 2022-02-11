@@ -3,10 +3,9 @@
 from gi import require_version as gi_require_version
 gi_require_version("Gtk", "4.0")
 gi_require_version('Adw', '1')
-from gi.repository import Adw, Gtk, Gdk, GObject
+from gi.repository import Adw, Gtk, Gdk
 import os
 
-from aspinwall.launcher.config import config
 from aspinwall.widgets.loader import load_widgets
 
 # The ClockBox, WidgetBox and AppChooser classes are imported to avoid
@@ -74,14 +73,22 @@ def on_activate(app):
 		Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
 	)
 
-	on_gtk_theme_change(gtk_settings, gtk_settings.get_property('gtk-theme-name'), True, style_provider)
-	gtk_settings.connect('notify::gtk-theme-name', on_gtk_theme_change, False, style_provider)
+	on_gtk_theme_change(
+		gtk_settings,
+		gtk_settings.get_property('gtk-theme-name'),
+		True, style_provider
+	)
+	gtk_settings.connect(
+		'notify::gtk-theme-name',
+		on_gtk_theme_change,
+		False, style_provider
+	)
 
 	win.add_action(win.widgetbox._show_chooser_action)
 
 	win.present()
 
-	if not 'GTK_DEBUG' in os.environ or not os.environ['GTK_DEBUG']:
+	if 'GTK_DEBUG' not in os.environ or not os.environ['GTK_DEBUG']:
 		win_surface = win.get_surface()
 		win.set_size_request(win_surface.get_width(), win_surface.get_height())
 		win.fullscreen()

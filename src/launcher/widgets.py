@@ -3,9 +3,6 @@
 Contains basic code for the launcher's widget handling.
 """
 from gi.repository import Gtk, Gdk, GObject
-import os
-
-from aspinwall.utils.dimmable import Dimmable
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetheader.ui')
 class LauncherWidgetHeader(Gtk.Box):

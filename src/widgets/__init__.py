@@ -4,7 +4,7 @@ Contains base class and helper functions for creating widgets.
 
 Code for loading widgets can be found in the loader submodule.
 """
-from gi.repository import Gtk, GObject
+from gi.repository import Gtk, Gio, GObject
 import os
 
 class Widget(GObject.GObject):

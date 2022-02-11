@@ -3,7 +3,6 @@
 Contains code for the app chooser.
 """
 from gi.repository import Gdk, GLib, Gio, Gtk
-import os
 
 from aspinwall.launcher.config import config
 

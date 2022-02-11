@@ -4,7 +4,6 @@ Contains code for handling wallpapers
 """
 import math
 import os
-import threading
 from gi.repository import Gtk, Gdk, GdkPixbuf
 from urllib.parse import urlparse
 
@@ -19,10 +18,10 @@ def color_to_pixel(color):
 	alpha = 0
 	if len(color) == 4:
 		alpha = color[3]
-	return ((((red   * 255)) << 24) | \
-			(((green * 255)) << 16) | \
-			(((blue  * 255)) << 8)  | \
-			((alpha * 255)))
+	return ((((red * 255)) << 24) |    # noqa: W504
+			(((green * 255)) << 16) |  # noqa: W504
+			(((blue * 255)) << 8) |    # noqa: W504
+			((alpha * 255)))           # noqa: W504
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/wallpaper.ui')
 class Wallpaper(Gtk.Box, Dimmable):
@@ -31,7 +30,7 @@ class Wallpaper(Gtk.Box, Dimmable):
 
 	wallpaper = Gtk.Template.Child()
 	# TODO: properly source these two
-	background_color = color_to_pixel([0,0,0])
+	background_color = color_to_pixel([0, 0, 0])
 	scale = 1
 
 	def __init__(self):
@@ -94,21 +93,25 @@ class Wallpaper(Gtk.Box, Dimmable):
 		new_width = math.floor(src_width * factor + 0.5)
 		new_height = math.floor(src_height * factor + 0.5)
 
-		dest = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, self.image.get_has_alpha, 8, min_width, min_height)
+		dest = GdkPixbuf.Pixbuf.new(
+			GdkPixbuf.Colorspace.RGB,
+			self.image.get_has_alpha,
+			8, min_width, min_height
+		)
 		if not dest:
 			return None
 
 		# crop the result
-		self.image.scale (dest,
+		self.image.scale(dest,
 			0, 0,
 			min_width, min_height,
 			(new_width - min_width) / -2,
 			(new_height - min_height) / -2,
 			factor,
 			factor,
-			GdkPixbuf.InterpType.BILINEAR)
+			GdkPixbuf.InterpType.BILINEAR
+		)
 		return dest
-
 
 	def scale_to_fit(self, width, height):
 		"""Returns the background, scaled to fit."""
