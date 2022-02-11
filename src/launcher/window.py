@@ -15,6 +15,8 @@ from aspinwall.launcher.launcher_boxes import ClockBox, WidgetBox # noqa: F401
 from aspinwall.launcher.app_chooser import AppChooser # noqa: F401
 from aspinwall.launcher.wallpaper import Wallpaper # noqa: F401
 
+running = False
+
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/launcher.ui')
 class Launcher(Gtk.ApplicationWindow):
 	"""Base class for launcher window."""
@@ -54,6 +56,11 @@ def on_gtk_theme_change(settings, theme_name, theme_name_is_str, style_provider)
 	style_provider.load_from_resource('/org/dithernet/aspinwall/stylesheet/' + stylesheet)
 
 def on_activate(app):
+	global running
+	if running:
+		return False
+	running = True
+
 	load_widgets()
 
 	win = Launcher(app)
