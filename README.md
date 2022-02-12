@@ -54,7 +54,7 @@ The current TODO list for the shell can be found [here](https://github.com/aspin
 
 With that being said, we encourage using Aspinwall on any old Android tablets you may have; give [postmarketOS](https://postmarketos.org) a try. Aspinwall is being developed with the limitations of downstream kernels in mind, so it should work relatively well on older devices not running a (close to) mainline kernel.
 
-*Developer's note: Aspinwall is planned to be packaged for postmarketOS, however it is currently available as the project is still in very early development. Also, we are in no way affiliated with postmarketOS.*
+*Developer's note: Aspinwall is planned to be packaged for postmarketOS, however it is not currently available as the project is still in very early development. Also, we are in no way affiliated with postmarketOS.*
 
 ### **Q:** Does Aspinwall run on Windows/Mac/any other platform supported by GTK4?
 
