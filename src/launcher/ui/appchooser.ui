@@ -75,6 +75,10 @@
 											<object class="GtkSeparator">
 												<property name="margin-start">6</property>
 												<property name="margin-end">6</property>
+
+												<style>
+													<class name="app-grid-separator"/>
+												</style>
 											</object>
 										</child>
 									</object>

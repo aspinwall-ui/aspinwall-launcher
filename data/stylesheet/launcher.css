@@ -135,6 +135,10 @@ window {
 	padding: 10px;
 }
 
+.app-grid-separator {
+	color: rgba(128, 128, 128, 0.75);
+}
+
 .app-icon {
 	font-weight: 400;
 }
