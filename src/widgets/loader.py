@@ -25,6 +25,7 @@ def load_widgets():
 	Loads widgets from files into the available_widgets variable, and
 	returns the list of available widgets.
 	"""
+	loaded_ids = {}
 	for dir in widget_dirs:
 		for widget_dir in os.listdir(dir):
 			if widget_dir == '__pycache__':
@@ -38,8 +39,19 @@ def load_widgets():
 					module = importlib.util.module_from_spec(spec)
 					spec.loader.exec_module(module)
 
+					if module._widget_class.id in loaded_ids.keys():
+						print('WARN: ID conflict between ' + \
+							loaded_ids[module._widget_class.id].widget_path + \
+							' (loaded) and ' + widget_path + \
+							' (attempted to load) while loading ' + \
+							module._widget_class.metadata['id'] + \
+							'; ignoring file'
+						)
+						continue
+
 					module._widget_class.widget_path = widget_path
 
+					loaded_ids[module._widget_class.id] = module._widget_class
 					available_widgets.append(module._widget_class)
 
 	return available_widgets
