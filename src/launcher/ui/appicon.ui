@@ -31,6 +31,13 @@
 						<property name="orientation">vertical</property>
 
 						<child>
+							<object class="GtkPopoverMenu" id="popover">
+								<property name="autohide">true</property>
+								<property name="menu-model">appicon-menu</property>
+							</object>
+						</child>
+
+						<child>
 							<object class="GtkImage" id="app_icon">
 								<property name="pixel-size">48</property>
 								<property name="icon-name">image-missing</property>
@@ -44,12 +51,6 @@
 								<property name="justify">center</property>
 								<property name="width-chars">10</property>
 								<property name="max-width-chars">10</property>
-							</object>
-						</child>
-
-						<child>
-							<object class="GtkPopoverMenu" id="popover">
-								<property name="menu-model">appicon-menu</property>
 							</object>
 						</child>
 					</object>

@@ -30,6 +30,7 @@ class AppIcon(Gtk.FlowBoxChild):
 	def __init__(self, app=None):
 		"""Initializes an AppIcon."""
 		super().__init__()
+		self.popover.present()
 		if app.get_filename() in config['favorite-apps']:
 			self.is_favorite = True
 		else:
