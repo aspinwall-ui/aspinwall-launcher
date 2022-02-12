@@ -40,12 +40,11 @@ def load_widgets():
 					spec.loader.exec_module(module)
 
 					if module._widget_class.id in loaded_ids.keys():
-						print('WARN: ID conflict between ' + \
-							loaded_ids[module._widget_class.id].widget_path + \
-							' (loaded) and ' + widget_path + \
-							' (attempted to load) while loading ' + \
-							module._widget_class.metadata['id'] + \
-							'; ignoring file'
+						print(
+							'WARN: ID conflict between %s (loaded) and %s (attempted to load) while loading %s; ignoring file' # noqa: E501
+							% (loaded_ids[module._widget_class.id].widget_path,
+							widget_path,
+							module._widget_class.metadata['id'])
 						)
 						continue
 
