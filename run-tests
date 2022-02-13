@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ ! -e src ]; then echo "Not in aspinwall source directory"; exit 1; fi
+
+glib-compile-schemas data
+mv src aspinwall
+
+GSETTINGS_SCHEMA_DIR=data xvfb-run python3 -m pytest
+echo $?
+
+rm data/gschemas.compiled
+mv aspinwall src

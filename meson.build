@@ -11,5 +11,6 @@ subdir('widgets')
 subdir('data')
 subdir('src')
 subdir('po')
+subdir('tests')
 
 meson.add_install_script('build-aux/meson/postinstall.py')
