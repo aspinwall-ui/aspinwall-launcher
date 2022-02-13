@@ -2,11 +2,22 @@
 
 if [ ! -e src ]; then echo "Not in aspinwall source directory"; exit 1; fi
 
+if [ -e output ]; then rm -r output; fi
+
+set -e
+
+meson --prefix=$PWD/tmp . output
+meson compile -C output
+
+set +e
+
 glib-compile-schemas data
 mv src aspinwall
 
 GSETTINGS_SCHEMA_DIR=data xvfb-run python3 -m pytest
-echo $?
+ret=$?
 
 rm data/gschemas.compiled
 mv aspinwall src
+
+exit $ret
