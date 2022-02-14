@@ -87,6 +87,8 @@ class WidgetBox(Gtk.Box):
 		"""Adds a LauncherWidget to the WidgetBox."""
 		self._widgets.append(launcherwidget)
 		self.widget_container.append(launcherwidget)
+		if self.management_mode:
+			launcherwidget.widget_header_revealer.set_reveal_child(True)
 
 	def add_widget(self, widget_class, instance=None):
 		"""Adds a widget to the WidgetBox."""
@@ -117,7 +119,10 @@ class WidgetBox(Gtk.Box):
 
 	def remove_widget(self, aspwidget):
 		"""Removes a widget from the WidgetBox."""
-		aspwidget.widget_header.hide()
+		if self.management_mode:
+			aspwidget.widget_header_revealer.set_reveal_child(False)
+		else:
+			aspwidget.widget_header.hide()
 		self._widgets.remove(aspwidget)
 		self.widget_container.remove(aspwidget)
 		self.update_move_buttons()
