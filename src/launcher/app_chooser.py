@@ -154,9 +154,7 @@ class AppChooser(Gtk.Box):
 	def fill_model(self):
 		"""Fills the favorites and app grid models."""
 		appinfo = Gio.AppInfo.get_all()
-
 		self.store.remove_all()
-		favorites = config['favorite-apps']
 
 		for app in appinfo:
 			if not Gio.AppInfo.should_show(app):
