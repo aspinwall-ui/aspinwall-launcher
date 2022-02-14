@@ -235,6 +235,7 @@ class WidgetBox(Gtk.Box):
 
 		for widget in self._widgets:
 			widget.reveal_header()
+			widget.widget_content.set_sensitive(False)
 
 	@Gtk.Template.Callback()
 	def exit_management_mode(self, *args):
@@ -245,6 +246,7 @@ class WidgetBox(Gtk.Box):
 
 		for widget in self._widgets:
 			widget.widget_header_revealer.set_reveal_child(False)
+			widget.widget_content.set_sensitive(True)
 
 		self.management_buttons_revealer.set_reveal_child(False)
 		self.chooser_button_revealer.set_reveal_child(True)

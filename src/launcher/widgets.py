@@ -53,6 +53,7 @@ class LauncherWidgetHeader(Gtk.Box):
 			window = self.get_native()
 			window.wallpaper.undim()
 			window.clockbox.undim()
+			self._aspwidget.widget_content.set_sensitive(True)
 
 			self._aspwidget._widgetbox.chooser_button_revealer.set_sensitive(True)
 			self.get_parent().set_reveal_child(False)
@@ -144,6 +145,7 @@ class LauncherWidget(Gtk.Box):
 			window = self.get_native()
 			window.wallpaper.dim()
 			window.clockbox.dim()
+			self.widget_content.set_sensitive(False)
 			for widget in self._widgetbox._widgets:
 				if widget._widget.instance != self._widget.instance:
 					widget.widget_header_revealer.set_reveal_child(False)
