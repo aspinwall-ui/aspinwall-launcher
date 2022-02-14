@@ -14,6 +14,7 @@ from aspinwall.launcher.launcher_boxes import ClockBox, WidgetBox # noqa: F401
 from aspinwall.launcher.app_chooser import AppChooser # noqa: F401
 from aspinwall.launcher.wallpaper import Wallpaper # noqa: F401
 
+win = None
 running = False
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/launcher.ui')
@@ -62,6 +63,7 @@ def on_activate(app):
 
 	load_widgets()
 
+	global win
 	win = Launcher(app)
 
 	gtk_settings = Gtk.Settings.get_default()
@@ -85,6 +87,7 @@ def on_activate(app):
 	)
 
 	win.add_action(win.widgetbox._show_chooser_action)
+	win.add_action(win.widgetbox._management_mode_action)
 
 	win.present()
 

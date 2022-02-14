@@ -21,6 +21,7 @@ class WidgetBox(Gtk.Box):
 	_widgets = []
 	_drag_targets = []
 	_removed_widgets = {}
+	management_mode = False
 
 	widget_container = Gtk.Template.Child('widget-container')
 	widget_chooser = Gtk.Template.Child('widget-chooser-container')
@@ -37,6 +38,9 @@ class WidgetBox(Gtk.Box):
 		# resets itself to slide_down during this step. Force-set the type here
 		# to avoid this.
 		self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
+
+		self._management_mode_action = Gio.SimpleAction.new("enter_widget_management", None)
+		self._management_mode_action.connect("activate", self.enter_management_mode)
 
 		# Set up the undo action
 		self.install_action('toast.undo_remove', 's', self.undo_remove)
@@ -209,6 +213,16 @@ class WidgetBox(Gtk.Box):
 		self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
 		self.widget_chooser.search.grab_focus()
 		self.widget_chooser.set_reveal_child(True)
+
+	def enter_management_mode(self, *args):
+		"""Enters widget management mode."""
+		self.management_mode = True
+		window = self.get_native()
+		window.wallpaper.dim()
+		window.clockbox.dim()
+
+		for widget in self._widgets:
+			widget.reveal_header()
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/clockbox.ui')
 class ClockBox(Gtk.Box, Dimmable):

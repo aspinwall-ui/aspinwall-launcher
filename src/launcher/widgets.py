@@ -46,11 +46,18 @@ class LauncherWidgetHeader(Gtk.Box):
 	@Gtk.Template.Callback()
 	def hide(self, *args):
 		"""Hides the widget header."""
+		if not self._aspwidget._widgetbox.management_mode:
+			for widget in self._aspwidget._widgetbox._widgets:
+				widget.container.remove_css_class('dim')
+		else:
+			for widget in self._aspwidget._widgetbox._widgets:
+				widget.widget_header_revealer.set_reveal_child(False)
+			self._aspwidget._widgetbox.management_mode = False
+
 		window = self.get_native()
 		window.wallpaper.undim()
 		window.clockbox.undim()
-		for widget in self._aspwidget._widgetbox._widgets:
-			widget.container.remove_css_class('dim')
+
 		self.get_parent().set_reveal_child(False)
 
 	def update_move_buttons(self):
@@ -131,15 +138,19 @@ class LauncherWidget(Gtk.Box):
 
 	def reveal_header(self, *args):
 		"""Reveals the widget's header."""
-		window = self.get_native()
-		window.wallpaper.dim()
-		window.clockbox.dim()
-		for widget in self._widgetbox._widgets:
-			if widget._widget.instance != self._widget.instance:
-				widget.widget_header_revealer.set_reveal_child(False)
-				widget.container.add_css_class('dim')
-			else:
-				widget.container.remove_css_class('dim')
+		if not self._widgetbox.management_mode:
+			# Dim the window and all other widgets; in the case of widget
+			# management mode, the window dimming part is done by the
+			# WidgetBox.enter_management_mode() function
+			window = self.get_native()
+			window.wallpaper.dim()
+			window.clockbox.dim()
+			for widget in self._widgetbox._widgets:
+				if widget._widget.instance != self._widget.instance:
+					widget.widget_header_revealer.set_reveal_child(False)
+					widget.container.add_css_class('dim')
+				else:
+					widget.container.remove_css_class('dim')
 		self.widget_header_revealer.set_reveal_child(True)
 
 	def drag_prepare(self, *args):

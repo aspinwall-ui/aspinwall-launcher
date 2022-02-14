@@ -60,7 +60,7 @@ class Widget(GObject.GObject):
 	def refresh(self):
 		"""(Optional) Runs in the background at the widget refresh interval.
 		For more information, see docs/widgets/creating-widgets.md."""
-		return
+		return None
 
 	@GObject.Property
 	def id(self):

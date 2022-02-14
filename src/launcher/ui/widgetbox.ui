@@ -79,7 +79,7 @@
 			<item>
 				<attribute name='icon'>list-add-symbolic</attribute>
 				<attribute name='label' translatable='yes'>_Manage Widgets</attribute>
-				<attribute name='action'>win.manage_widgets</attribute>
+				<attribute name='action'>win.enter_widget_management</attribute>
 			</item>
 		</section>
 		<section>
