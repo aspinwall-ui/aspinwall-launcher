@@ -49,16 +49,15 @@ class LauncherWidgetHeader(Gtk.Box):
 		if not self._aspwidget._widgetbox.management_mode:
 			for widget in self._aspwidget._widgetbox._widgets:
 				widget.container.remove_css_class('dim')
+
+			window = self.get_native()
+			window.wallpaper.undim()
+			window.clockbox.undim()
+
+			self._aspwidget._widgetbox.chooser_button_revealer.set_sensitive(True)
+			self.get_parent().set_reveal_child(False)
 		else:
-			for widget in self._aspwidget._widgetbox._widgets:
-				widget.widget_header_revealer.set_reveal_child(False)
-			self._aspwidget._widgetbox.management_mode = False
-
-		window = self.get_native()
-		window.wallpaper.undim()
-		window.clockbox.undim()
-
-		self.get_parent().set_reveal_child(False)
+			self._aspwidget._widgetbox.exit_management_mode()
 
 	def update_move_buttons(self):
 		"""
@@ -151,6 +150,7 @@ class LauncherWidget(Gtk.Box):
 					widget.container.add_css_class('dim')
 				else:
 					widget.container.remove_css_class('dim')
+			self._widgetbox.chooser_button_revealer.set_sensitive(False)
 		self.widget_header_revealer.set_reveal_child(True)
 
 	def drag_prepare(self, *args):

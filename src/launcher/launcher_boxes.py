@@ -27,6 +27,9 @@ class WidgetBox(Gtk.Box):
 	widget_chooser = Gtk.Template.Child('widget-chooser-container')
 	toast_overlay = Gtk.Template.Child()
 
+	chooser_button_revealer = Gtk.Template.Child()
+	management_buttons_revealer = Gtk.Template.Child()
+
 	def __init__(self):
 		"""Initializes the widget box."""
 		super().__init__()
@@ -213,6 +216,7 @@ class WidgetBox(Gtk.Box):
 			for widget in widgets:
 				self.add_widget(get_widget_class_by_id(widget[0]), widget[1])
 
+	@Gtk.Template.Callback()
 	def show_chooser(self, *args):
 		"""Shows the widget chooser."""
 		self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
@@ -226,8 +230,26 @@ class WidgetBox(Gtk.Box):
 		window.wallpaper.dim()
 		window.clockbox.dim()
 
+		self.chooser_button_revealer.set_reveal_child(False)
+		self.management_buttons_revealer.set_reveal_child(True)
+
 		for widget in self._widgets:
 			widget.reveal_header()
+
+	@Gtk.Template.Callback()
+	def exit_management_mode(self, *args):
+		"""Exits widget management mode."""
+		window = self.get_native()
+		window.wallpaper.undim()
+		window.clockbox.undim()
+
+		for widget in self._widgets:
+			widget.widget_header_revealer.set_reveal_child(False)
+
+		self.management_buttons_revealer.set_reveal_child(False)
+		self.chooser_button_revealer.set_reveal_child(True)
+
+		self.management_mode = False
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/clockbox.ui')
 class ClockBox(Gtk.Box, Dimmable):
