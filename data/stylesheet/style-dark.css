@@ -1,0 +1,20 @@
+/* Default colors for Aspinwall - dark */
+
+@define-color aspinwall_widget_bg     #2a2a2a;
+@define-color aspinwall_widget_fg     #fefefe;
+@define-color aspinwall_widget_border #383838;
+@define-color aspinwall_widget_shade  rgba(0, 0, 0, 0.36); /* @card_shade_color */
+
+@define-color aspinwall_widget_header_bg #303030;
+@define-color aspinwall_widget_header_fg #ffffff;
+
+@define-color aspinwall_widget_header_close_bg rgba(0, 0, 0, 0.08);
+
+@define-color aspinwall_menu_bg #242424;
+@define-color aspinwall_menu_fg #ffffff;
+@define-color aspinwall_menu_border #1e1e1e;
+
+@define-color aspinwall_menu_header_bg #303030; /* @headerbar_bg_color */
+@define-color aspinwall_menu_header_fg #ffffff; /* @headerbar_fg_color */
+
+@import url('launcher.css');

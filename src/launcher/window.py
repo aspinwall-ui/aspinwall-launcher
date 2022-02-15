@@ -6,6 +6,7 @@ gi_require_version('Adw', '1')
 from gi.repository import Adw, Gtk, Gdk
 import os
 
+from aspinwall.launcher.config import config
 from aspinwall.widgets.loader import load_widgets
 
 # The ClockBox, WidgetBox and AppChooser classes are imported to avoid
@@ -47,14 +48,16 @@ class Launcher(Gtk.ApplicationWindow):
 		self.launcher_flap.set_reveal_flap(True)
 		self.app_chooser.search.grab_focus()
 
-def on_gtk_theme_change(settings, theme_name, theme_name_is_str, style_provider):
-	"""Reloads the CSS provider as needed."""
-	if settings.get_property('gtk-theme-name') in ('HighContrast', 'Default-hc'):
-		stylesheet = 'default-hc.css'
+def on_theme_preference_change(*args):
+	"""Called when the theme preference changes."""
+	theme_preference = config['theme-preference']
+	style_manager = Adw.StyleManager.get_default()
+	if theme_preference == 1:
+		style_manager.set_color_scheme(Adw.ColorScheme.FORCE_LIGHT)
+	elif theme_preference == 2:
+		style_manager.set_color_scheme(Adw.ColorScheme.FORCE_DARK)
 	else:
-		stylesheet = 'default-dark.css'
-
-	style_provider.load_from_resource('/org/dithernet/aspinwall/stylesheet/' + stylesheet)
+		style_manager.set_color_scheme(Adw.ColorScheme.DEFAULT)
 
 def on_activate(app):
 	global running
@@ -66,26 +69,6 @@ def on_activate(app):
 
 	global win
 	win = Launcher(app)
-
-	gtk_settings = Gtk.Settings.get_default()
-
-	style_provider = Gtk.CssProvider()
-	Gtk.StyleContext.add_provider_for_display(
-		Gdk.Display.get_default(),
-		style_provider,
-		Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-	)
-
-	on_gtk_theme_change(
-		gtk_settings,
-		gtk_settings.get_property('gtk-theme-name'),
-		True, style_provider
-	)
-	gtk_settings.connect(
-		'notify::gtk-theme-name',
-		on_gtk_theme_change,
-		False, style_provider
-	)
 
 	win.add_action(win.widgetbox._show_chooser_action)
 	win.add_action(win.widgetbox._management_mode_action)
@@ -99,5 +82,10 @@ def on_activate(app):
 
 def main(version):
 	app = Adw.Application(application_id='org.dithernet.aspinwall.Launcher')
+	app.set_resource_base_path('/org/dithernet/aspinwall/stylesheet')
+	style_manager = app.get_style_manager()
+	on_theme_preference_change()
+	config.connect('changed::theme-preference', on_theme_preference_change)
+	style_manager.connect('notify::color-scheme', on_theme_preference_change)
 	app.connect('activate', on_activate)
 	app.run()

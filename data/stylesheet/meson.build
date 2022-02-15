@@ -1,8 +1,9 @@
 pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
 
 stylesheet_sources = [
-  'default-dark.css',
-  'default-hc.css',
+  'style.css',
+  'style-dark.css',
+  'style-hc.css',
   'launcher.css',
 ]
 

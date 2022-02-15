@@ -9,6 +9,16 @@
 			</description>
 		</key>
 
+		<key name="theme-preference" type="i">
+			<default>0</default>
+			<!-- TRANSLATORS: This is for the light/dark mode switch; can be translated as "Preferred theme" -->
+			<summary>Theme preference</summary>
+			<description>
+				Whether to use light theme, dark theme or follow system theme.
+				(0 - follow system theme, 1 - light, 2 - dark)
+			</description>
+		</key>
+
 		<key name="autorefresh-delay" type="i">
 			<default>900</default>
 			<summary>Widget autorefresh delay</summary>

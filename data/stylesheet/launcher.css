@@ -49,8 +49,9 @@ window {
 	border-radius: 10px;
 	font-size: 1.25em;
 	margin: 4px 10px;
-	box-shadow: 2px 1px 1px @aspinwall_widget_shade;
+	box-shadow: 2px 1px 5px @aspinwall_widget_shade;
 	border: 1px solid @aspinwall_widget_border;
+	opacity: 0.9;
 }
 
 .aspinwall-widget-wrapper {
@@ -108,6 +109,11 @@ window {
 	background-color: @aspinwall_menu_bg;
 	color: @aspinwall_menu_fg;
 	border-left: 1px @aspinwall_menu_border solid;
+}
+
+.widget-chooser-list {
+	background-color: @aspinwall_menu_bg;
+	color: @aspinwall_menu_fg;
 }
 
 .widget-chooser .header {
