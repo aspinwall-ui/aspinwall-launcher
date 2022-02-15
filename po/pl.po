@@ -50,8 +50,8 @@ msgid ""
 "List of favorite apps for the app chooser, stored as paths to their .desktop "
 "files."
 msgstr ""
-"Lista ulubionych aplikacji w menu wyboru aplikacji, przechowywana w "
-"formieścieżek do ich plików .desktop."
+"Lista ulubionych aplikacji w menu wyboru aplikacji, przechowywana w formie "
+"ścieżek do ich plików .desktop."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:41
 msgid "Time format string"
