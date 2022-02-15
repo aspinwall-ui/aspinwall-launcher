@@ -30,6 +30,7 @@ class Launcher(Gtk.ApplicationWindow):
 	clockbox = Gtk.Template.Child()
 	widgetbox = Gtk.Template.Child()
 	app_chooser = Gtk.Template.Child()
+	app_chooser_show = Gtk.Template.Child()
 
 	def __init__(self, app):
 		"""Initializes the launcher window."""

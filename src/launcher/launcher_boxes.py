@@ -232,6 +232,7 @@ class WidgetBox(Gtk.Box):
 		window.wallpaper.dim()
 		window.clockbox.dim()
 
+		self.get_native().app_chooser_show.set_sensitive(False)
 		self.chooser_button_revealer.set_reveal_child(False)
 		self.management_buttons_revealer.set_reveal_child(True)
 
@@ -251,6 +252,8 @@ class WidgetBox(Gtk.Box):
 				for widget in self._widgets:
 					widget.widget_header_revealer.set_reveal_child(False)
 					widget.widget_content.set_sensitive(True)
+
+				self.get_native().app_chooser_show.set_sensitive(True)
 				self.management_buttons_revealer.set_reveal_child(False)
 				self.chooser_button_revealer.set_reveal_child(True)
 			else:
@@ -258,6 +261,7 @@ class WidgetBox(Gtk.Box):
 					widget.widget_header_revealer.set_reveal_child(False)
 					widget.container.remove_css_class('dim')
 					widget.widget_content.set_sensitive(True)
+				self.get_native().app_chooser_show.set_sensitive(True)
 				self.chooser_button_revealer.set_sensitive(True)
 
 			self.management_mode = False

@@ -55,6 +55,7 @@ class LauncherWidgetHeader(Gtk.Box):
 			window.clockbox.undim()
 			self._aspwidget.widget_content.set_sensitive(True)
 
+			self.get_native().app_chooser_show.set_sensitive(True)
 			self._aspwidget._widgetbox.chooser_button_revealer.set_sensitive(True)
 			self.get_parent().set_reveal_child(False)
 			self._aspwidget._widgetbox.edit_mode = False
@@ -158,6 +159,7 @@ class LauncherWidget(Gtk.Box):
 					widget.container.add_css_class('dim')
 				else:
 					widget.container.remove_css_class('dim')
+			self.get_native().app_chooser_show.set_sensitive(False)
 			self._widgetbox.chooser_button_revealer.set_sensitive(False)
 			self._widgetbox.edit_mode = True
 		self.widget_header_revealer.set_reveal_child(True)
