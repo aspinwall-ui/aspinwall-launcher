@@ -57,6 +57,7 @@ class LauncherWidgetHeader(Gtk.Box):
 
 			self._aspwidget._widgetbox.chooser_button_revealer.set_sensitive(True)
 			self.get_parent().set_reveal_child(False)
+			self._aspwidget._widgetbox.edit_mode = False
 		else:
 			self._aspwidget._widgetbox.exit_management_mode()
 
@@ -126,6 +127,11 @@ class LauncherWidget(Gtk.Box):
 		longpress.connect('pressed', self.reveal_header)
 		self.widget_content.add_controller(longpress)
 
+		# Set up click target
+		dismiss_click = Gtk.GestureClick()
+		dismiss_click.connect('pressed', self._widgetbox.exit_management_mode)
+		self.widget_content.add_controller(dismiss_click)
+
 		# TODO: Set up hover target
 
 	def remove(self):
@@ -153,6 +159,7 @@ class LauncherWidget(Gtk.Box):
 				else:
 					widget.container.remove_css_class('dim')
 			self._widgetbox.chooser_button_revealer.set_sensitive(False)
+			self._widgetbox.edit_mode = True
 		self.widget_header_revealer.set_reveal_child(True)
 
 	def drag_prepare(self, *args):

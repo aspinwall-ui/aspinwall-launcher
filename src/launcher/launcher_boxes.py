@@ -22,6 +22,7 @@ class WidgetBox(Gtk.Box):
 	_drag_targets = []
 	_removed_widgets = {}
 	management_mode = False
+	edit_mode = False
 
 	widget_container = Gtk.Template.Child('widget-container')
 	widget_chooser = Gtk.Template.Child('widget-chooser-container')
@@ -226,6 +227,7 @@ class WidgetBox(Gtk.Box):
 	def enter_management_mode(self, *args):
 		"""Enters widget management mode."""
 		self.management_mode = True
+		self.edit_mode = True
 		window = self.get_native()
 		window.wallpaper.dim()
 		window.clockbox.dim()
@@ -240,18 +242,26 @@ class WidgetBox(Gtk.Box):
 	@Gtk.Template.Callback()
 	def exit_management_mode(self, *args):
 		"""Exits widget management mode."""
-		window = self.get_native()
-		window.wallpaper.undim()
-		window.clockbox.undim()
+		if self.edit_mode:
+			window = self.get_native()
+			window.wallpaper.undim()
+			window.clockbox.undim()
 
-		for widget in self._widgets:
-			widget.widget_header_revealer.set_reveal_child(False)
-			widget.widget_content.set_sensitive(True)
+			if self.management_mode:
+				for widget in self._widgets:
+					widget.widget_header_revealer.set_reveal_child(False)
+					widget.widget_content.set_sensitive(True)
+				self.management_buttons_revealer.set_reveal_child(False)
+				self.chooser_button_revealer.set_reveal_child(True)
+			else:
+				for widget in self._widgets:
+					widget.widget_header_revealer.set_reveal_child(False)
+					widget.container.remove_css_class('dim')
+					widget.widget_content.set_sensitive(True)
+				self.chooser_button_revealer.set_sensitive(True)
 
-		self.management_buttons_revealer.set_reveal_child(False)
-		self.chooser_button_revealer.set_reveal_child(True)
-
-		self.management_mode = False
+			self.management_mode = False
+			self.edit_mode = False
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/clockbox.ui')
 class ClockBox(Gtk.Box, Dimmable):
