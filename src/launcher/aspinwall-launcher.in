@@ -29,6 +29,7 @@
 # authorization.
 
 import os
+import locale
 import sys
 import signal
 import gettext
@@ -39,6 +40,13 @@ localedir = '@localedir@'
 
 sys.path.insert(1, pkgdatadir)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
+try:
+	locale.bindtextdomain('aspinwall', localedir)
+	locale.textdomain('aspinwall')
+except:
+	print("Python built without locale support, translations will not work!")
+gettext.bindtextdomain('aspinwall', localedir)
+gettext.textdomain('aspinwall')
 gettext.install('aspinwall', localedir)
 
 if __name__ == '__main__':
