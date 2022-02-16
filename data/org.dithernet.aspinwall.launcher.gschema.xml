@@ -37,18 +37,20 @@
 		</key>
 
 		<key name="time-format" type="s">
-			<default>"%H:%M"</default>
 			<!-- TRANSLATORS: This can also be translated as just "time format" -->
 			<summary>Time format string</summary>
+			<!-- TRANSLATORS: Default time format string for your locale; should only contain the hour and minutes. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this. -->
+			<default l10n="time">"%H:%M"</default>
 			<description>
 				Time format string for the clock, using the format described in the documentation at https://docs.python.org/3/library/time.html#time.strftime.
 			</description>
 		</key>
 
 		<key name="date-format" type="s">
-			<default>"%A, %x"</default>
 			<!-- TRANSLATORS: This can also be translated as just "date format" -->
 			<summary>Date format string</summary>
+			<!-- TRANSLATORS: Default date format string for your locale; should contain the week day and date. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this. -->
+			<default l10n="time">"%A, %x"</default>
 			<description>
 				Date format string for the clock, using the format described in the documentation at https://docs.python.org/3/library/time.html#time.strftime.
 			</description>

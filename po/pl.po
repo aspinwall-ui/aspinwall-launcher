@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-16 16:36+0100\n"
+"POT-Creation-Date: 2022-02-16 16:47+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -55,12 +55,17 @@ msgstr ""
 "ścieżek do ich plików .desktop."
 
 #. TRANSLATORS: This can also be translated as just "time format"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:42
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:41
 #: src/launcher/ui/settings.ui:77
 msgid "Time format string"
 msgstr "Format czasu"
 
+#. TRANSLATORS: Default time format string for your locale; should only contain the hour and minutes. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:43
+msgid "\"%H:%M\""
+msgstr "\"%H:%M\""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:44
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -74,7 +79,12 @@ msgstr ""
 msgid "Date format string"
 msgstr "Format daty"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:52
+#. TRANSLATORS: Default date format string for your locale; should contain the week day and date. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:53
+msgid "\"%A, %x\""
+msgstr "%A, %d %B, %Y"
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:54
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
