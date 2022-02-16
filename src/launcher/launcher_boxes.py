@@ -136,7 +136,7 @@ class WidgetBox(Gtk.Box):
 		self._removed_widgets[aspwidget._widget.instance] = aspwidget
 
 		# TRANSLATORS: Used in the popup that appears when you remove a widget
-		toast = Adw.Toast.new(_("Removed “%s”" % aspwidget._widget.name)) # noqa: F821
+		toast = Adw.Toast.new(_("Removed “%s”") % aspwidget._widget.name) # noqa: F821
 		toast.set_priority(Adw.ToastPriority.HIGH)
 		# TRANSLATORS: Used in the popup that appears when you remove a widget
 		toast.set_button_label(_('Undo')) # noqa: F821
