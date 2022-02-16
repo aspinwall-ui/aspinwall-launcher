@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-15 13:29+0100\n"
+"POT-Creation-Date: 2022-02-16 16:36+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -16,6 +16,7 @@ msgstr "Lista dodanych widżetów."
 
 #. TRANSLATORS: This is for the light/dark mode switch; can be translated as "Preferred theme"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:15
+#: src/launcher/ui/settings.ui:21
 msgid "Theme preference"
 msgstr "Preferowany motyw"
 
@@ -37,7 +38,7 @@ msgid ""
 "disable autorefresh. (Default: 900 seconds - 15 minutes)"
 msgstr ""
 "Ilość czasu (w sekundach) między automatycznym odświeżaniem widżetów. Ustaw "
-"na 0 żeby wyłąćzyć automatyczne odświeżanie. (Domyślnie: 900 sekund - 15 "
+"na 0 żeby wyłączyć automatyczne odświeżanie. (Domyślnie: 900 sekund - 15 "
 "minut)"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:32
@@ -53,11 +54,13 @@ msgstr ""
 "Lista ulubionych aplikacji w menu wyboru aplikacji, przechowywana w formie "
 "ścieżek do ich plików .desktop."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:41
+#. TRANSLATORS: This can also be translated as just "time format"
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:42
+#: src/launcher/ui/settings.ui:77
 msgid "Time format string"
 msgstr "Format czasu"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:42
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:43
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -65,11 +68,13 @@ msgstr ""
 "Ciąg zawierający format czasu dla zegara, używający formatu opisanego w "
 "dokumentacji: https://docs.python.org/3/library/time.html#time.strftime."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:49
+#. TRANSLATORS: This can also be translated as just "date format"
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:51
+#: src/launcher/ui/settings.ui:90
 msgid "Date format string"
 msgstr "Format daty"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:50
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:52
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -88,6 +93,41 @@ msgstr "_Usuń z ulubionych"
 #: src/launcher/ui/appicon.ui:68
 msgid "_Add to favorites"
 msgstr "_Dodaj do ulubionych"
+
+#: src/launcher/ui/settings.ui:17
+msgid "Theme"
+msgstr "Motyw"
+
+#. TRANSLATORS: This refers to the light theme.
+#: src/launcher/ui/settings.ui:34
+msgid "Light"
+msgstr "Jasny"
+
+#. TRANSLATORS: This refers to the dark theme.
+#: src/launcher/ui/settings.ui:43
+msgid "Dark"
+msgstr "Ciemny"
+
+#: src/launcher/ui/settings.ui:54
+msgid "Follow system theme"
+msgstr "Przestrzegaj motywu systemu"
+
+#: src/launcher/ui/settings.ui:68
+msgid "Clock"
+msgstr "Zegar"
+
+#: src/launcher/ui/settings.ui:72
+msgid "Time and date format"
+msgstr "Format czasu i daty"
+
+#: src/launcher/ui/settings.ui:73
+msgid ""
+"Set the format to use when displaying the time and date, following <a "
+"href='https://docs.python.org/3/library/time.html#time.strftime'>the time "
+"format string specification</a>."
+msgstr ""
+"Ustaw formaty daty dla zegara, używając <a href='https://docs.python.org/3/"
+"library/time.html#time.strftime'>specyfikacji ciągów formatowania dat</a>."
 
 #: src/launcher/ui/widgetchooser.ui:30
 msgid "Search widgets…"

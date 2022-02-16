@@ -164,3 +164,9 @@ window {
 .app-icon:focus {
   border-color: @accent_color;
 }
+
+/* Launcher settings window */
+.launcher-settings {
+	background-color: @aspinwall_menu_bg;
+	color: @aspinwall_menu_fg;
+}

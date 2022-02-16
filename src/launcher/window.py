@@ -3,7 +3,7 @@
 from gi import require_version as gi_require_version
 gi_require_version("Gtk", "4.0")
 gi_require_version('Adw', '1')
-from gi.repository import Adw, Gtk, Gdk
+from gi.repository import Adw, Gtk, Gdk, Gio
 import os
 
 from aspinwall.launcher.config import config
@@ -14,6 +14,7 @@ from aspinwall.widgets.loader import load_widgets
 from aspinwall.launcher.launcher_boxes import ClockBox, WidgetBox # noqa: F401
 from aspinwall.launcher.app_chooser import AppChooser # noqa: F401
 from aspinwall.launcher.wallpaper import Wallpaper # noqa: F401
+from aspinwall.launcher.settings import LauncherSettings
 
 win = None
 running = False
@@ -36,6 +37,13 @@ class Launcher(Gtk.ApplicationWindow):
 	def __init__(self, app):
 		"""Initializes the launcher window."""
 		super().__init__(title='Aspinwall Launcher', application=app)
+		self.open_settings_action = Gio.SimpleAction.new("open_settings", None)
+		self.open_settings_action.connect('activate', self.open_settings)
+
+		self.add_action(self.widgetbox._show_chooser_action)
+		self.add_action(self.widgetbox._management_mode_action)
+		self.add_action(self.open_settings_action)
+
 		self.launcher_wallpaper_overlay.set_measure_overlay(self.launcher_flap, True)
 
 	@Gtk.Template.Callback()
@@ -47,6 +55,12 @@ class Launcher(Gtk.ApplicationWindow):
 		# Show chooser
 		self.launcher_flap.set_reveal_flap(True)
 		self.app_chooser.search.grab_focus()
+
+	def open_settings(self, *args):
+		"""Opens the launcher settings window."""
+		settings_window = LauncherSettings()
+		settings_window.set_transient_for(self)
+		settings_window.present()
 
 def on_theme_preference_change(*args):
 	"""Called when the theme preference changes."""
@@ -69,9 +83,6 @@ def on_activate(app):
 
 	global win
 	win = Launcher(app)
-
-	win.add_action(win.widgetbox._show_chooser_action)
-	win.add_action(win.widgetbox._management_mode_action)
 
 	win.present()
 

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+	<requires lib="gtk" version="4.0"/>
+	<requires lib="libadwaita" version="1.0"/>
+	<template class="LauncherSettings" parent="AdwPreferencesWindow">
+		<style>
+			<class name="launcher-settings"/>
+		</style>
+		<child>
+			<object class="AdwPreferencesPage">
+		        <property name="icon_name">preferences-window-layout-symbolic</property>
+		        <property name="title">L_auncher</property>
+		        <property name="use-underline">True</property>
+
+				<child>
+					<object class="AdwPreferencesGroup">
+						<property name="title" translatable="yes">Theme</property>
+
+						<child>
+							<object class="AdwActionRow">
+								<property name="title" translatable="yes">Theme preference</property>
+
+								<child>
+									<object class="GtkBox" id="theme_toggle_box">
+										<property name="sensitive" bind-source="follow_system_theme_toggle" bind-property="active" bind-flags="invert-boolean"/>
+										<style>
+											<class name="linked"/>
+										</style>
+
+										<child>
+											<object class="GtkToggleButton" id="theme_toggle_start">
+												<property name="valign">center</property>
+												<!-- TRANSLATORS: This refers to the light theme. -->
+												<property name="label" translatable="yes">Light</property>
+												<signal name="toggled" handler="toggle_theme"/>
+											</object>
+										</child>
+
+										<child>
+											<object class="GtkToggleButton" id="theme_toggle_end">
+												<property name="valign">center</property>
+												<!-- TRANSLATORS: This refers to the dark theme. -->
+												<property name="label" translatable="yes">Dark</property>
+												<property name="group">theme_toggle_start</property>
+											</object>
+										</child>
+									</object>
+								</child>
+							</object>
+						</child>
+
+						<child>
+							<object class="AdwActionRow">
+								<property name="title" translatable="yes">Follow system theme</property>
+
+								<child>
+									<object class="GtkCheckButton" id="follow_system_theme_toggle">
+										<signal name="toggled" handler="toggle_follow_system_theme"/>
+									</object>
+								</child>
+							</object>
+						</child>
+					</object>
+				</child>
+
+				<child>
+					<object class="AdwPreferencesGroup">
+						<property name="title" translatable="yes">Clock</property>
+
+						<child>
+							<object class="AdwExpanderRow">
+								<property name="title" translatable="yes">Time and date format</property>
+								<property name="subtitle" translatable="yes">Set the format to use when displaying the time and date, following &lt;a href='https://docs.python.org/3/library/time.html#time.strftime'&gt;the time format string specification&lt;/a&gt;.</property>
+
+								<child>
+									<object class="AdwActionRow">
+										<property name="title" translatable="yes">Time format string</property>
+
+										<child>
+											<object class="GtkEntry" id="time_format_entry">
+												<property name="valign">center</property>
+												<signal name="changed" handler="change_time_format"/>
+											</object>
+										</child>
+									</object>
+								</child>
+
+								<child>
+									<object class="AdwActionRow">
+										<property name="title" translatable="yes">Date format string</property>
+
+										<child>
+											<object class="GtkEntry" id="date_format_entry">
+												<property name="valign">center</property>
+												<signal name="changed" handler="change_date_format"/>
+											</object>
+										</child>
+									</object>
+								</child>
+							</object>
+						</child>
+					</object>
+				</child>
+			</object>
+		</child>
+	</template>
+</interface>

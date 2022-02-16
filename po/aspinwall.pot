@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-15 13:29+0100\n"
+"POT-Creation-Date: 2022-02-16 16:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,6 +27,7 @@ msgstr ""
 
 #. TRANSLATORS: This is for the light/dark mode switch; can be translated as "Preferred theme"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:15
+#: src/launcher/ui/settings.ui:21
 msgid "Theme preference"
 msgstr ""
 
@@ -57,21 +58,25 @@ msgid ""
 "files."
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:41
+#. TRANSLATORS: This can also be translated as just "time format"
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:42
+#: src/launcher/ui/settings.ui:77
 msgid "Time format string"
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:42
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:43
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:49
+#. TRANSLATORS: This can also be translated as just "date format"
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:51
+#: src/launcher/ui/settings.ui:90
 msgid "Date format string"
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:50
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:52
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -87,6 +92,39 @@ msgstr ""
 
 #: src/launcher/ui/appicon.ui:68
 msgid "_Add to favorites"
+msgstr ""
+
+#: src/launcher/ui/settings.ui:17
+msgid "Theme"
+msgstr ""
+
+#. TRANSLATORS: This refers to the light theme.
+#: src/launcher/ui/settings.ui:34
+msgid "Light"
+msgstr ""
+
+#. TRANSLATORS: This refers to the dark theme.
+#: src/launcher/ui/settings.ui:43
+msgid "Dark"
+msgstr ""
+
+#: src/launcher/ui/settings.ui:54
+msgid "Follow system theme"
+msgstr ""
+
+#: src/launcher/ui/settings.ui:68
+msgid "Clock"
+msgstr ""
+
+#: src/launcher/ui/settings.ui:72
+msgid "Time and date format"
+msgstr ""
+
+#: src/launcher/ui/settings.ui:73
+msgid ""
+"Set the format to use when displaying the time and date, following <a "
+"href='https://docs.python.org/3/library/time.html#time.strftime'>the time "
+"format string specification</a>."
 msgstr ""
 
 #: src/launcher/ui/widgetchooser.ui:30
