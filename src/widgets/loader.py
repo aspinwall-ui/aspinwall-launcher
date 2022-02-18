@@ -6,17 +6,20 @@ from gi.repository import GLib
 import importlib
 import os
 
-user_widget_dir = os.path.join(GLib.get_user_data_dir(), 'aspinwall', 'widgets')
-widget_dirs = [user_widget_dir]
+if os.getenv('ASPINWALL_WIDGET_DIR'):
+	widget_dirs = [os.getenv('ASPINWALL_WIDGET_DIR')]
+else:
+	user_widget_dir = os.path.join(GLib.get_user_data_dir(), 'aspinwall', 'widgets')
+	widget_dirs = [user_widget_dir]
 
-if not os.path.exists(user_widget_dir):
-	os.makedirs(user_widget_dir)
+	if not os.path.exists(user_widget_dir):
+		os.makedirs(user_widget_dir)
 
-for data_dir in GLib.get_system_data_dirs():
-	dir = os.path.join(data_dir, 'aspinwall', 'widgets')
-	if not os.path.exists(dir):
-		continue
-	widget_dirs.append(dir)
+	for data_dir in GLib.get_system_data_dirs():
+		dir = os.path.join(data_dir, 'aspinwall', 'widgets')
+		if not os.path.exists(dir):
+			continue
+		widget_dirs.append(dir)
 
 available_widgets = []
 
@@ -39,18 +42,19 @@ def load_widgets():
 					module = importlib.util.module_from_spec(spec)
 					spec.loader.exec_module(module)
 
-					if module._widget_class.id in loaded_ids.keys():
+					module_id = module._widget_class.metadata['id']
+					if module_id in loaded_ids.keys():
 						print(
 							'WARN: ID conflict between %s (loaded) and %s (attempted to load) while loading %s; ignoring file' # noqa: E501
-							% (loaded_ids[module._widget_class.id].widget_path,
+							% (loaded_ids[module_id].widget_path,
 							widget_path,
-							module._widget_class.metadata['id'])
+							module_id)
 						)
 						continue
 
 					module._widget_class.widget_path = widget_path
 
-					loaded_ids[module._widget_class.id] = module._widget_class
+					loaded_ids[module_id] = module._widget_class
 					available_widgets.append(module._widget_class)
 
 	return available_widgets
@@ -61,6 +65,6 @@ def get_widget_class_by_id(widget_id):
 	provided ID, if available. Returns None if not found.
 	"""
 	for widget in available_widgets:
-		if widget.metadata['id']:
+		if widget.metadata['id'] == widget_id:
 			return widget
 	return None

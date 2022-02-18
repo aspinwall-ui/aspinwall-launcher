@@ -4,4 +4,4 @@ rm -r /tmp/aspinwall
 meson --prefix=/tmp/aspinwall . output
 meson compile -C output
 meson install -C output
-GSETTINGS_SCHEMA_DIR=/tmp/aspinwall/share/glib-2.0/schemas GTK_DEBUG=interactive /tmp/aspinwall/bin/aspinwall-launcher
+GSETTINGS_SCHEMA_DIR=/tmp/aspinwall/share/glib-2.0/schemas GTK_DEBUG=interactive ASPINWALL_WIDGET_DIR=/tmp/aspinwall/share/aspinwall/widgets /tmp/aspinwall/bin/aspinwall-launcher
