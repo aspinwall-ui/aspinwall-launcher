@@ -45,9 +45,9 @@ class MyWidget(Widget):
 		'thumbnail': []
 	}
 
-	def __init__(self):
-		# FIXME
-		raise NotImplementedError
+	def __init__(self, instance):
+		# FIXME: Add content here
+		super().__init__(instance)
 ```
 
 ## Creating the widget content
@@ -68,16 +68,6 @@ However, the `content` variable can be overwritten with a custom container, be i
 
 The code used for widget creation must be added to the `__init__()` function of the widget class.
 
-## Widget configuration
-
-Widgets use [GSettings](https://docs.gtk.org/gio/class.Settings.html) for storing data, and are expected to ship pre-compiled files. A `Gio.Settings` object is provided in the `config` variable on the object, and can be interacted with like a regular dict (`config['key']` gets a key, `config['key'] = value` sets it).
-
-Loading/saving is handled by the launcher.
-
-If you're planning to use the `config` variable, you must set the `has_config` value to True.
-
-If your widget has no configuration options, don't set the `has_config` value; it is set to False by default.
-
 ## Installing the widget
 
 The default local folder for widgets is `~/.local/share/aspinwall/widgets`.
@@ -90,16 +80,31 @@ To prepare a widget for installation:
 
 To install the widget, move it to the widget folder, whether it's the local one or the system one.
 
-## Styling widgets
+## Testing the widget
 
-Widgets are automatically set up with a `GtkCssProvider`, which is stored in the `self.css_provider` variable.
+You can now run the launcher (if you don't have it installed, use the provided `run` script) and add your widget to the launcher. If all goes well, you should now have a working widget!
 
-CSS properties can be loaded from a file (here we use `stylesheet.css` in the widget folder):
-```python
-	self.css_provider.load_from_path(self.join_with_data_path('stylesheet.css'))
-```
+## Adding more advanced features
 
-## Refreshing widget content
+So far, we have only covered the basics of adding/removing content to a widget. To access the full potential of widgets, there are multiple convenience features built into the widget API.
+
+### Widget configuration
+
+Widgets can have their own configuration. Internally, this uses [GSettings](https://docs.gtk.org/gio/class.Settings.html); a `Gio.Settings` object is automatically created by the API and stored in `self.config`.
+
+The config value behaves like a regular dict - `self.config['key']` gets a key, and `self.config['key'] = value` sets it. The values set in the widget are specific for each instance of a widget - every instance of a widget has a separate config. This is all handled by the widget API - no user interaction is needed.
+
+As the configuration uses `Gio.Settings` internally, widgets that use the config **must provide their own schemas**. The schema file for the widget must be placed in the `schemas` subfolder. See [HowDoI/GSettings](https://wiki.gnome.org/HowDoI/GSettings) for information on creating schema files, but take note of some Aspinwall-specific things:
+
+* **Do not define a path.** Usually in schema files the `<schema ...>` tag has a `path` attribute. We must not set this attribute, as we use relocatable schemas - the path is automatically created by the widget API. (The base path can be overwritten with the `self.schema_base_path` variable - most users will not need to do this.) 
+* **The schema ID must exactly match the widget's ID.** Note that this is *case-sensitive*.
+* **The schema's XML file must be placed in the `schemas` subdirectory in your widget directory.** Additionally, widgets that are shipped are expected to compile these schemas; see the `meson.build` files in the widget directories for a way to do this through Meson.
+
+Additionally, widgets that are planning to use the config variable **must** set `self.has_config` to True (usually by placing `has_config = True` above your init function, below the metadata).
+
+If your widget has no configuration options, you don't need to set the `has_config` value; it is set to False by default.
+
+### Refreshing widget content
 
 Widget classes can have a `refresh` function, which will automatically run in the background at a certain time, and/or whenever the launcher is started (this depends on user settings).
 
@@ -108,3 +113,12 @@ A refresh button will appear in the widget's header if this function is defined,
 Any commands that request data should be placed in this function. However, widgets that need to request data more often or need to process multiple events at once (for example, progress bars or buttons) can add background threads of their own.
 
 Using this function is not required, it is merely a suggestion to speed up development and allow for more fine-tuned power saving measures.
+
+### Styling widgets
+
+Widgets are automatically set up with a `GtkCssProvider`, which is stored in the `self.css_provider` variable.
+
+CSS properties can be loaded from a file (here we use `stylesheet.css` in the widget folder):
+```python
+	self.css_provider.load_from_path(self.join_with_data_path('stylesheet.css'))
+```
