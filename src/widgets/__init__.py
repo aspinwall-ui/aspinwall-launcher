@@ -31,6 +31,7 @@ class Widget(GObject.GObject):
 
 	metadata = {}
 	has_config = False
+	schema_base_path = None # set up automatically if not set
 
 	widget_path = None
 	instance = None
@@ -48,10 +49,18 @@ class Widget(GObject.GObject):
 		# Set up config
 		if self.has_config:
 			self.schema_source = Gio.SettingsSchemaSource.new_from_directory(
-				self.join_with_data_path('schemas')
+				self.join_with_data_path('schemas'),
+				Gio.SettingsSchemaSource.get_default(),
+				False
 			)
-			schema = Gio.SettingsSchemaSource.lookup(self.schema_source, self.metadata['id'], False)
-			self.config = Gio.Settings.new_full(schema, None, self.schema_path + '/' + instance)
+			schema = self.schema_source.lookup(self.metadata['id'], False)
+			if not schema:
+				raise Exception("Plugin error: schema not found in schema source. Make sure that your schema ID matches the widget ID (note that both are case-sensitive).")
+
+			if not self.schema_base_path:
+				self.schema_base_path = '/' + self.metadata['id'].lower().replace('.', '/') + '/'
+
+			self.config = Gio.Settings.new_full(schema, None, self.schema_base_path + str(instance) + '/')
 
 	def join_with_data_path(self, *args):
 		"""Joins path relative to widget data directory."""
