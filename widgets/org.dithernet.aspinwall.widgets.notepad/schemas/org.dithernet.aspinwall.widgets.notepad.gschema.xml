@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schemalist>
+	<schema id="org.dithernet.aspinwall.widgets.Notepad">
+		<key name="buffer" type="s">
+			<default>''</default>
+			<summary>Text buffer</summary>
+		</key>
+	</schema>
+</schemalist>

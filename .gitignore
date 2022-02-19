@@ -13,3 +13,4 @@ build/
 output/
 *.egg-info/
 
+gschemas.compiled
