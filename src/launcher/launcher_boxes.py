@@ -250,6 +250,8 @@ class WidgetBox(Gtk.Box):
 
 			if self.management_mode:
 				for widget in self._widgets:
+					if widget._widget.has_settings_menu:
+						widget.hide_widget_settings()
 					widget.widget_header_revealer.set_reveal_child(False)
 					widget.widget_content.set_sensitive(True)
 
@@ -258,6 +260,8 @@ class WidgetBox(Gtk.Box):
 				self.chooser_button_revealer.set_reveal_child(True)
 			else:
 				for widget in self._widgets:
+					if widget._widget.has_settings_menu:
+						widget.hide_widget_settings()
 					widget.widget_header_revealer.set_reveal_child(False)
 					widget.container.remove_css_class('dim')
 					widget.widget_content.set_sensitive(True)
