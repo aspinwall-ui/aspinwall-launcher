@@ -56,7 +56,9 @@ class Widget(GObject.GObject):
 			)
 			schema = self.schema_source.lookup(self.metadata['id'], False)
 			if not schema:
-				raise Exception("Plugin error: schema not found in schema source. Make sure that your schema ID matches the widget ID (note that both are case-sensitive).")
+				raise Exception(
+					"Plugin error: schema not found in schema source. Make sure that your schema ID matches the widget ID (note that both are case-sensitive)." # noqa: E501
+				)
 
 			if not self.schema_base_path:
 				self.schema_base_path = '/' + self.metadata['id'].lower().replace('.', '/') + '/'
