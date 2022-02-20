@@ -31,6 +31,7 @@ class Widget(GObject.GObject):
 
 	metadata = {}
 	has_config = False
+	has_settings_menu = False
 	schema_base_path = None # set up automatically if not set
 
 	widget_path = None

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-16 16:47+0100\n"
+"POT-Creation-Date: 2022-02-20 19:25+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -103,6 +103,11 @@ msgstr "_Remove from favorites"
 msgid "_Add to favorites"
 msgstr "_Add to favorites"
 
+#. TRANSLATORS: "Widget" here is singular; this is used for the widget-specific settings menu header
+#: src/launcher/ui/launcherwidget.ui:84
+msgid "Widget settings"
+msgstr "Widget settings"
+
 #: src/launcher/ui/settings.ui:17
 msgid "Theme"
 msgstr "Theme"
@@ -139,10 +144,6 @@ msgstr ""
 "href='https://docs.python.org/3/library/time.html#time.strftime'>the time "
 "format string specification</a>."
 
-#: src/launcher/ui/widgetchooser.ui:30
-msgid "Search widgets…"
-msgstr "Search widgets…"
-
 #: src/launcher/ui/widgetbox.ui:127
 msgid "_Add Widgets…"
 msgstr "_Add Widgets…"
@@ -158,6 +159,10 @@ msgstr "_Launcher Settings"
 #: src/launcher/ui/widgetbox.ui:144
 msgid "A_bout Aspinwall"
 msgstr "A_bout Aspinwall"
+
+#: src/launcher/ui/widgetchooser.ui:30
+msgid "Search widgets…"
+msgstr "Search widgets…"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
 #: src/launcher/launcher_boxes.py:139

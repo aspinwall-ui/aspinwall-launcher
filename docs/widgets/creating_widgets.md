@@ -104,6 +104,16 @@ Additionally, widgets that are planning to use the config variable **must** set 
 
 If your widget has no configuration options, you don't need to set the `has_config` value; it is set to False by default.
 
+### Settings menu
+
+In some cases, a widget might need to have its own settings options. The widget API allows for the addition of a settings menu, which is created by the widget and can be opened through the settings button in the widget header.
+
+To add a settings menu, set `self.has_settings_menu` to True and set `self.settings_menu` to the widget to use as the settings container.
+
+Note that in most cases, you will want to wrap your settings container widget in a `GtkScrolledWindow`. Make sure that the `GtkScrolledWindow` has the `vexpand` attribute set to `True`.
+
+Adding a settings menu is completely optional, and you don't need to add a settings menu if you just want to utilize the configuration backend.
+
 ### Refreshing widget content
 
 Widget classes can have a `refresh` function, which will automatically run in the background at a certain time, and/or whenever the launcher is started (this depends on user settings).

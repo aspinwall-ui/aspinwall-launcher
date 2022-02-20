@@ -12,6 +12,7 @@ class LauncherWidgetHeader(Gtk.Box):
 	icon = Gtk.Template.Child('widget_header_icon')
 	title = Gtk.Template.Child('widget_header_title')
 
+	widget_settings_button = Gtk.Template.Child()
 	move_up_button = Gtk.Template.Child('widget_header_move_up')
 	move_down_button = Gtk.Template.Child('widget_header_move_down')
 
@@ -20,6 +21,10 @@ class LauncherWidgetHeader(Gtk.Box):
 		super().__init__()
 		self._widget = widget
 		self._aspwidget = aspwidget
+
+		if self._widget.has_settings_menu:
+			self.widget_settings_button.set_visible(True)
+			self.widget_settings_button.set_sensitive(True)
 
 		self.icon.set_from_icon_name(self._widget.metadata['icon'])
 		self.title.set_label(self._widget.metadata['name'])
@@ -62,6 +67,12 @@ class LauncherWidgetHeader(Gtk.Box):
 		else:
 			self._aspwidget._widgetbox.exit_management_mode()
 
+	@Gtk.Template.Callback()
+	def show_widget_settings(self, *args):
+		"""Shows the widget settings overlay."""
+		self._aspwidget.widget_settings_revealer.set_visible(True)
+		self._aspwidget.widget_settings_revealer.set_reveal_child(True)
+
 	def update_move_buttons(self):
 		"""
 		Makes the move buttons sensitive or non-sensitive based on whether
@@ -91,6 +102,8 @@ class LauncherWidget(Gtk.Box):
 
 	container = Gtk.Template.Child()
 	widget_header_revealer = Gtk.Template.Child()
+	widget_settings_revealer = Gtk.Template.Child()
+	widget_settings_container = Gtk.Template.Child()
 
 	def __init__(self, widget_class, widgetbox, instance):
 		"""Initializes a widget display."""
@@ -122,6 +135,9 @@ class LauncherWidget(Gtk.Box):
 		self.widget_content = self._widget.content
 		self.widget_content.add_css_class('aspinwall-widget-content')
 		self.container.append(self.widget_content)
+
+		if self._widget.has_settings_menu:
+			self.widget_settings_container.append(self._widget.settings_menu)
 
 		# Set up long-press target
 		longpress = Gtk.GestureLongPress()
@@ -163,6 +179,12 @@ class LauncherWidget(Gtk.Box):
 			self._widgetbox.chooser_button_revealer.set_sensitive(False)
 			self._widgetbox.edit_mode = True
 		self.widget_header_revealer.set_reveal_child(True)
+
+	@Gtk.Template.Callback()
+	def hide_widget_settings(self, *args):
+		"""Hides the widget's settings menu."""
+		self.widget_settings_revealer.set_reveal_child(False)
+		self.widget_settings_revealer.set_visible(False)
 
 	def drag_prepare(self, *args):
 		"""Returns the GdkContentProvider for the drag operation"""

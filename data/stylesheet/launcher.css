@@ -103,6 +103,24 @@ window {
 	color: @destructive_color;
 }
 
+/* Widget settings */
+
+.aspinwall-widget-settings {
+	background-color: @aspinwall_menu_bg;
+	color: @aspinwall_menu_fg;
+	border: 1px @aspinwall_widget_border solid;
+	border-radius: 10px;
+}
+
+.aspinwall-widget-settings .header {
+	font-weight: bold;
+	padding: 2px 5px;
+	border-radius: 10px 10px 0 0;
+	background-color: @aspinwall_widget_header_bg;
+	color: @aspinwall_widget_header_fg;
+	border-bottom: 1px solid @aspinwall_widget_border;
+}
+
 /* Widget chooser */
 
 .widget-chooser {

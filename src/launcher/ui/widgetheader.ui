@@ -53,11 +53,29 @@
 				<property name="hexpand">true</property>
 
 				<child>
+					<object class="GtkButton" id="widget_settings_button">
+						<property name="icon-name">preferences-system-symbolic</property>
+						<property name="visible">false</property>
+						<property name="sensitive">false</property>
+						<signal name="clicked" handler="show_widget_settings"/>
+					</object>
+				</child>
+
+				<child>
+					<object class="GtkSeparator">
+						<style>
+							<class name="spacer"/>
+						</style>
+					</object>
+				</child>
+
+				<child>
 					<object class="GtkBox" id="widget_header_move_group">
 						<style>
 							<class name="border"/>
 							<class name="linked"/>
 						</style>
+
 						<child>
 							<object class="GtkButton" id="widget_header_move_up">
 								<property name="icon-name">pan-up-symbolic</property>

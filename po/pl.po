@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-16 16:47+0100\n"
+"POT-Creation-Date: 2022-02-20 19:25+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -104,6 +104,11 @@ msgstr "_Usuń z ulubionych"
 msgid "_Add to favorites"
 msgstr "_Dodaj do ulubionych"
 
+#. TRANSLATORS: "Widget" here is singular; this is used for the widget-specific settings menu header
+#: src/launcher/ui/launcherwidget.ui:84
+msgid "Widget settings"
+msgstr "Ustawienia widżetu"
+
 #: src/launcher/ui/settings.ui:17
 msgid "Theme"
 msgstr "Motyw"
@@ -139,10 +144,6 @@ msgstr ""
 "Ustaw formaty daty dla zegara, używając <a href='https://docs.python.org/3/"
 "library/time.html#time.strftime'>specyfikacji ciągów formatowania dat</a>."
 
-#: src/launcher/ui/widgetchooser.ui:30
-msgid "Search widgets…"
-msgstr "Szukaj widżetów…"
-
 #: src/launcher/ui/widgetbox.ui:127
 msgid "_Add Widgets…"
 msgstr "_Dodaj widżety…"
@@ -158,6 +159,10 @@ msgstr "_Ustawienia launchera"
 #: src/launcher/ui/widgetbox.ui:144
 msgid "A_bout Aspinwall"
 msgstr "_O Aspinwall"
+
+#: src/launcher/ui/widgetchooser.ui:30
+msgid "Search widgets…"
+msgstr "Szukaj widżetów…"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
 #: src/launcher/launcher_boxes.py:139
