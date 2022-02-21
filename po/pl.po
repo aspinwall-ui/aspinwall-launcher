@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-20 19:25+0100\n"
+"POT-Creation-Date: 2022-02-21 20:03+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -91,6 +91,16 @@ msgid ""
 msgstr ""
 "Ciąg zawierający format daty dla zegara, używający formatu opisanego w "
 "dokumentacji: https://docs.python.org/3/library/time.html#time.strftime."
+
+#. TRANSLATORS: This is the description, as seen in the about dialog.
+#: src/launcher/ui/about.ui:28
+msgid "Linux tablet UI with smart hub capabilities"
+msgstr "Interfejs użytkownika dla tabletów z Linuksem z funkcjami smart hub"
+
+#. TRANSLATORS: You can also translate "contributors" as "programmers" or "developers".
+#: src/launcher/ui/about.ui:30
+msgid "Copyright © 2022 Aspinwall contributors"
+msgstr "Copyright © 2022 Deweloperzy Aspinwall"
 
 #: src/launcher/ui/appchooser.ui:24
 msgid "Search apps…"

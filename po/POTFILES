@@ -1,4 +1,5 @@
 data/org.dithernet.aspinwall.launcher.gschema.xml
+src/launcher/ui/about.ui
 src/launcher/ui/appchooser.ui
 src/launcher/ui/appicon.ui
 src/launcher/ui/launcherwidget.ui

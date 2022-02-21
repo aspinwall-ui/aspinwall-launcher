@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-20 19:25+0100\n"
+"POT-Creation-Date: 2022-02-21 20:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,6 +90,16 @@ msgstr ""
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
+msgstr ""
+
+#. TRANSLATORS: This is the description, as seen in the about dialog.
+#: src/launcher/ui/about.ui:28
+msgid "Linux tablet UI with smart hub capabilities"
+msgstr ""
+
+#. TRANSLATORS: You can also translate "contributors" as "programmers" or "developers".
+#: src/launcher/ui/about.ui:30
+msgid "Copyright © 2022 Aspinwall contributors"
 msgstr ""
 
 #: src/launcher/ui/appchooser.ui:24

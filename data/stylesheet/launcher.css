@@ -188,3 +188,9 @@ window {
 	background-color: @aspinwall_menu_bg;
 	color: @aspinwall_menu_fg;
 }
+
+/* About window */
+.aspinwall-about {
+	background-color: @aspinwall_menu_bg;
+	color: @aspinwall_menu_fg;
+}

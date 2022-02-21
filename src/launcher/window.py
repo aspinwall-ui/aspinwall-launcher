@@ -15,9 +15,11 @@ from aspinwall.launcher.launcher_boxes import ClockBox, WidgetBox # noqa: F401
 from aspinwall.launcher.app_chooser import AppChooser # noqa: F401
 from aspinwall.launcher.wallpaper import Wallpaper # noqa: F401
 from aspinwall.launcher.settings import LauncherSettings
+from aspinwall.launcher.about import AboutAspinwall
 
 win = None
 running = False
+_version = 0
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/launcher.ui')
 class Launcher(Gtk.ApplicationWindow):
@@ -37,12 +39,17 @@ class Launcher(Gtk.ApplicationWindow):
 	def __init__(self, app):
 		"""Initializes the launcher window."""
 		super().__init__(title='Aspinwall Launcher', application=app)
+
 		self.open_settings_action = Gio.SimpleAction.new("open_settings", None)
 		self.open_settings_action.connect('activate', self.open_settings)
+
+		self.about_aspinwall_action = Gio.SimpleAction.new("about_aspinwall", None)
+		self.about_aspinwall_action.connect('activate', self.open_about)
 
 		self.add_action(self.widgetbox._show_chooser_action)
 		self.add_action(self.widgetbox._management_mode_action)
 		self.add_action(self.open_settings_action)
+		self.add_action(self.about_aspinwall_action)
 
 		self.launcher_wallpaper_overlay.set_measure_overlay(self.launcher_flap, True)
 
@@ -61,6 +68,12 @@ class Launcher(Gtk.ApplicationWindow):
 		settings_window = LauncherSettings()
 		settings_window.set_transient_for(self)
 		settings_window.present()
+
+	def open_about(self, *args):
+		"""Opens the about window."""
+		about_dialog = AboutAspinwall()
+		about_dialog.set_version(_version)
+		about_dialog.show()
 
 def on_theme_preference_change(*args):
 	"""Called when the theme preference changes."""
@@ -92,6 +105,8 @@ def on_activate(app):
 		win.fullscreen()
 
 def main(version):
+	global _version
+	_version = version
 	app = Adw.Application(application_id='org.dithernet.aspinwall.Launcher')
 	app.set_resource_base_path('/org/dithernet/aspinwall/stylesheet')
 	style_manager = app.get_style_manager()

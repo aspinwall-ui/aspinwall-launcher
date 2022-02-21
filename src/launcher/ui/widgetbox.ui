@@ -142,7 +142,7 @@
 			<item>
 				<attribute name='icon'>help-about-symbolic</attribute>
 				<attribute name='label' translatable='yes'>A_bout Aspinwall</attribute>
-				<attribute name='action'>win.about</attribute>
+				<attribute name='action'>win.about_aspinwall</attribute>
 			</item>
 		</section>
 	</menu>

@@ -27,6 +27,7 @@ configure_file(
 
 launcher_sources = [
   '__init__.py',
+  'about.py',
   'app_chooser.py',
   'config.py',
   'launcher_boxes.py',

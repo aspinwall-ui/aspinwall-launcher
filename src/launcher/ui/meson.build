@@ -2,6 +2,7 @@ pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.proje
 submoduledir = join_paths(pkgdatadir, 'aspinwall', 'launcher')
 
 launcher_ui_sources = [
+  'about.ui',
   'appchooser.ui',
   'appicon.ui',
   'clockbox.ui',
