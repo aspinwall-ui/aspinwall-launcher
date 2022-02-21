@@ -14,6 +14,26 @@
 
 				<child>
 					<object class="AdwPreferencesGroup">
+						<property name="title" translatable="yes">Wallpaper</property>
+
+						<child>
+							<object class="AdwActionRow">
+								<property name="title" translatable="yes">Use system wallpaper settings</property>
+								<property name="subtitle" translatable="yes">If enabled, the launcher inherits the wallpaper from GNOME settings. (Note that this setting only works with GNOME's control center.)</property>
+
+								<child>
+									<object class="GtkSwitch" id="system_wallpaper_settings_toggle">
+										<property name="valign">center</property>
+										<signal name="state-set" handler="toggle_use_system_wallpaper"/>
+									</object>
+								</child>
+							</object>
+						</child>
+					</object>
+				</child>
+
+				<child>
+					<object class="AdwPreferencesGroup">
 						<property name="title" translatable="yes">Theme</property>
 
 						<child>

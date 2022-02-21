@@ -5,13 +5,14 @@ settings access backend, which is set up in config.py.
 """
 from gi.repository import Gtk, Adw
 
-from aspinwall.launcher.config import config
+from aspinwall.launcher.config import config, bg_config
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/settings.ui')
 class LauncherSettings(Adw.PreferencesWindow):
 	"""Launcher settings window."""
 	__gtype_name__ = 'LauncherSettings'
 
+	system_wallpaper_settings_toggle = Gtk.Template.Child()
 	theme_toggle_start = Gtk.Template.Child()
 	theme_toggle_end = Gtk.Template.Child()
 	follow_system_theme_toggle = Gtk.Template.Child()
@@ -34,8 +35,22 @@ class LauncherSettings(Adw.PreferencesWindow):
 			self.theme_toggle_start.set_active(True)
 			self.follow_system_theme_toggle.set_active(True)
 
+		self.system_wallpaper_settings_toggle.set_active(config['use-gnome-background'])
+		if not bg_config:
+			self.system_wallpaper_settings_toggle.set_sensitive(False)
+
 		self.time_format_entry.set_text(config['time-format'])
 		self.date_format_entry.set_text(config['date-format'])
+
+	@Gtk.Template.Callback()
+	def toggle_use_system_wallpaper(self, switch, *args):
+		"""
+		Toggles the 'use system wallpaper' option based on the switch position.
+		"""
+		if switch.get_active():
+			config['use-gnome-background'] = True
+		else:
+			config['use-gnome-background'] = False
 
 	@Gtk.Template.Callback()
 	def toggle_theme(self, button, *args):

@@ -8,7 +8,7 @@ from gi.repository import Gtk, Gdk, GdkPixbuf
 from urllib.parse import urlparse
 
 from aspinwall.utils.dimmable import Dimmable
-from aspinwall.launcher.config import bg_config
+from aspinwall.launcher.config import config, bg_config
 
 def color_to_pixel(color):
 	"""Turns RGB color value to pixel value."""
@@ -59,8 +59,12 @@ class Wallpaper(Gtk.Box, Dimmable):
 		Sets the image to a pixbuf created from the image file provided
 		in the config file.
 		"""
-		uri = urlparse(bg_config['picture-uri'])
-		wallpaper_path = os.path.abspath(os.path.join(uri.netloc, uri.path))
+		# Use GNOME settings if available, and enabled
+		if bg_config and config['use-gnome-background']:
+			uri = urlparse(bg_config['picture-uri'])
+			wallpaper_path = os.path.abspath(os.path.join(uri.netloc, uri.path))
+		else:
+			wallpaper_path = config['wallpaper-path']
 		if wallpaper_path and not wallpaper_path == '/' and os.path.exists(wallpaper_path):
 			self.image = GdkPixbuf.Pixbuf.new_from_file(wallpaper_path)
 		else:
