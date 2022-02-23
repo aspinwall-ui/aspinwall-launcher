@@ -16,17 +16,22 @@
 					<object class="AdwPreferencesGroup">
 						<property name="title" translatable="yes">Wallpaper</property>
 
-						<!--<child>
-							<object class="GtkButton">
-								<signal name="clicked" handler="add_wallpaper"/>
+						<child>
+							<object class="AdwPreferencesRow">
 								<child>
-									<object class="AdwButtonContent">
-										<property name="icon-name">list-add-symbolic</property>
-										<property name="label">Add wallpaper</property>
+									<object class="GtkButton">
+										<signal name="clicked" handler="show_wallpaper_add_dialog"/>
+
+										<child>
+											<object class="AdwButtonContent">
+												<property name="icon-name">list-add-symbolic</property>
+												<property name="label">Add wallpaper</property>
+											</object>
+										</child>
 									</object>
 								</child>
 							</object>
-						</child>-->
+						</child>
 
 						<child>
 							<object class="AdwPreferencesRow">
