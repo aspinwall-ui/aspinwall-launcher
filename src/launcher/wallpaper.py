@@ -43,6 +43,11 @@ class Wallpaper(Gtk.Box, Dimmable):
 		self.wallpaper.set_draw_func(self.draw)
 		self.wallpaper.connect('resize', self.update)
 
+		config.connect('changed::wallpaper-path', self.load_and_update_aspinwall)
+		config.connect('changed::use-gnome-background', self.load_image_and_update)
+		if bg_config:
+			bg_config.connect('changed::picture-uri', self.load_and_update_gnome)
+
 	def draw(self, area, cr, *args):
 		"""Draws the background."""
 		x = 0
@@ -80,6 +85,22 @@ class Wallpaper(Gtk.Box, Dimmable):
 			self.pixbuf = self.scale_to_min(width, height)
 		else:
 			self.pixbuf = self.blank_bg(width, height)
+
+	def load_and_update_gnome(self, *args):
+		"""Reloads the GNOME background image if applicable."""
+		if config['use-gnome-background'] and bg_config:
+			self.load_image_and_update()
+
+	def load_and_update_aspinwall(self, *args):
+		"""Reloads the Aspinwall background image if applicable."""
+		if not config['use-gnome-background']:
+			self.load_image_and_update()
+
+	def load_image_and_update(self, *args):
+		"""Convenience function for calling set_image_from_config and update"""
+		self.set_image_from_config()
+		self.update()
+		self.wallpaper.queue_draw()
 
 	def blank_bg(self, width, height):
 		"""Returns an empty pixbuf, filled with the background color."""
