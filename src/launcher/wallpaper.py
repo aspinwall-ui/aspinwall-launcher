@@ -53,9 +53,11 @@ class Wallpaper(Gtk.Box, Dimmable):
 		self.wallpaper_fade_drawable.set_draw_func(self.draw, 'fade_pixbuf')
 
 		config.connect('changed::wallpaper-path', self.load_and_update_aspinwall)
-		config.connect('changed::use-gnome-background', self.load_image_and_update)
 		if bg_config:
 			bg_config.connect('changed::picture-uri', self.load_and_update_gnome)
+
+		config.connect('changed::wallpaper-scaling', self.load_image_and_update)
+		config.connect('changed::use-gnome-background', self.load_image_and_update)
 
 	def draw(self, area, cr, *args):
 		"""Draws the background."""
@@ -97,7 +99,12 @@ class Wallpaper(Gtk.Box, Dimmable):
 		self.fade_pixbuf = self.pixbuf
 
 		if self.image:
-			self.pixbuf = self.scale_to_min(width, height)
+			if config['wallpaper-scaling'] == 0:
+				self.pixbuf = self.blank_bg(width, height)
+			elif config['wallpaper-scaling'] == 1:
+				self.pixbuf = self.scale_to_fit(width, height)
+			else:
+				self.pixbuf = self.scale_to_min(width, height)
 		else:
 			self.pixbuf = self.blank_bg(width, height)
 
@@ -177,7 +184,7 @@ class Wallpaper(Gtk.Box, Dimmable):
 
 	def scale_to_fit(self, width, height):
 		"""Returns the background, scaled to fit."""
-		bg = self.blank_bg()
+		bg = self.blank_bg(width, height)
 
 		orig_width = self.image.get_width()
 		orig_height = self.image.get_height()

@@ -65,6 +65,28 @@
 								</child>
 							</object>
 						</child>
+
+						<child>
+							<object class="AdwActionRow">
+								<property name="title" translatable="yes">Wallpaper style</property>
+
+								<child>
+									<object class="GtkComboBoxText" id="wallpaper_scaling_combobox">
+										<property name="valign">center</property>
+										<signal name="changed" handler="set_wallpaper_scaling"/>
+
+										<items>
+											<!-- TRANSLATORS: Wallpaper scaling option -->
+											<item translatable="yes" id="0">Solid color</item>
+											<!-- TRANSLATORS: Wallpaper scaling option -->
+											<item translatable="yes" id="1">Scaled</item>
+											<!-- TRANSLATORS: Wallpaper scaling option -->
+											<item translatable="yes" id="2">Zoomed</item>
+										</items>
+									</object>
+								</child>
+							</object>
+						</child>
 					</object>
 				</child>
 

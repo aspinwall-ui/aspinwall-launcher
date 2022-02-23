@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-23 20:57+0100\n"
+"POT-Creation-Date: 2022-02-23 22:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,23 +33,32 @@ msgstr ""
 msgid "Path to a wallpaper file."
 msgstr ""
 
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:22
+#: src/launcher/ui/settings.ui:71
+msgid "Wallpaper style"
+msgstr ""
+
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:23
+msgid "Which wallpaper style to use (0 - solid color, 1 - scaled, 2 - zoomed)."
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:31
 msgid "Available wallpapers"
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:24
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:32
 msgid ""
 "List of wallpaper files available in the wallpaper picker in settings. Also "
 "used for the slideshow mode."
 msgstr ""
 
 #. TRANSLATORS: This settings option allows users to automatically use the background file provided by GNOME, allowing better integration with GNOME's control center.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:33
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:41
 #: src/launcher/ui/settings.ui:57
 msgid "Use system wallpaper settings"
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:34
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:42
 #: src/launcher/ui/settings.ui:58
 msgid ""
 "If enabled, the launcher inherits the wallpaper from GNOME settings. (Note "
@@ -57,67 +66,67 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: This is for the light/dark mode switch; can be translated as "Preferred theme"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:42
-#: src/launcher/ui/settings.ui:77
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:50
+#: src/launcher/ui/settings.ui:99
 msgid "Theme preference"
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:43
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:51
 msgid ""
 "Whether to use light theme, dark theme or follow system theme. (0 - follow "
 "system theme, 1 - light, 2 - dark)"
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:51
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:59
 msgid "Widget autorefresh delay"
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:52
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:60
 msgid ""
 "Amount of time (in seconds) between automatic widget refreshing. Set to 0 to "
 "disable autorefresh. (Default: 900 seconds - 15 minutes)"
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:59
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:67
 msgid "Favorite apps"
 msgstr ""
 
 #. TRANSLATORS: ".desktop files" refers to a specific filetype. Do not translate the ".desktop" bit.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:61
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:69
 msgid ""
 "List of favorite apps for the app chooser, stored as paths to their .desktop "
 "files."
 msgstr ""
 
 #. TRANSLATORS: This can also be translated as just "time format"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:68
-#: src/launcher/ui/settings.ui:133
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:76
+#: src/launcher/ui/settings.ui:155
 msgid "Time format string"
 msgstr ""
 
 #. TRANSLATORS: Default time format string for your locale; should only contain the hour and minutes. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:70
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:78
 msgid "\"%H:%M\""
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:71
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:79
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
 msgstr ""
 
 #. TRANSLATORS: This can also be translated as just "date format"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:78
-#: src/launcher/ui/settings.ui:146
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:86
+#: src/launcher/ui/settings.ui:168
 msgid "Date format string"
 msgstr ""
 
 #. TRANSLATORS: Default date format string for your locale; should contain the week day and date. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:80
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:88
 msgid "\"%A, %x\""
 msgstr ""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:81
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:89
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -154,33 +163,48 @@ msgstr ""
 msgid "Wallpaper"
 msgstr ""
 
-#: src/launcher/ui/settings.ui:73
+#. TRANSLATORS: Wallpaper scaling option
+#: src/launcher/ui/settings.ui:80
+msgid "Solid color"
+msgstr ""
+
+#. TRANSLATORS: Wallpaper scaling option
+#: src/launcher/ui/settings.ui:82
+msgid "Scaled"
+msgstr ""
+
+#. TRANSLATORS: Wallpaper scaling option
+#: src/launcher/ui/settings.ui:84
+msgid "Zoomed"
+msgstr ""
+
+#: src/launcher/ui/settings.ui:95
 msgid "Theme"
 msgstr ""
 
 #. TRANSLATORS: This refers to the light theme.
-#: src/launcher/ui/settings.ui:90
+#: src/launcher/ui/settings.ui:112
 msgid "Light"
 msgstr ""
 
 #. TRANSLATORS: This refers to the dark theme.
-#: src/launcher/ui/settings.ui:99
+#: src/launcher/ui/settings.ui:121
 msgid "Dark"
 msgstr ""
 
-#: src/launcher/ui/settings.ui:110
+#: src/launcher/ui/settings.ui:132
 msgid "Follow system theme"
 msgstr ""
 
-#: src/launcher/ui/settings.ui:124
+#: src/launcher/ui/settings.ui:146
 msgid "Clock"
 msgstr ""
 
-#: src/launcher/ui/settings.ui:128
+#: src/launcher/ui/settings.ui:150
 msgid "Time and date format"
 msgstr ""
 
-#: src/launcher/ui/settings.ui:129
+#: src/launcher/ui/settings.ui:151
 msgid ""
 "Set the format to use when displaying the time and date, following <a "
 "href='https://docs.python.org/3/library/time.html#time.strftime'>the time "
@@ -218,16 +242,16 @@ msgstr ""
 msgid "Undo"
 msgstr ""
 
-#: src/launcher/settings.py:118
+#: src/launcher/settings.py:126
 msgid "Add wallpaper"
 msgstr ""
 
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:124
+#: src/launcher/settings.py:132
 msgid "_Cancel"
 msgstr ""
 
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:126
+#: src/launcher/settings.py:134
 msgid "_Select"
 msgstr ""

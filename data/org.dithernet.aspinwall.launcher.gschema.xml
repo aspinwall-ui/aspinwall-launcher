@@ -17,6 +17,14 @@
 			</description>
 		</key>
 
+		<key name="wallpaper-scaling" type="i">
+			<default>2</default>
+			<summary>Wallpaper style</summary>
+			<description>
+				Which wallpaper style to use (0 - solid color, 1 - scaled, 2 - zoomed).
+			</description>
+		</key>
+
 		<key name="available-wallpapers" type="as">
 			<!-- This is automatically set to the contents of the /usr/share/backgrounds folder by default. -->
 			<default>['fixme']</default>

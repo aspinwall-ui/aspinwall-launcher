@@ -45,6 +45,7 @@ class LauncherSettings(Adw.PreferencesWindow):
 	__gtype_name__ = 'LauncherSettings'
 
 	wallpaper_grid = Gtk.Template.Child()
+	wallpaper_scaling_combobox = Gtk.Template.Child()
 	system_wallpaper_settings_toggle = Gtk.Template.Child()
 	theme_toggle_start = Gtk.Template.Child()
 	theme_toggle_end = Gtk.Template.Child()
@@ -76,6 +77,8 @@ class LauncherSettings(Adw.PreferencesWindow):
 			None
 		)
 		config.connect('changed::available-wallpapers', self.update_wallpaper_grid)
+
+		self.wallpaper_scaling_combobox.set_active_id(str(config['wallpaper-scaling']))
 
 		if bg_config:
 			self.system_wallpaper_settings_toggle.set_active(config['use-gnome-background'])
@@ -110,6 +113,11 @@ class LauncherSettings(Adw.PreferencesWindow):
 			else:
 				# Wallpaper removed
 				self.wallpaper_store.remove(current_store.index(wallpaper))
+
+	@Gtk.Template.Callback()
+	def set_wallpaper_scaling(self, combobox, *args):
+		"""Sets the wallpaper scaling settings."""
+		config['wallpaper-scaling'] = int(combobox.get_active_id())
 
 	@Gtk.Template.Callback()
 	def show_wallpaper_add_dialog(self, *args):
