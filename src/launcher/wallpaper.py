@@ -2,10 +2,13 @@
 """
 Contains code for handling wallpapers
 """
-import math
-import os
 from gi.repository import Gtk, Gdk, GdkPixbuf
 from urllib.parse import urlparse
+import math
+import os
+import threading
+import time
+import uuid
 
 from aspinwall.utils.dimmable import Dimmable
 from aspinwall.launcher.config import config, bg_config
@@ -29,6 +32,9 @@ class Wallpaper(Gtk.Box, Dimmable):
 	__gtype_name__ = 'Wallpaper'
 
 	wallpaper = Gtk.Template.Child()
+	wallpaper_fade = Gtk.Template.Child()
+	wallpaper_fade_drawable = Gtk.Template.Child()
+
 	# TODO: properly source these two
 	background_color = color_to_pixel([0, 0, 0])
 	scale = 1
@@ -37,11 +43,14 @@ class Wallpaper(Gtk.Box, Dimmable):
 		"""Initializes a Wallpaper object."""
 		super().__init__()
 		self.pixbuf = GdkPixbuf.Pixbuf()
+		self.fade_pixbuf = GdkPixbuf.Pixbuf()
 
 		self.set_image_from_config()
 
 		self.wallpaper.set_draw_func(self.draw)
 		self.wallpaper.connect('resize', self.update)
+
+		self.wallpaper_fade_drawable.set_draw_func(self.draw, 'fade_pixbuf')
 
 		config.connect('changed::wallpaper-path', self.load_and_update_aspinwall)
 		config.connect('changed::use-gnome-background', self.load_image_and_update)
@@ -50,11 +59,15 @@ class Wallpaper(Gtk.Box, Dimmable):
 
 	def draw(self, area, cr, *args):
 		"""Draws the background."""
+		if args[-1] == 'fade_pixbuf':
+			source_pixbuf = self.fade_pixbuf
+		else:
+			source_pixbuf = self.pixbuf
 		x = 0
 		y = 0
 		cr.save()
 		cr.scale(1.0 / self.scale, 1.0 / self.scale)
-		Gdk.cairo_set_source_pixbuf(cr, self.pixbuf, x * self.scale, y * self.scale)
+		Gdk.cairo_set_source_pixbuf(cr, source_pixbuf, x * self.scale, y * self.scale)
 		cr.paint()
 		cr.restore()
 		return True
@@ -64,7 +77,7 @@ class Wallpaper(Gtk.Box, Dimmable):
 		Sets the image to a pixbuf created from the image file provided
 		in the config file.
 		"""
-		# Use GNOME settings if available, and enabled
+		# Use GNOME settings if available and enabled
 		if bg_config and config['use-gnome-background']:
 			uri = urlparse(bg_config['picture-uri'])
 			wallpaper_path = os.path.abspath(os.path.join(uri.netloc, uri.path))
@@ -80,6 +93,8 @@ class Wallpaper(Gtk.Box, Dimmable):
 		window = self.get_root()
 		width = window.get_width()
 		height = window.get_height()
+
+		self.fade_pixbuf = self.pixbuf
 
 		if self.image:
 			self.pixbuf = self.scale_to_min(width, height)
@@ -97,10 +112,32 @@ class Wallpaper(Gtk.Box, Dimmable):
 			self.load_image_and_update()
 
 	def load_image_and_update(self, *args):
-		"""Convenience function for calling set_image_from_config and update"""
+		"""
+		Convenience function to call when the wallpaper is changed.
+		Automatically takes care of the wallpaper transition.
+		"""
+		self.wallpaper_fade_drawable.queue_draw()
+		_fade_thread = threading.Thread(target=self.crossfade_wallpaper)
+		_fade_thread.start()
+
 		self.set_image_from_config()
 		self.update()
 		self.wallpaper.queue_draw()
+
+	def crossfade_wallpaper(self, *args):
+		"""Convenience function for fading out the wallpaper."""
+		fading_out = str(uuid.uuid4())
+		self.fading_out = fading_out
+
+		self.wallpaper_fade.set_opacity(1)
+		while self.wallpaper_fade.get_opacity() > 0:
+			# Make sure another fadeout thread isn't running; if it is, let it
+			# take over control.
+			if self.fading_out != fading_out:
+				return
+			self.wallpaper_fade.set_opacity(self.wallpaper_fade.get_opacity() - 0.01)
+			time.sleep(0.01)
+		self.fading_out = False
 
 	def blank_bg(self, width, height):
 		"""Returns an empty pixbuf, filled with the background color."""

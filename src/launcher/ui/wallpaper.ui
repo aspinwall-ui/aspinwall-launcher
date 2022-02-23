@@ -7,9 +7,24 @@
 			<class name="wallpaper-container"/>
 			<class name="dimmable"/>
 		</style>
+
 		<child>
-			<object class="GtkDrawingArea" id="wallpaper">
-				<property name="hexpand">true</property>
+			<object class="GtkOverlay" id="wallpaper_content_overlay">
+				<child type="overlay">
+					<object class="GtkBox" id="wallpaper_fade">
+						<child>
+							<object class="GtkDrawingArea" id="wallpaper_fade_drawable">
+								<property name="hexpand">true</property>
+							</object>
+						</child>
+					</object>
+				</child>
+
+				<child>
+					<object class="GtkDrawingArea" id="wallpaper">
+						<property name="hexpand">true</property>
+					</object>
+				</child>
 			</object>
 		</child>
 	</template>
