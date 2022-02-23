@@ -189,6 +189,11 @@ window {
 	color: @aspinwall_menu_fg;
 }
 
+.wallpaper-grid {
+	padding: 12px;
+	border-radius: 10px;
+}
+
 /* About window */
 .aspinwall-about {
 	background-color: @aspinwall_menu_bg;

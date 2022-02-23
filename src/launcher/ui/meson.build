@@ -10,6 +10,7 @@ launcher_ui_sources = [
   'launcherwidget.ui',
   'settings.ui',
   'wallpaper.ui',
+  'wallpapericon.ui',
   'widgetbox.ui',
   'widgetchooser.ui',
   'widgetheader.ui',

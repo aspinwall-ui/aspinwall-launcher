@@ -16,6 +16,37 @@
 					<object class="AdwPreferencesGroup">
 						<property name="title" translatable="yes">Wallpaper</property>
 
+						<!--<child>
+							<object class="GtkButton">
+								<signal name="clicked" handler="add_wallpaper"/>
+								<child>
+									<object class="AdwButtonContent">
+										<property name="icon-name">list-add-symbolic</property>
+										<property name="label">Add wallpaper</property>
+									</object>
+								</child>
+							</object>
+						</child>-->
+
+						<child>
+							<object class="AdwPreferencesRow">
+								<property name="title">Wallpaper image</property>
+
+								<child>
+									<object class="GtkFlowBox" id="wallpaper_grid">
+										<property name="column-spacing">12</property>
+										<property name="row-spacing">12</property>
+										<signal name="child-activated" handler="set_wallpaper_from_grid"/>
+
+										<style>
+											<class name="view"/>
+											<class name="wallpaper-grid"/>
+										</style>
+									</object>
+								</child>
+							</object>
+						</child>
+
 						<child>
 							<object class="AdwActionRow">
 								<property name="title" translatable="yes">Use system wallpaper settings</property>

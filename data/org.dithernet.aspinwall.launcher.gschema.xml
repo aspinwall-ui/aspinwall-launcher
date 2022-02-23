@@ -17,6 +17,16 @@
 			</description>
 		</key>
 
+		<key name="available-wallpapers" type="as">
+			<!-- This is automatically set to the contents of the /usr/share/backgrounds folder by default. -->
+			<default>['fixme']</default>
+			<summary>Available wallpapers</summary>
+			<description>
+				List of wallpaper files available in the wallpaper picker in settings.
+				Also used for the slideshow mode.
+			</description>
+		</key>
+
 		<key name="use-gnome-background" type="b">
 			<default>false</default>
 			<!-- TRANSLATORS: This settings option allows users to automatically use the background file provided by GNOME, allowing better integration with GNOME's control center. -->
