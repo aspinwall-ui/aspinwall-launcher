@@ -113,6 +113,14 @@ class LauncherSettings(Adw.PreferencesWindow):
 		)
 		config.connect('changed::available-wallpapers', self.update_wallpaper_grid)
 
+		self.wallpaper_grid.select_child(
+			self.wallpaper_grid.get_child_at_index(
+				config['available-wallpapers'].index(
+					config['wallpaper-path']
+				)
+			)
+		)
+
 		self.wallpaper_scaling_combobox.set_active_id(str(config['wallpaper-scaling']))
 
 		self.wallpaper_color_button.set_use_alpha(False)
