@@ -25,6 +25,14 @@
 			</description>
 		</key>
 
+		<key name="wallpaper-color" type="(iii)">
+			<default>(0,0,0)</default>
+			<summary>Wallpaper background color</summary>
+			<description>
+				Background color for the wallpaper (for the "Solid color" mode or for a background for scaled images), stored as an array of three integers: Red, Green, Blue (0-255).
+			</description>
+		</key>
+
 		<key name="available-wallpapers" type="as">
 			<!-- This is automatically set to the contents of the /usr/share/backgrounds folder by default. -->
 			<default>['fixme']</default>

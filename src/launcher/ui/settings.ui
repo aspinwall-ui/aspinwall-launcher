@@ -153,6 +153,22 @@
 								</child>
 							</object>
 						</child>
+
+						<child>
+							<object class="AdwActionRow">
+								<property name="title" translatable="yes">Wallpaper background color</property>
+								<!-- TRANSLATORS: Please use the quotation mark symbols appropriate for your language, not the default '"' symbol. (In Weblate, you can find shortcuts to the quotation mark symbols in the right corner above the translation field for your language.)
+If it's easier, you can simply describe these as "modes" and omit the quotation marks entirely, but if you're refering to the wallpaper style verbatim please add the quotes. -->
+								<property name="subtitle" translatable="yes">Used for the “Solid Color” wallpaper style, as well as the backdrop for the “Scaled” style.</property>
+
+								<child>
+									<object class="GtkColorButton" id="wallpaper_color_button">
+										<property name="valign">center</property>
+										<signal name="color-set" handler="set_wallpaper_color"/>
+									</object>
+								</child>
+							</object>
+						</child>
 					</object>
 				</child>
 

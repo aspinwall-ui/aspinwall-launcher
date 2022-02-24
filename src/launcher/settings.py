@@ -3,7 +3,7 @@
 Contains code for the launcher settings window. Not to be confused with the
 settings access backend, which is set up in config.py.
 """
-from gi.repository import Adw, GdkPixbuf, Gtk, Gio
+from gi.repository import Adw, GdkPixbuf, Gtk, Gdk, Gio
 import threading
 
 from aspinwall.launcher.config import config, bg_config
@@ -46,6 +46,7 @@ class LauncherSettings(Adw.PreferencesWindow):
 
 	wallpaper_grid = Gtk.Template.Child()
 	wallpaper_scaling_combobox = Gtk.Template.Child()
+	wallpaper_color_button = Gtk.Template.Child()
 	system_wallpaper_settings_toggle = Gtk.Template.Child()
 	theme_toggle_start = Gtk.Template.Child()
 	theme_toggle_end = Gtk.Template.Child()
@@ -79,6 +80,11 @@ class LauncherSettings(Adw.PreferencesWindow):
 		config.connect('changed::available-wallpapers', self.update_wallpaper_grid)
 
 		self.wallpaper_scaling_combobox.set_active_id(str(config['wallpaper-scaling']))
+
+		self.wallpaper_color_button.set_use_alpha(False)
+		bg_color = Gdk.RGBA()
+		bg_color.parse('rgb' + str(config['wallpaper-color']))
+		self.wallpaper_color_button.set_rgba(bg_color)
 
 		if bg_config:
 			self.system_wallpaper_settings_toggle.set_active(config['use-gnome-background'])
@@ -118,6 +124,11 @@ class LauncherSettings(Adw.PreferencesWindow):
 	def set_wallpaper_scaling(self, combobox, *args):
 		"""Sets the wallpaper scaling settings."""
 		config['wallpaper-scaling'] = int(combobox.get_active_id())
+
+	@Gtk.Template.Callback()
+	def set_wallpaper_color(self, button, *args):
+		rgba = button.get_rgba()
+		config['wallpaper-color'] = [rgba.red * 255, rgba.green * 255, rgba.blue * 255]
 
 	@Gtk.Template.Callback()
 	def show_wallpaper_add_dialog(self, *args):

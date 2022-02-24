@@ -21,10 +21,10 @@ def color_to_pixel(color):
 	alpha = 0
 	if len(color) == 4:
 		alpha = color[3]
-	return ((((red * 255)) << 24) |    # noqa: W504
-			(((green * 255)) << 16) |  # noqa: W504
-			(((blue * 255)) << 8) |    # noqa: W504
-			((alpha * 255)))           # noqa: W504
+	return ((((red)) << 24) |    # noqa: W504
+			(((green)) << 16) |  # noqa: W504
+			(((blue)) << 8) |    # noqa: W504
+			((alpha)))           # noqa: W504
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/wallpaper.ui')
 class Wallpaper(Gtk.Box, Dimmable):
@@ -35,8 +35,7 @@ class Wallpaper(Gtk.Box, Dimmable):
 	wallpaper_fade = Gtk.Template.Child()
 	wallpaper_fade_drawable = Gtk.Template.Child()
 
-	# TODO: properly source these two
-	background_color = color_to_pixel([0, 0, 0])
+	# TODO: properly source this
 	scale = 1
 
 	def __init__(self):
@@ -45,6 +44,7 @@ class Wallpaper(Gtk.Box, Dimmable):
 		self.pixbuf = GdkPixbuf.Pixbuf()
 		self.fade_pixbuf = GdkPixbuf.Pixbuf()
 
+		self.update_background_color()
 		self.set_image_from_config()
 
 		self.wallpaper.set_draw_func(self.draw)
@@ -55,8 +55,8 @@ class Wallpaper(Gtk.Box, Dimmable):
 		config.connect('changed::wallpaper-path', self.load_and_update_aspinwall)
 		if bg_config:
 			bg_config.connect('changed::picture-uri', self.load_and_update_gnome)
-
 		config.connect('changed::wallpaper-scaling', self.load_image_and_update)
+		config.connect('changed::wallpaper-color', self.load_image_and_update)
 		config.connect('changed::use-gnome-background', self.load_image_and_update)
 
 	def draw(self, area, cr, *args):
@@ -118,6 +118,10 @@ class Wallpaper(Gtk.Box, Dimmable):
 		if not config['use-gnome-background']:
 			self.load_image_and_update()
 
+	def update_background_color(self, *args):
+		"""Sets the background color based on the wallpaper-color setting."""
+		self.background_color = color_to_pixel(config['wallpaper-color'])
+
 	def load_image_and_update(self, *args):
 		"""
 		Convenience function to call when the wallpaper is changed.
@@ -127,6 +131,7 @@ class Wallpaper(Gtk.Box, Dimmable):
 		_fade_thread = threading.Thread(target=self.crossfade_wallpaper)
 		_fade_thread.start()
 
+		self.update_background_color()
 		self.set_image_from_config()
 		self.update()
 		self.wallpaper.queue_draw()

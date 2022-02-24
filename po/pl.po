@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 16:30+0100\n"
+"POT-Creation-Date: 2022-02-24 17:49+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -30,15 +30,30 @@ msgstr "Styl tapety"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:23
 msgid "Which wallpaper style to use (0 - solid color, 1 - scaled, 2 - zoomed)."
 msgstr ""
-"Którego stylu tapety używać (0 - solidny kolor, 1 - skalowana, 2 - "
+"Którego stylu tapety używać (0 - jednolity kolor, 1 - skalowana, 2 - "
 "przybliżona)"
 
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:30
+#: src/launcher/ui/settings.ui:159
+msgid "Wallpaper background color"
+msgstr "Kolor tła dla tapety"
+
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:31
+msgid ""
+"Background color for the wallpaper (for the \"Solid color\" mode or for a "
+"background for scaled images), stored as an array of three integers: Red, "
+"Green, Blue (0-255)."
+msgstr ""
+"Kolor tła dla tapety (używany w trybie jednolitego koloru lub jako tło dla "
+"skalowanych obrazów), przechowywana jako lista trzech liczb: czerwień, "
+"zieleń, niebieski (0-255)."
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:39
 #: src/launcher/ui/settings.ui:21 src/launcher/ui/settings.ui:48
 msgid "Available wallpapers"
 msgstr "Dostępne tapety"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:32
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:40
 msgid ""
 "List of wallpaper files available in the wallpaper picker in settings. Also "
 "used for the slideshow mode."
@@ -47,12 +62,12 @@ msgstr ""
 "również w trybie pokazu slajdów."
 
 #. TRANSLATORS: This settings option allows users to automatically use the background file provided by GNOME, allowing better integration with GNOME's control center.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:41
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:49
 #: src/launcher/ui/settings.ui:123
 msgid "Use system wallpaper settings"
 msgstr "Użyj systemowych ustawień tapety"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:42
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:50
 #: src/launcher/ui/settings.ui:124
 msgid ""
 "If enabled, the launcher inherits the wallpaper from GNOME settings. (Note "
@@ -62,12 +77,12 @@ msgstr ""
 "(Uwaga: to ustawienie działa tylko z panelem sterowania GNOME.)"
 
 #. TRANSLATORS: This is for the light/dark mode switch; can be translated as "Preferred theme"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:50
-#: src/launcher/ui/settings.ui:165
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:58
+#: src/launcher/ui/settings.ui:181
 msgid "Theme preference"
 msgstr "Preferowany motyw"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:51
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:59
 msgid ""
 "Whether to use light theme, dark theme or follow system theme. (0 - follow "
 "system theme, 1 - light, 2 - dark)"
@@ -75,11 +90,11 @@ msgstr ""
 "Czy używać jasnego motywu, ciemnego motywu czy przestrzegać ustawień systemu."
 "(0 - przestrzegaj ustawień systemu, 1 - jasny, 2 - ciemny)"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:59
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:67
 msgid "Widget autorefresh delay"
 msgstr "Opóźnienie automatycznego odświeżania widżetów"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:60
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:68
 msgid ""
 "Amount of time (in seconds) between automatic widget refreshing. Set to 0 to "
 "disable autorefresh. (Default: 900 seconds - 15 minutes)"
@@ -88,12 +103,12 @@ msgstr ""
 "na 0 żeby wyłączyć automatyczne odświeżanie. (Domyślnie: 900 sekund - 15 "
 "minut)"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:67
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:75
 msgid "Favorite apps"
 msgstr "Ulubione aplikacje"
 
 #. TRANSLATORS: ".desktop files" refers to a specific filetype. Do not translate the ".desktop" bit.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:69
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:77
 msgid ""
 "List of favorite apps for the app chooser, stored as paths to their .desktop "
 "files."
@@ -102,17 +117,17 @@ msgstr ""
 "ścieżek do ich plików .desktop."
 
 #. TRANSLATORS: This can also be translated as just "time format"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:76
-#: src/launcher/ui/settings.ui:221
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:84
+#: src/launcher/ui/settings.ui:237
 msgid "Time format string"
 msgstr "Format czasu"
 
 #. TRANSLATORS: Default time format string for your locale; should only contain the hour and minutes. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:78
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:86
 msgid "\"%H:%M\""
 msgstr "\"%H:%M\""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:79
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:87
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -121,17 +136,17 @@ msgstr ""
 "dokumentacji: https://docs.python.org/3/library/time.html#time.strftime."
 
 #. TRANSLATORS: This can also be translated as just "date format"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:86
-#: src/launcher/ui/settings.ui:234
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:94
+#: src/launcher/ui/settings.ui:250
 msgid "Date format string"
 msgstr "Format daty"
 
 #. TRANSLATORS: Default date format string for your locale; should contain the week day and date. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:88
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:96
 msgid "\"%A, %x\""
 msgstr "%A, %d %B, %Y"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:89
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:97
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -191,33 +206,41 @@ msgstr "Skalowana"
 msgid "Zoomed"
 msgstr "Przybliżona"
 
-#: src/launcher/ui/settings.ui:161
+#. TRANSLATORS: Please use the quotation mark symbols appropriate for your language, not the default '"' symbol. (In Weblate, you can find shortcuts to the quotation mark symbols in the right corner above the translation field for your language.)
+#. If it's easier, you can simply describe these as "modes" and omit the quotation marks entirely, but if you're refering to the wallpaper style verbatim please add the quotes.
+#: src/launcher/ui/settings.ui:162
+msgid ""
+"Used for the “Solid Color” wallpaper style, as well as the backdrop for the "
+"“Scaled” style."
+msgstr "Użyte w trybie jednolitego koloru oraz jako tło w trybie skalowania."
+
+#: src/launcher/ui/settings.ui:177
 msgid "Theme"
 msgstr "Motyw"
 
 #. TRANSLATORS: This refers to the light theme.
-#: src/launcher/ui/settings.ui:178
+#: src/launcher/ui/settings.ui:194
 msgid "Light"
 msgstr "Jasny"
 
 #. TRANSLATORS: This refers to the dark theme.
-#: src/launcher/ui/settings.ui:187
+#: src/launcher/ui/settings.ui:203
 msgid "Dark"
 msgstr "Ciemny"
 
-#: src/launcher/ui/settings.ui:198
+#: src/launcher/ui/settings.ui:214
 msgid "Follow system theme"
 msgstr "Przestrzegaj motywu systemu"
 
-#: src/launcher/ui/settings.ui:212
+#: src/launcher/ui/settings.ui:228
 msgid "Clock"
 msgstr "Zegar"
 
-#: src/launcher/ui/settings.ui:216
+#: src/launcher/ui/settings.ui:232
 msgid "Time and date format"
 msgstr "Format czasu i daty"
 
-#: src/launcher/ui/settings.ui:217
+#: src/launcher/ui/settings.ui:233
 msgid ""
 "Set the format to use when displaying the time and date, following <a "
 "href='https://docs.python.org/3/library/time.html#time.strftime'>the time "
@@ -257,16 +280,16 @@ msgstr "Usunięto „%s”"
 msgid "Undo"
 msgstr "Przywróć"
 
-#: src/launcher/settings.py:126
+#: src/launcher/settings.py:137
 msgid "Add wallpaper"
 msgstr "Dodaj tapetę"
 
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:132
+#: src/launcher/settings.py:143
 msgid "_Cancel"
 msgstr "_Anuluj"
 
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:134
+#: src/launcher/settings.py:145
 msgid "_Select"
 msgstr "_Wybierz"
