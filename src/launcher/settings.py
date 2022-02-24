@@ -3,7 +3,7 @@
 Contains code for the launcher settings window. Not to be confused with the
 settings access backend, which is set up in config.py.
 """
-from gi.repository import Adw, GdkPixbuf, Gtk, Gdk, Gio
+from gi.repository import Adw, GdkPixbuf, Gtk, Gdk, GObject
 import threading
 
 from aspinwall.launcher.config import config, bg_config
@@ -18,6 +18,17 @@ class WallpaperIcon(Gtk.FlowBoxChild):
 	def __init__(self, wallpaper_path):
 		"""Initializes the wallpaper icon."""
 		super().__init__()
+
+		self.drag_source = Gtk.DragSource(actions=Gdk.DragAction.MOVE)
+		self.drag_source.connect("prepare", self.drag_prepare)
+		self.drag_source.connect("drag-begin", self.drag_begin)
+		self.add_controller(self.drag_source)
+
+		self.drop_target = Gtk.DropTarget(actions=Gdk.DragAction.MOVE)
+		self.drop_target.set_gtypes([GObject.TYPE_STRING])
+		self.drop_target.connect("drop", self.drop)
+		self.add_controller(self.drop_target)
+
 		bind_thread = threading.Thread(target=self.bind, args=[wallpaper_path])
 		bind_thread.start()
 
@@ -37,6 +48,26 @@ class WallpaperIcon(Gtk.FlowBoxChild):
 		"""Removes the wallpaper from available wallpapers."""
 		new_config = config['available-wallpapers'].copy()
 		new_config.remove(self.wallpaper)
+		config['available-wallpapers'] = new_config
+
+	# Drag source
+	def drag_prepare(self, *args):
+		return Gdk.ContentProvider.new_for_value(self.wallpaper)
+
+	def drag_begin(self, drag_source, *args):
+		drag_source.set_icon(
+			Gtk.WidgetPaintable.new(self),
+			self.get_width() / 2, self.get_height() / 2
+		)
+
+	# Drop target
+	def drop(self, target, value, *args):
+		wallpaper_path = value
+		new_config = config['available-wallpapers'].copy()
+		new_config.insert(
+			new_config.index(self.wallpaper),
+			new_config.pop(new_config.index(wallpaper_path))
+		)
 		config['available-wallpapers'] = new_config
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/settings.ui')
@@ -72,8 +103,11 @@ class LauncherSettings(Adw.PreferencesWindow):
 
 		self.wallpaper_store = Gtk.StringList()
 		self.wallpaper_store.splice(0, 0, config['available-wallpapers'])
+		self.wallpaper_sort_model = Gtk.SortListModel(model=self.wallpaper_store)
+		self.wallpaper_sorter = Gtk.CustomSorter.new(self.wallpaper_sort_func, None)
+		self.wallpaper_sort_model.set_sorter(self.wallpaper_sorter)
 		self.wallpaper_grid.bind_model(
-			self.wallpaper_store,
+			self.wallpaper_sort_model,
 			self.wallpaper_bind,
 			None
 		)
@@ -100,6 +134,18 @@ class LauncherSettings(Adw.PreferencesWindow):
 		wallpaper_path = wallpaper_path_string.get_string()
 		return WallpaperIcon(wallpaper_path)
 
+	def wallpaper_sort_func(self, a, b, *args):
+		"""Sort function for the wallpaper grid."""
+		a_index = config['available-wallpapers'].index(a.get_string())
+		b_index = config['available-wallpapers'].index(b.get_string())
+
+		if a_index < b_index:
+			return -1
+		elif a_index > b_index:
+			return 1
+		else:
+			return 0
+
 	def update_wallpaper_grid(self, *args):
 		"""Updates the wallpaper grid after a removal/addition."""
 		_current_store = list(self.wallpaper_store)
@@ -109,16 +155,20 @@ class LauncherSettings(Adw.PreferencesWindow):
 			current_store.append(item.get_string())
 		current_config = config['available-wallpapers'].copy()
 
+		self.wallpaper_sorter.changed(Gtk.SorterChange.DIFFERENT)
+
 		new_wallpapers = list(set(current_store) - set(current_config)) + \
 			list(set(current_config) - set(current_store))
 
-		for wallpaper in new_wallpapers:
-			if wallpaper in current_config:
-				# Wallpaper added
-				self.wallpaper_store.append(wallpaper)
-			else:
-				# Wallpaper removed
-				self.wallpaper_store.remove(current_store.index(wallpaper))
+		if new_wallpapers:
+			# Wallpaper was added/removed
+			for wallpaper in new_wallpapers:
+				if wallpaper in current_config:
+					# Wallpaper added
+					self.wallpaper_store.append(wallpaper)
+				else:
+					# Wallpaper removed
+					self.wallpaper_store.remove(current_store.index(wallpaper))
 
 	@Gtk.Template.Callback()
 	def set_wallpaper_scaling(self, combobox, *args):
@@ -134,15 +184,15 @@ class LauncherSettings(Adw.PreferencesWindow):
 	def show_wallpaper_add_dialog(self, *args):
 		"""Shows the wallpaper addition dialog."""
 		file_dialog = Gtk.FileChooserDialog(
-			title=_('Add wallpaper'),
+			title=_('Add wallpaper'), # noqa: F821
 			action=Gtk.FileChooserAction.OPEN,
 		)
 
 		file_dialog.add_buttons(
 			# TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-			_('_Cancel'), Gtk.ResponseType.CANCEL,
+			_('_Cancel'), Gtk.ResponseType.CANCEL, # noqa: F821
 			# TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-			_('_Select'), Gtk.ResponseType.OK
+			_('_Select'), Gtk.ResponseType.OK # noqa: F821
 		)
 
 		file_dialog.set_transient_for(self)
