@@ -17,36 +17,102 @@
 						<property name="title" translatable="yes">Wallpaper</property>
 
 						<child>
-							<object class="AdwPreferencesRow">
+							<object class="AdwPreferencesRow" id="wallpaper_row">
+								<property name="title" translatable="yes">Available wallpapers</property>
+								<property name="activatable">False</property>
+
 								<child>
-									<object class="GtkButton">
-										<signal name="clicked" handler="show_wallpaper_add_dialog"/>
+									<object class="GtkBox">
+										<property name="orientation">vertical</property>
 
 										<child>
-											<object class="AdwButtonContent">
-												<property name="icon-name">list-add-symbolic</property>
-												<property name="label">Add wallpaper</property>
+											<object class="GtkBox">
+												<style>
+													<class name="wallpaper-grid-header"/>
+												</style>
+												<child>
+													<object class="GtkBox">
+														<property name="orientation">vertical</property>
+														<property name="valign">center</property>
+														<property name="hexpand">true</property>
+														<child>
+															<object class="GtkBox" id="wallpaper_title_box">
+																<property name="halign">start</property>
+																<property name="orientation">vertical</property>
+																<style>
+																	<class name="title"/>
+																</style>
+
+																<child>
+																	<object class="GtkLabel">
+																		<property name="label" translatable="yes">Available wallpapers</property>
+																		<property name="ellipsize">none</property>
+																		<property name="lines">0</property>
+																		<property name="wrap">True</property>
+																		<property name="wrap-mode">word-char</property>
+																		<property name="xalign">0</property>
+																	</object>
+																</child>
+
+																<child>
+																	<object class="GtkLabel">
+																		<!-- TRANSLATOR: For the "Available wallpapers" option; box can be translated as field -->
+																		<property name="label" translatable="yes">The images in this box are used for the slideshow mode if it's enabled.</property>
+																		<property name="ellipsize">none</property>
+																		<property name="lines">0</property>
+																		<property name="wrap">True</property>
+																		<property name="wrap-mode">word-char</property>
+																		<property name="xalign">0</property>
+
+																		<style>
+																			<class name="subtitle"/>
+																		</style>
+																	</object>
+																</child>
+															</object>
+														</child>
+													</object>
+												</child>
+
+												<child>
+													<object class="GtkBox">
+														<property name="spacing">12</property>
+
+														<child>
+															<object class="GtkButton">
+																<property name="valign">center</property>
+																<property name="halign">end</property>
+																<signal name="clicked" handler="show_wallpaper_add_dialog"/>
+
+																<style>
+																	<class name="flat"/>
+																</style>
+
+																<child>
+																	<object class="AdwButtonContent">
+																		<property name="icon-name">list-add-symbolic</property>
+																		<property name="label">Add wallpaper</property>
+																	</object>
+																</child>
+															</object>
+														</child>
+													</object>
+												</child>
 											</object>
 										</child>
-									</object>
-								</child>
-							</object>
-						</child>
 
-						<child>
-							<object class="AdwPreferencesRow">
-								<property name="title">Wallpaper image</property>
+										<child>
+											<object class="GtkFlowBox" id="wallpaper_grid">
+												<property name="column-spacing">12</property>
+												<property name="row-spacing">12</property>
+												<signal name="child-activated" handler="set_wallpaper_from_grid"/>
 
-								<child>
-									<object class="GtkFlowBox" id="wallpaper_grid">
-										<property name="column-spacing">12</property>
-										<property name="row-spacing">12</property>
-										<signal name="child-activated" handler="set_wallpaper_from_grid"/>
-
-										<style>
-											<class name="view"/>
-											<class name="wallpaper-grid"/>
-										</style>
+												<style>
+													<class name="view"/>
+													<class name="wallpaper-grid"/>
+												</style>
+											</object>
+										</child>
 									</object>
 								</child>
 							</object>

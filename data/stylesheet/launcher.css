@@ -189,6 +189,18 @@ window {
 	color: @aspinwall_menu_fg;
 }
 
+.wallpaper-grid-header {
+	margin-left: 12px;
+	margin-right: 12px;
+	min-height: 50px;
+}
+
+.wallpaper-grid-header .title {
+	margin-top: 6px;
+	margin-bottom: 6px;
+	border-spacing: 3px;
+}
+
 .wallpaper-grid {
 	padding: 12px;
 	border-radius: 10px;
