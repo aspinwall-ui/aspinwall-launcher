@@ -20,6 +20,7 @@
 							<object class="AdwPreferencesRow" id="wallpaper_row">
 								<property name="title" translatable="yes">Available wallpapers</property>
 								<property name="activatable">False</property>
+								<property name="sensitive" bind-source="system_wallpaper_settings_toggle" bind-property="active" bind-flags="invert-boolean"/>
 
 								<child>
 									<object class="GtkBox">
