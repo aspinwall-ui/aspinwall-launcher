@@ -43,7 +43,7 @@ class SlideshowManager:
 		# The thread automatically quits if slideshow mode is disabled.
 		# Here we can re-create it if needed.
 		if config['slideshow-mode']:
-			self.thread = threading.Thread(target=self.slideshow_thread_func)
+			self.thread = threading.Thread(target=self.slideshow_thread_func, daemon=True)
 			self.thread.start()
 
 	def update_counter(self, *args):
