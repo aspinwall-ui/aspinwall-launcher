@@ -169,8 +169,6 @@ class LauncherSettings(Adw.PreferencesWindow):
 			current_store.append(item.get_string())
 		current_config = config['available-wallpapers'].copy()
 
-		self.wallpaper_sorter.changed(Gtk.SorterChange.DIFFERENT)
-
 		new_wallpapers = list(set(current_store) - set(current_config)) + \
 			list(set(current_config) - set(current_store))
 
@@ -183,6 +181,16 @@ class LauncherSettings(Adw.PreferencesWindow):
 				else:
 					# Wallpaper removed
 					self.wallpaper_store.remove(current_store.index(wallpaper))
+
+		self.wallpaper_sorter.changed(Gtk.SorterChange.DIFFERENT)
+
+		self.wallpaper_grid.select_child(
+			self.wallpaper_grid.get_child_at_index(
+				config['available-wallpapers'].index(
+					config['wallpaper-path']
+				)
+			)
+		)
 
 	@Gtk.Template.Callback()
 	def set_slideshow_switch_delay(self, combobox, *args):
