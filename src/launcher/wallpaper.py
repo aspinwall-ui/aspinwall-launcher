@@ -2,11 +2,12 @@
 """
 Contains code for handling wallpapers
 """
-from gi.repository import Gtk, Gdk, GdkPixbuf
+from gi.repository import Gtk, Gdk, GdkPixbuf, GLib
 from urllib.parse import urlparse
 import math
 import os
 import threading
+import traceback
 import time
 import uuid
 
@@ -135,7 +136,11 @@ class Wallpaper(Gtk.Box, Dimmable):
 		else:
 			wallpaper_path = config['wallpaper-path']
 		if wallpaper_path and not wallpaper_path == '/' and os.path.exists(wallpaper_path):
-			self.image = GdkPixbuf.Pixbuf.new_from_file(wallpaper_path)
+			try:
+				self.image = GdkPixbuf.Pixbuf.new_from_file(wallpaper_path)
+			except GLib.GError:
+				traceback.print_exc()
+				self.image = None
 		else:
 			self.image = None
 
