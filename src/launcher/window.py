@@ -92,6 +92,16 @@ def on_activate(app):
 		return False
 	running = True
 
+	if config['available-wallpapers'][0] == 'fixme':
+		wallpaper_files = []
+		wallpaper_paths = []
+		for filetype in ['jpg', 'png']:
+			wallpaper_paths += list(Path('/usr/share/backgrounds').rglob('*.' + filetype))
+
+		for wallpaper in wallpaper_paths:
+			wallpaper_files.append(str(wallpaper))
+		config['available-wallpapers'] = wallpaper_files
+
 	load_widgets()
 
 	global win
