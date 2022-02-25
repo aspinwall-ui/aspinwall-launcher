@@ -26,6 +26,53 @@ def color_to_pixel(color):
 			(((blue)) << 8) |    # noqa: W504
 			((alpha)))           # noqa: W504
 
+class SlideshowManager:
+	"""Convenience class for managing slideshows."""
+	def __init__(self):
+		"""Initializes the SlideshowManager."""
+		self.start_slideshow_mode_if_enabled()
+		config.connect('changed::slideshow-mode', self.start_slideshow_mode_if_enabled)
+		config.connect('changed::wallpaper-path', self.update_counter)
+		config.connect('changed::slideshow-switch-delay', self.update_counter)
+
+	def start_slideshow_mode_if_enabled(self, *args):
+		"""
+		Starts slideshow mode if the slideshow-mode config option is enabled.
+		"""
+		# The thread automatically quits if slideshow mode is disabled.
+		# Here we can re-create it if needed.
+		if config['slideshow-mode']:
+			self.thread = threading.Thread(target=self.slideshow_thread_func)
+			self.thread.start()
+
+	def update_counter(self, *args):
+		"""Updates the counter to match the delay."""
+		self.counter = config['slideshow-switch-delay']
+
+	def slideshow_thread_func(self):
+		"""Wallpaper update thread."""
+		self.counter = config['slideshow-switch-counter']
+		while True:
+			if not config['slideshow-mode']:
+				return
+
+			if self.counter <= 0:
+				self.counter = config['slideshow-switch-delay']
+				available_wallpapers = config['available-wallpapers']
+				current_wallpaper = config['wallpaper-path']
+
+				if current_wallpaper not in available_wallpapers:
+					config['wallpaper-path'] = available_wallpapers[0]
+				else:
+					next_wallpaper_index = available_wallpapers.index(current_wallpaper) + 1
+					if next_wallpaper_index >= len(available_wallpapers):
+						next_wallpaper_index = 0
+					config['wallpaper-path'] = available_wallpapers[next_wallpaper_index]
+
+			self.counter -= 1
+			config['slideshow-switch-counter'] = self.counter
+			time.sleep(1)
+
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/wallpaper.ui')
 class Wallpaper(Gtk.Box, Dimmable):
 	"""Wallpaper image that reads wallpaper data from the config."""
@@ -58,6 +105,8 @@ class Wallpaper(Gtk.Box, Dimmable):
 		config.connect('changed::wallpaper-scaling', self.load_image_and_update)
 		config.connect('changed::wallpaper-color', self.load_image_and_update)
 		config.connect('changed::use-gnome-background', self.load_image_and_update)
+
+		self.slideshow_manager = SlideshowManager()
 
 	def draw(self, area, cr, *args):
 		"""Draws the background."""
