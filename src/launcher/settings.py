@@ -32,16 +32,23 @@ class WallpaperIcon(Gtk.FlowBoxChild):
 		bind_thread = threading.Thread(target=self.bind, args=[wallpaper_path])
 		bind_thread.start()
 
+		self.connect('unmap', self._destroy)
+
+	def _destroy(self, *args):
+		"""Removes the stored pixbuf."""
+		self.picture = None
+		self.pixbuf = None
+
 	def bind(self, wallpaper_path):
 		"""Binds the wallpaper icon to a wallpaper from the path."""
 		self.wallpaper = wallpaper_path
 
-		pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
+		self.pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
 			wallpaper_path,
 			144, 144
 		)
 
-		self.picture.set_pixbuf(pixbuf)
+		self.picture.set_pixbuf(self.pixbuf)
 
 	@Gtk.Template.Callback()
 	def remove_from_available(self, *args):

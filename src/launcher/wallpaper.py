@@ -109,6 +109,14 @@ class Wallpaper(Gtk.Box, Dimmable):
 		config.connect('changed::wallpaper-color', self.load_image_and_update)
 		config.connect('changed::use-gnome-background', self.load_image_and_update)
 
+		self.connect('unmap', self._destroy)
+
+	def _destroy(self, *args):
+		"""Removes the wallpaper."""
+		self.pixbuf = None
+		self.fade_pixbuf = None
+		self.image = None
+
 	def draw(self, area, cr, *args):
 		"""Draws the background."""
 		if args[-1] == 'fade_pixbuf':
@@ -181,7 +189,7 @@ class Wallpaper(Gtk.Box, Dimmable):
 		Automatically takes care of the wallpaper transition.
 		"""
 		self.wallpaper_fade_drawable.queue_draw()
-		_fade_thread = threading.Thread(target=self.crossfade_wallpaper)
+		_fade_thread = threading.Thread(target=self.crossfade_wallpaper, daemon=True)
 		_fade_thread.start()
 
 		self.update_background_color()
