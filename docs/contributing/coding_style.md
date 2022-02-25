@@ -81,6 +81,8 @@ If your arguments are short and can fit on one line without hitting the limit, i
 
 * **Keep newlines before each child definition.**
 * If an object has multiple properties that serve a similar purpose (such as positioning, labels, etc.), you can **split them into groups and add newlines in between the groups**.
+* Property names must be written with dashes (`-`), not underscores. (For example - `<property name="margin-bottom">6</property>`, NOT `<property name="margin_bottom">6</property>`.)
+* Object IDs must use underscores (`_`), not dashes.
 
 ## Linting
 
