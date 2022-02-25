@@ -17,6 +17,125 @@
 						<property name="title" translatable="yes">Wallpaper</property>
 
 						<child>
+							<object class="AdwPreferencesRow">
+								<property name="title" translatable="yes">Wallpaper preview</property>
+								<property name="activatable">False</property>
+
+								<style>
+									<class name="view"/>
+								</style>
+
+								<child>
+									<object class="GtkBox" id="wallpaper_preview_box">
+										<property name="hexpand">true</property>
+										<property name="halign">center</property>
+
+										<style>
+											<class name="wallpaper-preview-container"/>
+										</style>
+
+										<child>
+											<object class="GtkOverlay" id="wallpaper_preview_overlay">
+												<style>
+													<class name="wallpaper-preview"/>
+												</style>
+
+												<child type="overlay">
+													<object class="GtkLabel">
+														<property name="label">&lt;span weight="bold" font="12"&gt;00:00&lt;/span&gt;</property>
+														<property name="use-markup">true</property>
+														<property name="halign">start</property>
+														<property name="valign">end</property>
+
+														<property name="margin-top">6</property>
+														<property name="margin-bottom">6</property>
+														<property name="margin-start">6</property>
+														<property name="margin-end">6</property>
+
+														<style>
+															<class name="clockbox"/>
+														</style>
+													</object>
+												</child>
+
+												<child type="overlay">
+													<object class="GtkBox">
+														<property name="halign">start</property>
+														<property name="valign">start</property>
+
+														<property name="margin-top">6</property>
+														<property name="margin-bottom">6</property>
+														<property name="margin-start">6</property>
+														<property name="margin-end">6</property>
+
+														<style>
+															<class name="osd"/>
+															<class name="settings-mock-button"/>
+														</style>
+
+														<child>
+															<object class="GtkImage">
+																<property name="icon-name">view-grid-symbolic</property>
+															</object>
+														</child>
+													</object>
+												</child>
+
+												<child type="overlay">
+													<object class="GtkBox">
+														<property name="halign">end</property>
+														<property name="valign">start</property>
+
+														<property name="margin-top">6</property>
+														<property name="margin-bottom">6</property>
+														<property name="margin-start">6</property>
+														<property name="margin-end">6</property>
+
+														<style>
+															<class name="osd"/>
+															<class name="settings-mock-button"/>
+														</style>
+
+														<child>
+															<object class="GtkImage">
+																<property name="icon-name">open-menu-symbolic</property>
+															</object>
+														</child>
+													</object>
+												</child>
+
+												<child type="overlay">
+													<object class="GtkBox">
+														<property name="width-request">114</property>
+														<property name="height-request">60</property>
+														<property name="halign">end</property>
+														<property name="valign">end</property>
+
+														<property name="margin-top">6</property>
+														<property name="margin-bottom">6</property>
+														<property name="margin-start">6</property>
+														<property name="margin-end">6</property>
+
+														<style>
+															<class name="settings-mock-widget"/>
+														</style>
+													</object>
+												</child>
+
+												<child>
+													<object class="Wallpaper" id="wallpaper_preview">
+														<property name="width-request">240</property>
+														<property name="height-request">135</property>
+													</object>
+												</child>
+											</object>
+										</child>
+									</object>
+								</child>
+							</object>
+						</child>
+
+						<child>
 							<object class="AdwPreferencesRow" id="wallpaper_row">
 								<property name="title" translatable="yes">Available wallpapers</property>
 								<property name="activatable">False</property>

@@ -74,6 +74,8 @@ class SlideshowManager:
 			config['slideshow-switch-counter'] = self.counter
 			time.sleep(1)
 
+slideshow_manager = SlideshowManager()
+
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/wallpaper.ui')
 class Wallpaper(Gtk.Box, Dimmable):
 	"""Wallpaper image that reads wallpaper data from the config."""
@@ -106,8 +108,6 @@ class Wallpaper(Gtk.Box, Dimmable):
 		config.connect('changed::wallpaper-scaling', self.load_image_and_update)
 		config.connect('changed::wallpaper-color', self.load_image_and_update)
 		config.connect('changed::use-gnome-background', self.load_image_and_update)
-
-		self.slideshow_manager = SlideshowManager()
 
 	def draw(self, area, cr, *args):
 		"""Draws the background."""
@@ -146,9 +146,8 @@ class Wallpaper(Gtk.Box, Dimmable):
 
 	def update(self, *args):
 		"""Updates the background."""
-		window = self.get_root()
-		width = window.get_width()
-		height = window.get_height()
+		width = self.get_width()
+		height = self.get_height()
 
 		self.fade_pixbuf = self.pixbuf
 

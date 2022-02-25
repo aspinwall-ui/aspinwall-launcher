@@ -202,6 +202,29 @@
 	border-radius: 10px;
 }
 
+.wallpaper-preview-container {
+	padding: 12px 0;
+}
+
+.wallpaper-preview {
+	border: 1px solid @borders;
+}
+
+.settings-mock-button {
+	border-radius: 3px;
+	padding: 3px;
+	opacity: 0.75;
+}
+
+.settings-mock-widget {
+	border-radius: 3px;
+	background-color: @aspinwall_widget_bg;
+	color: @aspinwall_widget_fg;
+	box-shadow: 2px 1px 5px @aspinwall_widget_shade;
+	border: 1px solid @aspinwall_widget_border;
+	opacity: 0.9;
+}
+
 /* About window */
 .aspinwall-about {
 	background-color: @aspinwall_menu_bg;

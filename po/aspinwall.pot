@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-25 19:02+0100\n"
+"POT-Creation-Date: 2022-02-25 21:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgid "Path to a wallpaper file."
 msgstr ""
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:23
-#: src/launcher/ui/settings.ui:171
+#: src/launcher/ui/settings.ui:290
 msgid "Wallpaper style"
 msgstr ""
 
@@ -43,7 +43,7 @@ msgid "Which wallpaper style to use (0 - solid color, 1 - scaled, 2 - zoomed)."
 msgstr ""
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:31
-#: src/launcher/ui/settings.ui:193
+#: src/launcher/ui/settings.ui:312
 msgid "Wallpaper background color"
 msgstr ""
 
@@ -55,7 +55,7 @@ msgid ""
 msgstr ""
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:40
-#: src/launcher/ui/settings.ui:21 src/launcher/ui/settings.ui:49
+#: src/launcher/ui/settings.ui:140 src/launcher/ui/settings.ui:168
 msgid "Available wallpapers"
 msgstr ""
 
@@ -67,25 +67,25 @@ msgstr ""
 
 #. TRANSLATORS: This settings option allows users to automatically use the background file provided by GNOME, allowing better integration with GNOME's control center.
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:50
-#: src/launcher/ui/settings.ui:209
+#: src/launcher/ui/settings.ui:328
 msgid "Use system wallpaper settings"
 msgstr ""
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:51
-#: src/launcher/ui/settings.ui:210
+#: src/launcher/ui/settings.ui:329
 msgid ""
 "If enabled, the launcher inherits the wallpaper from GNOME settings. (Note "
 "that this setting only works with GNOME's control center.)"
 msgstr ""
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:59
-#: src/launcher/ui/settings.ui:124
+#: src/launcher/ui/settings.ui:243
 msgid "Slideshow mode"
 msgstr ""
 
 #. TRANSLATORS: Alternatively, this can be translated as "the launcher automatically switches between available wallpapers".
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:61
-#: src/launcher/ui/settings.ui:125
+#: src/launcher/ui/settings.ui:244
 msgid ""
 "In slideshow mode, the launcher automatically loops over available "
 "wallpapers."
@@ -109,7 +109,7 @@ msgstr ""
 
 #. TRANSLATORS: This is for the light/dark mode switch; can be translated as "Preferred theme"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:86
-#: src/launcher/ui/settings.ui:229
+#: src/launcher/ui/settings.ui:348
 msgid "Theme preference"
 msgstr ""
 
@@ -142,7 +142,7 @@ msgstr ""
 
 #. TRANSLATORS: This can also be translated as just "time format"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:113
-#: src/launcher/ui/settings.ui:285
+#: src/launcher/ui/settings.ui:404
 msgid "Time format string"
 msgstr ""
 
@@ -159,7 +159,7 @@ msgstr ""
 
 #. TRANSLATORS: This can also be translated as just "date format"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:123
-#: src/launcher/ui/settings.ui:298
+#: src/launcher/ui/settings.ui:417
 msgid "Date format string"
 msgstr ""
 
@@ -205,101 +205,105 @@ msgstr ""
 msgid "Wallpaper"
 msgstr ""
 
+#: src/launcher/ui/settings.ui:21
+msgid "Wallpaper preview"
+msgstr ""
+
 #. TRANSLATOR: For the "Available wallpapers" option; box can be translated as field
-#: src/launcher/ui/settings.ui:61
+#: src/launcher/ui/settings.ui:180
 msgid "The images in this box are used for the slideshow mode if it's enabled."
 msgstr ""
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency
-#: src/launcher/ui/settings.ui:138
+#: src/launcher/ui/settings.ui:257
 msgid "Switch wallpaper every:"
 msgstr ""
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:148
+#: src/launcher/ui/settings.ui:267
 msgid "1 minute"
 msgstr ""
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:150
+#: src/launcher/ui/settings.ui:269
 msgid "3 minutes"
 msgstr ""
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:152
+#: src/launcher/ui/settings.ui:271
 msgid "5 minutes"
 msgstr ""
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:154
+#: src/launcher/ui/settings.ui:273
 msgid "10 minutes"
 msgstr ""
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:156
+#: src/launcher/ui/settings.ui:275
 msgid "15 minutes"
 msgstr ""
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:158
+#: src/launcher/ui/settings.ui:277
 msgid "30 minutes"
 msgstr ""
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:160
+#: src/launcher/ui/settings.ui:279
 msgid "1 hour"
 msgstr ""
 
 #. TRANSLATORS: Wallpaper scaling option
-#: src/launcher/ui/settings.ui:180
+#: src/launcher/ui/settings.ui:299
 msgid "Solid color"
 msgstr ""
 
 #. TRANSLATORS: Wallpaper scaling option
-#: src/launcher/ui/settings.ui:182
+#: src/launcher/ui/settings.ui:301
 msgid "Scaled"
 msgstr ""
 
 #. TRANSLATORS: Wallpaper scaling option
-#: src/launcher/ui/settings.ui:184
+#: src/launcher/ui/settings.ui:303
 msgid "Zoomed"
 msgstr ""
 
 #. TRANSLATORS: Please use the quotation mark symbols appropriate for your language, not the default '"' symbol. (In Weblate, you can find shortcuts to the quotation mark symbols in the right corner above the translation field for your language.)
 #. If it's easier, you can simply describe these as "modes" and omit the quotation marks entirely, but if you're refering to the wallpaper style verbatim please add the quotes.
-#: src/launcher/ui/settings.ui:196
+#: src/launcher/ui/settings.ui:315
 msgid ""
 "Used for the “Solid Color” wallpaper style, as well as the backdrop for the "
 "“Scaled” style."
 msgstr ""
 
-#: src/launcher/ui/settings.ui:225
+#: src/launcher/ui/settings.ui:344
 msgid "Theme"
 msgstr ""
 
 #. TRANSLATORS: This refers to the light theme.
-#: src/launcher/ui/settings.ui:242
+#: src/launcher/ui/settings.ui:361
 msgid "Light"
 msgstr ""
 
 #. TRANSLATORS: This refers to the dark theme.
-#: src/launcher/ui/settings.ui:251
+#: src/launcher/ui/settings.ui:370
 msgid "Dark"
 msgstr ""
 
-#: src/launcher/ui/settings.ui:262
+#: src/launcher/ui/settings.ui:381
 msgid "Follow system theme"
 msgstr ""
 
-#: src/launcher/ui/settings.ui:276
+#: src/launcher/ui/settings.ui:395
 msgid "Clock"
 msgstr ""
 
-#: src/launcher/ui/settings.ui:280
+#: src/launcher/ui/settings.ui:399
 msgid "Time and date format"
 msgstr ""
 
-#: src/launcher/ui/settings.ui:281
+#: src/launcher/ui/settings.ui:400
 msgid ""
 "Set the format to use when displaying the time and date, following <a "
 "href='https://docs.python.org/3/library/time.html#time.strftime'>the time "
@@ -337,17 +341,17 @@ msgstr ""
 msgid "Undo"
 msgstr ""
 
-#: src/launcher/settings.py:206
+#: src/launcher/settings.py:214
 msgid "Add wallpaper"
 msgstr ""
 
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:212
+#: src/launcher/settings.py:220
 msgid "_Cancel"
 msgstr ""
 
 #. noqa: F821
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:214
+#: src/launcher/settings.py:222
 msgid "_Select"
 msgstr ""

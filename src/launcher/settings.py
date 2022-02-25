@@ -104,16 +104,6 @@ class LauncherSettings(Adw.PreferencesWindow):
 			self.theme_toggle_start.set_active(True)
 			self.follow_system_theme_toggle.set_active(True)
 
-		if config['available-wallpapers'][0] == 'fixme':
-			wallpaper_files = []
-			wallpaper_paths = []
-			for filetype in ['jpg', 'png']:
-				wallpaper_paths += list(Path('/usr/share/backgrounds').rglob('*.' + filetype))
-
-			for wallpaper in wallpaper_paths:
-				wallpaper_files.append(str(wallpaper))
-			config['available-wallpapers'] = wallpaper_files
-
 		self.wallpaper_store = Gtk.StringList()
 		self.wallpaper_store.splice(0, 0, config['available-wallpapers'])
 		self.wallpaper_sort_model = Gtk.SortListModel(model=self.wallpaper_store)
