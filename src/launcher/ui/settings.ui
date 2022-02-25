@@ -120,14 +120,47 @@
 						</child>
 
 						<child>
-							<object class="AdwActionRow">
-								<property name="title" translatable="yes">Use system wallpaper settings</property>
-								<property name="subtitle" translatable="yes">If enabled, the launcher inherits the wallpaper from GNOME settings. (Note that this setting only works with GNOME's control center.)</property>
+							<object class="AdwExpanderRow">
+								<property name="title" translatable="yes">Slideshow mode</property>
+								<property name="subtitle" translatable="yes">In slideshow mode, the launcher automatically loops over available wallpapers.</property>
+								<property name="sensitive" bind-source="system_wallpaper_settings_toggle" bind-property="active" bind-flags="invert-boolean"/>
+
+								<child type="action">
+									<object class="GtkSwitch" id="slideshow_mode_toggle">
+										<property name="valign">center</property>
+										<signal name="state-set" handler="toggle_slideshow_mode"/>
+									</object>
+								</child>
 
 								<child>
-									<object class="GtkSwitch" id="system_wallpaper_settings_toggle">
-										<property name="valign">center</property>
-										<signal name="state-set" handler="toggle_use_system_wallpaper"/>
+									<object class="AdwActionRow">
+										<!-- TRANSLATORS: Used for the slideshow mode switch frequency -->
+										<property name="title" translatable="yes">Switch wallpaper every:</property>
+										<property name="sensitive" bind-source="slideshow_mode_toggle" bind-property="active"/>
+
+										<child>
+											<object class="GtkComboBoxText" id="slideshow_switch_delay_combobox">
+												<property name="valign">center</property>
+												<signal name="changed" handler="set_slideshow_switch_delay"/>
+
+												<items>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="60">1 minute</item>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="180">3 minutes</item>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="300">5 minutes</item>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="600">10 minutes</item>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="900">15 minutes</item>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="1800">30 minutes</item>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="3600">1 hour</item>
+												</items>
+											</object>
+										</child>
 									</object>
 								</child>
 							</object>
@@ -166,6 +199,20 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
 									<object class="GtkColorButton" id="wallpaper_color_button">
 										<property name="valign">center</property>
 										<signal name="color-set" handler="set_wallpaper_color"/>
+									</object>
+								</child>
+							</object>
+						</child>
+
+						<child>
+							<object class="AdwActionRow">
+								<property name="title" translatable="yes">Use system wallpaper settings</property>
+								<property name="subtitle" translatable="yes">If enabled, the launcher inherits the wallpaper from GNOME settings. (Note that this setting only works with GNOME's control center.)</property>
+
+								<child>
+									<object class="GtkSwitch" id="system_wallpaper_settings_toggle">
+										<property name="valign">center</property>
+										<signal name="state-set" handler="toggle_use_system_wallpaper"/>
 									</object>
 								</child>
 							</object>

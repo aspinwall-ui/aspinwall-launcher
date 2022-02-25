@@ -78,7 +78,10 @@ class LauncherSettings(Adw.PreferencesWindow):
 	wallpaper_grid = Gtk.Template.Child()
 	wallpaper_scaling_combobox = Gtk.Template.Child()
 	wallpaper_color_button = Gtk.Template.Child()
+	slideshow_mode_toggle = Gtk.Template.Child()
+	slideshow_switch_delay_combobox = Gtk.Template.Child()
 	system_wallpaper_settings_toggle = Gtk.Template.Child()
+
 	theme_toggle_start = Gtk.Template.Child()
 	theme_toggle_end = Gtk.Template.Child()
 	follow_system_theme_toggle = Gtk.Template.Child()
@@ -134,6 +137,9 @@ class LauncherSettings(Adw.PreferencesWindow):
 			self.system_wallpaper_settings_toggle.set_active(False)
 			self.system_wallpaper_settings_toggle.set_sensitive(False)
 
+		self.slideshow_mode_toggle.set_active(config['slideshow-mode'])
+		self.slideshow_switch_delay_combobox.set_active_id(str(config['slideshow-switch-delay']))
+
 		self.time_format_entry.set_text(config['time-format'])
 		self.date_format_entry.set_text(config['date-format'])
 
@@ -179,6 +185,11 @@ class LauncherSettings(Adw.PreferencesWindow):
 					self.wallpaper_store.remove(current_store.index(wallpaper))
 
 	@Gtk.Template.Callback()
+	def set_slideshow_switch_delay(self, combobox, *args):
+		"""Sets the slideshow switch delay."""
+		config['slideshow-switch-delay'] = int(combobox.get_active_id())
+
+	@Gtk.Template.Callback()
 	def set_wallpaper_scaling(self, combobox, *args):
 		"""Sets the wallpaper scaling settings."""
 		config['wallpaper-scaling'] = int(combobox.get_active_id())
@@ -222,6 +233,14 @@ class LauncherSettings(Adw.PreferencesWindow):
 	@Gtk.Template.Callback()
 	def set_wallpaper_from_grid(self, flowbox, wallpaper_icon):
 		config['wallpaper-path'] = wallpaper_icon.wallpaper
+
+	@Gtk.Template.Callback()
+	def toggle_slideshow_mode(self, switch, *args):
+		"""Toggles slideshow mode based on the switch position."""
+		if switch.get_active():
+			config['slideshow-mode'] = True
+		else:
+			config['slideshow-mode'] = False
 
 	@Gtk.Template.Callback()
 	def toggle_use_system_wallpaper(self, switch, *args):
