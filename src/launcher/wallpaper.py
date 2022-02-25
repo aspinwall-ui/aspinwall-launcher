@@ -2,7 +2,7 @@
 """
 Contains code for handling wallpapers
 """
-from gi.repository import Gtk, Gdk, GdkPixbuf, GLib
+from gi.repository import Gtk, Gdk, GdkPixbuf, GLib, GObject
 from urllib.parse import urlparse
 import math
 import os
@@ -85,6 +85,8 @@ class Wallpaper(Gtk.Box, Dimmable):
 	wallpaper_fade = Gtk.Template.Child()
 	wallpaper_fade_drawable = Gtk.Template.Child()
 
+	_is_preview = False
+
 	# TODO: properly source this
 	scale = 1
 
@@ -110,6 +112,15 @@ class Wallpaper(Gtk.Box, Dimmable):
 		config.connect('changed::use-gnome-background', self.load_image_and_update)
 
 		self.connect('unmap', self._destroy)
+
+	@GObject.Property(type=bool, default=False)
+	def is_preview(self):
+		"""Whether the wallpaper is a preview or not."""
+		return self._is_preview
+
+	@is_preview.setter
+	def is_preview(self, value):
+		self._is_preview = value
 
 	def _destroy(self, *args):
 		"""Removes the wallpaper."""
@@ -145,7 +156,14 @@ class Wallpaper(Gtk.Box, Dimmable):
 			wallpaper_path = config['wallpaper-path']
 		if wallpaper_path and not wallpaper_path == '/' and os.path.exists(wallpaper_path):
 			try:
-				self.image = GdkPixbuf.Pixbuf.new_from_file(wallpaper_path)
+				if not self._is_preview:
+					self.image = GdkPixbuf.Pixbuf.new_from_file(wallpaper_path)
+				else:
+					self.image = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+						wallpaper_path,
+						240, 135, # The settings preview has a set size of 240x135
+						True
+					)
 			except GLib.GError:
 				traceback.print_exc()
 				self.image = None

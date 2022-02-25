@@ -124,6 +124,7 @@
 
 												<child>
 													<object class="Wallpaper" id="wallpaper_preview">
+														<property name="is-preview">true</property>
 														<property name="width-request">240</property>
 														<property name="height-request">135</property>
 													</object>
