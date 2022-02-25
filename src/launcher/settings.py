@@ -199,6 +199,8 @@ class LauncherSettings(Adw.PreferencesWindow):
 			)
 		)
 
+		self.queue_draw()
+
 	@Gtk.Template.Callback()
 	def set_slideshow_switch_delay(self, combobox, *args):
 		"""Sets the slideshow switch delay."""
@@ -248,6 +250,7 @@ class LauncherSettings(Adw.PreferencesWindow):
 	@Gtk.Template.Callback()
 	def set_wallpaper_from_grid(self, flowbox, wallpaper_icon):
 		config['wallpaper-path'] = wallpaper_icon.wallpaper
+		self.queue_draw()
 
 	@Gtk.Template.Callback()
 	def toggle_slideshow_mode(self, switch, *args):
