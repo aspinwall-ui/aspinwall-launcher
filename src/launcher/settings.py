@@ -123,13 +123,8 @@ class LauncherSettings(Adw.PreferencesWindow):
 		)
 		config.connect('changed::available-wallpapers', self.update_wallpaper_grid)
 
-		self.wallpaper_grid.select_child(
-			self.wallpaper_grid.get_child_at_index(
-				config['available-wallpapers'].index(
-					config['wallpaper-path']
-				)
-			)
-		)
+		self.refresh_wallpaper_grid_selection()
+		config.connect('changed::wallpaper-path', self.refresh_wallpaper_grid_selection)
 
 		self.wallpaper_scaling_combobox.set_active_id(str(config['wallpaper-scaling']))
 
@@ -191,6 +186,14 @@ class LauncherSettings(Adw.PreferencesWindow):
 
 		self.wallpaper_sorter.changed(Gtk.SorterChange.DIFFERENT)
 
+		self.refresh_wallpaper_grid_selection()
+
+		self.queue_draw()
+
+	def refresh_wallpaper_grid_selection(self, *args):
+		"""
+		Selects the wallpaper provided in wallpaper-path in the wallpaper grid.
+		"""
 		self.wallpaper_grid.select_child(
 			self.wallpaper_grid.get_child_at_index(
 				config['available-wallpapers'].index(
@@ -198,8 +201,6 @@ class LauncherSettings(Adw.PreferencesWindow):
 				)
 			)
 		)
-
-		self.queue_draw()
 
 	@Gtk.Template.Callback()
 	def set_slideshow_switch_delay(self, combobox, *args):
