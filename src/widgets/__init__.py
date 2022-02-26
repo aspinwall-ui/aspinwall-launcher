@@ -44,8 +44,9 @@ class Widget(GObject.GObject):
 
 		# Set up style context, CSS provider
 		style_context = self.content.get_style_context()
+		print(style_context)
 		self.css_provider = Gtk.CssProvider()
-		style_context.add_provider(self.css_provider, 0)
+		style_context.add_provider(self.css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
 		# Set up config
 		if self.has_config:
