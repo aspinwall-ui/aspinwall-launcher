@@ -4,7 +4,7 @@ Contains code for the widget chooser and widget infoboxes for the chooser.
 """
 from gi.repository import Gtk, Gio, GLib
 
-from aspinwall.widgets import Widget
+from aspinwall.widgets.data import WidgetData
 from aspinwall.widgets.loader import available_widgets
 
 # Pointer to the widget box; set up by the WidgetBox __init__ function,
@@ -27,22 +27,22 @@ class WidgetInfobox(Gtk.Box):
 		"""Initializes a widget infobox."""
 		super().__init__()
 
-	def bind_to_widget(self, widget):
+	def bind_to_widget(self, widget_data):
 		"""Binds the infobox to a widget."""
-		self.widget = widget.__class__
+		self.widget_data = widget_data
 
-		self.widget_icon.set_from_icon_name(widget.metadata['icon'])
+		self.widget_icon.set_from_icon_name(widget_data.metadata['icon'])
 		self.widget_name.set_markup(
-			'<span size="large" font="bold">' + widget.metadata['name'] + '</span>'
+			'<span size="large" font="bold">' + widget_data.metadata['name'] + '</span>'
 		)
 		self.widget_description.set_markup(
-			'<span size="medium">' + widget.metadata['description'] + '</span>'
+			'<span size="medium">' + widget_data.metadata['description'] + '</span>'
 		)
 
 	@Gtk.Template.Callback()
 	def add_widget_from_infobox(self, *args):
 		"""Adds the widget to the widget box."""
-		widgetbox.add_widget(self.widget)
+		widgetbox.add_widget(self.widget_data.widget_class)
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetchooser.ui')
 class WidgetChooser(Gtk.Revealer):
@@ -61,9 +61,9 @@ class WidgetChooser(Gtk.Revealer):
 		factory.connect('bind', self.bind)
 
 		# Set up model and factory
-		store = Gio.ListStore(item_type=Widget)
-		for widget in available_widgets:
-			store.append(widget())
+		store = Gio.ListStore(item_type=WidgetData)
+		for widget_class in available_widgets:
+			store.append(WidgetData(widget_class))
 
 		# Set up sort model
 		self.sort_model = Gtk.SortListModel(model=store)
@@ -88,9 +88,9 @@ class WidgetChooser(Gtk.Revealer):
 
 	def update_model(self):
 		"""Updates the widget list model."""
-		store = Gio.ListStore(item_type=Widget)
+		store = Gio.ListStore(item_type=WidgetData)
 		for widget in available_widgets:
-			store.append(widget())
+			store.append(WidgetData(widget))
 
 		self.sort_model.set_model(store)
 

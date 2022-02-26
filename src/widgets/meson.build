@@ -4,6 +4,7 @@ python = import('python')
 
 widgets_sources = [
   '__init__.py',
+  'data.py',
   'loader.py',
 ]
 
