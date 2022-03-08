@@ -1,0 +1,31 @@
+# coding: utf-8
+"""
+Contains the code for the panel.
+"""
+from gi import require_version as gi_require_version
+gi_require_version("Gtk", "4.0")
+gi_require_version('Adw', '1')
+
+from gi.repository import Adw, Gtk
+from aspinwall.shell.panel import Panel
+
+running = False
+
+def on_activate(app):
+	global running
+	if running:
+		return False
+	running = True
+
+	global win
+	win = Panel(app)
+
+	win.present()
+
+def main(version):
+	global _version
+	_version = version
+	app = Adw.Application(application_id='org.dithernet.aspinwall.Shell')
+	app.set_resource_base_path('/org/dithernet/aspinwall/stylesheet')
+	app.connect('activate', on_activate)
+	app.run()

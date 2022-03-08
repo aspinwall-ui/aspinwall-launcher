@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+	<requires lib="gtk" version="4.0"/>
+	<requires lib="adw" version="1.0"/>
+	<template class="Panel" parent="GtkWindow">
+		<property name="resizable">false</property>
+		<property name="decorated">false</property>
+		<property name="deletable">false</property>
+		<property name="height-request">32</property>
+
+		<style>
+			<class name="aspinwall-panel"/>
+		</style>
+
+		<child>
+			<object class="AdwFlap" id="panel_flap">
+				<child type="content">
+					<object class="GtkBox" id="panel_box">
+						<property name="hexpand">true</property>
+						<property name="homogeneous">true</property>
+
+						<child>
+							<object class="GtkBox" id="status_icon_box">
+								<property name="halign">start</property>
+							</object>
+						</child>
+
+						<child>
+							<object class="GtkLabel" id="clock">
+								<property name="label">00:00</property>
+								<property name="halign">fill</property>
+								<property name="hexpand">true</property>
+
+								<attributes>
+									<attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
+								</attributes>
+							</object>
+						</child>
+
+						<child>
+							<object class="GtkBox" id="battery_icon_box">
+								<property name="halign">start</property>
+							</object>
+						</child>
+					</object>
+				</child>
+
+				<child type="flap">
+					<object class="GtkBox" id="control_panel_box">
+						<style>
+							<class name="aspinwall-control-panel"/>
+						</style>
+					</object>
+				</child>
+			</object>
+		</child>
+	</template>
+</interface>

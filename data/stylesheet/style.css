@@ -18,3 +18,4 @@
 @define-color aspinwall_menu_header_fg rgba(0, 0, 0, 0.8); /* @headerbar_fg_color */
 
 @import url('launcher.css');
+@import url('shell.css');
