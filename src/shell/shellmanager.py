@@ -11,16 +11,23 @@ from aspinwall.shell.panel import Panel
 
 running = False
 
+class ShellManager:
+	"""Main shell daemon class, keeps track of running windows."""
+	def __init__(self, app):
+		"""Initializes the shell."""
+		self.windows = Gtk.WindowGroup()
+
+		self.panel = Panel(app)
+		self.windows.add_window(self.panel)
+
 def on_activate(app):
 	global running
 	if running:
 		return False
 	running = True
 
-	global win
-	win = Panel(app)
-
-	win.present()
+	global shell_manager
+	shell_manager = ShellManager(app)
 
 def main(version):
 	global _version
