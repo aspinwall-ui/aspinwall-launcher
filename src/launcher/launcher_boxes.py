@@ -7,6 +7,7 @@ import threading
 import time
 import uuid
 
+from aspinwall.utils.clock import clock_daemon
 from aspinwall.utils.dimmable import Dimmable
 from aspinwall.launcher.config import config
 from aspinwall.launcher.widgets import LauncherWidget
@@ -282,17 +283,13 @@ class ClockBox(Gtk.Box, Dimmable):
 	def __init__(self):
 		"""Initializes the clock box."""
 		super().__init__()
+		clock_daemon.connect('notify::time', self.update)
 
-		self._updater = threading.Thread(target=self.update, daemon=True)
-		self._updater.start()
-
-	def update(self):
+	def update(self, *args):
 		"""Updates the time and date on the clock."""
-		while True:
-			self.clockbox_time.set_markup(
-				'<span weight="bold" font="36">' + time.strftime(config["time-format"]) + '</span>'
-			)
-			self.clockbox_date.set_markup(
-				'<span font="24">' + time.strftime(config['date-format']) + '</span>'
-			)
-			time.sleep(1)
+		self.clockbox_time.set_markup(
+			'<span weight="bold" font="36">' + time.strftime(config["time-format"]) + '</span>'
+		)
+		self.clockbox_date.set_markup(
+			'<span font="24">' + time.strftime(config['date-format']) + '</span>'
+		)
