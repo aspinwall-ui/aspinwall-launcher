@@ -29,6 +29,7 @@ configure_file(
 utils_sources = [
   '__init__.py',
   'panel.py',
+  'surface.py',
   'shellmanager.py',
 ]
 
