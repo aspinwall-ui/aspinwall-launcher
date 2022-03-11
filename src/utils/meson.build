@@ -3,6 +3,7 @@ submoduledir = join_paths(pkgdatadir, 'aspinwall', 'utils')
 
 utils_sources = [
   '__init__.py',
+  'clock.py',
   'dimmable.py',
 ]
 
