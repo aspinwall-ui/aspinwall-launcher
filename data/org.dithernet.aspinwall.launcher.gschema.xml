@@ -11,7 +11,7 @@
 
 		<!-- Wallpapers -->
 		<key name="wallpaper-path" type="s">
-			<default>"/usr/share/backgrounds/gnome/adwaita-day.png"</default>
+			<default>"fixme"</default>
 			<summary>Path to wallpaper</summary>
 			<description>
 				Path to a wallpaper file.

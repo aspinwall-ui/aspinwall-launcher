@@ -103,6 +103,14 @@ def on_activate(app):
 			wallpaper_files.append(str(wallpaper))
 		config['available-wallpapers'] = wallpaper_files
 
+	if config['wallpaper-path'] == 'fixme':
+		wallpaper_files = config['available-wallpapers']
+		if wallpaper_files:
+			config['wallpaper-path'] = wallpaper_files['0']
+		else:
+			config['wallpaper-path'] = ''
+			config['wallpaper-scaling'] = 0 # solid color
+
 	load_widgets()
 
 	global win
