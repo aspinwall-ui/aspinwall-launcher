@@ -121,6 +121,7 @@ class AppChooser(Gtk.Box):
 	favorites_revealer = Gtk.Template.Child()
 	favorites_grid = Gtk.Template.Child()
 	search = Gtk.Template.Child()
+	no_results = Gtk.Template.Child()
 
 	def __init__(self):
 		"""Initializes an app chooser."""
@@ -269,8 +270,15 @@ class AppChooser(Gtk.Box):
 		else:
 			self.in_search = False
 			self.favorites_revealer.set_reveal_child(True)
+			self.no_results.set_visible(False)
 
 		self.filter.changed(Gtk.FilterChange.DIFFERENT)
+
+		if self.model.get_n_items() == 0:
+			self.no_results.set_visible(True)
+		else:
+			self.no_results.set_visible(False)
+
 		# Select first item in list
 		first_item = self.app_grid.get_first_child()
 		if first_item:
