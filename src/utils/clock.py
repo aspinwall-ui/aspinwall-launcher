@@ -18,7 +18,7 @@ class ClockDaemon(GObject.Object):
 	def __init__(self):
 		"""Initializes the clock daemon."""
 		super().__init__()
-		self.update_thread = threading.Thread(target=self.update_func)
+		self.update_thread = threading.Thread(target=self.update_func, daemon=True)
 		self.update_thread.start()
 
 	def update_func(self):
