@@ -14,10 +14,12 @@ class Panel(Surface):
 	__gtype_name__ = 'Panel'
 
 	clock = Gtk.Template.Child()
+	status_icons_start = Gtk.Template.Child()
+	status_icons_end = Gtk.Template.Child()
 
 	def __init__(self, app):
 		"""Initializes the panel."""
-		super().__init__(application=app, hexpand=True, height=32)
+		super().__init__(application=app, hexpand=True, height=36)
 		clock_daemon.connect('notify::time', self.update_time)
 		self.clock.set_label(time.strftime('%H:%M'))
 
