@@ -51,6 +51,7 @@ class WidgetChooser(Gtk.Revealer):
 
 	widget_list = Gtk.Template.Child()
 	search = Gtk.Template.Child()
+	no_results = Gtk.Template.Child()
 
 	def __init__(self):
 		"""Initializes a widget chooser."""
@@ -129,6 +130,12 @@ class WidgetChooser(Gtk.Revealer):
 	def search_changed(self, *args):
 		"""Notifies the filter about search changes."""
 		self.filter.changed(Gtk.FilterChange.DIFFERENT)
+
+		if self.model.get_n_items() == 0:
+			self.no_results.set_visible(True)
+		else:
+			self.no_results.set_visible(False)
+
 		# Select first item in list
 		selection_model = self.widget_list.get_model()
 		selection_model.set_selected(0)

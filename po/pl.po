@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-12 21:17+0100\n"
+"POT-Creation-Date: 2022-03-12 21:18+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -201,11 +201,11 @@ msgstr "Copyright © 2022 Deweloperzy Aspinwall"
 msgid "Search apps…"
 msgstr "Szukaj aplikacji…"
 
-#: src/launcher/ui/appchooser.ui:122
+#: src/launcher/ui/appchooser.ui:122 src/launcher/ui/widgetchooser.ui:65
 msgid "No Results Found"
 msgstr "Brak wyników wyszukiwania"
 
-#: src/launcher/ui/appchooser.ui:123
+#: src/launcher/ui/appchooser.ui:123 src/launcher/ui/widgetchooser.ui:66
 msgid "Try a different search"
 msgstr "Spróbuj innych słów kluczowych"
 

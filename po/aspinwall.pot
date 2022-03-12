@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-12 21:17+0100\n"
+"POT-Creation-Date: 2022-03-12 21:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,11 +188,11 @@ msgstr ""
 msgid "Search apps…"
 msgstr ""
 
-#: src/launcher/ui/appchooser.ui:122
+#: src/launcher/ui/appchooser.ui:122 src/launcher/ui/widgetchooser.ui:65
 msgid "No Results Found"
 msgstr ""
 
-#: src/launcher/ui/appchooser.ui:123
+#: src/launcher/ui/appchooser.ui:123 src/launcher/ui/widgetchooser.ui:66
 msgid "Try a different search"
 msgstr ""
 
