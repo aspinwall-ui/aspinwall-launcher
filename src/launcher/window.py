@@ -109,7 +109,7 @@ def on_activate(app):
 			config['wallpaper-path'] = wallpaper_files['0']
 		else:
 			config['wallpaper-path'] = ''
-			config['wallpaper-scaling'] = 0 # solid color
+			config['wallpaper-style'] = 0 # solid color
 
 	load_widgets()
 

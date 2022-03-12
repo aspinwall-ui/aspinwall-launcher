@@ -107,7 +107,7 @@ class Wallpaper(Gtk.Box, Dimmable):
 		config.connect('changed::wallpaper-path', self.load_and_update_aspinwall)
 		if bg_config:
 			bg_config.connect('changed::picture-uri', self.load_and_update_gnome)
-		config.connect('changed::wallpaper-scaling', self.load_image_and_update)
+		config.connect('changed::wallpaper-style', self.load_image_and_update)
 		config.connect('changed::wallpaper-color', self.load_image_and_update)
 		config.connect('changed::use-gnome-background', self.load_image_and_update)
 
@@ -178,9 +178,9 @@ class Wallpaper(Gtk.Box, Dimmable):
 		self.fade_pixbuf = self.pixbuf
 
 		if self.image:
-			if config['wallpaper-scaling'] == 0:
+			if config['wallpaper-style'] == 0:
 				self.pixbuf = self.blank_bg(width, height)
-			elif config['wallpaper-scaling'] == 1:
+			elif config['wallpaper-style'] == 1:
 				self.pixbuf = self.scale_to_fit(width, height)
 			else:
 				self.pixbuf = self.scale_to_min(width, height)

@@ -291,9 +291,9 @@
 								<property name="title" translatable="yes">Wallpaper style</property>
 
 								<child>
-									<object class="GtkComboBoxText" id="wallpaper_scaling_combobox">
+									<object class="GtkComboBoxText" id="wallpaper_style_combobox">
 										<property name="valign">center</property>
-										<signal name="changed" handler="set_wallpaper_scaling"/>
+										<signal name="changed" handler="set_wallpaper_style"/>
 
 										<items>
 											<!-- TRANSLATORS: Wallpaper scaling option -->

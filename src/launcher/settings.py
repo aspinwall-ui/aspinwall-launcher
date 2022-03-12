@@ -83,7 +83,7 @@ class LauncherSettings(Adw.PreferencesWindow):
 	__gtype_name__ = 'LauncherSettings'
 
 	wallpaper_grid = Gtk.Template.Child()
-	wallpaper_scaling_combobox = Gtk.Template.Child()
+	wallpaper_style_combobox = Gtk.Template.Child()
 	wallpaper_color_button = Gtk.Template.Child()
 	slideshow_mode_toggle = Gtk.Template.Child()
 	slideshow_switch_delay_combobox = Gtk.Template.Child()
@@ -126,7 +126,7 @@ class LauncherSettings(Adw.PreferencesWindow):
 		self.refresh_wallpaper_grid_selection()
 		config.connect('changed::wallpaper-path', self.refresh_wallpaper_grid_selection)
 
-		self.wallpaper_scaling_combobox.set_active_id(str(config['wallpaper-scaling']))
+		self.wallpaper_style_combobox.set_active_id(str(config['wallpaper-style']))
 
 		self.wallpaper_color_button.set_use_alpha(False)
 		bg_color = Gdk.RGBA()
@@ -208,9 +208,9 @@ class LauncherSettings(Adw.PreferencesWindow):
 		config['slideshow-switch-delay'] = int(combobox.get_active_id())
 
 	@Gtk.Template.Callback()
-	def set_wallpaper_scaling(self, combobox, *args):
-		"""Sets the wallpaper scaling settings."""
-		config['wallpaper-scaling'] = int(combobox.get_active_id())
+	def set_wallpaper_style(self, combobox, *args):
+		"""Sets the wallpaper style settings."""
+		config['wallpaper-style'] = int(combobox.get_active_id())
 
 	@Gtk.Template.Callback()
 	def set_wallpaper_color(self, button, *args):
