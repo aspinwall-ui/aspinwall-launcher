@@ -6,6 +6,7 @@ from gi.repository import Gtk
 
 from aspinwall.shell.surface import Surface
 from aspinwall.utils.clock import clock_daemon
+from aspinwall.shell.config import config
 import time
 import threading
 import psutil
@@ -34,6 +35,19 @@ class Panel(Surface):
 			daemon=True
 		)
 		self.update_status_thread.start()
+
+		config.connect('changed::show-battery-percentage', self.toggle_battery_percentage)
+		self.toggle_battery_percentage()
+
+	def toggle_battery_percentage(self, *args):
+		"""
+		Toggles the battery percentage display on or off based on the
+		config option.
+		"""
+		if config['show-battery-percentage']:
+			self.battery_percentage.set_visible(True)
+		else:
+			self.battery_percentage.set_visible(False)
 
 	def update_time(self, *args):
 		"""Updates the time on the clock."""
@@ -72,4 +86,4 @@ class Panel(Surface):
 
 			self.battery_icon.set_from_icon_name(battery_icon_name + '-symbolic')
 			self.battery_percentage.set_label(str(percentage) + '%')
-			time.sleep(5)
+			time.sleep(config['status-icon-refresh-delay'])

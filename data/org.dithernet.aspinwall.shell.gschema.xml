@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schemalist gettext-domain="aspinwall">
+	<schema path="/org/dithernet/aspinwall/shell/" id="org.dithernet.aspinwall.shell">
+		<!-- Panel -->
+		<key name="status-icon-refresh-delay" type="i">
+			<default>5</default>
+			<summary>Status icon refresh delay</summary>
+			<description>
+				How often the status icons should be refreshed, in seconds. Does not apply to the clock.
+			</description>
+		</key>
+
+		<key name="show-battery-percentage" type="b">
+			<default>false</default>
+			<summary>Show battery percentage</summary>
+			<description>
+				Shows a battery percentage label next to the battery icon on the status bar.
+			</description>
+		</key>
+	</schema>
+</schemalist>
