@@ -2,15 +2,17 @@
 
 Linux tablet shell that turns your device into a smart hub when not in use
 
+![Launcher screenshot](docs/launcher-screenshot.png)
+
 ## About
 
 Aspinwall is a Linux interface for tablets and touchscreen devices. It offers:
 
 - A clean, focused launcher with a widget view - reminiscent of smart hub devices
 - *(TODO)* Multitasking features, such as a dedicated app list and easy window control
-- *(TODO)* Some level of convergence - the shell works on both vertical (portrait) and horizontal (landscape) displays, and the launcher can be set to display on a separate screen by default
-- *(TODO)* A widget API for creating your own widgets
-- *(TODO)* Integration with Mycroft
+- Some level of convergence - the shell works on both vertical (portrait) and horizontal (landscape) displays, and the launcher can be set to display on a separate screen by default
+- A widget API for creating your own widgets
+- Integration with voice assistants (see our Mycroft GUI, [Lapel](https://github.com/aspinwall-ui/lapel))
 
 ## Installing
 
