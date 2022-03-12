@@ -111,7 +111,7 @@ class Wallpaper(Gtk.Box, Dimmable):
 		config.connect('changed::wallpaper-color', self.load_image_and_update)
 		config.connect('changed::use-gnome-background', self.load_image_and_update)
 
-		self.connect('unmap', self._destroy)
+		self.connect('unrealize', self._destroy)
 
 	@GObject.Property(type=bool, default=False)
 	def is_preview(self):
