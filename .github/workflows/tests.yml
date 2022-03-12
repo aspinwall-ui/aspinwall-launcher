@@ -3,8 +3,20 @@ name: Linting and tests
 on:
   push:
     branches: [ develop ]
+    paths-ignore:
+      - 'README.md'
+      - 'CODINGSTYLE.md'
+      - 'LICENSE'
+      - 'po/**'
+      - 'docs/**'
   pull_request:
     branches: [ develop ]
+    paths-ignore:
+      - 'README.md'
+      - 'CODINGSTYLE.md'
+      - 'LICENSE'
+      - 'po/**'
+      - 'docs/**'
 
 jobs:
   test:
