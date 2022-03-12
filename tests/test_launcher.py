@@ -9,7 +9,7 @@ from gi import require_version as gi_require_version
 gi_require_version("Gtk", "4.0")
 gi_require_version('Adw', '1')
 from gi.repository import Adw, Gtk, Gdk, Gio # noqa: F401
-from gi.repository.Adw import Flap, ToastOverlay, ButtonContent, Leaflet # noqa: F401
+from gi.repository.Adw import Flap, ToastOverlay, ButtonContent, Leaflet, StatusPage # noqa: F401
 
 @pytest.fixture
 def window():
