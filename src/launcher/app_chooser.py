@@ -72,6 +72,9 @@ class AppIcon(Gtk.FlowBoxChild):
 			app_chooser.filter.changed(Gtk.FilterChange.MORE_STRICT)
 			app_chooser.favorites_filter.changed(Gtk.FilterChange.LESS_STRICT)
 
+			if not app_chooser.in_search:
+				app_chooser.favorites_revealer.set_reveal_child(True)
+
 	def unfavorite(self, app_icon, *args):
 		"""Removes the app from favorites."""
 		if app_icon.app.get_filename() in config['favorite-apps']:
@@ -85,6 +88,9 @@ class AppIcon(Gtk.FlowBoxChild):
 
 			app_chooser.filter.changed(Gtk.FilterChange.LESS_STRICT)
 			app_chooser.favorites_filter.changed(Gtk.FilterChange.MORE_STRICT)
+
+			if not new_list:
+				app_chooser.favorites_revealer.set_reveal_child(False)
 
 	@Gtk.Template.Callback()
 	def run(self, *args):
@@ -107,6 +113,9 @@ class AppIcon(Gtk.FlowBoxChild):
 class AppChooser(Gtk.Box):
 	"""App chooser widget."""
 	__gtype_name__ = 'AppChooser'
+
+	# Whether we are currently searching or not
+	in_search = False
 
 	app_grid = Gtk.Template.Child()
 	favorites_revealer = Gtk.Template.Child()
@@ -147,6 +156,12 @@ class AppChooser(Gtk.Box):
 
 		# Set up favorites grid
 		self.favorites_grid.bind_model(self.favorites_model, self.bind, None)
+
+		# Show/hide the favorites depending on whether there are any
+		if config['favorite-apps']:
+			self.favorites_revealer.set_reveal_child(True)
+		else:
+			self.favorites_revealer.set_reveal_child(False)
 
 		global app_chooser
 		app_chooser = self
@@ -197,6 +212,11 @@ class AppChooser(Gtk.Box):
 					self.filter.changed(Gtk.FilterChange.DIFFERENT)
 					self.favorites_filter.changed(Gtk.FilterChange.DIFFERENT)
 
+		if config['favorite-apps'] and not self.in_search:
+			self.favorites_revealer.set_reveal_child(True)
+		else:
+			self.favorites_revealer.set_reveal_child(False)
+
 	def bind(self, app, *args):
 		"""Binds the list items in the app grid."""
 		return AppIcon(app)
@@ -244,8 +264,10 @@ class AppChooser(Gtk.Box):
 	def search_changed(self, search_entry, *args):
 		"""Notifies the filter about search changes."""
 		if search_entry.get_text():
+			self.in_search = True
 			self.favorites_revealer.set_reveal_child(False)
 		else:
+			self.in_search = False
 			self.favorites_revealer.set_reveal_child(True)
 
 		self.filter.changed(Gtk.FilterChange.DIFFERENT)
