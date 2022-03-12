@@ -68,12 +68,14 @@
 											<object class="GtkLabel" id="battery_percentage">
 												<property name="label">N/A</property>
 												<property name="visible">false</property>
+												<property name="valign">center</property>
 											</object>
 										</child>
 
 										<child>
 											<object class="GtkImage" id="battery_icon">
 												<property name="icon-name">battery-missing-symbolic</property>
+												<property name="valign">center</property>
 											</object>
 										</child>
 									</object>
