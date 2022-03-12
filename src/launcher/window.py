@@ -122,6 +122,8 @@ def on_activate(app):
 		win_surface = win.get_surface()
 		win.set_size_request(win_surface.get_width(), win_surface.get_height())
 		win.fullscreen()
+	else:
+		win.set_size_request(1270, 720)
 
 def main(version):
 	global _version
