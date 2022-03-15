@@ -40,14 +40,31 @@ class Panel(Surface):
 		self.toggle_battery_percentage()
 
 		# Set up swipe-to-show-control-panel
-		click_gesture = Gtk.GestureClick.new()
-		click_gesture.connect('pressed', self.show_control_panel)
-		self.add_controller(click_gesture)
+		swipe_gesture = Gtk.GestureSwipe.new()
+		swipe_gesture.connect('swipe', self.swipe_handler)
+		self.add_controller(swipe_gesture)
 
-	def show_control_panel(self, *args):
-		"""Shows the control panel."""
-		from aspinwall.shell.control_panel import control_panel
-		control_panel.show_control_panel()
+	def swipe_handler(self, handler, x, y, *args):
+		"""Handles swipes on the panel."""
+		if y > 0:
+			from aspinwall.shell.control_panel import control_panel
+			control_panel_revealer = control_panel.container_revealer
+
+			panel_width = self.get_width()
+			if panel_width <= 320:
+				control_panel_revealer.set_halign(Gtk.Align.FILL)
+			else:
+				tapped_x = handler.get_point().x
+				one_third_panel_width = panel_width / 3
+
+				if tapped_x <= one_third_panel_width:
+					control_panel_revealer.set_halign(Gtk.Align.START)
+				elif tapped_x <= one_third_panel_width * 2:
+					control_panel_revealer.set_halign(Gtk.Align.CENTER)
+				else:
+					control_panel_revealer.set_halign(Gtk.Align.END)
+
+			control_panel.show_control_panel()
 
 	def toggle_battery_percentage(self, *args):
 		"""
