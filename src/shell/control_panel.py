@@ -2,7 +2,7 @@
 """
 Contains code for the control panel that appears after dragging the panel.
 """
-from gi.repository import Gdk, Gtk
+from gi.repository import Adw, Gdk, Gtk
 
 from aspinwall.shell.surface import Surface
 
@@ -37,14 +37,34 @@ class ControlPanelContainer(Surface):
 		clickaway_gesture.connect('pressed', self.hide_control_panel)
 		self.container_bg.add_controller(clickaway_gesture)
 
+	def fadeout_worker(self, value, *args):
+		"""Used by the background fadeout animation."""
+		self.container_bg.set_opacity(value)
+
 	def show_control_panel(self, *args):
 		"""Shows the control panel."""
 		self.set_visible(True)
 		self.container_revealer.set_reveal_child(True)
 
+		# Fade in background
+		anim = Adw.TimedAnimation.new(
+			self,
+			0, 1, 250,
+			Adw.CallbackAnimationTarget.new(self.fadeout_worker)
+		)
+		anim.play()
+
 	def hide_control_panel(self, *args):
 		"""Hides the control panel."""
 		self.container_revealer.set_reveal_child(False)
+
+		# Fade out background
+		anim = Adw.TimedAnimation.new(
+			self,
+			1, 0, 250,
+			Adw.CallbackAnimationTarget.new(self.fadeout_worker)
+		)
+		anim.play()
 
 	def change_visibility(self, *args):
 		"""Sets the container visibility based on reveal progress."""
