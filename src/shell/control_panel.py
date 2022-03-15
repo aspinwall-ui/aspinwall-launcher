@@ -5,6 +5,8 @@ Contains code for the control panel that appears after dragging the panel.
 from gi.repository import Adw, Gdk, Gtk
 
 from aspinwall.shell.surface import Surface
+from aspinwall.utils.clock import clock_daemon
+import time
 
 control_panel = None
 
@@ -33,6 +35,7 @@ class ControlPanelContainer(Surface):
 
 		self.container_revealer.connect('notify::child-revealed', self.change_visibility)
 
+		# Add clickaway gesture for the background behind the panel
 		clickaway_gesture = Gtk.GestureClick.new()
 		clickaway_gesture.connect('pressed', self.hide_control_panel)
 		self.container_bg.add_controller(clickaway_gesture)
@@ -83,11 +86,22 @@ class ControlPanel(Gtk.Box):
 	"""
 	__gtype_name__ = 'ControlPanel'
 
+	clock_time = Gtk.Template.Child()
+	clock_date = Gtk.Template.Child()
+
 	def __init__(self):
 		"""Initializes the control panel."""
 		super().__init__()
 
+		clock_daemon.connect('notify::time', self.update_time)
+		self.update_time()
+
 		self.connect('map', self.set_size)
+
+	def update_time(self, *args):
+		"""Updates the clock in the control panel."""
+		self.clock_time.set_label(time.strftime('%H:%M'))
+		self.clock_date.set_label(time.strftime('%x'))
 
 	def set_size(self, *args):
 		"""Sets the size for the control panel."""
