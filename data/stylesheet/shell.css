@@ -6,3 +6,19 @@
 	font-size: 16px;
 	-gtk-icon-size: 22px;
 }
+
+.aspinwall-control-panel {
+	background-color: black;
+	color: white;
+	font-size: 18px;
+	-gtk-icon-size: 22px;
+	padding: 6px;
+}
+
+.transparent {
+	background: transparent;
+}
+
+.control-panel-flap-bg {
+	background-color: rgba(0, 0, 0, 0.30);
+}

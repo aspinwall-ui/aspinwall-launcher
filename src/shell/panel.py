@@ -39,6 +39,16 @@ class Panel(Surface):
 		config.connect('changed::show-battery-percentage', self.toggle_battery_percentage)
 		self.toggle_battery_percentage()
 
+		# Set up swipe-to-show-control-panel
+		click_gesture = Gtk.GestureClick.new()
+		click_gesture.connect('pressed', self.show_control_panel)
+		self.add_controller(click_gesture)
+
+	def show_control_panel(self, *args):
+		"""Shows the control panel."""
+		from aspinwall.shell.control_panel import control_panel
+		control_panel.show_control_panel()
+
 	def toggle_battery_percentage(self, *args):
 		"""
 		Toggles the battery percentage display on or off based on the

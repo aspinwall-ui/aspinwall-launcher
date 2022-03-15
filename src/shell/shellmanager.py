@@ -7,6 +7,7 @@ gi_require_version("Gtk", "4.0")
 gi_require_version('Adw', '1')
 
 from gi.repository import Adw, Gtk
+from aspinwall.shell.control_panel import ControlPanelContainer
 from aspinwall.shell.panel import Panel
 
 running = False
@@ -16,6 +17,12 @@ class ShellManager:
 	def __init__(self, app):
 		"""Initializes the shell."""
 		self.windows = Gtk.WindowGroup()
+
+		style_manager = Adw.StyleManager.get_default()
+		style_manager.set_color_scheme(Adw.ColorScheme.FORCE_DARK)
+
+		self.control_panel = ControlPanelContainer(app)
+		self.windows.add_window(self.control_panel)
 
 		self.panel = Panel(app)
 		self.windows.add_window(self.panel)

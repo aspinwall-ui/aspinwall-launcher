@@ -38,3 +38,4 @@ class Surface(Gtk.Window):
 		self.set_size_request(width, height)
 
 		# TODO: Set surface alignment
+

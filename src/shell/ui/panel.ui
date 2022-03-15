@@ -9,87 +9,75 @@
 		</style>
 
 		<child>
-			<object class="AdwFlap" id="panel_flap">
-				<child type="content">
-					<object class="GtkBox" id="panel_box">
-						<property name="hexpand">true</property>
-						<property name="homogeneous">true</property>
+			<object class="GtkBox" id="panel_box">
+				<property name="hexpand">true</property>
+				<property name="homogeneous">true</property>
+
+				<child>
+					<object class="GtkBox" id="status_icons_start">
+						<property name="halign">start</property>
+						<property name="margin-start">6</property>
+						<property name="spacing">6</property>
 
 						<child>
-							<object class="GtkBox" id="status_icons_start">
-								<property name="halign">start</property>
-								<property name="margin-start">6</property>
-								<property name="spacing">6</property>
-
-								<child>
-									<object class="GtkImage" id="cellular_icon">
-										<property name="icon-name">network-cellular-signal-none-symbolic</property>
-										<property name="visible">false</property>
-									</object>
-								</child>
-
-								<child>
-									<object class="GtkImage" id="wifi_icon">
-										<property name="icon-name">network-wireless-signal-none-symbolic</property>
-									</object>
-								</child>
+							<object class="GtkImage" id="cellular_icon">
+								<property name="icon-name">network-cellular-signal-none-symbolic</property>
+								<property name="visible">false</property>
 							</object>
 						</child>
 
 						<child>
-							<object class="GtkLabel" id="clock">
-								<property name="label">00:00</property>
-								<property name="halign">fill</property>
-								<property name="hexpand">true</property>
-
-								<attributes>
-									<attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
-								</attributes>
-							</object>
-						</child>
-
-						<child>
-							<object class="GtkBox" id="status_icons_end">
-								<property name="halign">end</property>
-								<property name="margin-end">6</property>
-								<property name="spacing">6</property>
-
-								<child>
-									<object class="GtkBox" id="battery_icon_container">
-										<property name="halign">end</property>
-										<property name="valign">fill</property>
-										<property name="spacing">5</property>
-
-										<style>
-											<class name="linked"/>
-										</style>
-
-										<child>
-											<object class="GtkLabel" id="battery_percentage">
-												<property name="label">N/A</property>
-												<property name="visible">false</property>
-												<property name="valign">center</property>
-											</object>
-										</child>
-
-										<child>
-											<object class="GtkImage" id="battery_icon">
-												<property name="icon-name">battery-missing-symbolic</property>
-												<property name="valign">center</property>
-											</object>
-										</child>
-									</object>
-								</child>
+							<object class="GtkImage" id="wifi_icon">
+								<property name="icon-name">network-wireless-signal-none-symbolic</property>
 							</object>
 						</child>
 					</object>
 				</child>
 
-				<child type="flap">
-					<object class="GtkBox" id="control_panel_box">
-						<style>
-							<class name="aspinwall-control-panel"/>
-						</style>
+				<child>
+					<object class="GtkLabel" id="clock">
+						<property name="label">00:00</property>
+						<property name="halign">fill</property>
+						<property name="hexpand">true</property>
+
+						<attributes>
+							<attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
+						</attributes>
+					</object>
+				</child>
+
+				<child>
+					<object class="GtkBox" id="status_icons_end">
+						<property name="halign">end</property>
+						<property name="margin-end">6</property>
+						<property name="spacing">6</property>
+
+						<child>
+							<object class="GtkBox" id="battery_icon_container">
+								<property name="halign">end</property>
+								<property name="valign">fill</property>
+								<property name="spacing">5</property>
+
+								<style>
+									<class name="linked"/>
+								</style>
+
+								<child>
+									<object class="GtkLabel" id="battery_percentage">
+										<property name="label">N/A</property>
+										<property name="visible">false</property>
+										<property name="valign">center</property>
+									</object>
+								</child>
+
+								<child>
+									<object class="GtkImage" id="battery_icon">
+										<property name="icon-name">battery-missing-symbolic</property>
+										<property name="valign">center</property>
+									</object>
+								</child>
+							</object>
+						</child>
 					</object>
 				</child>
 			</object>
