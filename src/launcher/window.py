@@ -106,7 +106,7 @@ def on_activate(app):
 	if config['wallpaper-path'] == 'fixme':
 		wallpaper_files = config['available-wallpapers']
 		if wallpaper_files:
-			config['wallpaper-path'] = wallpaper_files['0']
+			config['wallpaper-path'] = wallpaper_files[0]
 		else:
 			config['wallpaper-path'] = ''
 			config['wallpaper-style'] = 0 # solid color
