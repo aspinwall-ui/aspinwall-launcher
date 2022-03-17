@@ -402,6 +402,23 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
 
 								<child>
 									<object class="AdwActionRow">
+										<!-- TRANSLATORS: Used for the "reset time format to default" option. -->
+										<property name="title" translatable="yes">Reset to defaults</property>
+										<property name="subtitle" translatable="yes">Sets the time format to default settings.</property>
+
+										<child>
+											<object class="GtkButton">
+												<!-- TRANSLATORS: Used for the "reset time format to default" option. -->
+												<property name="label" translatable="yes">Reset</property>
+												<property name="valign">center</property>
+												<signal name="clicked" handler="reset_time_format"/>
+											</object>
+										</child>
+									</object>
+								</child>
+
+								<child>
+									<object class="AdwActionRow">
 										<property name="title" translatable="yes">Time format string</property>
 
 										<child>

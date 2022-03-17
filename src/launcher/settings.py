@@ -292,6 +292,15 @@ class LauncherSettings(Adw.PreferencesWindow):
 			self.toggle_theme(self.theme_toggle_start)
 
 	@Gtk.Template.Callback()
+	def reset_time_format(self, *args):
+		"""Resets the clock format settings to defaults."""
+		config.reset('time-format')
+		self.time_format_entry.set_text(config['time-format'])
+
+		config.reset('date-format')
+		self.date_format_entry.set_text(config['date-format'])
+
+	@Gtk.Template.Callback()
 	def change_time_format(self, text_field, *args):
 		"""Changes the clockbox time format based on the text field content."""
 		config['time-format'] = text_field.get_text()

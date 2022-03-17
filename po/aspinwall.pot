@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-12 21:18+0100\n"
+"POT-Creation-Date: 2022-03-17 22:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -142,7 +142,7 @@ msgstr ""
 
 #. TRANSLATORS: This can also be translated as just "time format"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:113
-#: src/launcher/ui/settings.ui:405
+#: src/launcher/ui/settings.ui:422
 msgid "Time format string"
 msgstr ""
 
@@ -159,7 +159,7 @@ msgstr ""
 
 #. TRANSLATORS: This can also be translated as just "date format"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:123
-#: src/launcher/ui/settings.ui:418
+#: src/launcher/ui/settings.ui:435
 msgid "Date format string"
 msgstr ""
 
@@ -316,6 +316,20 @@ msgid ""
 "Set the format to use when displaying the time and date, following <a "
 "href='https://docs.python.org/3/library/time.html#time.strftime'>the time "
 "format string specification</a>."
+msgstr ""
+
+#. TRANSLATORS: Used for the "reset time format to default" option.
+#: src/launcher/ui/settings.ui:406
+msgid "Reset to defaults"
+msgstr ""
+
+#: src/launcher/ui/settings.ui:407
+msgid "Sets the time format to default settings."
+msgstr ""
+
+#. TRANSLATORS: Used for the "reset time format to default" option.
+#: src/launcher/ui/settings.ui:412
+msgid "Reset"
 msgstr ""
 
 #: src/launcher/ui/widgetbox.ui:127
