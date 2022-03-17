@@ -12,7 +12,21 @@ control_panel = None
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/shell/ui/controlpanelbutton.ui')
 class ControlPanelButton(Gtk.FlowBoxChild):
-	"""Button for the control panel."""
+	"""
+	Button for the control panel.
+
+	Properties:
+	  - icon_name - the name of the icon to use for the button.
+	  - icon_label - the label to display under the button.
+	  - icon_active - whether the icon is active or not.
+
+	Functions:
+	  - make_active() - makes the button active.
+	  - make_inactive() - makes the button inactive.
+
+	Signals:
+	  - icon-clicked - emitted when the button in the icon is clicked.
+	"""
 	__gtype_name__ = 'ControlPanelButton'
 
 	action_button = Gtk.Template.Child()
@@ -23,7 +37,7 @@ class ControlPanelButton(Gtk.FlowBoxChild):
 	_icon_name = 'system-preferences-symbolic'
 	_icon_active = False
 
-	def __init__(self, icon_name=None, icon_label=None, icon_active=None, target_function=None):
+	def __init__(self, icon_name=None, icon_label=None, icon_active=None):
 		"""Initializes the control panel icon."""
 		super().__init__()
 		if icon_name:
@@ -32,8 +46,11 @@ class ControlPanelButton(Gtk.FlowBoxChild):
 			self.set_icon_label(icon_label)
 		if icon_active:
 			self.set_icon_active(icon_active)
-		if target_function:
-			self.set_target_function(target_function)
+		self.action_button.connect('clicked', self.emit_icon_clicked)
+
+	def emit_icon_clicked(self, *args):
+		"""Emits the icon-clicked signal. Used by the action button."""
+		self.emit('icon-clicked')
 
 	@GObject.Property(type=str)
 	def icon_name(self):
@@ -70,6 +87,19 @@ class ControlPanelButton(Gtk.FlowBoxChild):
 			self.action_button.add_css_class('active')
 		else:
 			self.action_button.remove_css_class('active')
+
+	@GObject.Signal
+	def icon_clicked(self, *args):
+		"""Emitted when the button in the icon is clicked."""
+		pass
+
+	def make_active(self, *args):
+		"""Convenience function that makes the button active."""
+		self.set_property('icon_active', True)
+
+	def make_inactive(self, *args):
+		"""Convenience function that makes the button inactive."""
+		self.set_property('icon_active', False)
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/shell/ui/controlpanelcontainer.ui')
 class ControlPanelContainer(Surface):

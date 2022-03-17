@@ -96,6 +96,7 @@
 										<property name="icon-active">true</property>
 									</object>
 								</child>
+
 								<child>
 									<object class="ControlPanelButton"/>
 								</child>
