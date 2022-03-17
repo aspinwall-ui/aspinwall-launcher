@@ -3,9 +3,7 @@
 Notepad plugin for Aspinwall
 """
 from aspinwall.widgets import Widget
-from gi.repository import Gtk, Gio
-
-from gettext import gettext as _
+from gi.repository import Gtk
 
 class Notepad(Widget):
 	metadata = {

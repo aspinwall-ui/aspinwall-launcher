@@ -4,8 +4,6 @@ Contains basic code for the launcher's widget handling.
 """
 from gi.repository import Gtk, Gdk, GObject
 
-from aspinwall.widgets.data import WidgetData
-
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetheader.ui')
 class LauncherWidgetHeader(Gtk.Box):
 	"""Header for LauncherWidget."""

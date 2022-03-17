@@ -31,11 +31,10 @@ class Surface(Gtk.Window):
 		monitor = Gdk.Display.get_default().get_monitor_at_surface(
 			self.get_surface()
 		)
-		if hexpand == True:
+		if hexpand is True:
 			width = monitor.get_geometry().width
-		if vexpand == True:
+		if vexpand is True:
 			height = monitor.get_geometry().height
 		self.set_size_request(width, height)
 
 		# TODO: Set surface alignment
-

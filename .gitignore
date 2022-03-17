@@ -7,6 +7,7 @@ __pycache__/
 .coverage
 htmlcov/
 coverage.xml
+fil-result
 
 dist/
 build/
