@@ -1,6 +1,9 @@
 #!/bin/sh
-rm -r output
-rm -r /tmp/aspinwall
+if [ ! -e src ]; then echo "Not in aspinwall source directory"; exit 1; fi
+
+if [ -e output ]; then rm -r output; fi
+
+set -e
 meson --prefix=/tmp/aspinwall . output
 meson compile -C output
 meson install -C output
