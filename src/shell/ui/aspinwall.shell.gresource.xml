@@ -2,6 +2,7 @@
 <gresources>
 	<gresource prefix="/org/dithernet/aspinwall/shell">
 		<file preprocess="xml-stripblanks">ui/controlpanel.ui</file>
+		<file preprocess="xml-stripblanks">ui/controlpanelbutton.ui</file>
 		<file preprocess="xml-stripblanks">ui/controlpanelcontainer.ui</file>
 		<file preprocess="xml-stripblanks">ui/panel.ui</file>
 	</gresource>

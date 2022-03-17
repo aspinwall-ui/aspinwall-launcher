@@ -23,6 +23,9 @@
 						<property name="valign">start</property>
 						<property name="transition-type">slide-down</property>
 
+						<property name="margin-start">50</property>
+						<property name="margin-end">50</property>
+
 						<style>
 							<class name="control-panel-flap"/>
 						</style>

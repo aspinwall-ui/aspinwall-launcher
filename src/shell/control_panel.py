@@ -2,13 +2,74 @@
 """
 Contains code for the control panel that appears after dragging the panel.
 """
-from gi.repository import Adw, Gdk, Gtk
+from gi.repository import Adw, Gdk, Gtk, GObject
 
 from aspinwall.shell.surface import Surface
 from aspinwall.utils.clock import clock_daemon
 import time
 
 control_panel = None
+
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/shell/ui/controlpanelbutton.ui')
+class ControlPanelButton(Gtk.FlowBoxChild):
+	"""Button for the control panel."""
+	__gtype_name__ = 'ControlPanelButton'
+
+	action_button = Gtk.Template.Child()
+	action_button_icon = Gtk.Template.Child()
+	action_label = Gtk.Template.Child()
+
+	_icon_label = 'Unknown'
+	_icon_name = 'system-preferences-symbolic'
+	_icon_active = False
+
+	def __init__(self, icon_name=None, icon_label=None, icon_active=None, target_function=None):
+		"""Initializes the control panel icon."""
+		super().__init__()
+		if icon_name:
+			self.set_icon_name(icon_name)
+		if icon_label:
+			self.set_icon_label(icon_label)
+		if icon_active:
+			self.set_icon_active(icon_active)
+		if target_function:
+			self.set_target_function(target_function)
+
+	@GObject.Property(type=str)
+	def icon_name(self):
+		"""The icon name for the control panel icon."""
+		return self._icon_name
+
+	@icon_name.setter
+	def set_icon_name(self, icon_name):
+		"""Sets the icon name for the control panel icon."""
+		self._icon_name = icon_name
+		self.action_button_icon.set_from_icon_name(icon_name)
+
+	@GObject.Property(type=str)
+	def icon_label(self):
+		"""The icon label for the control panel icon."""
+		return self._icon_label
+
+	@icon_label.setter
+	def set_icon_label(self, icon_label):
+		"""Sets the icon label for the control panel icon."""
+		self._icon_label = icon_label
+		self.action_label.set_label(icon_label)
+
+	@GObject.Property(type=bool, default=False)
+	def icon_active(self):
+		"""Whether the icon should be marked as active or not."""
+		return self._icon_active
+
+	@icon_active.setter
+	def set_icon_active(self, icon_active):
+		"""Sets the icon active for the control panel icon."""
+		self._icon_active = icon_active
+		if icon_active:
+			self.action_button.add_css_class('active')
+		else:
+			self.action_button.remove_css_class('active')
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/shell/ui/controlpanelcontainer.ui')
 class ControlPanelContainer(Surface):
@@ -47,6 +108,7 @@ class ControlPanelContainer(Surface):
 	def show_control_panel(self, *args):
 		"""Shows the control panel."""
 		self.set_visible(True)
+		self.container.set_visible(True)
 		self.container_revealer.set_reveal_child(True)
 
 		# Fade in background
@@ -74,10 +136,8 @@ class ControlPanelContainer(Surface):
 		progress = self.container_revealer.get_child_revealed()
 		if progress:
 			self.set_visible(True)
-			self.container.set_visible(True)
 		else:
 			self.set_visible(False)
-			self.container.set_visible(False)
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/shell/ui/controlpanel.ui')
 class ControlPanel(Gtk.Box):

@@ -4,7 +4,8 @@
 	<requires lib="adw" version="1.0"/>
 	<template class="ControlPanel" parent="GtkBox">
 		<property name="width-request">320</property>
-		<property name="spacing">5</property>
+		<property name="spacing">12</property>
+		<property name="orientation">vertical</property>
 		<style>
 			<class name="aspinwall-control-panel"/>
 		</style>
@@ -28,11 +29,14 @@
 				<child>
 					<object class="GtkBox" id="control_panel_clock_container">
 						<property name="orientation">vertical</property>
-						<property name="spacing">5</property>
+						<property name="spacing">4</property>
 
 						<child>
 							<object class="GtkLabel" id="clock_time">
 								<property name="label">00:00</property>
+								<style>
+									<class name="clock-time"/>
+								</style>
 
 								<attributes>
 									<attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
@@ -43,6 +47,9 @@
 						<child>
 							<object class="GtkLabel" id="clock_date">
 								<property name="label">1970-01-01</property>
+								<style>
+									<class name="clock-date"/>
+								</style>
 							</object>
 						</child>
 
@@ -57,6 +64,56 @@
 						<style>
 							<class name="circular"/>
 						</style>
+					</object>
+				</child>
+			</object>
+		</child>
+
+		<child>
+			<object class="GtkBox" id="controls_box">
+				<property name="hexpand">true</property>
+				<property name="orientation">vertical</property>
+				<property name="spacing">5</property>
+
+				<child>
+					<object class="AdwClamp" id="control_buttons_clamp">
+						<child>
+							<object class="GtkFlowBox" id="control_buttons">
+								<property name="max-children-per-line">3</property>
+								<property name="column-spacing">6</property>
+								<property name="row-spacing">6</property>
+								<property name="homogeneous">true</property>
+								<property name="selection-mode">none</property>
+
+								<property name="margin-start">6</property>
+								<property name="margin-end">6</property>
+								<property name="hexpand">true</property>
+
+								<child>
+									<object class="ControlPanelButton">
+										<property name="icon-name">weather-clear-symbolic</property>
+										<property name="icon-label">Active</property>
+										<property name="icon-active">true</property>
+									</object>
+								</child>
+								<child>
+									<object class="ControlPanelButton"/>
+								</child>
+								<child>
+									<object class="ControlPanelButton"/>
+								</child>
+								<child>
+									<object class="ControlPanelButton"/>
+								</child>
+								<child>
+									<object class="ControlPanelButton"/>
+								</child>
+								<child>
+									<object class="ControlPanelButton"/>
+								</child>
+
+							</object>
+						</child>
 					</object>
 				</child>
 			</object>

@@ -3,6 +3,7 @@ submoduledir = join_paths(pkgdatadir, 'aspinwall', 'shell')
 
 shell_ui_sources = [
   'controlpanel.ui',
+  'controlpanelbutton.ui',
   'controlpanelcontainer.ui',
   'panel.ui',
 ]
