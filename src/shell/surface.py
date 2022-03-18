@@ -2,7 +2,7 @@
 """
 Abstraction code for shell elements.
 """
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, GObject
 
 class Surface(Gtk.Window):
 	"""
@@ -37,4 +37,27 @@ class Surface(Gtk.Window):
 			height = monitor.get_geometry().height
 		self.set_size_request(width, height)
 
+		self.width = width
+		self.height = height
+
 		# TODO: Set surface alignment
+
+	@GObject.Property(type=int, flags=GObject.ParamFlags.READABLE)
+	def surface_width(self):
+		"""
+		Width of the surface.
+
+		Should be used in derived objects instead of the monitor width, as
+		this allows it to be easily changed for debugging purposes.
+		"""
+		return self.width
+
+	@GObject.Property(type=int, flags=GObject.ParamFlags.READABLE)
+	def surface_height(self):
+		"""
+		Height of the surface.
+
+		Should be used in derived objects instead of the monitor height, as
+		this allows it to be easily changed for debugging purposes.
+		"""
+		return self.height
