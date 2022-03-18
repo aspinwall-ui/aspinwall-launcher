@@ -2,7 +2,7 @@
 """
 Contains code for the control panel that appears after dragging the panel.
 """
-from gi.repository import Adw, Gdk, Gtk, GObject
+from gi.repository import Adw, Gtk, GObject
 
 from aspinwall.shell.surface import Surface
 from aspinwall.utils.clock import clock_daemon
@@ -111,6 +111,7 @@ class ControlPanelContainer(Surface):
 	container = Gtk.Template.Child()
 	container_bg = Gtk.Template.Child()
 	container_revealer = Gtk.Template.Child()
+	control_panel = Gtk.Template.Child()
 
 	def __init__(self, application):
 		"""Initializes the control panel container."""
@@ -130,6 +131,23 @@ class ControlPanelContainer(Surface):
 		clickaway_gesture = Gtk.GestureClick.new()
 		clickaway_gesture.connect('pressed', self.hide_control_panel)
 		self.container_bg.add_controller(clickaway_gesture)
+
+		self.connect('map', self.set_size)
+		self.set_size()
+
+	def set_size(self, *args):
+		"""Sets/unsets margins and control panel size based on screen width"""
+		width = self.surface_width
+		if width > 480:
+			self.control_panel.set_halign(Gtk.Align.END)
+			self.control_panel.set_size_request(width / 3, 48)
+			self.container_revealer.set_margin_start(50)
+			self.container_revealer.set_margin_end(50)
+		else:
+			self.control_panel.set_halign(Gtk.Align.CENTER)
+			self.control_panel.set_size_request(width, 48)
+			self.container_revealer.set_margin_start(0)
+			self.container_revealer.set_margin_end(0)
 
 	def fadeout_worker(self, value, *args):
 		"""Used by the background fadeout animation."""
@@ -186,22 +204,7 @@ class ControlPanel(Gtk.Box):
 		clock_daemon.connect('notify::time', self.update_time)
 		self.update_time()
 
-		self.connect('map', self.set_size)
-
 	def update_time(self, *args):
 		"""Updates the clock in the control panel."""
 		self.clock_time.set_label(time.strftime('%H:%M'))
 		self.clock_date.set_label(time.strftime('%x'))
-
-	def set_size(self, *args):
-		"""Sets the size for the control panel."""
-		monitor = Gdk.Display.get_default().get_monitor_at_surface(
-			self.get_native().get_surface()
-		)
-		width = monitor.get_geometry().width
-		if width > 400:
-			self.set_halign(Gtk.Align.END)
-			self.set_size_request(width / 3, 48)
-		else:
-			self.set_halign(Gtk.Align.CENTER)
-			self.set_size_request(320, 48)

@@ -31,7 +31,7 @@
 						</style>
 
 						<child>
-							<object class="ControlPanel" id="control_panel_box"/>
+							<object class="ControlPanel" id="control_panel"/>
 						</child>
 					</object>
 				</child>
