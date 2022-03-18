@@ -6,6 +6,7 @@ meson --prefix=/tmp/aspinwall . output
 meson compile -C output
 meson compile aspinwall-update-po -C output
 
-for widget in "org.dithernet.aspinwall.widgets.welcome"; do
+for widget_dir in $PWD/widgets/org.dithernet.aspinwall.widgets.*; do
+	widget=$(basename "$widget_dir")
 	meson compile $widget-update-po -C output
 done
