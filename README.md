@@ -9,7 +9,7 @@ Linux tablet shell that turns your device into a smart hub when not in use
 Aspinwall is a Linux interface for tablets and touchscreen devices. It offers:
 
 - A clean, focused launcher with a widget view - reminiscent of smart hub devices
-- *(TODO)* Multitasking features, such as a dedicated app list and easy window control
+- Multitasking features, such as a dedicated app list and easy window control
 - Some level of convergence - the shell works on both vertical (portrait) and horizontal (landscape) displays, and the launcher can be set to display on a separate screen by default
 - A widget API for creating your own widgets
 - Integration with voice assistants (see our Mycroft GUI, [Lapel](https://github.com/aspinwall-ui/lapel))
@@ -30,12 +30,22 @@ Before you can use the `./run` script, you will need to install Meson.
 
 ### Requirements
 
+## Runtime
+
 - GTK 4.0 (>4.5.0 required for libadwaita 1.0.0)
 - libadwaita >= 1.0.0
 - GLib
 - Python >= 3.6
 - PyGObject
 - psutil
+
+## Build
+
+These are also needed if you're planning to use the provided run scripts.
+
+- meson
+- glib2-dev or equivalent (needed for `glib-compile-schemas`)
+- desktop-file-utils (needed for `update-desktop-database`)
 
 ## Contributing
 
@@ -53,7 +63,7 @@ The current TODO list for the shell can be found [here](https://github.com/aspin
 
 ### **Q:** Does Aspinwall run on Android?
 
-**A:** No. Aspinwall is a Linux shell, and there are no plans to release an Android port of any of the shell's elements (besides, there is no Android port of GTK to my knowledge).
+**A:** No. Aspinwall is a Linux shell, and there are no plans to release an Android port of any of the shell's elements, unless a GTK4 Android port arises at some point.
 
 With that being said, we encourage using Aspinwall on any old Android tablets you may have; give [postmarketOS](https://postmarketos.org) a try. Aspinwall is being developed with the limitations of downstream kernels in mind, so it should work relatively well on older devices not running a (close to) mainline kernel.
 
@@ -61,8 +71,8 @@ With that being said, we encourage using Aspinwall on any old Android tablets yo
 
 ### **Q:** Does Aspinwall run on Windows/Mac/any other platform supported by GTK4?
 
-**A:** The launcher? Sure, but we won't provide any support for these kinds of setups (in fact, this wasn't even tested). The shell? Not so much.
+**A:** Aspinwall uses a handful of Linux-specific APIs and packages for some of its features (NetworkManager for WiFi control, etc.), and it's not meant to be run on anything other than Linux. While the launcher may work, some widgets may not. The shell will also completely lack functionality.
 
 ### **Q:** Is Aspinwall a GNOME project?
 
-**A:** Aspinwall attempts to follow some design philosophies from Phosh and GNOME, but is (currently) not affiliated with either of the two.
+**A:** Aspinwall attempts to follow some design philosophies from Phosh and GNOME, but is not affiliated with either of the two.
