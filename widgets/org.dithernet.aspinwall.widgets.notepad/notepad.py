@@ -11,7 +11,7 @@ class Notepad(Widget):
 		"icon": 'edit-paste-symbolic',
 		"description": "Notepad",
 		"id": "org.dithernet.aspinwall.widgets.Notepad",
-		"tags": ['notes', 'todo', 'to do', 'list']
+		"tags": 'notes,todo,to do,list'
 	}
 
 	has_config = True

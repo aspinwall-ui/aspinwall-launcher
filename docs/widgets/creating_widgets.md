@@ -19,7 +19,7 @@ A widget's content is provided through the `content` variable, and it contains a
  - `name` - the widget's name
  - `icon` - string containing the icon name to use for the widget
  - `description` - the widget's description (shown in the widget chooser)
- - `tags` - a list of tags
+ - `tags` - a string containing a list of tags, separated by commas
  - `thumbnail` - an url to a screenshot of the widget
 
 When displayed in the launcher, the widget is wrapped in a `LauncherWidget` object and given a `LauncherWidgetHeader`; this header displays the widget's name and icon, and provides buttons for removing the widget from the launcher and accessing its settings.
@@ -41,7 +41,7 @@ class MyWidget(Widget):
 		'name': 'My Widget',
 		'icon': 'preferences-system-symbolic',
 		'description': 'My first widget',
-		'tags': ['hello world'],
+		'tags': 'hello world,example',
 		'thumbnail': []
 	}
 

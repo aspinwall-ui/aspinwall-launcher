@@ -16,7 +16,7 @@ class ExampleWidget(Widget):
 		"name": "Test widget",
 		"icon": 'dialog-information-symbolic',
 		"description": "This is a widget used for tests.",
-		"tags": ['test', 'test widget', 'example']
+		"tags": 'test,test widget,example'
 	}
 
 	def __init__(self, instance):
@@ -40,4 +40,4 @@ def test_widget():
 	assert widget.name == widget.metadata['name']
 	assert widget.icon_name == widget.metadata['icon']
 	assert widget.description == widget.metadata['description']
-	assert widget.tags == widget.metadata['tags']
+	assert widget.tags == widget.metadata['tags'].split(',')

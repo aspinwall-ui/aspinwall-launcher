@@ -15,11 +15,9 @@ class Widget(GObject.GObject):
 	  - metadata - dict containing widget metadata:
 	               - name
 				   - description
-				   - tags (list)
+				   - tags (comma-separated string)
 				   - thumbnail (url to image)
 	  			   - icon - contains GTK icon name string
-	  - title - contains widget title, as displayed in the header
-		        (can be changed dynaimcally)
 	  - refresh() - (function) runs in the background at the widget
 	                refresh interval
 	  - content - Widget content. This can be any GTK widget; by default,
@@ -97,4 +95,4 @@ class Widget(GObject.GObject):
 	@GObject.Property
 	def tags(self):
 		"""The tags of the widget, as defined in its metadata."""
-		return self.metadata['tags']
+		return self.metadata['tags'].split(',')

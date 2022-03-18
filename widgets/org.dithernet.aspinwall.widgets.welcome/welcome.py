@@ -5,19 +5,18 @@ Welcome plugin for Aspinwall
 from aspinwall.widgets import Widget
 from gi.repository import Gtk, Adw
 
-from gettext import gettext as _
-
 class Welcome(Widget):
 	metadata = {
 		"name": "Welcome",
 		"icon": 'dialog-information-symbolic',
 		"description": "Displays basic information about Aspinwall.",
 		"id": "org.dithernet.aspinwall.widgets.Welcome",
-		"tags": ['welcome', 'first startup']
+		"tags": 'welcome,first startup'
 	}
 
 	def __init__(self, instance=0):
 		super().__init__(instance)
+		_ = self.l
 
 		header = Gtk.Label(
 			label=_('Welcome to Aspinwall'),
