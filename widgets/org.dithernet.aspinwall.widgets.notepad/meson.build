@@ -8,3 +8,4 @@ notepad_sources = [
 install_data(notepad_sources, install_dir: submoduledir)
 
 subdir('schemas')
+subdir('po')

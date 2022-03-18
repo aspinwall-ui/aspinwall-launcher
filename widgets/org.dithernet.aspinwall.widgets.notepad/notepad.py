@@ -4,14 +4,15 @@ Notepad plugin for Aspinwall
 """
 from aspinwall.widgets import Widget
 from gi.repository import Gtk
+translatable = lambda message: message
 
 class Notepad(Widget):
 	metadata = {
-		"name": "Notepad",
+		"name": translatable("Notepad"),
 		"icon": 'edit-paste-symbolic',
-		"description": "Notepad",
+		"description": translatable("Simple notepad widget"),
 		"id": "org.dithernet.aspinwall.widgets.Notepad",
-		"tags": 'notes,todo,to do,list'
+		"tags": translatable('notes,todo,to do,list')
 	}
 
 	has_config = True

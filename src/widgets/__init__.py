@@ -6,6 +6,7 @@ Code for loading widgets can be found in the loader submodule.
 """
 from gi.repository import Gtk, Gio, GObject
 import os
+import gettext
 
 class Widget(GObject.GObject):
 	"""
@@ -39,6 +40,16 @@ class Widget(GObject.GObject):
 		super().__init__()
 		self.content = Gtk.Box(hexpand=True, orientation=Gtk.Orientation.VERTICAL)
 		self.instance = instance
+
+		# Set up i18n
+		localedir = self.join_with_data_path('po')
+		self.l = lambda message: message # noqa: E741
+		if os.path.exists(localedir):
+			gettext.bindtextdomain(self.id.lower(), localedir)
+			self.l = lambda message: gettext.dgettext(self.id.lower(), message) # noqa: E741
+			self.metadata['name'] = self.l(self.metadata['name'])
+			self.metadata['description'] = self.l(self.metadata['description'])
+			self.metadata['tags'] = self.l(self.metadata['tags'])
 
 		# Set up style context, CSS provider
 		style_context = self.content.get_style_context()

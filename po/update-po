@@ -5,3 +5,7 @@ if [ -e /tmp/aspinwall ]; then rm -r /tmp/aspinwall; fi
 meson --prefix=/tmp/aspinwall . output
 meson compile -C output
 meson compile aspinwall-update-po -C output
+
+for widget in "org.dithernet.aspinwall.widgets.welcome"; do
+	meson compile $widget-update-po -C output
+done

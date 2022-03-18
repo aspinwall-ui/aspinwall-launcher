@@ -19,6 +19,9 @@ class ExampleWidget(Widget):
 		"tags": 'test,test widget,example'
 	}
 
+	# Normally this is set by the loader, but we make it manually here
+	widget_path = '/'
+
 	def __init__(self, instance):
 		super().__init__(instance)
 

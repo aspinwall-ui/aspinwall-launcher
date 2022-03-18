@@ -6,3 +6,5 @@ welcome_sources = [
 ]
 
 install_data(welcome_sources, install_dir: submoduledir)
+
+subdir('po')

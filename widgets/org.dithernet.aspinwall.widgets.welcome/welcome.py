@@ -4,14 +4,15 @@ Welcome plugin for Aspinwall
 """
 from aspinwall.widgets import Widget
 from gi.repository import Gtk, Adw
+translatable = lambda message: message
 
 class Welcome(Widget):
 	metadata = {
-		"name": "Welcome",
+		"name": translatable("Welcome"),
 		"icon": 'dialog-information-symbolic',
-		"description": "Displays basic information about Aspinwall.",
+		"description": translatable("Displays basic information about Aspinwall."),
 		"id": "org.dithernet.aspinwall.widgets.Welcome",
-		"tags": 'welcome,first startup'
+		"tags": translatable('welcome,first startup')
 	}
 
 	def __init__(self, instance=0):

@@ -132,3 +132,37 @@ CSS properties can be loaded from a file (here we use `stylesheet.css` in the wi
 ```python
 	self.css_provider.load_from_path(self.join_with_data_path('stylesheet.css'))
 ```
+
+### Translating widgets
+
+The widget API sets a variable, `self.l`, which is akin to the traditional gettext `_`. It is automatically set if there's a `po` directory in the widget's data directory. This directory must contain the compiled `.mo` files.
+
+The domain name will always be equal to the widget's ID in lowercase.
+
+In order to make generating translations easier, it's recommended to alias `self.l` to `_` at the start of your init function:
+
+```python
+	_ = self.l
+```
+
+You will also need to add the following line to the top of your file:
+
+```python
+translatable = lambda message: message
+```
+
+and change your metadata's `name`, `description` and `tags` to be wrapped in it:
+
+```python
+class MyWidget(Widget):
+	metadata = {
+		'name': translatable('My Widget'),
+		'icon': 'preferences-system-symbolic',
+		'description': translatable('My first widget'),
+		'tags': translatable('hello world,example')
+	}
+```
+
+Assuming you're following the meson.build file from the widget example, this will allow `meson compile <widget-id>-update-po` (and, by extension, `xgettext`) to find these strings and automatically add them to the po file.
+
+See the example widget project for an example meson build file for translations.
