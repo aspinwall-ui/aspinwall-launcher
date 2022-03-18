@@ -1,0 +1,47 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-18 17:10+0100\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:11
+msgid "Welcome"
+msgstr "Welcome"
+
+#: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:13
+msgid "Displays basic information about Aspinwall."
+msgstr "Displays basic information about Aspinwall."
+
+#: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:15
+msgid "welcome,first startup"
+msgstr "welcome,first startup"
+
+#: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:23
+msgid "Welcome to Aspinwall"
+msgstr "Welcome to Aspinwall"
+
+#: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:35
+msgid ""
+"Thank you for trying out Aspinwall! The UI is still in active development, "
+"and some things may not work correctly - you can report bugs to <a "
+"href='https://github.com/aspinwall-ui/aspinwall/issues'>our bug tracker</a>."
+msgstr ""
+"Thank you for trying out Aspinwall! The UI is still in active development, "
+"and some things may not work correctly - you can report bugs to <a "
+"href='https://github.com/aspinwall-ui/aspinwall/issues'>our bug tracker</a>."
+
+#: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:43
+msgid ""
+"\n"
+"• To add a new widget, press the menu button in the top right corner, then "
+"select “Add Widgets”.\n"
+"• To remove this widget, long-press it and click the trash icon on the "
+"toolbar that pops up.\n"
+msgstr ""
+"\n"
+"• To add a new widget, press the menu button in the top right corner, then "
+"select “Add Widgets”.\n"
+"• To remove this widget, long-press it and click the trash icon on the "
+"toolbar that pops up.\n"
