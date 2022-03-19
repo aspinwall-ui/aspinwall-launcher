@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-18 16:39+0100\n"
+"POT-Creation-Date: 2022-03-19 10:16+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -393,3 +393,7 @@ msgstr "_Anuluj"
 #: src/launcher/settings.py:232
 msgid "_Select"
 msgstr "_Wybierz"
+
+#: src/shell/ui/controlpanel.ui:145
+msgid "No new notifications"
+msgstr ""

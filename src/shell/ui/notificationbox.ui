@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+	<requires lib="gtk" version="4.0"/>
+	<requires lib="adw" version="1.0"/>
+	<template class="NotificationBox" parent="GtkBox">
+		<property name="hexpand">true</property>
+		<property name="spacing">12</property>
+		<style>
+			<class name="notification"/>
+		</style>
+
+		<child>
+			<object class="GtkImage" id="icon">
+				<property name="icon-name">package-x-generic-symbolic</property>
+				<property name="icon-size">large</property>
+				<property name="valign">start</property>
+				<style>
+					<class name="notification-icon"/>
+				</style>
+			</object>
+		</child>
+
+		<child>
+			<object class="GtkBox" id="content_container">
+				<property name="orientation">vertical</property>
+				<property name="spacing">6</property>
+				<property name="hexpand">true</property>
+
+				<child>
+					<object class="GtkLabel" id="title_label">
+						<property name="label">Notification title</property>
+						<property name="halign">start</property>
+						<attributes>
+							<attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
+						</attributes>
+					</object>
+				</child>
+
+				<child>
+					<object class="GtkLabel" id="description_label">
+						<property name="label">Notification description</property>
+						<property name="halign">start</property>
+					</object>
+				</child>
+
+				<child>
+					<object class="GtkBox" id="action_buttons">
+						<property name="halign">end</property>
+
+						<style>
+							<class name="action-buttons"/>
+						</style>
+
+						<child>
+							<object class="GtkButton" id="button">
+								<property name="label">test</property>
+							</object>
+						</child>
+					</object>
+				</child>
+			</object>
+		</child>
+	</template>
+</interface>

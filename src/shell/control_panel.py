@@ -5,6 +5,7 @@ Contains code for the control panel that appears after dragging the panel.
 from gi.repository import Adw, Gtk, GObject
 
 from aspinwall.shell.surface import Surface
+from aspinwall.shell.notificationbox import NotificationBox # noqa: F401
 from aspinwall.utils.clock import clock_daemon
 import time
 

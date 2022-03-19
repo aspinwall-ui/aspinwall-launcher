@@ -8,5 +8,10 @@
 @define-color aspinwall_splash_fg_color @theme_fg_color;
 @define-color aspinwall_activity_bg_color #e5e5e5;
 
+@define-color aspinwall_shell_bg            white;
+@define-color aspinwall_shell_fg            black;
+@define-color aspinwall_shell_bg_secondary  #e0e0e0;
+@define-color aspinwall_shell_fg_secondary  black;
+
 @import url('launcher.css');
 @import url('shell.css');

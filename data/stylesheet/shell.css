@@ -7,8 +7,8 @@
 /* Panel */
 
 .aspinwall-panel {
-	background-color: black;
-	color: white;
+	background-color: @aspinwall_shell_bg;
+	color: @aspinwall_shell_fg;
 	font-size: 16px;
 	-gtk-icon-size: 22px;
 }
@@ -20,11 +20,18 @@
 }
 
 .aspinwall-control-panel {
-	background-color: black;
-	color: white;
+	background-color: @aspinwall_shell_bg;
+	color: @aspinwall_shell_fg;
 	font-size: 14px;
 	-gtk-icon-size: 24px;
-	padding: 12px;
+}
+
+.aspinwall-control-panel .top-box {
+	padding: 12px 12px 0;
+}
+
+.aspinwall-control-panel .control-button-container {
+	padding: 0 12px;
 }
 
 .control-panel-button button.active {
@@ -42,6 +49,18 @@
 	color: @accent_fg_color;
 }
 
+.aspinwall-control-panel .notification-container {
+	border-top: 1px @aspinwall_shell_border solid;
+	background-color: @aspinwall_shell_bg_secondary;
+	color: @aspinwall_shell_fg_secondary;
+	padding: 0 6px;
+}
+
+.notification-container .no-notifications {
+	color: rgba(255, 255, 255, 0.3);
+	padding: 12px;
+}
+
 /* FIXME: Ideally we'd set the size through Pango attributes, but that seems to make the entire label disappear for some reason? Investigate. */
 .aspinwall-control-panel .clock-time {
 	font-size: 22px;
@@ -49,4 +68,13 @@
 
 .aspinwall-control-panel .clock-date {
 	font-size: 16px;
+}
+
+/* Notifications */
+
+.notification {
+	background-color: @aspinwall_notification_bg;
+	color: @aspinwall_notification_fg;
+	padding: 12px;
+	border-radius: 4px;
 }

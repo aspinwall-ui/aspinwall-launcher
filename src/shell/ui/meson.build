@@ -5,6 +5,7 @@ shell_ui_sources = [
   'controlpanel.ui',
   'controlpanelbutton.ui',
   'controlpanelcontainer.ui',
+  'notificationbox.ui',
   'panel.ui',
 ]
 

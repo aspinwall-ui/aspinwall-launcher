@@ -15,6 +15,10 @@
 				<property name="hexpand">true</property>
 				<property name="homogeneous">true</property>
 
+				<style>
+					<class name="top-box"/>
+				</style>
+
 				<child>
 					<object class="GtkButton" id="settings_button">
 						<property name="halign">start</property>
@@ -75,6 +79,10 @@
 				<property name="orientation">vertical</property>
 				<property name="spacing">5</property>
 
+				<style>
+					<class name="control-button-container"/>
+				</style>
+
 				<child>
 					<object class="AdwClamp" id="control_buttons_clamp">
 						<child>
@@ -115,6 +123,42 @@
 
 							</object>
 						</child>
+					</object>
+				</child>
+			</object>
+		</child>
+
+		<child>
+			<object class="GtkBox" id="notification_container">
+				<property name="hexpand">true</property>
+				<property name="orientation">vertical</property>
+				<style>
+					<class name="notification-container"/>
+				</style>
+
+				<child>
+					<object class="GtkRevealer" id="no_notifications_revealer">
+						<property name="reveal-child">true</property>
+
+						<child>
+							<object class="GtkLabel" id="no_notifications">
+								<property name="label" translatable="yes">No new notifications</property>
+								<attributes>
+									<attribute name="weight" value="PANGO_WEIGHT_LIGHT"/>
+								</attributes>
+								<style>
+									<class name="no-notifications"/>
+								</style>
+							</object>
+						</child>
+					</object>
+				</child>
+
+				<child>
+					<object class="GtkListView" id="notification_list">
+						<style>
+							<class name="notification-list"/>
+						</style>
 					</object>
 				</child>
 			</object>
