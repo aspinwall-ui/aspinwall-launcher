@@ -28,9 +28,9 @@ For development purposes, the launcher can be started using the provided `./run`
 
 Before you can use the `./run` script, you will need to install Meson.
 
-### Requirements
+## Requirements
 
-## Runtime
+### Runtime
 
 - GTK 4.0 (>4.5.0 required for libadwaita 1.0.0)
 - libadwaita >= 1.0.0
@@ -39,7 +39,7 @@ Before you can use the `./run` script, you will need to install Meson.
 - PyGObject
 - psutil
 
-## Build
+### Build
 
 These are also needed if you're planning to use the provided run scripts.
 
