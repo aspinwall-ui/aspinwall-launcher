@@ -134,7 +134,8 @@ class ControlPanelContainer(Surface):
 			application=application,
 			valign=Gtk.Align.START,
 			hexpand=True,
-			vexpand=True
+			vexpand=True,
+			visible=False
 		)
 
 		global control_panel

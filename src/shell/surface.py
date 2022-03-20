@@ -17,12 +17,14 @@ class Surface(Gtk.Window):
 
 	def __init__(self, application,
 			valign=Gtk.Align.START, halign=Gtk.Align.END,
-			vexpand=False, hexpand=False, width=0, height=0):
+			vexpand=False, hexpand=False, width=0, height=0,
+			visible=True):
 		"""Initializes a shell surface."""
 		super().__init__(application=application,
 			resizable=False,
 			decorated=False,
-			deletable=False
+			deletable=False,
+			visible=visible
 		)
 
 		self.show()
@@ -39,6 +41,10 @@ class Surface(Gtk.Window):
 
 		self.width = width
 		self.height = height
+
+		if not visible:
+			self.set_visible(False)
+			self.hide()
 
 		# TODO: Set surface alignment
 
