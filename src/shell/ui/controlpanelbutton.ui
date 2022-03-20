@@ -3,6 +3,7 @@
 	<requires lib="gtk" version="4.0"/>
 	<requires lib="adw" version="1.0"/>
 	<template class="ControlPanelButton" parent="GtkFlowBoxChild">
+		<property name="sensitive">false</property>
 		<child>
 			<object class="GtkBox" id="box">
 				<property name="hexpand">true</property>
@@ -27,6 +28,7 @@
 				<child>
 					<object class="GtkLabel" id="action_label">
 						<property name="label">Unknown</property>
+						<property name="wrap">true</property>
 					</object>
 				</child>
 			</object>

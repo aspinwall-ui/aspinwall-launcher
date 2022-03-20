@@ -98,29 +98,51 @@
 								<property name="hexpand">true</property>
 
 								<child>
-									<object class="ControlPanelButton">
-										<property name="icon-name">weather-clear-symbolic</property>
-										<property name="icon-label">Active</property>
-										<property name="icon-active">true</property>
+									<object class="ControlPanelButton" id="network_button">
+										<property name="icon-name">network-wireless-offline</property>
+										<!-- TRANSLATORS: Used for the inactive state of the Wi-Fi button in the control panel -->
+										<property name="icon-label" translatable="yes">Wi-Fi</property>
 									</object>
 								</child>
 
 								<child>
-									<object class="ControlPanelButton"/>
-								</child>
-								<child>
-									<object class="ControlPanelButton"/>
-								</child>
-								<child>
-									<object class="ControlPanelButton"/>
-								</child>
-								<child>
-									<object class="ControlPanelButton"/>
-								</child>
-								<child>
-									<object class="ControlPanelButton"/>
+									<object class="ControlPanelButton" id="bluetooth_button">
+										<property name="icon-name">bluetooth-disabled-symbolic</property>
+										<property name="icon-label">Bluetooth</property>
+									</object>
 								</child>
 
+								<child>
+									<object class="ControlPanelButton">
+										<property name="icon-name">battery-missing-symbolic</property>
+										<!-- TRANSLATORS: Used for the inactive state of the battery button in the control panel -->
+										<property name="icon-label" translatable="yes">No battery</property>
+									</object>
+								</child>
+
+								<child>
+									<object class="ControlPanelButton">
+										<property name="icon-name">microphone-sensitivity-muted-symbolic</property>
+										<!-- TRANSLATORS: Used for the microphone enable/disable button in the control panel -->
+										<property name="icon-label" translatable="yes">Microphone</property>
+									</object>
+								</child>
+
+								<child>
+									<object class="ControlPanelButton">
+										<property name="icon-name">rotation-locked-symbolic</property>
+										<!-- TRANSLATORS: Used for the automatic rotation button -->
+										<property name="icon-label" translatable="yes">Auto-rotation</property>
+									</object>
+								</child>
+
+								<child>
+									<object class="ControlPanelButton">
+										<property name="icon-name">audio-volume-muted-symbolic</property>
+										<!-- TRANSLATORS: Used for the mute/unmute button in the control panel -->
+										<property name="icon-label">Muted</property>
+									</object>
+								</child>
 							</object>
 						</child>
 					</object>

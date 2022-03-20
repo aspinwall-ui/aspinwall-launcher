@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-19 10:16+0100\n"
+"POT-Creation-Date: 2022-03-20 14:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -378,6 +378,26 @@ msgstr ""
 msgid "_Select"
 msgstr ""
 
-#: src/shell/ui/controlpanel.ui:145
+#. TRANSLATORS: Used for the inactive state of the Wi-Fi button in the control panel
+#: src/shell/ui/controlpanel.ui:104
+msgid "Wi-Fi"
+msgstr ""
+
+#. TRANSLATORS: Used for the inactive state of the battery button in the control panel
+#: src/shell/ui/controlpanel.ui:119
+msgid "No battery"
+msgstr ""
+
+#. TRANSLATORS: Used for the microphone enable/disable button in the control panel
+#: src/shell/ui/controlpanel.ui:127
+msgid "Microphone"
+msgstr ""
+
+#. TRANSLATORS: Used for the automatic rotation button
+#: src/shell/ui/controlpanel.ui:135
+msgid "Auto-rotation"
+msgstr ""
+
+#: src/shell/ui/controlpanel.ui:168
 msgid "No new notifications"
 msgstr ""
