@@ -24,7 +24,7 @@ class Notification(GObject.Object):
 	__gtype_name__ = 'Notification'
 
 	def __init__(self, app_name, replaces_id, app_icon, summary, body, actions,
-				 hints, expire_timeout):
+				 hints, expire_timeout, daemon):
 		"""Initializes the notification."""
 		super().__init__()
 		self._app_name = app_name
@@ -36,9 +36,15 @@ class Notification(GObject.Object):
 		self._hints = hints
 		self._expire_timeout = expire_timeout
 
+		self.daemon = daemon
+
 		global max_id
 		max_id += 1
 		self._id = max_id
+
+	def dismiss(self):
+		"""Dismisses the notification."""
+		self.daemon.CloseNotification(self.props.id)
 
 	@GObject.Property(type=str, flags=GObject.ParamFlags.READABLE)
 	def id(self):
@@ -85,6 +91,7 @@ class DBusNotificationDaemon(dbus.service.Object):
 
 	def __init__(self, bus_name):
 		super().__init__(bus_name, BUS_PATH)
+		self.dict = {}
 		self.store = Gio.ListStore(item_type=Notification)
 
 	@dbus.service.method(dbus_interface='org.freedesktop.Notifications',
@@ -103,10 +110,25 @@ class DBusNotificationDaemon(dbus.service.Object):
 			   hints, expire_timeout):
 		"""Main notification handler."""
 		notification = Notification(
-			app_name, replaces_id, app_icon, summary, body, actions, hints, expire_timeout
+			app_name, replaces_id, app_icon, summary, body, actions, hints, expire_timeout,
+			self
 		)
+		self.dict[notification.id] = notification
 		self.store.append(notification)
 		return notification.id
+
+	@dbus.service.method(dbus_interface=BUS_INTERFACE_NAME,
+						 in_signature='u')
+	def CloseNotification(self, id):
+		"""Dismisses the notification with the given ID."""
+		self.NotificationClosed(id, 0)
+
+	@dbus.service.signal(dbus_interface=BUS_INTERFACE_NAME,
+						 signature='uu')
+	def NotificationClosed(self, id, reason):
+		"""Dismisses the notification with the given ID."""
+		self.store.remove(self.store.find(self.dict[id])[1])
+		self.dict.pop(id)
 
 class NotificationInterface(Interface):
 	"""
