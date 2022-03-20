@@ -4,6 +4,8 @@ Notification handler and interface.
 """
 from aspinwall.shell.interfaces import Interface
 from gi.repository import Gio, GObject
+import threading
+import time
 
 import dbus
 import dbus.service
@@ -23,6 +25,8 @@ class Notification(GObject.Object):
 	"""
 	__gtype_name__ = 'Notification'
 
+	dismissed = False
+
 	def __init__(self, app_name, replaces_id, app_icon, summary, body, actions,
 				 hints, expire_timeout, daemon):
 		"""Initializes the notification."""
@@ -38,12 +42,25 @@ class Notification(GObject.Object):
 
 		self.daemon = daemon
 
+		if expire_timeout >= 0:
+			self.autoexpire = threading.Thread(target=self.do_autoexpire, daemon=True)
+			self.autoexpire.start()
+
 		global max_id
 		max_id += 1
 		self._id = max_id
 
+	def do_autoexpire(self):
+		"""
+		Automatically dismisses the notificaton after the expiration timeout.
+		"""
+		time.sleep(self.props.expire_timeout / 1000)
+		if not self.dismissed:
+			self.dismiss()
+
 	def dismiss(self):
 		"""Dismisses the notification."""
+		self.dismissed = True
 		self.daemon.CloseNotification(self.props.id)
 
 	@GObject.Property(type=str, flags=GObject.ParamFlags.READABLE)
