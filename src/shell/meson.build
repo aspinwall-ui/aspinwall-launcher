@@ -38,4 +38,5 @@ utils_sources = [
 
 install_data(utils_sources, install_dir: submoduledir)
 
+subdir('interfaces')
 subdir('ui')
