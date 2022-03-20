@@ -3,7 +3,7 @@
 Notification handler and interface.
 """
 from aspinwall.shell.interfaces import Interface
-from gi.repository import Gio, GLib, GObject
+from gi.repository import Gio, GObject
 
 import dbus
 import dbus.service
@@ -87,11 +87,13 @@ class DBusNotificationDaemon(dbus.service.Object):
 		super().__init__(bus_name, BUS_PATH)
 		self.store = Gio.ListStore(item_type=Notification)
 
-	@dbus.service.method(dbus_interface='org.freedesktop.Notifications', in_signature='', out_signature='ssss')
+	@dbus.service.method(dbus_interface='org.freedesktop.Notifications',
+		in_signature='', out_signature='ssss')
 	def GetServerInformation(self):
 		return ('dbus', 'Aspinwall', '0.1', '1.2')
 
-	@dbus.service.method(dbus_interface='org.freedesktop.Notifications', in_signature='', out_signature='as')
+	@dbus.service.method(dbus_interface='org.freedesktop.Notifications',
+		in_signature='', out_signature='as')
 	def GetCapabilities(self):
 		return ['actions', 'body', 'body-hyperlinks', 'body-markup', 'icon-static', 'sound']
 

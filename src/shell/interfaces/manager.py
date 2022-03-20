@@ -2,8 +2,6 @@
 """
 Contains code for the interface manager
 """
-from gi.repository import GObject
-
 from aspinwall.shell.interfaces.notification import NotificationInterface
 
 interface_manager = None
