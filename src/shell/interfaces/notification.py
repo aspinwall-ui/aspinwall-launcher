@@ -46,6 +46,9 @@ class Notification(GObject.Object):
 			self.autoexpire = threading.Thread(target=self.do_autoexpire, daemon=True)
 			self.autoexpire.start()
 
+		if replaces_id:
+			self.daemon.CloseNotification(replaces_id)
+
 		global max_id
 		max_id += 1
 		self._id = max_id
@@ -132,6 +135,7 @@ class DBusNotificationDaemon(dbus.service.Object):
 		)
 		self.dict[notification.id] = notification
 		self.store.append(notification)
+
 		return notification.id
 
 	@dbus.service.method(dbus_interface=BUS_INTERFACE_NAME,
@@ -144,6 +148,7 @@ class DBusNotificationDaemon(dbus.service.Object):
 						 signature='uu')
 	def NotificationClosed(self, id, reason):
 		"""Dismisses the notification with the given ID."""
+		self.dict[id].dismissed = True
 		self.store.remove(self.store.find(self.dict[id])[1])
 		self.dict.pop(id)
 
