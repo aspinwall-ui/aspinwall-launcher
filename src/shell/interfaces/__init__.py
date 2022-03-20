@@ -47,7 +47,7 @@ class Interface(GObject.Object):
 		(for example, when the user connects to a Wi-Fi network or Bluetooth
 		device, or if something like NFC is disabled/enabled).
 		"""
-		return self._available
+		return self._active
 
 	@active.setter
 	def set_active(self, active):

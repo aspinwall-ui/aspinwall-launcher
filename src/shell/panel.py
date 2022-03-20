@@ -7,6 +7,8 @@ from gi.repository import Gtk
 from aspinwall.shell.surface import Surface
 from aspinwall.utils.clock import clock_daemon
 from aspinwall.shell.config import config
+from aspinwall.shell.interfaces.manager import get_interface_manager
+
 import time
 import threading
 import psutil
@@ -30,11 +32,11 @@ class Panel(Surface):
 		clock_daemon.connect('notify::time', self.update_time)
 		self.clock.set_label(time.strftime('%H:%M'))
 
-		self.update_status_thread = threading.Thread(
-			target=self.update_status_icons,
-			daemon=True
-		)
-		self.update_status_thread.start()
+		# Set up status icons
+		interface_manager = get_interface_manager()
+		battery = interface_manager.get_interface_by_name('BatteryInterface')
+		self.battery_icon.set_from_icon_name(battery.props.icon_name)
+		battery.bind_property('icon-name', self.battery_icon, 'icon-name')
 
 		config.connect('changed::show-battery-percentage', self.toggle_battery_percentage)
 		self.toggle_battery_percentage()
@@ -79,38 +81,3 @@ class Panel(Surface):
 	def update_time(self, *args):
 		"""Updates the time on the clock."""
 		self.clock.set_label(time.strftime('%H:%M'))
-
-	def update_status_icons(self, *args):
-		"""Daemon that updates the status icons."""
-		while True:
-			# Update battery icon
-			battery = psutil.sensors_battery()
-
-			percentage = 'N/A'
-			plugged = False
-			if battery:
-				percentage = int(battery.percent)
-				plugged = battery.power_plugged
-
-				if percentage >= 85:
-					battery_icon_name = 'battery-full'
-				elif percentage >= 50:
-					battery_icon_name = 'battery-good'
-				elif percentage >= 25:
-					battery_icon_name = 'battery-low'
-				elif percentage >= 2:
-					battery_icon_name = 'battery-caution'
-				else:
-					battery_icon_name = 'battery-empty'
-
-				if plugged:
-					if percentage == 100:
-						battery_icon_name += '-charged'
-					else:
-						battery_icon_name += '-charging'
-			else:
-				battery_icon_name = 'battery-missing'
-
-			self.battery_icon.set_from_icon_name(battery_icon_name + '-symbolic')
-			self.battery_percentage.set_label(str(percentage) + '%')
-			time.sleep(config['status-icon-refresh-delay'])

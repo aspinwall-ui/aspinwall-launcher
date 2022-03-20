@@ -54,10 +54,14 @@ class ControlPanelButton(Gtk.FlowBoxChild):
 
 	def bind_to_interface(self, interface):
 		"""Binds the button to an interface."""
-		self.set_sensitive(interface.available)
-		self.set_icon_active(interface.active)
-		self.bind_property('sensitive', interface, 'available')
-		self.bind_property('icon-active', interface, 'active')
+		self.set_sensitive(interface.props.available)
+		self.set_property('icon-active', interface.props.active)
+		interface.bind_property('available', self, 'sensitive',
+			flags=GObject.BindingFlags.SYNC_CREATE
+		)
+		interface.bind_property('active', self, 'icon-active',
+			flags=GObject.BindingFlags.SYNC_CREATE
+		)
 
 	def emit_icon_clicked(self, *args):
 		"""Emits the icon-clicked signal. Used by the action button."""
@@ -217,6 +221,11 @@ class ControlPanel(Gtk.Box):
 	notification_list = Gtk.Template.Child()
 	notification_list_scrollable = Gtk.Template.Child()
 
+	# Control panel buttons
+	network_button = Gtk.Template.Child()
+	bluetooth_button = Gtk.Template.Child()
+	battery_button = Gtk.Template.Child()
+
 	def __init__(self):
 		"""Initializes the control panel."""
 		super().__init__()
@@ -225,9 +234,11 @@ class ControlPanel(Gtk.Box):
 			self.interface_manager.get_interface_by_name('NotificationInterface')
 		self.notification_store = self.notification_interface.props.notifications
 
+		# Set up clock
 		clock_daemon.connect('notify::time', self.update_time)
 		self.update_time()
 
+		# Set up notification list
 		notification_factory = Gtk.SignalListItemFactory()
 		notification_factory.connect('setup', self.notification_setup)
 		notification_factory.connect('bind', self.notification_bind)
@@ -239,6 +250,14 @@ class ControlPanel(Gtk.Box):
 
 		self.notification_store.connect('items-changed', self.show_no_notifications)
 		self.show_no_notifications()
+
+		# Set up control panel buttons
+		battery_interface = self.interface_manager.get_interface_by_name('BatteryInterface')
+		self.battery_button.bind_to_interface(battery_interface)
+		self.battery_button.set_property('icon-name', battery_interface.props.icon_name)
+		battery_interface.bind_property('icon-name', self.battery_button, 'icon-name',
+			flags=GObject.BindingFlags.SYNC_CREATE
+		)
 
 	def show_no_notifications(self, *args):
 		"""

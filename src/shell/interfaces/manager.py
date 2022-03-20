@@ -2,6 +2,7 @@
 """
 Contains code for the interface manager
 """
+from aspinwall.shell.interfaces.battery import BatteryInterface
 from aspinwall.shell.interfaces.notification import NotificationInterface
 
 interface_manager = None
@@ -10,7 +11,7 @@ class InterfaceManager:
 	"""
 	Manager that initializes all interfaces.
 	"""
-	interfaces = [NotificationInterface]
+	interfaces = [BatteryInterface, NotificationInterface]
 	enabled_interfaces = {}
 	available_interfaces = []
 

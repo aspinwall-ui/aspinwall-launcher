@@ -113,7 +113,7 @@
 								</child>
 
 								<child>
-									<object class="ControlPanelButton">
+									<object class="ControlPanelButton" id="battery_button">
 										<property name="icon-name">battery-missing-symbolic</property>
 										<!-- TRANSLATORS: Used for the inactive state of the battery button in the control panel -->
 										<property name="icon-label" translatable="yes">No battery</property>

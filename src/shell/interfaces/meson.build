@@ -3,6 +3,7 @@ submoduledir = join_paths(pkgdatadir, 'aspinwall', 'shell', 'interfaces')
 
 interfaces_sources = [
   '__init__.py',
+  'battery.py',
   'manager.py',
   'notification.py'
 ]
