@@ -7,6 +7,7 @@ gi_require_version("Gtk", "4.0")
 gi_require_version('Adw', '1')
 
 from gi.repository import Adw, Gtk
+from aspinwall.shell.interfaces.manager import start_interface_manager
 from aspinwall.shell.control_panel import ControlPanelContainer
 from aspinwall.shell.panel import Panel
 
@@ -16,6 +17,10 @@ class ShellManager:
 	"""Main shell daemon class, keeps track of running windows."""
 	def __init__(self, app):
 		"""Initializes the shell."""
+		# Initialize interfaces
+		start_interface_manager()
+
+		# Initialize shell surfaces
 		self.windows = Gtk.WindowGroup()
 
 		style_manager = Adw.StyleManager.get_default()

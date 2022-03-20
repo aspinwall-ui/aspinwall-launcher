@@ -5,6 +5,8 @@
 	<template class="NotificationBox" parent="GtkBox">
 		<property name="hexpand">true</property>
 		<property name="spacing">12</property>
+		<property name="margin-top">3</property>
+		<property name="margin-bottom">3</property>
 		<style>
 			<class name="notification"/>
 		</style>
@@ -23,13 +25,16 @@
 		<child>
 			<object class="GtkBox" id="content_container">
 				<property name="orientation">vertical</property>
-				<property name="spacing">6</property>
 				<property name="hexpand">true</property>
+				<property name="spacing">6</property>
 
 				<child>
 					<object class="GtkLabel" id="title_label">
 						<property name="label">Notification title</property>
-						<property name="halign">start</property>
+						<property name="wrap">true</property>
+						<property name="wrap-mode">word-char</property>
+						<property name="halign">fill</property>
+						<property name="xalign">0</property>
 						<attributes>
 							<attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
 						</attributes>
@@ -39,7 +44,10 @@
 				<child>
 					<object class="GtkLabel" id="description_label">
 						<property name="label">Notification description</property>
-						<property name="halign">start</property>
+						<property name="wrap">true</property>
+						<property name="wrap-mode">word-char</property>
+						<property name="halign">fill</property>
+						<property name="xalign">0</property>
 					</object>
 				</child>
 

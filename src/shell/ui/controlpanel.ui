@@ -131,6 +131,7 @@
 		<child>
 			<object class="GtkBox" id="notification_container">
 				<property name="hexpand">true</property>
+				<property name="vexpand">true</property>
 				<property name="orientation">vertical</property>
 				<style>
 					<class name="notification-container"/>
@@ -155,10 +156,19 @@
 				</child>
 
 				<child>
-					<object class="GtkListView" id="notification_list">
-						<style>
-							<class name="notification-list"/>
-						</style>
+					<object class="GtkScrolledWindow" id="notification_list_scrollable">
+						<property name="propagate-natural-height">true</property>
+						<child>
+							<object class="AdwClampScrollable">
+								<child>
+									<object class="GtkListView" id="notification_list">
+										<style>
+											<class name="notification-list"/>
+										</style>
+									</object>
+								</child>
+							</object>
+						</child>
 					</object>
 				</child>
 			</object>

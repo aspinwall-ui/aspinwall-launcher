@@ -14,11 +14,27 @@ class NotificationBox(Gtk.Box):
 	  - title - notification title.
 	  - description - notification description.
 	"""
-	__gtype_name__ = 'Notification'
+	__gtype_name__ = 'NotificationBox'
 
 	icon = Gtk.Template.Child()
 	title_label = Gtk.Template.Child()
 	description_label = Gtk.Template.Child()
+
+	_icon_name = None
+	_title = None
+	_description = None
+
+	def __init__(self):
+		super().__init__()
+
+	def bind_to_notification(self, notification):
+		"""
+		Takes a Notification object and makes the NotificationBox
+		show its values.
+		"""
+		self.set_property('icon_name', notification.app_icon)
+		self.set_property('title', notification.summary)
+		self.set_property('description', notification.body)
 
 	@GObject.Property(type=str)
 	def icon_name(self):

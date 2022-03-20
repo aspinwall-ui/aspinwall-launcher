@@ -78,3 +78,12 @@
 	padding: 12px;
 	border-radius: 4px;
 }
+
+.notification-list {
+	background-color: transparent;
+	padding: 3px 12px;
+}
+
+.notification-list row {
+	background-color: transparent;
+}

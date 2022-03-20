@@ -7,6 +7,9 @@ from gi.repository import Adw, Gtk, GObject
 from aspinwall.shell.surface import Surface
 from aspinwall.shell.notificationbox import NotificationBox # noqa: F401
 from aspinwall.utils.clock import clock_daemon
+
+from aspinwall.shell.interfaces.manager import get_interface_manager
+
 import time
 
 control_panel = None
@@ -48,6 +51,13 @@ class ControlPanelButton(Gtk.FlowBoxChild):
 		if icon_active:
 			self.set_icon_active(icon_active)
 		self.action_button.connect('clicked', self.emit_icon_clicked)
+
+	def bind_to_interface(self, interface):
+		"""Binds the button to an interface."""
+		self.set_sensitive(interface.available)
+		self.set_icon_active(interface.active)
+		self.bind_property('sensitive', interface, 'available')
+		self.bind_property('icon-active', interface, 'active')
 
 	def emit_icon_clicked(self, *args):
 		"""Emits the icon-clicked signal. Used by the action button."""
@@ -139,14 +149,19 @@ class ControlPanelContainer(Surface):
 	def set_size(self, *args):
 		"""Sets/unsets margins and control panel size based on screen width"""
 		width = self.surface_width
+		height = self.surface_height
 		if width > 480:
 			self.control_panel.set_halign(Gtk.Align.END)
 			self.control_panel.set_size_request(width / 3, 48)
+			notif_list = self.control_panel.notification_list_scrollable
+			notif_list.set_max_content_height(height / 2)
 			self.container_revealer.set_margin_start(50)
 			self.container_revealer.set_margin_end(50)
 		else:
 			self.control_panel.set_halign(Gtk.Align.CENTER)
 			self.control_panel.set_size_request(width, 48)
+			notif_list = self.control_panel.notification_list_scrollable
+			notif_list.set_max_content_height(height - 300)
 			self.container_revealer.set_margin_start(0)
 			self.container_revealer.set_margin_end(0)
 
@@ -198,12 +213,52 @@ class ControlPanel(Gtk.Box):
 	clock_time = Gtk.Template.Child()
 	clock_date = Gtk.Template.Child()
 
+	no_notifications_revealer = Gtk.Template.Child()
+	notification_list = Gtk.Template.Child()
+	notification_list_scrollable = Gtk.Template.Child()
+
 	def __init__(self):
 		"""Initializes the control panel."""
 		super().__init__()
+		self.interface_manager = get_interface_manager()
+		self.notification_interface = \
+			self.interface_manager.get_interface_by_name('NotificationInterface')
+		self.notification_store = self.notification_interface.props.notifications
 
 		clock_daemon.connect('notify::time', self.update_time)
 		self.update_time()
+
+		notification_factory = Gtk.SignalListItemFactory()
+		notification_factory.connect('setup', self.notification_setup)
+		notification_factory.connect('bind', self.notification_bind)
+
+		self.notification_list.set_model(Gtk.SingleSelection(
+			model=self.notification_store)
+		)
+		self.notification_list.set_factory(notification_factory)
+
+		self.notification_store.connect('items-changed', self.show_no_notifications)
+		self.show_no_notifications()
+
+	def show_no_notifications(self, *args):
+		"""
+		Shows/hides the "no notifications" text based on the amount of items
+		in the notification store.
+		"""
+		if self.notification_store.get_n_items() > 0:
+			self.no_notifications_revealer.set_reveal_child(False)
+			self.notification_list_scrollable.set_visible(True)
+		else:
+			self.no_notifications_revealer.set_reveal_child(True)
+			self.notification_list_scrollable.set_visible(False)
+
+	def notification_setup(self, factory, list_item):
+		list_item.set_child(NotificationBox())
+
+	def notification_bind(self, factory, list_item):
+		box = list_item.get_child()
+		item = list_item.get_item()
+		box.bind_to_notification(item)
 
 	def update_time(self, *args):
 		"""Updates the clock in the control panel."""
