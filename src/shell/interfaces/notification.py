@@ -117,12 +117,12 @@ class DBusNotificationDaemon(dbus.service.Object):
 	@dbus.service.method(dbus_interface='org.freedesktop.Notifications',
 		in_signature='', out_signature='ssss')
 	def GetServerInformation(self):
-		return ('dbus', 'Aspinwall', '0.1', '1.2')
+		return ('aspinwall-shell', 'Aspinwall', '0.1.0', '1.2')
 
 	@dbus.service.method(dbus_interface='org.freedesktop.Notifications',
 		in_signature='', out_signature='as')
 	def GetCapabilities(self):
-		return ['actions', 'body', 'body-hyperlinks', 'body-markup', 'icon-static', 'sound']
+		return ['actions', 'body', 'body-hyperlinks', 'body-markup', 'icon-static']
 
 	@dbus.service.method(dbus_interface=BUS_INTERFACE_NAME,
 						 in_signature='susssasa{sv}i', out_signature='u')
