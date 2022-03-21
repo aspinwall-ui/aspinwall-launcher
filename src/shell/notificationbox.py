@@ -68,6 +68,7 @@ class NotificationBox(Gtk.Revealer):
 	title_label = Gtk.Template.Child()
 	description_label = Gtk.Template.Child()
 
+	value_bar = Gtk.Template.Child()
 	action_buttons = Gtk.Template.Child()
 
 	notification = None
@@ -122,6 +123,11 @@ class NotificationBox(Gtk.Revealer):
 		self.set_property('icon_name', notification.app_icon)
 		self.set_property('title', notification.summary)
 		self.set_property('description', notification.body)
+
+		# Set up value bar
+		if 'value' in notification.props.hints:
+			self.value_bar.set_visible(True)
+			self.value_bar.set_fraction(int(notification.props.hints['value']) / 100)
 
 		# Set up icon
 		hints = self.notification.props.hints
