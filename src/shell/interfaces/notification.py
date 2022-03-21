@@ -68,16 +68,16 @@ class Notification(GObject.Object):
 		"""
 		time.sleep(self.props.expire_timeout / 1000)
 		if not self.dismissed:
-			self.dismiss()
+			self.dismiss(reason=1)
 
 	def do_action(self, action):
 		"""Performs an action on behalf of the notification."""
 		self.daemon.ActionInvoked(self.id, action)
 
-	def dismiss(self):
+	def dismiss(self, reason=2):
 		"""Dismisses the notification."""
 		self.dismissed = True
-		self.daemon.CloseNotification(self.props.id)
+		self.daemon.NotificationClosed(self.id, reason)
 
 	@GObject.Property(type=str, flags=GObject.ParamFlags.READABLE)
 	def id(self):
@@ -160,7 +160,7 @@ class DBusNotificationDaemon(dbus.service.Object):
 						 in_signature='u')
 	def CloseNotification(self, id):
 		"""Dismisses the notification with the given ID."""
-		self.NotificationClosed(id, 0)
+		self.NotificationClosed(id, 3)
 
 	@dbus.service.signal(dbus_interface=BUS_INTERFACE_NAME,
 						 signature='uu')
@@ -174,6 +174,8 @@ class DBusNotificationDaemon(dbus.service.Object):
 						 signature='us')
 	def ActionInvoked(self, id, action_key):
 		"""Invokes an action on the notification."""
+		# Clients perform the action when they receive the signal;
+		# we don't need to do anything extra to accomodate this.
 		pass
 
 class NotificationInterface(Interface):
