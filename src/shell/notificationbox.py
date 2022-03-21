@@ -20,6 +20,8 @@ class NotificationBox(Gtk.Revealer):
 	title_label = Gtk.Template.Child()
 	description_label = Gtk.Template.Child()
 
+	action_buttons = Gtk.Template.Child()
+
 	notification = None
 
 	_icon_name = None
@@ -67,10 +69,26 @@ class NotificationBox(Gtk.Revealer):
 		Takes a Notification object and makes the NotificationBox
 		show its values.
 		"""
+		self.notification = notification
+
 		self.set_property('icon_name', notification.app_icon)
 		self.set_property('title', notification.summary)
 		self.set_property('description', notification.body)
-		self.notification = notification
+
+		self.set_actions(notification.action_dict)
+
+	def set_actions(self, action_dict):
+		"""Sets up the action buttons based on the action dict."""
+		if not action_dict:
+			return
+		for action, label in action_dict.items():
+			button = Gtk.Button(label=label)
+			button.connect('clicked', self.do_action, action)
+			self.action_buttons.append(button)
+
+	def do_action(self, button, action):
+		"""Callback wrapper for Notification.do_action."""
+		self.notification.do_action(action)
 
 	@GObject.Property(type=str)
 	def icon_name(self):

@@ -42,6 +42,15 @@ class Notification(GObject.Object):
 
 		self.daemon = daemon
 
+		# Turn action list (which follows an action, label format) into a dict
+		# by using even items as keys and odd items as values
+		if actions:
+			self._action_dict = { str(action):str(label) for action, label in
+				zip(actions[::2], actions[1::2])
+			}
+		else:
+			self._action_dict = {}
+
 		if expire_timeout >= 0:
 			self.autoexpire = threading.Thread(target=self.do_autoexpire, daemon=True)
 			self.autoexpire.start()
@@ -60,6 +69,10 @@ class Notification(GObject.Object):
 		time.sleep(self.props.expire_timeout / 1000)
 		if not self.dismissed:
 			self.dismiss()
+
+	def do_action(self, action):
+		"""Performs an action on behalf of the notification."""
+		self.daemon.ActionInvoked(self.id, action)
 
 	def dismiss(self):
 		"""Dismisses the notification."""
@@ -106,6 +119,11 @@ class Notification(GObject.Object):
 		"""Expire timeout."""
 		return self._expire_timeout
 
+	@GObject.Property(flags=GObject.ParamFlags.READABLE)
+	def action_dict(self):
+		"""Dictionary containing actions and their labels."""
+		return self._action_dict
+
 class DBusNotificationDaemon(dbus.service.Object):
 	"""DBus daemon for listening to notification messages."""
 
@@ -114,12 +132,12 @@ class DBusNotificationDaemon(dbus.service.Object):
 		self.dict = {}
 		self.store = Gio.ListStore(item_type=Notification)
 
-	@dbus.service.method(dbus_interface='org.freedesktop.Notifications',
+	@dbus.service.method(dbus_interface=BUS_INTERFACE_NAME,
 		in_signature='', out_signature='ssss')
 	def GetServerInformation(self):
 		return ('aspinwall-shell', 'Aspinwall', '0.1.0', '1.2')
 
-	@dbus.service.method(dbus_interface='org.freedesktop.Notifications',
+	@dbus.service.method(dbus_interface=BUS_INTERFACE_NAME,
 		in_signature='', out_signature='as')
 	def GetCapabilities(self):
 		return ['actions', 'body', 'body-hyperlinks', 'body-markup', 'icon-static']
@@ -151,6 +169,12 @@ class DBusNotificationDaemon(dbus.service.Object):
 		self.dict[id].dismissed = True
 		self.store.remove(self.store.find(self.dict[id])[1])
 		self.dict.pop(id)
+
+	@dbus.service.signal(dbus_interface=BUS_INTERFACE_NAME,
+						 signature='us')
+	def ActionInvoked(self, id, action_key):
+		"""Invokes an action on the notification."""
+		pass
 
 class NotificationInterface(Interface):
 	"""

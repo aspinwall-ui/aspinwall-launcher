@@ -61,16 +61,11 @@
 						<child>
 							<object class="GtkBox" id="action_buttons">
 								<property name="halign">end</property>
+								<property name="spacing">6</property>
 
 								<style>
 									<class name="action-buttons"/>
 								</style>
-
-								<child>
-									<object class="GtkButton" id="button">
-										<property name="label">test</property>
-									</object>
-								</child>
 							</object>
 						</child>
 					</object>
