@@ -2,7 +2,7 @@
 """
 Contains code for notifications.
 """
-from gi.repository import Gtk, GObject
+from gi.repository import Adw, Gtk, GObject
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/shell/ui/notificationbox.ui')
 class NotificationBox(Gtk.Revealer):
@@ -81,10 +81,18 @@ class NotificationBox(Gtk.Revealer):
 		"""Sets up the action buttons based on the action dict."""
 		if not action_dict:
 			return
+		count = 0
 		for action, label in action_dict.items():
+			action_icons = self.notification.props.hints['action-icons']
 			button = Gtk.Button(label=label)
+			if action_icons and action != 'default':
+				button_content = Adw.ButtonContent.new()
+				button_content.set_icon_name(action)
+				button_content.set_label(label)
+				button.set_child(button_content)
 			button.connect('clicked', self.do_action, action)
 			self.action_buttons.append(button)
+			count += 1
 
 	def do_action(self, button, action):
 		"""Callback wrapper for Notification.do_action."""

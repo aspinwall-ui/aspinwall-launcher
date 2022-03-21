@@ -114,6 +114,11 @@ class Notification(GObject.Object):
 		"""Notification actions."""
 		return self._actions
 
+	@GObject.Property(flags=GObject.ParamFlags.READABLE)
+	def hints(self):
+		"""Notification hints."""
+		return self._hints
+
 	@GObject.Property(type=int, flags=GObject.ParamFlags.READABLE)
 	def expire_timeout(self):
 		"""Expire timeout."""
@@ -140,7 +145,9 @@ class DBusNotificationDaemon(dbus.service.Object):
 	@dbus.service.method(dbus_interface=BUS_INTERFACE_NAME,
 		in_signature='', out_signature='as')
 	def GetCapabilities(self):
-		return ['actions', 'body', 'body-hyperlinks', 'body-markup', 'icon-static']
+		return [
+			'action-icons', 'actions', 'body', 'body-hyperlinks', 'body-markup', 'icon-static'
+		]
 
 	@dbus.service.method(dbus_interface=BUS_INTERFACE_NAME,
 						 in_signature='susssasa{sv}i', out_signature='u')
