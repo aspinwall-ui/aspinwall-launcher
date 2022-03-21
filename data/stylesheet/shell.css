@@ -87,3 +87,7 @@
 .notification-list row {
 	background-color: transparent;
 }
+
+.notification .action-buttons {
+	background-color: transparent;
+}

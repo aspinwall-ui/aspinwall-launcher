@@ -2,7 +2,39 @@
 """
 Contains code for notifications.
 """
-from gi.repository import Adw, Gtk, GObject
+from gi.repository import Adw, Gtk, Gio, GObject
+
+from aspinwall.shell.interfaces.notification import Action
+
+class ActionButton(Gtk.Button):
+	"""Simple button representing an action."""
+	__gtype_name__ = 'ActionButton'
+
+	def __init__(self, notification):
+		"""Sets up an ActionButton."""
+		super().__init__()
+		self.notification = notification
+
+	def bind_to_action(self, action):
+		"""Takes an Action object and applies its properties to the button."""
+		self.action = action
+
+		use_action_icons = self.notification.props.hints['action-icons']
+		action_key = action.props.action
+		label = action.props.label
+
+		self.set_label(label)
+		if use_action_icons and action_key != 'default':
+			button_content = Adw.ButtonContent.new()
+			button_content.set_icon_name(action_key)
+			button_content.set_label(label)
+			self.set_child(button_content)
+
+		self.connect('clicked', self.invoke)
+
+	def invoke(self, *args):
+		"""Callback wrapper for Action.invoke."""
+		self.action.invoke()
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/shell/ui/notificationbox.ui')
 class NotificationBox(Gtk.Revealer):
@@ -75,28 +107,23 @@ class NotificationBox(Gtk.Revealer):
 		self.set_property('title', notification.summary)
 		self.set_property('description', notification.body)
 
-		self.set_actions(notification.action_dict)
+		# Set up action store
+		action_factory = Gtk.SignalListItemFactory()
+		action_factory.connect('setup', self.action_button_setup)
+		action_factory.connect('bind', self.action_button_bind)
 
-	def set_actions(self, action_dict):
-		"""Sets up the action buttons based on the action dict."""
-		if not action_dict:
-			return
-		count = 0
-		for action, label in action_dict.items():
-			action_icons = self.notification.props.hints['action-icons']
-			button = Gtk.Button(label=label)
-			if action_icons and action != 'default':
-				button_content = Adw.ButtonContent.new()
-				button_content.set_icon_name(action)
-				button_content.set_label(label)
-				button.set_child(button_content)
-			button.connect('clicked', self.do_action, action)
-			self.action_buttons.append(button)
-			count += 1
+		self.action_buttons.set_model(Gtk.SingleSelection(
+			model=self.notification.actions)
+		)
+		self.action_buttons.set_factory(action_factory)
 
-	def do_action(self, button, action):
-		"""Callback wrapper for Notification.do_action."""
-		self.notification.do_action(action)
+	def action_button_setup(self, factory, item):
+		item.set_child(ActionButton(self.notification))
+
+	def action_button_bind(self, factory, item):
+		action = item.get_item()
+		button = item.get_child()
+		button.bind_to_action(action)
 
 	@GObject.Property(type=str)
 	def icon_name(self):

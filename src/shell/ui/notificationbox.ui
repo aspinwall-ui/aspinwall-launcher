@@ -59,9 +59,9 @@
 						</child>
 
 						<child>
-							<object class="GtkBox" id="action_buttons">
+							<object class="GtkListView" id="action_buttons">
+								<property name="orientation">horizontal</property>
 								<property name="halign">end</property>
-								<property name="spacing">6</property>
 
 								<style>
 									<class name="action-buttons"/>

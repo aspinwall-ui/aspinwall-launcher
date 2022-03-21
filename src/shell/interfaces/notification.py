@@ -19,6 +19,33 @@ BUS_INTERFACE_NAME = BUS_NAME
 session_bus = dbus.SessionBus()
 max_id = 0
 
+class Action(GObject.Object):
+	"""
+	GObject representation of a notification action.
+	"""
+	__gtype_name__ = 'Action'
+
+	def __init__(self, notification, action, label):
+		"""Sets up an action."""
+		super().__init__()
+		self.notification = notification
+		self._action = action
+		self._label = label
+
+	def invoke(self):
+		"""Invokes the action."""
+		self.notification.daemon.ActionInvoked(self.notification.id, self.action)
+
+	@GObject.Property(type=str, flags=GObject.ParamFlags.READABLE)
+	def action(self):
+		"""The action key."""
+		return self._action
+
+	@GObject.Property(type=str, flags=GObject.ParamFlags.READABLE)
+	def label(self):
+		"""The action label."""
+		return self._label
+
 class Notification(GObject.Object):
 	"""
 	GObject representation of a notification.
@@ -36,20 +63,18 @@ class Notification(GObject.Object):
 		self._app_icon = app_icon
 		self._summary = summary
 		self._body = body
-		self._actions = actions
+		self._actions_list = actions
 		self._hints = hints
 		self._expire_timeout = expire_timeout
 
 		self.daemon = daemon
 
-		# Turn action list (which follows an action, label format) into a dict
-		# by using even items as keys and odd items as values
+		# Format action list for store
+		self.actions = Gio.ListStore(item_type=Action)
 		if actions:
-			self._action_dict = { str(action):str(label) for action, label in
-				zip(actions[::2], actions[1::2])
-			}
-		else:
-			self._action_dict = {}
+			for action, label in zip(actions[::2], actions[1::2]):
+				action = Action(self, str(action), str(label))
+				self.actions.append(action)
 
 		if expire_timeout >= 0:
 			self.autoexpire = threading.Thread(target=self.do_autoexpire, daemon=True)
@@ -69,10 +94,6 @@ class Notification(GObject.Object):
 		time.sleep(self.props.expire_timeout / 1000)
 		if not self.dismissed:
 			self.dismiss(reason=1)
-
-	def do_action(self, action):
-		"""Performs an action on behalf of the notification."""
-		self.daemon.ActionInvoked(self.id, action)
 
 	def dismiss(self, reason=2):
 		"""Dismisses the notification."""
@@ -110,11 +131,6 @@ class Notification(GObject.Object):
 		return self._body
 
 	@GObject.Property(flags=GObject.ParamFlags.READABLE)
-	def actions(self):
-		"""Notification actions."""
-		return self._actions
-
-	@GObject.Property(flags=GObject.ParamFlags.READABLE)
 	def hints(self):
 		"""Notification hints."""
 		return self._hints
@@ -123,11 +139,6 @@ class Notification(GObject.Object):
 	def expire_timeout(self):
 		"""Expire timeout."""
 		return self._expire_timeout
-
-	@GObject.Property(flags=GObject.ParamFlags.READABLE)
-	def action_dict(self):
-		"""Dictionary containing actions and their labels."""
-		return self._action_dict
 
 class DBusNotificationDaemon(dbus.service.Object):
 	"""DBus daemon for listening to notification messages."""
