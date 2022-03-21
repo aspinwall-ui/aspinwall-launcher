@@ -157,7 +157,8 @@ class DBusNotificationDaemon(dbus.service.Object):
 		in_signature='', out_signature='as')
 	def GetCapabilities(self):
 		return [
-			'action-icons', 'actions', 'body', 'body-hyperlinks', 'body-markup', 'icon-static'
+			'action-icons', 'actions', 'body', 'body-hyperlinks',
+			'body-markup', 'icon-static', 'persistent'
 		]
 
 	@dbus.service.method(dbus_interface=BUS_INTERFACE_NAME,
