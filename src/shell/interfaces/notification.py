@@ -68,8 +68,8 @@ class Notification(GObject.Object):
 		self._hints = hints
 		self._expire_timeout = expire_timeout
 
-		if 'urgency' in hints:
-			self._urgency = hints['urgency']
+		if 'urgency' in hints and hints['urgency']:
+			self._urgency = int(hints['urgency'])
 		else:
 			self._urgency = 1 # Normal
 

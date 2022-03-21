@@ -8,7 +8,7 @@
 		<property name="transition-duration">50</property>
 
 		<child>
-			<object class="GtkBox">
+			<object class="GtkBox" id="main_box">
 				<property name="hexpand">true</property>
 				<property name="spacing">12</property>
 				<property name="margin-top">3</property>

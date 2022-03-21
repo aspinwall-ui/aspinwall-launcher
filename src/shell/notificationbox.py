@@ -74,6 +74,7 @@ class NotificationBox(Gtk.Revealer):
 	title_label = Gtk.Template.Child()
 	description_label = Gtk.Template.Child()
 
+	main_box = Gtk.Template.Child()
 	value_bar = Gtk.Template.Child()
 	action_buttons = Gtk.Template.Child()
 
@@ -132,6 +133,9 @@ class NotificationBox(Gtk.Revealer):
 		self.time_label.set_label(str(
 			time.strftime('%H:%M', time.localtime(notification.time_received))
 		))
+
+		if notification.props.urgency == 2:
+			self.main_box.add_css_class('critical')
 
 		# Set up value bar
 		if 'value' in notification.props.hints:
