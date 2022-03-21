@@ -3,6 +3,7 @@
 Contains code for notifications.
 """
 from gi.repository import Adw, Gtk, GdkPixbuf, GObject
+import time
 import os.path
 from urllib.parse import urlparse
 
@@ -69,6 +70,7 @@ class NotificationBox(Gtk.Revealer):
 	__gtype_name__ = 'NotificationBox'
 
 	icon = Gtk.Template.Child()
+	time_label = Gtk.Template.Child()
 	title_label = Gtk.Template.Child()
 	description_label = Gtk.Template.Child()
 
@@ -127,6 +129,9 @@ class NotificationBox(Gtk.Revealer):
 		self.set_property('icon_name', notification.app_icon)
 		self.set_property('title', notification.summary)
 		self.set_property('description', notification.body)
+		self.time_label.set_label(str(
+			time.strftime('%H:%M', time.localtime(notification.time_received))
+		))
 
 		# Set up value bar
 		if 'value' in notification.props.hints:

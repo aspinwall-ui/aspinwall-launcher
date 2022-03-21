@@ -35,15 +35,32 @@
 						<property name="spacing">6</property>
 
 						<child>
-							<object class="GtkLabel" id="title_label">
-								<property name="label">Notification title</property>
-								<property name="wrap">true</property>
-								<property name="wrap-mode">word-char</property>
-								<property name="halign">fill</property>
-								<property name="xalign">0</property>
-								<attributes>
-									<attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
-								</attributes>
+							<object class="GtkOverlay" id="time_overlay">
+								<child>
+									<object class="GtkLabel" id="title_label">
+										<property name="label">Notification title</property>
+										<property name="wrap">true</property>
+										<property name="wrap-mode">word-char</property>
+										<property name="halign">fill</property>
+										<property name="xalign">0</property>
+										<property name="margin-end">50</property>
+										<attributes>
+											<attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
+										</attributes>
+									</object>
+								</child>
+
+								<child type="overlay">
+									<object class="GtkLabel" id="time_label">
+										<property name="label">00:00</property>
+										<property name="halign">end</property>
+										<property name="valign">start</property>
+
+										<style>
+											<class name="dim-label"/>
+										</style>
+									</object>
+								</child>
 							</object>
 						</child>
 
