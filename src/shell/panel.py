@@ -10,8 +10,6 @@ from aspinwall.shell.config import config
 from aspinwall.shell.interfaces.manager import get_interface_manager
 
 import time
-import threading
-import psutil
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/shell/ui/panel.ui')
 class Panel(Surface):

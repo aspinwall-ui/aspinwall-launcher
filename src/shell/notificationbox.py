@@ -2,9 +2,7 @@
 """
 Contains code for notifications.
 """
-from gi.repository import Adw, Gtk, Gio, GObject
-
-from aspinwall.shell.interfaces.notification import Action
+from gi.repository import Adw, Gtk, GObject
 
 class ActionButton(Gtk.Button):
 	"""Simple button representing an action."""
