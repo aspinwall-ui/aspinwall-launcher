@@ -233,7 +233,7 @@ class ControlPanel(Gtk.Box):
 		self.interface_manager = get_interface_manager()
 		self.notification_interface = \
 			self.interface_manager.get_interface_by_name('NotificationInterface')
-		self.notification_store = self.notification_interface.props.notifications
+		self.notification_store = self.notification_interface.props.notifications_sorted
 
 		# Set up clock
 		clock_daemon.connect('notify::time', self.update_time)

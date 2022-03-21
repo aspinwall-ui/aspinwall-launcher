@@ -3,7 +3,7 @@
 Notification handler and interface.
 """
 from aspinwall.shell.interfaces import Interface
-from gi.repository import Gio, GObject
+from gi.repository import Gio, Gtk, GObject
 import threading
 import time
 
@@ -58,6 +58,7 @@ class Notification(GObject.Object):
 				 hints, expire_timeout, daemon):
 		"""Initializes the notification."""
 		super().__init__()
+		self._time_received = time.time()
 		self._app_name = app_name
 		self._replaces_id = replaces_id
 		self._app_icon = app_icon
@@ -66,6 +67,11 @@ class Notification(GObject.Object):
 		self._actions_list = actions
 		self._hints = hints
 		self._expire_timeout = expire_timeout
+
+		if 'urgency' in hints:
+			self._urgency = hints['urgency']
+		else:
+			self._urgency = 1 # Normal
 
 		self.daemon = daemon
 
@@ -140,6 +146,16 @@ class Notification(GObject.Object):
 		"""Expire timeout."""
 		return self._expire_timeout
 
+	@GObject.Property(type=int, flags=GObject.ParamFlags.READABLE)
+	def time_received(self):
+		"""The time when the notification was received by the daemon."""
+		return self._time_received
+
+	@GObject.Property(type=int, flags=GObject.ParamFlags.READABLE)
+	def urgency(self):
+		"""The notification's urgency."""
+		return self._urgency
+
 class DBusNotificationDaemon(dbus.service.Object):
 	"""DBus daemon for listening to notification messages."""
 
@@ -147,6 +163,28 @@ class DBusNotificationDaemon(dbus.service.Object):
 		super().__init__(bus_name, BUS_PATH)
 		self.dict = {}
 		self.store = Gio.ListStore(item_type=Notification)
+
+		self.sorter = Gtk.CustomSorter.new(self.notification_sort_func, None)
+		self.sorted_store = Gtk.SortListModel(model=self.store)
+		self.sorted_store.set_sorter(self.sorter)
+
+	def notification_sort_func(self, a, b, *args):
+		"""
+		Custom sorter for notifications. Prioritizes newer notifications
+		with a higher urgency.
+		"""
+		urgency = 0
+		if a.props.time_received > b.props.time_received:
+			urgency -= 1
+		elif a.props.time_received < b.props.time_received:
+			urgency += 1
+
+		if a.props.urgency > b.props.urgency:
+			urgency -= 2
+		elif a.props.urgency < b.props.urgency:
+			urgency += 2
+
+		return urgency
 
 	@dbus.service.method(dbus_interface=BUS_INTERFACE_NAME,
 		in_signature='', out_signature='ssss')
@@ -172,6 +210,7 @@ class DBusNotificationDaemon(dbus.service.Object):
 		)
 		self.dict[notification.id] = notification
 		self.store.append(notification)
+		self.sorter.changed(Gtk.SorterChange.DIFFERENT)
 
 		return notification.id
 
@@ -190,6 +229,7 @@ class DBusNotificationDaemon(dbus.service.Object):
 			self.dict[id].dismissed = True
 			self.store.remove(self.store.find(self.dict[id])[1])
 			self.dict.pop(id)
+			self.sorter.changed(Gtk.SorterChange.DIFFERENT)
 
 	@dbus.service.signal(dbus_interface=BUS_INTERFACE_NAME,
 						 signature='us')
@@ -226,3 +266,8 @@ class NotificationInterface(Interface):
 	def notifications(self):
 		"""Returns the notification daemon's notification store."""
 		return self.daemon.store
+
+	@GObject.Property(flags=GObject.ParamFlags.READABLE)
+	def notifications_sorted(self):
+		"""Returns the notification daemon's sorted notification store."""
+		return self.daemon.sorted_store
