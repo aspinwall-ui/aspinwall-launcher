@@ -185,9 +185,11 @@ class DBusNotificationDaemon(dbus.service.Object):
 						 signature='uu')
 	def NotificationClosed(self, id, reason):
 		"""Dismisses the notification with the given ID."""
-		self.dict[id].dismissed = True
-		self.store.remove(self.store.find(self.dict[id])[1])
-		self.dict.pop(id)
+		# Don't try to remove notification if it doesn't exist
+		if id in self.dict.keys():
+			self.dict[id].dismissed = True
+			self.store.remove(self.store.find(self.dict[id])[1])
+			self.dict.pop(id)
 
 	@dbus.service.signal(dbus_interface=BUS_INTERFACE_NAME,
 						 signature='us')
