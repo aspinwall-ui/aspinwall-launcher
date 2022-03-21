@@ -2,7 +2,25 @@
 """
 Contains code for notifications.
 """
-from gi.repository import Adw, Gtk, GObject
+from gi.repository import Adw, Gtk, GdkPixbuf, GObject
+import os.path
+from urllib.parse import urlparse
+
+def image_data_to_dict(image_data):
+	"""
+	Converts a desktop notification image data array into a dict.
+	"""
+	result = {}
+
+	result['width'] = image_data[0]
+	result['height'] = image_data[1]
+	result['rowstride'] = image_data[2]
+	result['has_alpha'] = image_data[3]
+	result['bits_per_sample'] = image_data[4]
+	result['channels'] = image_data[5]
+	result['data'] = image_data[6]
+
+	return result
 
 class ActionButton(Gtk.Button):
 	"""Simple button representing an action."""
@@ -104,6 +122,59 @@ class NotificationBox(Gtk.Revealer):
 		self.set_property('icon_name', notification.app_icon)
 		self.set_property('title', notification.summary)
 		self.set_property('description', notification.body)
+
+		# Set up icon
+		hints = self.notification.props.hints
+		self.icon.set_visible(True)
+
+		if 'icon_data' in hints and hints['icon_data']:
+			image_data = image_data_to_dict(hints['icon_data'])
+		elif 'image-data' in hints and hints['image-data']:
+			image_data = image_data_to_dict(hints['image-data'])
+		else:
+			image_data = None
+
+		if 'image-path' in hints and hints['image-path']:
+			image_path = hints['image-path']
+		elif self.notification.props.app_icon:
+			image_path = self.notification.props.app_icon
+		else:
+			image_path = None
+
+		if image_data:
+			pixbuf = GdkPixbuf.Pixbuf.new_from_data(
+				image_data['data'], GdkPixbuf.Colorspace.RGB,
+				image_data['has_alpha'],
+				image_data['bits_per_sample'],
+				image_data['width'], image_data['height'],
+				image_data['rowstride']
+			)
+			self.icon.set_from_pixbuf(pixbuf)
+		elif image_path:
+			# Depending on the caller program, the image path may be provided
+			# in one of three formats:
+			#   * as an URI (starts with file://)
+			#   * as a file path
+			#   * as an icon name
+			# Thus, we need to figure out which one is passed.
+
+			if 'file://' in image_path:
+				# Handle URI; this is safe, per the spec only file:// is supported
+				parsed = urlparse(image_path)
+				final_path = os.path.abspath(os.path.join(parsed.netloc, parsed.path))
+			elif '/' in image_path or '\\' in image_path:
+				# Handle local file path
+				final_path = image_path
+			else:
+				# We're dealing with an icon name
+				final_path = None
+				self.icon.set_from_icon_name(image_path)
+
+			if final_path:
+				self.icon.set_from_file(final_path)
+		else:
+			# No icon
+			self.icon.set_visible(False)
 
 		# Set up action store
 		action_factory = Gtk.SignalListItemFactory()
