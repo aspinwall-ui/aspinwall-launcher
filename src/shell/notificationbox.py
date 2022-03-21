@@ -35,7 +35,11 @@ class ActionButton(Gtk.Button):
 		"""Takes an Action object and applies its properties to the button."""
 		self.action = action
 
-		use_action_icons = self.notification.props.hints['action-icons']
+		if 'action-icons' in self.notification.props.hints:
+			use_action_icons = self.notification.props.hints['action-icons']
+		else:
+			use_action_icons = False
+
 		action_key = action.props.action
 		label = action.props.label
 
