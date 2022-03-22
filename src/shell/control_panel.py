@@ -5,10 +5,10 @@ Contains code for the control panel that appears after dragging the panel.
 from gi.repository import Adw, Gtk, GObject
 
 from aspinwall.shell.surface import Surface
-from aspinwall.shell.notificationbox import NotificationBox # noqa: F401
 from aspinwall.utils.clock import clock_daemon
 
 from aspinwall.shell.interfaces.manager import get_interface_manager
+from aspinwall.shell.notificationbox import NotificationListView # noqa: F401
 
 import time
 
@@ -239,16 +239,6 @@ class ControlPanel(Gtk.Box):
 		clock_daemon.connect('notify::time', self.update_time)
 		self.update_time()
 
-		# Set up notification list
-		notification_factory = Gtk.SignalListItemFactory()
-		notification_factory.connect('setup', self.notification_setup)
-		notification_factory.connect('bind', self.notification_bind)
-
-		self.notification_list.set_model(Gtk.SingleSelection(
-			model=self.notification_store)
-		)
-		self.notification_list.set_factory(notification_factory)
-
 		self.notification_store.connect('items-changed', self.show_no_notifications)
 		self.show_no_notifications()
 
@@ -271,14 +261,6 @@ class ControlPanel(Gtk.Box):
 		else:
 			self.no_notifications_revealer.set_reveal_child(True)
 			self.notification_list_scrollable.set_visible(False)
-
-	def notification_setup(self, factory, list_item):
-		list_item.set_child(NotificationBox())
-
-	def notification_bind(self, factory, list_item):
-		box = list_item.get_child()
-		item = list_item.get_item()
-		box.bind_to_notification(item)
 
 	def update_time(self, *args):
 		"""Updates the clock in the control panel."""

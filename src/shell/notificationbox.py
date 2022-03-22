@@ -7,6 +7,8 @@ import time
 import os.path
 from urllib.parse import urlparse
 
+from aspinwall.shell.interfaces.manager import get_interface_manager
+
 def image_data_to_dict(image_data):
 	"""
 	Converts a desktop notification image data array into a dict.
@@ -249,3 +251,33 @@ class NotificationBox(Gtk.Revealer):
 		"""Sets the notification description."""
 		self._description = description
 		self.description_label.set_label(description)
+
+class NotificationListView(Gtk.ListView):
+	"""
+	Sorted notification listview.
+	"""
+	__gtype_name__ = 'NotificationListView'
+
+	def __init__(self):
+		"""Initializes the notification list."""
+		super().__init__()
+		self.add_css_class('notification-list')
+		self.interface_manager = get_interface_manager()
+		self.notification_interface = \
+			self.interface_manager.get_interface_by_name('NotificationInterface')
+		self.notification_store = self.notification_interface.props.notifications_sorted
+
+		notification_factory = Gtk.SignalListItemFactory()
+		notification_factory.connect('setup', self.notification_setup)
+		notification_factory.connect('bind', self.notification_bind)
+
+		self.set_model(Gtk.SingleSelection(model=self.notification_store))
+		self.set_factory(notification_factory)
+
+	def notification_setup(self, factory, list_item):
+		list_item.set_child(NotificationBox())
+
+	def notification_bind(self, factory, list_item):
+		box = list_item.get_child()
+		item = list_item.get_item()
+		box.bind_to_notification(item)

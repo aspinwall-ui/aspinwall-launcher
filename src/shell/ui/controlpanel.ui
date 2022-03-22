@@ -183,11 +183,7 @@
 						<child>
 							<object class="AdwClampScrollable">
 								<child>
-									<object class="GtkListView" id="notification_list">
-										<style>
-											<class name="notification-list"/>
-										</style>
-									</object>
+									<object class="NotificationListView" id="notification_list"/>
 								</child>
 							</object>
 						</child>
