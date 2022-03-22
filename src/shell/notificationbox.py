@@ -129,7 +129,11 @@ class NotificationBox(Gtk.Revealer):
 
 		self.set_property('icon_name', notification.app_icon)
 		self.set_property('title', notification.summary)
-		self.set_property('description', notification.body)
+		if notification.body:
+			self.description_label.set_visible(True)
+			self.set_property('description', notification.body)
+		else:
+			self.description_label.set_visible(False)
 		self.time_label.set_label(str(
 			time.strftime('%H:%M', time.localtime(notification.time_received))
 		))
