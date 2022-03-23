@@ -32,6 +32,7 @@ utils_sources = [
   'control_panel.py',
   'panel.py',
   'notificationbox.py',
+  'notification_popup.py',
   'surface.py',
   'shellmanager.py',
 ]

@@ -8,7 +8,9 @@ gi_require_version('Adw', '1')
 
 from gi.repository import Adw, Gtk
 from aspinwall.shell.interfaces.manager import start_interface_manager
+
 from aspinwall.shell.control_panel import ControlPanelContainer
+from aspinwall.shell.notification_popup import NotificationPopup
 from aspinwall.shell.panel import Panel
 
 running = False
@@ -28,6 +30,9 @@ class ShellManager:
 
 		self.control_panel = ControlPanelContainer(app)
 		self.windows.add_window(self.control_panel)
+
+		self.notification_popup = NotificationPopup(app)
+		self.windows.add_window(self.notification_popup)
 
 		self.panel = Panel(app)
 		self.windows.add_window(self.panel)

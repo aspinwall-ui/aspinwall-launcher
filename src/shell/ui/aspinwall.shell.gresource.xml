@@ -5,6 +5,7 @@
 		<file preprocess="xml-stripblanks">ui/controlpanelbutton.ui</file>
 		<file preprocess="xml-stripblanks">ui/controlpanelcontainer.ui</file>
 		<file preprocess="xml-stripblanks">ui/notificationbox.ui</file>
+		<file preprocess="xml-stripblanks">ui/notificationpopup.ui</file>
 		<file preprocess="xml-stripblanks">ui/panel.ui</file>
 	</gresource>
 </gresources>
