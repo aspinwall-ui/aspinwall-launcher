@@ -37,7 +37,7 @@ class Surface(Gtk.Window):
 			self.get_surface()
 		)
 		self._monitor_width = monitor.get_geometry().width
-		self._monitor_height = monitor.get_geometry().width
+		self._monitor_height = monitor.get_geometry().height
 
 		monitor.connect('notify::geometry', self.update_size)
 
@@ -65,7 +65,7 @@ class Surface(Gtk.Window):
 			self.get_surface()
 		)
 		self._monitor_width = monitor.get_geometry().width
-		self._monitor_height = monitor.get_geometry().width
+		self._monitor_height = monitor.get_geometry().height
 
 		if self.hexpand is True:
 			self.width = self._monitor_width
