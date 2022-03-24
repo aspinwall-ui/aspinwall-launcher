@@ -18,6 +18,7 @@
 
 				<child type="overlay">
 					<object class="GtkRevealer" id="container_revealer">
+						<property name="reveal-child">false</property>
 						<property name="hexpand">false</property>
 						<property name="halign">end</property> <!-- this is changed in-code based on where the panel touch/slide happened -->
 						<property name="valign">start</property>
