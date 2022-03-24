@@ -58,15 +58,15 @@ class PulseAudioInterface(Interface):
 			self.sink = self.client.sink_list()[0]
 
 		# Get default input sink; this will be used for microphone control
-		default_input_sink_name = self.client.server_info().default_source_name
-		self.input_sink = None
-		if self.client.sink_input_list():
-			for sink in self.client.sink_input_list():
-				if sink.name == default_input_sink_name:
-					self.input_sink = sink
+		default_source_name = self.client.server_info().default_source_name
+		self.source = None
+		if self.client.source_list():
+			for sink in self.client.source_list():
+				if sink.name == default_source_name:
+					self.source = sink
 					break
-			if not self.input_sink:
-				self.input_sink = self.client.sink_input_list()[0]
+			if not self.source:
+				self.source = self.client.source_list()[0]
 
 	def listener_func(self, *args):
 		"""Function for the listener thread."""
@@ -127,20 +127,20 @@ class PulseAudioInterface(Interface):
 	@GObject.Property(type=bool, default=False)
 	def input_muted(self):
 		"""Whether the default input sink is muted or not."""
-		if self.input_sink:
+		if self.source:
 			self.latest_change_is_ours = True
-			return self.input_sink.mute
+			return self.source.mute
 		return False
 
 	@input_muted.setter
 	def set_input_muted(self, value):
 		"""Mutes/unmutes the input sink according to the value."""
-		if self.input_sink:
+		if self.source:
 			self.latest_change_is_ours = True
 			if value is True:
-				self.client.mute(self.input_sink, True)
+				self.client.mute(self.source, True)
 			else:
-				self.client.mute(self.input_sink, False)
+				self.client.mute(self.source, False)
 
 	def toggle_input_mute(self, *args):
 		"""Toggles between muted/unmuted mode."""
@@ -149,6 +149,6 @@ class PulseAudioInterface(Interface):
 	@GObject.Property(type=bool, default=False, flags=GObject.ParamFlags.READABLE)
 	def has_input(self):
 		"""Whether there's an input device present or not."""
-		if self.input_sink:
+		if self.source:
 			return True
 		return False

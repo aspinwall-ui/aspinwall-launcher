@@ -311,7 +311,7 @@ class ControlPanel(Gtk.Box):
 		else:
 			audio_icon_name = 'audio-volume-muted-symbolic'
 
-		if self.audio_interface.input_sink and not self.audio_interface.props.input_muted:
+		if self.audio_interface.source and not self.audio_interface.props.input_muted:
 			microphone_icon_name = 'microphone-sensitivity-high-symbolic'
 		else:
 			microphone_icon_name = 'microphone-sensitivity-muted-symbolic'
