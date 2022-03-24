@@ -57,10 +57,10 @@ class ControlPanelButton(Gtk.FlowBoxChild):
 		self.set_sensitive(interface.props.available)
 		self.set_property('icon-active', interface.props.active)
 		interface.bind_property('available', self, 'sensitive',
-			flags=GObject.BindingFlags.SYNC_CREATE
+			GObject.BindingFlags.SYNC_CREATE
 		)
 		interface.bind_property('active', self, 'icon-active',
-			flags=GObject.BindingFlags.SYNC_CREATE
+			GObject.BindingFlags.SYNC_CREATE
 		)
 
 	def emit_icon_clicked(self, *args):
@@ -226,6 +226,12 @@ class ControlPanel(Gtk.Box):
 	network_button = Gtk.Template.Child()
 	bluetooth_button = Gtk.Template.Child()
 	battery_button = Gtk.Template.Child()
+	microphone_mute_button = Gtk.Template.Child()
+	speaker_mute_button = Gtk.Template.Child()
+
+	volume_slider = Gtk.Template.Child()
+	volume_adjustment = Gtk.Template.Child()
+	volume_icon = Gtk.Template.Child()
 
 	def __init__(self):
 		"""Initializes the control panel."""
@@ -247,8 +253,39 @@ class ControlPanel(Gtk.Box):
 		self.battery_button.bind_to_interface(battery_interface)
 		self.battery_button.set_property('icon-name', battery_interface.props.icon_name)
 		battery_interface.bind_property('icon-name', self.battery_button, 'icon-name',
-			flags=GObject.BindingFlags.SYNC_CREATE
+			GObject.BindingFlags.SYNC_CREATE
 		)
+
+		self.audio_interface = \
+			self.interface_manager.get_interface_by_name('PulseAudioInterface')
+		self.audio_interface.bind_property('available', self.volume_slider, 'sensitive')
+		self.audio_interface.bind_property('volume', self.volume_adjustment, 'value',
+			GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE
+		)
+
+		self.microphone_mute_button.bind_to_interface(self.audio_interface)
+		self.audio_interface.bind_property('input-muted',
+			self.microphone_mute_button, 'icon-active'
+		)
+		self.audio_interface.bind_property('has-input',
+			self.microphone_mute_button, 'sensitive'
+		)
+		self.microphone_mute_button.connect(
+			'icon-clicked', self.audio_interface.toggle_input_mute
+		)
+
+		self.speaker_mute_button.bind_to_interface(self.audio_interface)
+		self.audio_interface.bind_property('muted', self.speaker_mute_button, 'icon-active')
+		self.speaker_mute_button.connect('icon-clicked', self.audio_interface.toggle_mute)
+
+		self.volume_icon.bind_property('active', self.audio_interface, 'muted',
+			GObject.BindingFlags.BIDIRECTIONAL
+		)
+
+		self.microphone_mute_button.connect('icon-clicked', self.update_mute_icons)
+		self.speaker_mute_button.connect('icon-clicked', self.update_mute_icons)
+		self.volume_icon.connect('toggled', self.update_mute_icons)
+		self.update_mute_icons()
 
 	def show_no_notifications(self, *args):
 		"""
@@ -266,3 +303,19 @@ class ControlPanel(Gtk.Box):
 		"""Updates the clock in the control panel."""
 		self.clock_time.set_label(time.strftime('%H:%M'))
 		self.clock_date.set_label(time.strftime('%x'))
+
+	def update_mute_icons(self, *args):
+		"""Updates the icons for audio-related interfaces."""
+		if self.audio_interface.sink and not self.audio_interface.props.muted:
+			audio_icon_name = 'audio-volume-high-symbolic'
+		else:
+			audio_icon_name = 'audio-volume-muted-symbolic'
+
+		if self.audio_interface.input_sink and not self.audio_interface.props.input_muted:
+			microphone_icon_name = 'microphone-sensitivity-high-symbolic'
+		else:
+			microphone_icon_name = 'microphone-sensitivity-muted-symbolic'
+
+		self.microphone_mute_button.set_property('icon-name', microphone_icon_name)
+		self.speaker_mute_button.set_property('icon-name', audio_icon_name)
+		self.volume_icon.set_icon_name(audio_icon_name)

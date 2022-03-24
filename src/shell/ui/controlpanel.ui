@@ -121,7 +121,7 @@
 								</child>
 
 								<child>
-									<object class="ControlPanelButton">
+									<object class="ControlPanelButton" id="microphone_mute_button">
 										<property name="icon-name">microphone-sensitivity-muted-symbolic</property>
 										<!-- TRANSLATORS: Used for the microphone enable/disable button in the control panel -->
 										<property name="icon-label" translatable="yes">Microphone</property>
@@ -137,10 +137,35 @@
 								</child>
 
 								<child>
-									<object class="ControlPanelButton">
+									<object class="ControlPanelButton" id="speaker_mute_button">
 										<property name="icon-name">audio-volume-muted-symbolic</property>
 										<!-- TRANSLATORS: Used for the mute/unmute button in the control panel -->
-										<property name="icon-label">Muted</property>
+										<property name="icon-label">Speaker</property>
+									</object>
+								</child>
+							</object>
+						</child>
+					</object>
+				</child>
+
+				<child>
+					<object class="AdwClamp">
+						<child>
+							<object class="GtkBox" id="volume_slider_pack">
+								<child>
+									<object class="GtkToggleButton" id="volume_icon">
+										<property name="icon-name">audio-volume-muted-symbolic</property>
+
+										<style>
+											<class name="flat"/>
+										</style>
+									</object>
+								</child>
+
+								<child>
+									<object class="GtkScale" id="volume_slider">
+										<property name="adjustment">volume_adjustment</property>
+										<property name="hexpand">true</property>
 									</object>
 								</child>
 							</object>
@@ -192,4 +217,8 @@
 			</object>
 		</child>
 	</template>
+	<object class="GtkAdjustment" id="volume_adjustment">
+		<property name="lower">0</property>
+		<property name="upper">100</property>
+	</object>
 </interface>
