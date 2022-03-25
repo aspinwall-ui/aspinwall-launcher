@@ -6,20 +6,20 @@ from gi.repository import GLib
 import importlib
 import os
 
+user_widget_dir = os.path.join(GLib.get_user_data_dir(), 'aspinwall', 'widgets')
+widget_dirs = [user_widget_dir]
+
+if not os.path.exists(user_widget_dir):
+	os.makedirs(user_widget_dir)
+
+for data_dir in GLib.get_system_data_dirs():
+	dir = os.path.join(data_dir, 'aspinwall', 'widgets')
+	if not os.path.exists(dir):
+		continue
+	widget_dirs.append(dir)
+
 if os.getenv('ASPINWALL_WIDGET_DIR'):
-	widget_dirs = [os.getenv('ASPINWALL_WIDGET_DIR')]
-else:
-	user_widget_dir = os.path.join(GLib.get_user_data_dir(), 'aspinwall', 'widgets')
-	widget_dirs = [user_widget_dir]
-
-	if not os.path.exists(user_widget_dir):
-		os.makedirs(user_widget_dir)
-
-	for data_dir in GLib.get_system_data_dirs():
-		dir = os.path.join(data_dir, 'aspinwall', 'widgets')
-		if not os.path.exists(dir):
-			continue
-		widget_dirs.append(dir)
+	widget_dirs += [os.getenv('ASPINWALL_WIDGET_DIR')]
 
 available_widgets = []
 
