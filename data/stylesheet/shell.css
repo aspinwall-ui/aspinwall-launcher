@@ -101,3 +101,30 @@
 .aspinwall-notification-popup {
 	background-color: transparent;
 }
+
+/* Window switcher */
+
+.window-list {
+	background-color: alpha(@aspinwall_shell_bg_secondary, 0.5);
+	color: @aspinwall_shell_fg_secondary;
+	padding: 12px;
+}
+
+.window-view {
+	border: 1px @aspinwall_shell_border solid;
+	border-radius: 6px;
+	font-size: 14px;
+}
+
+.window-view .window-actions {
+	background-color: @aspinwall_shell_bg;
+	color: @aspinwall_shell_fg;
+	border-radius: 6px 6px 0 0;
+	padding: 3px;
+}
+
+.window-view .window-preview {
+	background-color: @aspinwall_shell_bg_secondary;
+	color: @aspinwall_shell_fg_secondary;
+	border-radius: 0 0 6px 6px;
+}

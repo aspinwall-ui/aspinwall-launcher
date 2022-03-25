@@ -11,6 +11,7 @@ from aspinwall.shell.interfaces.manager import start_interface_manager
 
 from aspinwall.shell.control_panel import ControlPanelContainer
 from aspinwall.shell.notification_popup import NotificationPopup
+from aspinwall.shell.window_switcher import WindowSwitcher
 from aspinwall.shell.panel import Panel
 
 running = False
@@ -33,6 +34,9 @@ class ShellManager:
 
 		self.notification_popup = NotificationPopup(app)
 		self.windows.add_window(self.notification_popup)
+
+		self.window_switcher = WindowSwitcher(app)
+		self.windows.add_window(self.window_switcher)
 
 		self.panel = Panel(app)
 		self.windows.add_window(self.panel)

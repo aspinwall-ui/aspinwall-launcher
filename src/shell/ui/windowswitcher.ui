@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+	<requires lib="gtk" version="4.0"/>
+	<requires lib="adw" version="1.0"/>
+	<template class="WindowSwitcher" parent="ShellSurface">
+		<style>
+			<class name="transparent"/>
+		</style>
+
+		<child>
+			<object class="GtkRevealer" id="container_revealer">
+				<property name="reveal-child">true</property>
+
+				<child>
+					<object class="GtkOverlay" id="container">
+						<property name="hexpand">true</property>
+						<property name="vexpand">true</property>
+						<style>
+							<class name="transparent"/>
+						</style>
+
+						<child type="overlay">
+							<object class="GtkBox">
+								<property name="orientation">vertical</property>
+								<property name="hexpand">true</property>
+								<property name="vexpand">true</property>
+
+								<child>
+									<object class="GtkGrid" id="open_window_grid">
+										<property name="vexpand">true</property>
+									</object>
+								</child>
+
+								<child>
+									<object class="GtkBox" id="window_switcher">
+										<property name="valign">end</property>
+										<property name="height-request">200</property>
+
+										<style>
+											<class name="window-list"/>
+										</style>
+
+										<child>
+											<object class="WindowView"/>
+										</child>
+									</object>
+								</child>
+							</object>
+						</child>
+
+						<child>
+							<object class="AdwBin" id="wallpaper_bin">
+								<property name="hexpand">true</property>
+								<property name="vexpand">true</property>
+
+								<style>
+									<class name="dimmable"/>
+									<class name="dim"/>
+								</style>
+							</object>
+						</child>
+					</object>
+				</child>
+			</object>
+		</child>
+	</template>
+</interface>

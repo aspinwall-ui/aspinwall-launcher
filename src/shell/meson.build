@@ -35,6 +35,7 @@ utils_sources = [
   'notification_popup.py',
   'surface.py',
   'shellmanager.py',
+  'window_switcher.py'
 ]
 
 install_data(utils_sources, install_dir: submoduledir)

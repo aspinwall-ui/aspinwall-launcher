@@ -8,6 +8,8 @@ shell_ui_sources = [
   'notificationbox.ui',
   'notificationpopup.ui',
   'panel.ui',
+  'windowswitcher.ui',
+  'windowview.ui',
 ]
 
 install_data(shell_ui_sources, install_dir: join_paths(submoduledir, 'ui'))
