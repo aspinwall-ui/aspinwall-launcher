@@ -39,6 +39,9 @@ class Surface(Gtk.Window):
 		self._monitor_width = monitor.get_geometry().width
 		self._monitor_height = monitor.get_geometry().height
 
+		self.notify('monitor-width')
+		self.notify('monitor-height')
+
 		monitor.connect('notify::geometry', self.update_size)
 
 		if hexpand is True:
@@ -52,7 +55,7 @@ class Surface(Gtk.Window):
 
 		if not visible:
 			self.set_visible(False)
-			self.hide()
+			self.close()
 
 		# TODO: Set surface alignment
 

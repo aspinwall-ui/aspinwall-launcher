@@ -29,7 +29,9 @@ class NotificationPopup(Surface):
 			valign=Gtk.Align.START
 		)
 
-		self.set_width(self.monitor_width / 4)
+		self.connect('notify::monitor-width', self.update_popup_size)
+		self.connect('notify::monitor-height', self.update_popup_size)
+		self.connect('map', self.update_popup_size)
 
 		# Set up recent notification filter
 		self.filter_model = Gtk.FilterListModel(model=self.notification_list.notification_store)
@@ -46,6 +48,10 @@ class NotificationPopup(Surface):
 			'changed', self.update_filter
 		)
 		self.filter_model.connect('items-changed', self.show_or_hide)
+
+	def update_popup_size(self, *args):
+		"""Updates the size of the notification popup."""
+		self.set_width(self.monitor_width / 4)
 
 	def filter_by_time(self, notification, *args):
 		"""Discards notifications older than a certain treshold."""
