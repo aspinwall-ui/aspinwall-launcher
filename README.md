@@ -37,7 +37,12 @@ Before you can use the `./run` script, you will need to install Meson.
 - GLib
 - Python >= 3.6
 - PyGObject
+
+#### Shell
+
+- dbus-python
 - psutil
+- pulsectl
 
 ### Build
 
