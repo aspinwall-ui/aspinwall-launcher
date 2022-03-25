@@ -60,6 +60,8 @@ We plan to add translations for Aspinwall projects, which will most likely be ho
 
 The current TODO list for the shell can be found [here](https://github.com/aspinwall-ui/aspinwall/issues/1).
 
+See also: [Contributing to Aspinwall](docs/contributing/contributing.md)
+
 ## FAQ
 
 ### **Q:** Where does the name come from?
