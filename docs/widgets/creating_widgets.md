@@ -2,6 +2,8 @@
 
 This document serves as a tutorial for creating a new widget, as well as a reference for working with the Widget base class.
 
+For a more concrete API reference, see [Widget API reference](docs/widgets/widget_api.md).
+
 ## What is a widget?
 
 In purely technical terms, a **widget** is a simple box containing a small, one-window GTK application.
@@ -16,21 +18,23 @@ Every widget inherits from the `Widget` class, as defined in `aspinwall.widgets.
 
 A widget's content is provided through the `content` variable, and it contains a GTK widget (usually a `GtkBox`, `GtkGrid` or other type of container). Information about the widget is stored in the `metadata` variable, which is a dict. It contains the following values:
 
+ - `id` - the widget's ID
  - `name` - the widget's name
  - `icon` - string containing the icon name to use for the widget
  - `description` - the widget's description (shown in the widget chooser)
  - `tags` - a string containing a list of tags, separated by commas
- - `thumbnail` - an url to a screenshot of the widget
 
 When displayed in the launcher, the widget is wrapped in a `LauncherWidget` object and given a `LauncherWidgetHeader`; this header displays the widget's name and icon, and provides buttons for removing the widget from the launcher and accessing its settings.
 
-***Note:** The metadata (including the name and icon) cannot be changed while the widget is running.*
+***Note:** The metadata cannot be changed while the widget is running.*
 
 ## Creating the widget class
 
-First, begin by creating the widget file. You can use our simple [widget template](https://github.com/aspinwall-ui/aspinwall-example-widget) to get an initial file layout.
+> Note: You can use our [widget template](https://github.com/aspinwall-ui/aspinwall-example-widget) to get an initial file layout.
 
-Then, add the widget class to your newly created file:
+Create a new file called `widget.py` in your widget directory. This will be where our widget's code is stored.
+
+Now, add the widget class to the file:
 
 ```python
 from aspinwall.widgets import Widget
@@ -38,17 +42,23 @@ from gi.repository import Gtk
 
 class MyWidget(Widget):
 	metadata = {
+		'id': 'com.github.username.mywidget',
 		'name': 'My Widget',
 		'icon': 'preferences-system-symbolic',
 		'description': 'My first widget',
-		'tags': 'hello world,example',
-		'thumbnail': []
+		'tags': 'hello world,example'
 	}
 
 	def __init__(self, instance):
 		# FIXME: Add content here
 		super().__init__(instance)
+
+_widget_class = MyWidget
 ```
+
+Notice the `_widget_class` variable at the bottom of our file. **This tells Aspinwall where to look for the widget class** - as such, it **must be in-sync with the widget class name**.
+
+You will most likely want to change the widget class name to something that suits your widget more - remember to also change the `_widget_class` variable at the bottom of the file.
 
 ## Creating the widget content
 
@@ -69,6 +79,8 @@ However, the `content` variable can be overwritten with a custom container, be i
 The code used for widget creation must be added to the `__init__()` function of the widget class.
 
 ## Installing the widget
+
+> Note: The [example widget](https://github.com/aspinwall-ui/aspinwall-example-widget) has Meson build files that automate this process; simply follow the building instructions in its readme.
 
 The default local folder for widgets is `~/.local/share/aspinwall/widgets`.
 
@@ -156,6 +168,7 @@ and change your metadata's `name`, `description` and `tags` to be wrapped in it:
 ```python
 class MyWidget(Widget):
 	metadata = {
+		'id': 'com.github.username.mywidget',
 		'name': translatable('My Widget'),
 		'icon': 'preferences-system-symbolic',
 		'description': translatable('My first widget'),
@@ -165,4 +178,4 @@ class MyWidget(Widget):
 
 Assuming you're following the meson.build file from the widget example, this will allow `meson compile <widget-id>-update-po` (and, by extension, `xgettext`) to find these strings and automatically add them to the po file.
 
-See the example widget project for an example meson build file for translations.
+See the [example widget](https://github.com/aspinwall-ui/aspinwall-example-widget) for an example meson build file for translations.
