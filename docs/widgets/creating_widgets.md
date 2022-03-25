@@ -28,7 +28,7 @@ When displayed in the launcher, the widget is wrapped in a `LauncherWidget` obje
 
 ## Creating the widget class
 
-First, begin by creating the widget file. You can use our simple [widget template](TODO) to get an initial file layout.
+First, begin by creating the widget file. You can use our simple [widget template](https://github.com/aspinwall-ui/aspinwall-example-widget) to get an initial file layout.
 
 Then, add the widget class to your newly created file:
 
