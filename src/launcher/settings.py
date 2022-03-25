@@ -194,13 +194,22 @@ class LauncherSettings(Adw.PreferencesWindow):
 		"""
 		Selects the wallpaper provided in wallpaper-path in the wallpaper grid.
 		"""
-		self.wallpaper_grid.select_child(
-			self.wallpaper_grid.get_child_at_index(
-				config['available-wallpapers'].index(
-					config['wallpaper-path']
+		try:
+			self.wallpaper_grid.select_child(
+				self.wallpaper_grid.get_child_at_index(
+					config['available-wallpapers'].index(
+						config['wallpaper-path']
+					)
 				)
 			)
-		)
+		except ValueError:
+			if config['available-wallpapers']:
+				self.wallpaper_grid.select_child(
+					self.wallpaper_grid.get_child_at_index(0)
+				)
+			else:
+				config['wallpaper-style'] = 0
+				self.wallpaper_style_combobox.set_active_id("0")
 
 	@Gtk.Template.Callback()
 	def set_slideshow_switch_delay(self, combobox, *args):
