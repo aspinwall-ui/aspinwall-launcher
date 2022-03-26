@@ -2,7 +2,7 @@
 
 This document serves as a tutorial for creating a new widget, as well as a reference for working with the Widget base class.
 
-For a more concrete API reference, see [Widget API reference](docs/widgets/widget_api.md).
+For a more concrete API reference, see [Widget API reference](api_reference.md).
 
 ## What is a widget?
 
@@ -18,11 +18,11 @@ Every widget inherits from the `Widget` class, as defined in `aspinwall.widgets.
 
 A widget's content is provided through the `content` variable, and it contains a GTK widget (usually a `GtkBox`, `GtkGrid` or other type of container). Information about the widget is stored in the `metadata` variable, which is a dict. It contains the following values:
 
- - `id` - the widget's ID
- - `name` - the widget's name
- - `icon` - string containing the icon name to use for the widget
- - `description` - the widget's description (shown in the widget chooser)
- - `tags` - a string containing a list of tags, separated by commas
+ * `id` - the widget's ID
+ * `name` - the widget's name
+ * `icon` - string containing the icon name to use for the widget
+ * `description` - the widget's description (shown in the widget chooser)
+ * `tags` - a string containing a list of tags, separated by commas
 
 When displayed in the launcher, the widget is wrapped in a `LauncherWidget` object and given a `LauncherWidgetHeader`; this header displays the widget's name and icon, and provides buttons for removing the widget from the launcher and accessing its settings.
 
@@ -41,17 +41,17 @@ from aspinwall.widgets import Widget
 from gi.repository import Gtk
 
 class MyWidget(Widget):
-	metadata = {
-		'id': 'com.github.username.mywidget',
-		'name': 'My Widget',
-		'icon': 'preferences-system-symbolic',
-		'description': 'My first widget',
-		'tags': 'hello world,example'
-	}
+    metadata = {
+        'id': 'com.github.username.mywidget',
+        'name': 'My Widget',
+        'icon': 'preferences-system-symbolic',
+        'description': 'My first widget',
+        'tags': 'hello world,example'
+    }
 
-	def __init__(self, instance):
-		# FIXME: Add content here
-		super().__init__(instance)
+    def __init__(self, instance):
+        # FIXME: Add content here
+        super().__init__(instance)
 
 _widget_class = MyWidget
 ```
@@ -67,13 +67,13 @@ Widgets are basically small GTK apps - thus, creating the content is roughly equ
 The widget's content is stored in the `content` variable. By default, this is initialized with an empty `GtkBox`; as such, items can be added with:
 
 ```python
-	self.content.append(element)
+    self.content.append(element)
 ```
 
 However, the `content` variable can be overwritten with a custom container, be it a `GtkBox` or a different element entirely:
 
 ```python
-	self.content = Gtk.Box(hexpand=True)
+    self.content = Gtk.Box(hexpand=True)
 ```
 
 The code used for widget creation must be added to the `__init__()` function of the widget class.
@@ -86,9 +86,9 @@ The default local folder for widgets is `~/.local/share/aspinwall/widgets`.
 
 To prepare a widget for installation:
 
-  - Create a folder with the widget's ID in lowercase as the name
-  - Place your widget's `.py` file into the folder
-  - If your widgets have schemas, place the compiled `gschemas.compiled` file into a subfolder named `schemas`.
+ * Create a folder with the widget's ID in lowercase as the name
+ * Place your widget's `.py` file into the folder
+ * If your widgets have schemas, place the compiled `gschemas.compiled` file into a subfolder named `schemas`.
 
 To install the widget, move it to the widget folder, whether it's the local one or the system one.
 
@@ -108,11 +108,11 @@ The config value behaves like a regular dict - `self.config['key']` gets a key, 
 
 As the configuration uses `Gio.Settings` internally, widgets that use the config **must provide their own schemas**. The schema file for the widget must be placed in the `schemas` subfolder. See [HowDoI/GSettings](https://wiki.gnome.org/HowDoI/GSettings) for information on creating schema files, but take note of some Aspinwall-specific things:
 
-* **Do not define a path.** Usually in schema files the `<schema ...>` tag has a `path` attribute. We must not set this attribute, as we use relocatable schemas - the path is automatically created by the widget API. (The base path can be overwritten with the `self.schema_base_path` variable - most users will not need to do this.) 
-* **The schema ID must exactly match the widget's ID.** Note that this is *case-sensitive*.
-* **The schema's XML file must be placed in the `schemas` subdirectory in your widget directory.** Additionally, widgets that are shipped are expected to compile these schemas; see the `meson.build` files in the widget directories for a way to do this through Meson.
+ * **Do not define a path.** Usually in schema files the `<schema ...>` tag has a `path` attribute. We must not set this attribute, as we use relocatable schemas - the path is automatically created by the widget API. (The base path can be overwritten with the `self.schema_base_path` property in your widget class - most users will not need to do this.)
+ * **The schema ID must exactly match the widget's ID.** Note that this is *case-sensitive*.
+ * **The schema's XML file must be placed in the `schemas` subdirectory in your widget directory.** Additionally, widgets that are shipped are expected to compile these schemas; see the `meson.build` files in the widget directories for a way to do this through Meson.
 
-Additionally, widgets that are planning to use the config variable **must** set `self.has_config` to True (usually by placing `has_config = True` above your init function, below the metadata).
+Additionally, widgets that are planning to use the config variable **must** set `self.has_config` to True (usually by placing `has_config = True` above your init function, below the metadata). This tells the launcher to load the settings schema. **If `self.has_config` is set to False, `self.config` is undefined**.
 
 If your widget has no configuration options, you don't need to set the `has_config` value; it is set to False by default.
 
@@ -141,8 +141,9 @@ Using this function is not required, it is merely a suggestion to speed up devel
 Widgets are automatically set up with a `GtkCssProvider`, which is stored in the `self.css_provider` variable.
 
 CSS properties can be loaded from a file (here we use `stylesheet.css` in the widget folder):
+
 ```python
-	self.css_provider.load_from_path(self.join_with_data_path('stylesheet.css'))
+    self.css_provider.load_from_path(self.join_with_data_path('stylesheet.css'))
 ```
 
 ### Translating widgets
@@ -154,7 +155,7 @@ The domain name will always be equal to the widget's ID in lowercase.
 In order to make generating translations easier, it's recommended to alias `self.l` to `_` at the start of your init function:
 
 ```python
-	_ = self.l
+    _ = self.l
 ```
 
 You will also need to add the following line to the top of your file:
@@ -167,13 +168,13 @@ and change your metadata's `name`, `description` and `tags` to be wrapped in it:
 
 ```python
 class MyWidget(Widget):
-	metadata = {
-		'id': 'com.github.username.mywidget',
-		'name': translatable('My Widget'),
-		'icon': 'preferences-system-symbolic',
-		'description': translatable('My first widget'),
-		'tags': translatable('hello world,example')
-	}
+    metadata = {
+        'id': 'com.github.username.mywidget',
+        'name': translatable('My Widget'),
+        'icon': 'preferences-system-symbolic',
+        'description': translatable('My first widget'),
+        'tags': translatable('hello world,example')
+    }
 ```
 
 Assuming you're following the meson.build file from the widget example, this will allow `meson compile <widget-id>-update-po` (and, by extension, `xgettext`) to find these strings and automatically add them to the po file.
