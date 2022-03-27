@@ -5,6 +5,7 @@
 	<template class="WindowView" parent="GtkBox">
 		<property name="orientation">vertical</property>
 		<property name="halign">start</property>
+		<property name="vexpand">true</property>
 		<property name="width-request">176</property>
 
 		<style>

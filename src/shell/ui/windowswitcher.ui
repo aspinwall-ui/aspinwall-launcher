@@ -32,16 +32,42 @@
 								</child>
 
 								<child>
-									<object class="GtkBox" id="window_switcher">
+									<object class="GtkBox" id="window_list_container">
 										<property name="valign">end</property>
+										<property name="hexpand">true</property>
 										<property name="height-request">200</property>
-
 										<style>
-											<class name="window-list"/>
+											<class name="window-list-container"/>
 										</style>
 
 										<child>
-											<object class="WindowView"/>
+											<object class="GtkScrolledWindow">
+												<property name="vexpand">true</property>
+												<property name="vscrollbar-policy">never</property>
+												<property name="hscrollbar-policy">automatic</property>
+
+												<child>
+													<object class="AdwClampScrollable">
+														<style>
+															<class name="scroll"/>
+														</style>
+
+														<child>
+															<object class="GtkListView" id="window_list">
+																<property name="hexpand">true</property>
+																<property name="vexpand">true</property>
+																<property name="orientation">horizontal</property>
+																<property name="margin-start">6</property>
+																<property name="margin-end">6</property>
+
+																<style>
+																	<class name="window-list"/>
+																</style>
+															</object>
+														</child>
+													</object>
+												</child>
+											</object>
 										</child>
 									</object>
 								</child>

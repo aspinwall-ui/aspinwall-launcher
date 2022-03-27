@@ -104,10 +104,13 @@
 
 /* Window switcher */
 
-.window-list {
+.window-list-container {
 	background-color: alpha(@aspinwall_shell_bg_secondary, 0.5);
 	color: @aspinwall_shell_fg_secondary;
-	padding: 12px;
+}
+
+.window-list-container .scroll {
+	padding: 12px 0;
 }
 
 .window-view {
