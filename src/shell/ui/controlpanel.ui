@@ -137,10 +137,10 @@
 								</child>
 
 								<child>
-									<object class="ControlPanelButton" id="speaker_mute_button">
-										<property name="icon-name">audio-volume-muted-symbolic</property>
-										<!-- TRANSLATORS: Used for the mute/unmute button in the control panel -->
-										<property name="icon-label">Speaker</property>
+									<object class="ControlPanelButton" id="window_switcher_button">
+										<property name="icon-name">preferences-system-windows-symbolic</property>
+										<!-- TRANSLATORS: Used for the window switcher show button in the control panel -->
+										<property name="icon-label">Windows</property>
 									</object>
 								</child>
 							</object>

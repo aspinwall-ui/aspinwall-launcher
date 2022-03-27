@@ -227,7 +227,7 @@ class ControlPanel(Gtk.Box):
 	bluetooth_button = Gtk.Template.Child()
 	battery_button = Gtk.Template.Child()
 	microphone_mute_button = Gtk.Template.Child()
-	speaker_mute_button = Gtk.Template.Child()
+	window_switcher_button = Gtk.Template.Child()
 
 	volume_slider = Gtk.Template.Child()
 	volume_adjustment = Gtk.Template.Child()
@@ -274,18 +274,21 @@ class ControlPanel(Gtk.Box):
 			'icon-clicked', self.audio_interface.toggle_input_mute
 		)
 
-		self.speaker_mute_button.bind_to_interface(self.audio_interface)
-		self.audio_interface.bind_property('muted', self.speaker_mute_button, 'icon-active')
-		self.speaker_mute_button.connect('icon-clicked', self.audio_interface.toggle_mute)
-
 		self.volume_icon.bind_property('active', self.audio_interface, 'muted',
 			GObject.BindingFlags.BIDIRECTIONAL
 		)
 
 		self.microphone_mute_button.connect('icon-clicked', self.update_mute_icons)
-		self.speaker_mute_button.connect('icon-clicked', self.update_mute_icons)
 		self.volume_icon.connect('toggled', self.update_mute_icons)
 		self.update_mute_icons()
+
+		from aspinwall.shell.window_switcher import window_switcher
+		self.window_switcher = window_switcher
+		window_switcher.bind_property('opened', self.window_switcher_button, 'icon-active',
+			GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE
+		)
+		self.window_switcher_button.connect('icon-clicked', self.show_window_switcher)
+		self.window_switcher_button.set_sensitive(True)
 
 	def show_no_notifications(self, *args):
 		"""
@@ -317,5 +320,11 @@ class ControlPanel(Gtk.Box):
 			microphone_icon_name = 'microphone-sensitivity-muted-symbolic'
 
 		self.microphone_mute_button.set_property('icon-name', microphone_icon_name)
-		self.speaker_mute_button.set_property('icon-name', audio_icon_name)
 		self.volume_icon.set_icon_name(audio_icon_name)
+
+	def show_window_switcher(self, *args):
+		"""
+		Shows/hides the window switcher based on the switcher's current state.
+		"""
+		self.window_switcher.set_property('opened', not self.window_switcher.props.opened)
+		self.get_parent().get_parent().get_parent().hide_control_panel()

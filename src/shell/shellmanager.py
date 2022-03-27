@@ -29,14 +29,14 @@ class ShellManager:
 		style_manager = Adw.StyleManager.get_default()
 		style_manager.set_color_scheme(Adw.ColorScheme.FORCE_DARK)
 
+		self.window_switcher = WindowSwitcher(app)
+		self.windows.add_window(self.window_switcher)
+
 		self.control_panel = ControlPanelContainer(app)
 		self.windows.add_window(self.control_panel)
 
 		self.notification_popup = NotificationPopup(app)
 		self.windows.add_window(self.notification_popup)
-
-		self.window_switcher = WindowSwitcher(app)
-		self.windows.add_window(self.window_switcher)
 
 		self.panel = Panel(app)
 		self.windows.add_window(self.panel)
