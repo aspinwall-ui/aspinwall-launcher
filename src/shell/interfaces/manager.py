@@ -5,6 +5,7 @@ Contains code for the interface manager
 from aspinwall.shell.interfaces.battery import BatteryInterface
 from aspinwall.shell.interfaces.notification import NotificationInterface
 from aspinwall.shell.interfaces.pulseaudio import PulseAudioInterface
+from aspinwall.shell.interfaces.window import WindowInterface
 
 interface_manager = None
 
@@ -12,7 +13,12 @@ class InterfaceManager:
 	"""
 	Manager that initializes all interfaces.
 	"""
-	interfaces = [BatteryInterface, NotificationInterface, PulseAudioInterface]
+	interfaces = [
+		BatteryInterface,
+		NotificationInterface,
+		PulseAudioInterface,
+		WindowInterface
+	]
 	enabled_interfaces = {}
 	available_interfaces = []
 

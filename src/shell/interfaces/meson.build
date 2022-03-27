@@ -6,7 +6,9 @@ interfaces_sources = [
   'battery.py',
   'manager.py',
   'notification.py',
-  'pulseaudio.py'
+  'pulseaudio.py',
+  'window.py',
+  'x11window.py'
 ]
 
 install_data(interfaces_sources, install_dir: submoduledir)
