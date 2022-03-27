@@ -43,6 +43,8 @@ Before you can use the `./run` script, you will need to install Meson.
 - dbus-python
 - psutil
 - pulsectl
+- python-ewmh
+- python-xlib
 
 ### Build
 
