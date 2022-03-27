@@ -38,6 +38,15 @@ class WindowView(Gtk.Box):
 			self.window_icon.set_from_pixbuf(scaled_icon)
 			self.window_preview.set_from_pixbuf(scaled_icon)
 
+	def focus_window(self, *args):
+		"""Focuses the window represented by the icon."""
+		self.window.focus()
+
+	@Gtk.Template.Callback()
+	def close_window(self, *args):
+		"""Closes the window represented by the icon."""
+		self.window.close()
+
 window_switcher = None
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/shell/ui/windowswitcher.ui')
@@ -85,6 +94,7 @@ class WindowSwitcher(Surface):
 
 		self.window_list.set_model(Gtk.SingleSelection(model=self.filtered_store))
 		self.window_list.set_factory(factory)
+		self.window_list.connect('activate', self.focus_window)
 
 		self.connect('map', self.load_wallpaper)
 		self.connect('unmap', self.unload_wallpaper)
@@ -114,6 +124,9 @@ class WindowSwitcher(Surface):
 		window_view = list_item.get_child()
 		window = list_item.get_item()
 		window_view.bind_to_window(window)
+
+	def focus_window(self, list, window_no):
+		list.get_model().get_item(window_no).focus()
 
 	def update_filter(self, *args):
 		"""Convenience function that forces a filter update."""

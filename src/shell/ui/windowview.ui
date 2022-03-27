@@ -56,6 +56,7 @@
 						<child>
 							<object class="GtkButton" id="close">
 								<property name="icon-name">window-close-symbolic</property>
+								<signal name="clicked" handler="close_window"/>
 
 								<style>
 									<class name="window-action-button"/>

@@ -44,6 +44,14 @@ class Window(GObject.Object):
 		"""Whether the window should be visible in the window switcher."""
 		return self._visible
 
+	def close(self):
+		"""Closes the window represented by this object."""
+		raise NotImplementedError
+
+	def focus(self):
+		"""Focuses the window represented by this object."""
+		raise NotImplementedError
+
 class ProtocolSpecificInterface(GObject.Object):
 	"""
 	Base class for protocol-specific interfaces.

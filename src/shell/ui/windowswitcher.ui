@@ -59,6 +59,7 @@
 																<property name="orientation">horizontal</property>
 																<property name="margin-start">6</property>
 																<property name="margin-end">6</property>
+																<property name="single-click-activate">true</property>
 
 																<style>
 																	<class name="window-list"/>

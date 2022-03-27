@@ -7,6 +7,24 @@ from ewmh import EWMH
 
 from aspinwall.shell.interfaces.window import Window, ProtocolSpecificInterface
 
+class X11Window(Window):
+	"""Represents an X11 window."""
+	__gtype_name__ = 'X11Window'
+
+	def __init__(self, ewmh, x11_window, **kwargs):
+		"""Initializes an X11Window object."""
+		super().__init__(**kwargs)
+		self.ewmh = ewmh
+		self.x11_window = x11_window
+
+	def focus(self):
+		"""Focuses the window."""
+		self.ewmh.setActiveWindow(self.x11_window)
+
+	def close(self):
+		"""Closes the window."""
+		self.ewmh.setCloseWindow(self.x11_window)
+
 class X11WindowInterface(ProtocolSpecificInterface):
 	"""
 	Interface for getting information about open windows, compatible with EWMH.
@@ -63,7 +81,9 @@ class X11WindowInterface(ProtocolSpecificInterface):
 				icon_height = icon_data[1]
 
 				# The remainder of the data is used for image data. We need to
-				# extract the argb values and morph them into an 8-bit value.
+				# extract the argb values and add them to the list that will be
+				# used by GdkPixbuf (which follows a format of "r, g, b, a, r,
+				# g, b, a, ...")
 				count = -1
 				current_height = 1
 				current_width = 1
@@ -93,7 +113,9 @@ class X11WindowInterface(ProtocolSpecificInterface):
 					rowstride
 				)
 
-			window_object = Window(
+			window_object = X11Window(
+				ewmh=self.ewmh,
+				x11_window=window,
 				title=title,
 				icon_pixbuf=icon_pixbuf,
 				visible=visible
