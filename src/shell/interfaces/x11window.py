@@ -2,7 +2,7 @@
 """
 Contains code for the X11 window list/interaction interface.
 """
-from gi.repository import GObject
+from gi.repository import GdkPixbuf, GObject
 from ewmh import EWMH
 
 from aspinwall.shell.interfaces.window import Window, ProtocolSpecificInterface
@@ -49,11 +49,53 @@ class X11WindowInterface(ProtocolSpecificInterface):
 						title = result
 					break
 
-			# Get icon data (TODO: Actually use it?)
+			# The icon data is provided as an array of "32-bit packed CARDINAL
+			# ARGB with high byte being A, low byte being B". We need to
+			# convert this to a format that GdkPixbuf can understand.
 			icon_data = self.ewmh._getProperty('_NET_WM_ICON', window)
+			icon_pixbuf = None
+
+			if icon_data:
+				new_data = []
+
+				# The first two items represent the width/height of the icon
+				icon_width = icon_data[0]
+				icon_height = icon_data[1]
+
+				# The remainder of the data is used for image data. We need to
+				# extract the argb values and morph them into an 8-bit value.
+				count = -1
+				current_height = 1
+				current_width = 1
+				for bit in icon_data:
+					count += 1
+					if count <= 1:
+						continue
+					a = (bit & 0xff000000) >> 24
+					r = (bit & 0x00ff0000) >> 16
+					g = (bit & 0x0000ff00) >> 8
+					b = (bit & 0x000000ff)
+
+					new_data.append(r)
+					new_data.append(g)
+					new_data.append(b)
+					new_data.append(a)
+
+				rowstride = GdkPixbuf.Pixbuf.calculate_rowstride(
+					GdkPixbuf.Colorspace.RGB, True, 8, icon_width, icon_height
+				)
+
+				icon_pixbuf = GdkPixbuf.Pixbuf.new_from_data(
+					new_data,
+					GdkPixbuf.Colorspace.RGB,
+					True, 8,
+					icon_width, icon_height,
+					rowstride
+				)
 
 			window_object = Window(
 				title=title,
+				icon_pixbuf=icon_pixbuf,
 				visible=visible
 			)
 			self.windows.append(window_object)

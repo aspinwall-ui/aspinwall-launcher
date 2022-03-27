@@ -2,7 +2,7 @@
 """
 Contains code for the window switcher.
 """
-from gi.repository import Gtk, GObject
+from gi.repository import GdkPixbuf, Gtk, GObject
 
 from aspinwall.launcher.wallpaper import Wallpaper
 from aspinwall.shell.interfaces.manager import get_interface_manager
@@ -17,6 +17,8 @@ class WindowView(Gtk.Box):
 
 	window = None
 	window_title = Gtk.Template.Child()
+	window_icon = Gtk.Template.Child()
+	window_preview = Gtk.Template.Child()
 
 	def __init__(self):
 		"""Initializes the WindowView."""
@@ -28,6 +30,13 @@ class WindowView(Gtk.Box):
 		window.bind_property('title', self.window_title, 'label',
 			GObject.BindingFlags.SYNC_CREATE
 		)
+		if window.props.icon_pixbuf:
+			scaled_icon = window.props.icon_pixbuf.scale_simple(
+				24, 24, GdkPixbuf.InterpType.BILINEAR
+			)
+
+			self.window_icon.set_from_pixbuf(scaled_icon)
+			self.window_preview.set_from_pixbuf(scaled_icon)
 
 window_switcher = None
 

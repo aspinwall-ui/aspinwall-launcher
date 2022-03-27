@@ -23,14 +23,14 @@
 
 				<child>
 					<object class="GtkImage" id="window_icon">
-						<property name="icon-name">preferences-system-symbolic</property>
+						<property name="icon-name">application-x-executable</property>
 						<property name="margin-start">6</property>
 					</object>
 				</child>
 
 				<child>
 					<object class="GtkLabel" id="window_title">
-						<property name="label">Window</property>
+						<property name="label" translatable="yes">Unnamed window</property>
 						<property name="ellipsize">middle</property>
 					</object>
 				</child>
@@ -73,7 +73,8 @@
 			<object class="GtkImage" id="window_preview">
 				<property name="hexpand">true</property>
 				<property name="vexpand">true</property>
-				<property name="icon-name">preferences-system-symbolic</property>
+				<property name="icon-name">application-x-executable</property>
+				<property name="icon-size">large</property>
 
 				<style>
 					<class name="window-preview"/>

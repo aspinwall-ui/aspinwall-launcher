@@ -17,11 +17,15 @@ class Window(GObject.Object):
 	_title = ''
 	_visible = True
 
-	def __init__(self, title='', visible=True):
+	def __init__(self, title='', icon_pixbuf=None, visible=True):
 		"""Initializes a Window object."""
 		super().__init__()
 		self._title = title
 		self.notify('title')
+
+		self._icon_pixbuf = icon_pixbuf
+		self.notify('icon-pixbuf')
+
 		self._visible = visible
 		self.notify('visible')
 
@@ -29,6 +33,11 @@ class Window(GObject.Object):
 	def title(self):
 		"""The window's title."""
 		return self._title
+
+	@GObject.Property(flags=GObject.ParamFlags.READABLE)
+	def icon_pixbuf(self):
+		"""The window's icon, as a GdkPixbuf."""
+		return self._icon_pixbuf
 
 	@GObject.Property(type=bool, flags=GObject.ParamFlags.READABLE, default=True)
 	def visible(self):
