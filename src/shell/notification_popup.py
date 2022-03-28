@@ -34,6 +34,9 @@ class NotificationPopup(Surface):
 		self.connect('map', self.update_popup_size)
 
 		# Set up recent notification filter
+		if not self.notification_list.notification_store:
+			return
+
 		self.filter_model = Gtk.FilterListModel(model=self.notification_list.notification_store)
 		self.filter = Gtk.CustomFilter.new(self.filter_by_time, self.filter_model)
 		self.filter_model.set_filter(self.filter)

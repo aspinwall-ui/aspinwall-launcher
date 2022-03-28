@@ -254,13 +254,13 @@ class NotificationInterface(Interface):
 				BUS_NAME, bus=session_bus, do_not_queue=True,
 				allow_replacement=True, replace_existing=True
 			)
+			self.daemon = DBusNotificationDaemon(bus_name)
 		except dbus.exceptions.NameExistsException:
 			self.set_property('available', False)
+			print("COULD NOT INITIALIZE NOTIFICATION DAEMON! Notifications will not work.")
 			return
 		else:
 			self.set_property('available', True)
-
-		self.daemon = DBusNotificationDaemon(bus_name)
 
 	@GObject.Property(flags=GObject.ParamFlags.READABLE)
 	def notifications(self):

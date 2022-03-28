@@ -265,6 +265,11 @@ class NotificationListView(Gtk.ListView):
 		self.interface_manager = get_interface_manager()
 		self.notification_interface = \
 			self.interface_manager.get_interface_by_name('NotificationInterface')
+
+		if not self.notification_interface.props.available:
+			self.notification_store = None
+			return
+
 		self.notification_store = self.notification_interface.props.notifications_sorted
 
 		notification_factory = Gtk.SignalListItemFactory()

@@ -239,14 +239,15 @@ class ControlPanel(Gtk.Box):
 		self.interface_manager = get_interface_manager()
 		self.notification_interface = \
 			self.interface_manager.get_interface_by_name('NotificationInterface')
-		self.notification_store = self.notification_interface.props.notifications_sorted
+
+		if self.notification_interface.props.available:
+			self.notification_store = self.notification_interface.props.notifications_sorted
+			self.notification_store.connect('items-changed', self.show_no_notifications)
+			self.show_no_notifications()
 
 		# Set up clock
 		clock_daemon.connect('notify::time', self.update_time)
 		self.update_time()
-
-		self.notification_store.connect('items-changed', self.show_no_notifications)
-		self.show_no_notifications()
 
 		# Set up control panel buttons
 		battery_interface = self.interface_manager.get_interface_by_name('BatteryInterface')
