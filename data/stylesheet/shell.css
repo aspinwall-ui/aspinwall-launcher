@@ -113,6 +113,19 @@
 	padding: 12px 0;
 }
 
+.window-list {
+	background-color: transparent;
+}
+
+.window-list row {
+	background-color: transparent;
+}
+
+.window-list row:active {
+	background-color: alpha(lighter(@aspinwall_shell_bg_secondary), 0.5);
+}
+
+
 .window-view {
 	border: 1px @aspinwall_shell_border solid;
 	border-radius: 6px;
