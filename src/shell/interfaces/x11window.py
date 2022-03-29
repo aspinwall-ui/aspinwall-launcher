@@ -2,7 +2,7 @@
 """
 Contains code for the X11 window list/interaction interface.
 """
-from gi.repository import GdkPixbuf, GObject
+from gi.repository import GdkPixbuf
 from ewmh import EWMH
 
 from aspinwall.shell.interfaces.window import Window, ProtocolSpecificInterface
@@ -85,8 +85,6 @@ class X11WindowInterface(ProtocolSpecificInterface):
 				# used by GdkPixbuf (which follows a format of "r, g, b, a, r,
 				# g, b, a, ...")
 				count = -1
-				current_height = 1
-				current_width = 1
 				for bit in icon_data:
 					count += 1
 					if count <= 1:

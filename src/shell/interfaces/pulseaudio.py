@@ -27,7 +27,7 @@ class PulseAudioInterface(Interface):
 			# two separate clients.
 			self.listener_client = pulsectl.Pulse('aspinwall-shell-listener')
 			self.client = pulsectl.Pulse('aspinwall-shell')
-		except:
+		except: # noqa: E722
 			self.set_property('available', False)
 			return
 		else:

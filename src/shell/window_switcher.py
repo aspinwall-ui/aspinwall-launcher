@@ -160,7 +160,7 @@ class WindowSwitcher(Surface):
 	@opened.setter
 	def set_opened(self, value):
 		"""Sets whether the window switcher is currently open or not."""
-		if value == True:
+		if value is True:
 			self.show_switcher()
 		else:
 			self.close_switcher()

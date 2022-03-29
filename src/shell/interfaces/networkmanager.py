@@ -39,7 +39,7 @@ class NetworkManagerInterface(Interface):
 				dbus_interface='org.freedesktop.DBus.Properties',
 				path_keyword='path'
 			)
-		except:
+		except: # noqa: E722
 			self.set_property('available', False)
 			return
 		else:
