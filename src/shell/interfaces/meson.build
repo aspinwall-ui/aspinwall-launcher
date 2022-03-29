@@ -5,6 +5,7 @@ interfaces_sources = [
   '__init__.py',
   'battery.py',
   'manager.py',
+  'networkmanager.py',
   'notification.py',
   'pulseaudio.py',
   'window.py',

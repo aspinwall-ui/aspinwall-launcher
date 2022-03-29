@@ -3,6 +3,7 @@
 Contains code for the interface manager
 """
 from aspinwall.shell.interfaces.battery import BatteryInterface
+from aspinwall.shell.interfaces.networkmanager import NetworkManagerInterface
 from aspinwall.shell.interfaces.notification import NotificationInterface
 from aspinwall.shell.interfaces.pulseaudio import PulseAudioInterface
 from aspinwall.shell.interfaces.window import WindowInterface
@@ -15,6 +16,7 @@ class InterfaceManager:
 	"""
 	interfaces = [
 		BatteryInterface,
+		NetworkManagerInterface,
 		NotificationInterface,
 		PulseAudioInterface,
 		WindowInterface

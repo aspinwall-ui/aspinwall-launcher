@@ -2,7 +2,7 @@
 """
 Contains the code for the panel.
 """
-from gi.repository import Gtk
+from gi.repository import Gtk, GObject
 
 from aspinwall.shell.surface import Surface
 from aspinwall.utils.clock import clock_daemon
@@ -23,6 +23,8 @@ class Panel(Surface):
 	battery_icon = Gtk.Template.Child()
 	battery_percentage = Gtk.Template.Child()
 
+	wifi_icon = Gtk.Template.Child()
+
 	def __init__(self, app):
 		"""Initializes the panel."""
 		super().__init__(application=app, hexpand=True, height=36)
@@ -33,8 +35,14 @@ class Panel(Surface):
 		# Set up status icons
 		interface_manager = get_interface_manager()
 		battery = interface_manager.get_interface_by_name('BatteryInterface')
-		self.battery_icon.set_from_icon_name(battery.props.icon_name)
-		battery.bind_property('icon-name', self.battery_icon, 'icon-name')
+		battery.bind_property('icon-name', self.battery_icon, 'icon-name',
+			GObject.BindingFlags.SYNC_CREATE
+		)
+
+		network = interface_manager.get_interface_by_name('NetworkManagerInterface')
+		network.bind_property('icon-name', self.wifi_icon, 'icon-name',
+			GObject.BindingFlags.SYNC_CREATE
+		)
 
 		config.connect('changed::show-battery-percentage', self.toggle_battery_percentage)
 		self.toggle_battery_percentage()

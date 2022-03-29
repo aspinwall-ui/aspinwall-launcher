@@ -250,6 +250,13 @@ class ControlPanel(Gtk.Box):
 		self.update_time()
 
 		# Set up control panel buttons
+		network_interface = self.interface_manager.get_interface_by_name('NetworkManagerInterface')
+		if network_interface and network_interface.props.available:
+			self.network_button.bind_to_interface(network_interface)
+			network_interface.bind_property('icon-name', self.network_button, 'icon-name',
+				GObject.BindingFlags.SYNC_CREATE
+			)
+
 		battery_interface = self.interface_manager.get_interface_by_name('BatteryInterface')
 		self.battery_button.bind_to_interface(battery_interface)
 		self.battery_button.set_property('icon-name', battery_interface.props.icon_name)
