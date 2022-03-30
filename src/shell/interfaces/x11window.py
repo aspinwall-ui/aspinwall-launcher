@@ -51,10 +51,12 @@ class X11WindowInterface(ProtocolSpecificInterface):
 				   state == ' _NET_WM_STATE_SKIP_PAGER':
 					visible = False
 
-			window_type = self.ewmh.getWmWindowType(window, str=True)[0]
-			if window_type == '_NET_WM_WINDOW_TYPE_DESKTOP' or \
-			   window_type == '_NET_WM_WINDOW_TYPE_DOCK':
-				visible = False
+			window_type_output = self.ewmh.getWmWindowType(window, str=True)
+			if window_type_output:
+				window_type = window_type_output[0]
+				if window_type == '_NET_WM_WINDOW_TYPE_DESKTOP' or \
+				   window_type == '_NET_WM_WINDOW_TYPE_DOCK':
+					visible = False
 
 			# Get title
 			title = None
