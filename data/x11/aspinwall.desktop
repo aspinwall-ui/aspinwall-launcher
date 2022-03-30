@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Aspinwall
+Comment=Linux tablet shell with smart hub capabilities
+Exec=start-aspinwall x11
+Type=Application

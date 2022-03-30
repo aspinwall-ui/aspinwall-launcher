@@ -22,5 +22,18 @@ if compile_schemas.found()
   )
 endif
 
+conf = configuration_data()
+conf.set('VERSION', meson.project_version())
+conf.set('pkgdatadir', pkgdatadir)
+
+configure_file(
+  input: 'start-aspinwall.in',
+  output: 'start-aspinwall',
+  configuration: conf,
+  install: true,
+  install_dir: get_option('bindir')
+)
+
 subdir('icons')
 subdir('stylesheet')
+subdir('x11')

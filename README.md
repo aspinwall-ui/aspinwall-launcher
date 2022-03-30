@@ -41,6 +41,8 @@ Before you can use the `./run` script, you will need to install Meson.
 #### Shell
 
 - dbus-python
+- herbstluftwm (and its Python bindings)
+- picom
 - psutil
 - pulsectl
 - python-ewmh
