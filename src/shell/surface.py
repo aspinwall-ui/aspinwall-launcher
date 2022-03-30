@@ -4,6 +4,7 @@ Abstraction code for shell elements.
 """
 from gi.repository import Gtk, Gdk, GdkX11, GObject
 from ewmh import EWMH
+import Xlib
 
 class SurfaceType:
 	"""Enum for surface types."""
@@ -56,12 +57,8 @@ class Surface(Gtk.Window):
 		self._hexpand = hexpand
 		self._vexpand = vexpand
 
-		self.show()
-
 		# Set surface width/height
-		monitor = Gdk.Display.get_default().get_monitor_at_surface(
-			self.get_surface()
-		)
+		monitor = Gdk.Display.get_default().get_monitors()[0]
 		self._monitor_width = monitor.get_geometry().width
 		self._monitor_height = monitor.get_geometry().height
 
@@ -85,10 +82,26 @@ class Surface(Gtk.Window):
 		except: # noqa: E722
 			pass # No x11/ewmh support
 		else:
+			# We need to show the window temporarily to get the X11 window
+			self.show()
+			self.unmap()
+
 			ewmh = EWMH()
 			x11_display = ewmh.display
 			x11_window_id = GdkX11.X11Surface.get_xid(self.get_surface())
 			x11_window = x11_display.create_resource_object('window', x11_window_id)
+
+			# herbstluftwm only listens to properties when a window is mapped;
+			# However, as we need to show the window to get the X11 ID from the
+			# resulting surface, and closing it closes the program (???),
+			# we need to manually unmap the window here (we re-map it at the
+			# end).
+			unmap_event = Xlib.protocol.event.UnmapNotify(
+				event=x11_window,
+				window=x11_window,
+				from_configure=False
+			)
+			x11_window.send_event(unmap_event)
 
 			# Set strut for dock
 			if type == SurfaceType.DOCK:
@@ -110,9 +123,19 @@ class Surface(Gtk.Window):
 				]
 			)
 
+			# Re-map window; see earlier comment
+			remap_event = Xlib.protocol.event.MapNotify(
+				event=x11_window,
+				window=x11_window,
+				override=False
+			)
+			x11_window.send_event(remap_event)
+			self.map()
+
+			x11_window.get_property(x11_display.intern_atom('_NET_WM_WINDOW_TYPE'), x11_display.intern_atom('ATOM'), 0, 32)
+
 		if not visible:
 			self.set_visible(False)
-			self.close()
 
 	def update_size(self):
 		"""Updates the size request of the surface based on its variables."""

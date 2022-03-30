@@ -41,6 +41,8 @@ class ShellManager:
 		self.panel = Panel(app)
 		self.windows.add_window(self.panel)
 
+		self.panel.show()
+
 		self.window_switcher.set_transient_for(self.panel)
 		self.control_panel.set_transient_for(self.panel)
 		self.notification_popup.set_transient_for(self.panel)

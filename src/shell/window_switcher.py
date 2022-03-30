@@ -72,7 +72,7 @@ class WindowSwitcher(Surface):
 			hexpand=True,
 			vexpand=True,
 			visible=False,
-			top=32
+			top=36
 		)
 
 		global window_switcher
