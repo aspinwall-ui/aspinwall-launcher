@@ -4,7 +4,6 @@ Contains code for the window switcher.
 """
 from gi.repository import GdkPixbuf, Gtk, GObject
 
-from aspinwall.launcher.wallpaper import Wallpaper
 from aspinwall.shell.interfaces.manager import get_interface_manager
 from aspinwall.shell.surface import Surface
 
@@ -72,6 +71,7 @@ class WindowSwitcher(Surface):
 			hexpand=True,
 			vexpand=True,
 			visible=False,
+			focus_on_create=True,
 			top=36
 		)
 
@@ -96,9 +96,6 @@ class WindowSwitcher(Surface):
 		self.window_list.set_model(Gtk.SingleSelection(model=self.filtered_store))
 		self.window_list.set_factory(factory)
 		self.window_list.connect('activate', self.focus_window)
-
-		self.connect('map', self.load_wallpaper)
-		self.connect('unmap', self.unload_wallpaper)
 
 	def show_switcher(self, *args):
 		"""Shows the window switcher."""
@@ -128,6 +125,7 @@ class WindowSwitcher(Surface):
 
 	def focus_window(self, list, window_no):
 		list.get_model().get_item(window_no).focus()
+		self.close_switcher()
 
 	def update_filter(self, *args):
 		"""Convenience function that forces a filter update."""
@@ -139,19 +137,6 @@ class WindowSwitcher(Surface):
 		False otherwise.
 		"""
 		return window.props.visible
-
-	def load_wallpaper(self, *args):
-		"""Loads the wallpaper when the window switcher is opened."""
-		self.wallpaper = Wallpaper()
-		self.wallpaper_bin.set_child(self.wallpaper)
-
-	def unload_wallpaper(self, *args):
-		"""Unloads the wallpaper when the window switcher is closed."""
-		self.wallpaper_bin.set_child(None)
-		if self.wallpaper:
-			self.wallpaper._destroy()
-			self.wallpaper.unrealize()
-			self.wallpaper = None
 
 	@GObject.Property(type=bool, default=False)
 	def opened(self):
