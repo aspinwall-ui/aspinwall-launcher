@@ -4,6 +4,7 @@ Contains code for the X11 window list/interaction interface.
 """
 from gi.repository import GdkPixbuf
 from ewmh import EWMH
+import threading
 import Xlib
 from Xlib import X
 
@@ -63,6 +64,8 @@ class X11WindowInterface(ProtocolSpecificInterface):
 	"""
 	__gtype_name_ = 'X11WindowInterface'
 
+	windows = None
+
 	def __init__(self, window_interface):
 		"""Initializes the X11/EWMH window inteface."""
 		super().__init__(window_interface)
@@ -70,10 +73,73 @@ class X11WindowInterface(ProtocolSpecificInterface):
 		self.ewmh = EWMH()
 		self.update_windows()
 
+		event_handler = threading.Thread(target=self.event_handler_func, daemon=True)
+		event_handler.start()
+
+	def event_handler_func(self):
+		"""Handles events."""
+		root = self.ewmh.display.screen().root
+		mask = (
+			X.StructureNotifyMask |
+			X.PropertyChangeMask |
+			X.VisibilityChangeMask |
+			X.FocusChangeMask |
+			X.SubstructureNotifyMask
+		)
+		root.change_attributes(event_mask=mask)
+
+		update_trigger_atoms = [
+			self.ewmh.display.intern_atom('_NET_CLOSE_WINDOW'),
+			self.ewmh.display.intern_atom('_NET_DESTROY_WINDOW'),
+			self.ewmh.display.intern_atom('_NET_CLIENT_LIST'),
+			self.ewmh.display.intern_atom('_NET_CLIENT_LIST_STACKING')
+		]
+
+		while True:
+			event = root.display.next_event()
+			if event.type == X.PropertyNotify and event.atom in update_trigger_atoms:
+				# Some property we're watching for has changed
+				self.update_windows()
+			elif event.type == X.FocusIn or event.type == X.FocusOut:
+				# Focus changed
+				self.update_windows()
+			elif event.type == X.DestroyNotify or event.type == X.UnmapNotify:
+				# Window closed
+				self.update_windows()
+			elif event.type == X.MapNotify or event.type == X.MapRequest:
+				# Window shown
+				self.update_windows()
+			# Otherwise, we don't know how to handle the event
+
 	def update_windows(self):
 		"""Updates the window list."""
-		self.clients = self.ewmh.getClientList()
-		for window in self.clients:
+		new_clients = self.ewmh.getClientList()
+		if self.windows:
+			old_clients = self.clients
+			if new_clients != old_clients:
+				scan_clients = []
+				diff_clients = list(set(old_clients) - set(new_clients)) + \
+					list(set(new_clients) - set(old_clients))
+				for client in diff_clients:
+					if client not in new_clients:
+						# Client removed, drop from store
+						for window in list(self.windows):
+							print(window)
+							if window.x11_window == client:
+								self.windows.remove(self.windows.find(window)[1])
+								break
+					else:
+						# Client added, add to re-scan list
+						scan_clients.append(client)
+				self.clients = new_clients
+			else:
+				# Nothing for us to update
+				return
+		else:
+			self.clients = new_clients
+			scan_clients = self.clients
+
+		for window in scan_clients:
 			visible = True
 
 			# Get window switcher visibility by parsing window states and type

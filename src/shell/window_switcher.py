@@ -45,6 +45,8 @@ class WindowView(Gtk.Box):
 	def close_window(self, *args):
 		"""Closes the window represented by the icon."""
 		self.window.close()
+		global window_switcher
+		window_switcher.window_interface.update_windows()
 
 window_switcher = None
 
@@ -79,8 +81,8 @@ class WindowSwitcher(Surface):
 		window_switcher = self
 
 		interface_manager = get_interface_manager()
-		window_interface = interface_manager.get_interface_by_name('WindowInterface')
-		self.window_store = window_interface.windows
+		self.window_interface = interface_manager.get_interface_by_name('WindowInterface')
+		self.window_store = self.window_interface.windows
 
 		# Set up filter
 		self.filtered_store = Gtk.FilterListModel(model=self.window_store)

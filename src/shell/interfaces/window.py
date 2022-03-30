@@ -91,3 +91,7 @@ class WindowInterface(Interface):
 
 		from aspinwall.shell.interfaces.x11window import X11WindowInterface
 		self.specific_interface = X11WindowInterface(self)
+
+	def update_windows(self):
+		"""Updates the window list."""
+		self.specific_interface.update_windows()
