@@ -5,6 +5,7 @@ Abstraction code for shell elements.
 from gi.repository import Gtk, Gdk, GdkX11, GObject
 from ewmh import EWMH
 import Xlib
+from Xlib import X
 
 class SurfaceType:
 	"""Enum for surface types."""
@@ -80,8 +81,10 @@ class Surface(Gtk.Window):
 		try:
 			EWMH().getActiveWindow()
 		except: # noqa: E722
+			self.is_x11 = False
 			pass # No x11/ewmh support
 		else:
+			self.is_x11 = True
 			# We need to show the window temporarily to get the X11 window
 			self.show()
 			self.unmap()
@@ -90,6 +93,10 @@ class Surface(Gtk.Window):
 			x11_display = ewmh.display
 			x11_window_id = GdkX11.X11Surface.get_xid(self.get_surface())
 			x11_window = x11_display.create_resource_object('window', x11_window_id)
+
+			self.x11_display = x11_display
+			self.x11_window_id = x11_window_id
+			self.x11_window = x11_window
 
 			# herbstluftwm only listens to properties when a window is mapped;
 			# However, as we need to show the window to get the X11 ID from the
@@ -132,10 +139,41 @@ class Surface(Gtk.Window):
 			x11_window.send_event(remap_event)
 			self.map()
 
-			x11_window.get_property(x11_display.intern_atom('_NET_WM_WINDOW_TYPE'), x11_display.intern_atom('ATOM'), 0, 32)
+			# FIXME: Not sure why, but this prevents the panel from disappearing.
+			x11_window.get_property(
+				x11_display.intern_atom('_NET_WM_WINDOW_TYPE'),
+				x11_display.intern_atom('ATOM'),
+				0, 32
+			)
 
 		if not visible:
 			self.set_visible(False)
+
+	def show_and_focus(self):
+		"""
+		Convenience function to bring WM focus to a surface when showing it.
+		"""
+		self.show()
+		self.focus()
+
+	def focus(self):
+		"""Focuses the surface."""
+		if self.is_x11:
+			focus_event = Xlib.protocol.event.ClientMessage(
+				window=self.x11_window,
+				client_type=self.x11_display.intern_atom('_NET_ACTIVE_WINDOW'),
+				data=(
+					32, [2, X.CurrentTime, 0, 0, 0]
+				)
+			)
+
+			mask = (X.SubstructureRedirectMask | X.SubstructureNotifyMask)
+			self.x11_display.send_event(
+				destination=self.x11_display.screen().root,
+				propagate=False,
+				event_mask=mask,
+				event=focus_event
+			)
 
 	def update_size(self):
 		"""Updates the size request of the surface based on its variables."""

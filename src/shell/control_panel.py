@@ -177,6 +177,7 @@ class ControlPanelContainer(Surface):
 
 	def show_control_panel(self, *args):
 		"""Shows the control panel."""
+		self.show_and_focus()
 		self.set_visible(True)
 		self.container.set_visible(True)
 		self.container_revealer.set_reveal_child(True)

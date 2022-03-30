@@ -104,7 +104,7 @@ class WindowSwitcher(Surface):
 		"""Shows the window switcher."""
 		self._opened = True
 		self.notify('opened')
-		self.present()
+		self.show_and_focus()
 		self.set_visible(True)
 		self.container_revealer.set_reveal_child(True)
 
