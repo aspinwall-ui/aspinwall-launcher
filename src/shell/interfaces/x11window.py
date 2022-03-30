@@ -124,7 +124,6 @@ class X11WindowInterface(ProtocolSpecificInterface):
 					if client not in new_clients:
 						# Client removed, drop from store
 						for window in list(self.windows):
-							print(window)
 							if window.x11_window == client:
 								self.windows.remove(self.windows.find(window)[1])
 								break
