@@ -41,6 +41,11 @@ class ShellManager:
 		self.panel = Panel(app)
 		self.windows.add_window(self.panel)
 
+		self.window_switcher.set_transient_for(self.panel)
+		self.control_panel.set_transient_for(self.panel)
+		self.notification_popup.set_transient_for(self.panel)
+		self.panel.present()
+
 def on_activate(app):
 	global running
 	if running:

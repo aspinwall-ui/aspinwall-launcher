@@ -4,7 +4,7 @@ Contains code for the control panel that appears after dragging the panel.
 """
 from gi.repository import Adw, Gtk, GObject
 
-from aspinwall.shell.surface import Surface
+from aspinwall.shell.surface import Surface, SurfaceType
 from aspinwall.utils.clock import clock_daemon
 
 from aspinwall.shell.interfaces.manager import get_interface_manager
@@ -135,7 +135,8 @@ class ControlPanelContainer(Surface):
 			valign=Gtk.Align.START,
 			hexpand=True,
 			vexpand=True,
-			visible=False
+			visible=False,
+			type=SurfaceType.OVERLAY
 		)
 
 		global control_panel
@@ -179,6 +180,7 @@ class ControlPanelContainer(Surface):
 		self.set_visible(True)
 		self.container.set_visible(True)
 		self.container_revealer.set_reveal_child(True)
+		self.fullscreen()
 
 		# Fade in background
 		anim = Adw.TimedAnimation.new(
@@ -190,6 +192,7 @@ class ControlPanelContainer(Surface):
 
 	def hide_control_panel(self, *args):
 		"""Hides the control panel."""
+		self.unfullscreen()
 		self.container_revealer.set_reveal_child(False)
 
 		# Fade out background

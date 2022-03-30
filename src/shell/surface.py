@@ -2,7 +2,32 @@
 """
 Abstraction code for shell elements.
 """
-from gi.repository import Gtk, Gdk, GObject
+from gi.repository import Gtk, Gdk, GdkX11, GObject
+from ewmh import EWMH
+
+class SurfaceType:
+	"""Enum for surface types."""
+	DEFAULT = 0
+	DOCK = 1
+	OVERLAY = 2
+	NOTIFICATION = 3
+	LAUNCHER = 4
+
+def x11_atom_for_type(ewmh, type):
+	"""Gets the atom int for a specific surface type."""
+	if type == SurfaceType.DEFAULT:
+		ewmh_type = '_NET_WM_WINDOW_TYPE_NORMAL'
+	elif type == SurfaceType.DOCK:
+		ewmh_type = '_NET_WM_WINDOW_TYPE_DOCK'
+	elif type == SurfaceType.OVERLAY:
+		ewmh_type = '_NET_WM_WINDOW_TYPE_DIALOG'
+	elif type == SurfaceType.NOTIFICATION:
+		ewmh_type = '_NET_WM_WINDOW_TYPE_NOTIFICATION'
+	elif type == SurfaceType.LAUNCHER:
+		ewmh_type = '_NET_WM_WINDOW_TYPE_DESKTOP'
+	else:
+		raise ValueError("incorrect type")
+	return ewmh.display.intern_atom(ewmh_type)
 
 class Surface(Gtk.Window):
 	"""
@@ -18,9 +43,10 @@ class Surface(Gtk.Window):
 	def __init__(self, application,
 			valign=Gtk.Align.START, halign=Gtk.Align.END,
 			vexpand=False, hexpand=False, width=0, height=0,
-			visible=True):
+			visible=True, top=0, type=SurfaceType.DEFAULT):
 		"""Initializes a shell surface."""
-		super().__init__(application=application,
+		super().__init__(
+			application=application,
 			resizable=False,
 			decorated=False,
 			deletable=False,
@@ -47,17 +73,46 @@ class Surface(Gtk.Window):
 		if hexpand is True:
 			width = self._monitor_width
 		if vexpand is True:
-			height = self._monitor_height
+			height = self._monitor_height - top
 		self.set_size_request(width, height)
 
 		self.width = width
 		self.height = height
 
+		# Set surface info and alignment
+		try:
+			EWMH().getActiveWindow()
+		except: # noqa: E722
+			pass # No x11/ewmh support
+		else:
+			ewmh = EWMH()
+			x11_display = ewmh.display
+			x11_window_id = GdkX11.X11Surface.get_xid(self.get_surface())
+			x11_window = x11_display.create_resource_object('window', x11_window_id)
+
+			# Set strut for dock
+			if type == SurfaceType.DOCK:
+				x11_window.change_property(
+					x11_display.intern_atom('_NET_WM_STRUT'),
+					x11_display.intern_atom('CARDINAL'),
+					32, [0, 0, height, 0]
+				)
+
+			ewmh.setWmState(x11_window, 2, '_NET_WM_STATE_SKIP_TASKBAR')
+
+			# Set window type
+			x11_window.change_property(
+				x11_display.intern_atom('_NET_WM_WINDOW_TYPE'),
+				x11_display.intern_atom('ATOM'),
+				32, [
+					x11_atom_for_type(ewmh, type),
+					x11_display.intern_atom('_NET_WM_WINDOW_TYPE_NORMAL')
+				]
+			)
+
 		if not visible:
 			self.set_visible(False)
 			self.close()
-
-		# TODO: Set surface alignment
 
 	def update_size(self):
 		"""Updates the size request of the surface based on its variables."""

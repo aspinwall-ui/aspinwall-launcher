@@ -4,7 +4,7 @@ Contains the code for the panel.
 """
 from gi.repository import Gtk, GObject
 
-from aspinwall.shell.surface import Surface
+from aspinwall.shell.surface import Surface, SurfaceType
 from aspinwall.utils.clock import clock_daemon
 from aspinwall.shell.config import config
 from aspinwall.shell.interfaces.manager import get_interface_manager
@@ -27,7 +27,12 @@ class Panel(Surface):
 
 	def __init__(self, app):
 		"""Initializes the panel."""
-		super().__init__(application=app, hexpand=True, height=36)
+		super().__init__(
+			application=app,
+			hexpand=True,
+			height=36,
+			type=SurfaceType.DOCK
+		)
 
 		clock_daemon.connect('notify::time', self.update_time)
 		self.clock.set_label(time.strftime('%H:%M'))

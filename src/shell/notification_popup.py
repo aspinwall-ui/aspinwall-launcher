@@ -8,7 +8,7 @@ import time
 import threading
 
 from aspinwall.shell.notificationbox import NotificationListView # noqa: F401
-from aspinwall.shell.surface import Surface
+from aspinwall.shell.surface import Surface, SurfaceType
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/shell/ui/notificationpopup.ui')
 class NotificationPopup(Surface):
@@ -26,7 +26,8 @@ class NotificationPopup(Surface):
 			application=app,
 			visible=False,
 			halign=Gtk.Align.CENTER,
-			valign=Gtk.Align.START
+			valign=Gtk.Align.START,
+			type=SurfaceType.NOTIFICATION
 		)
 
 		self.connect('notify::monitor-width', self.update_popup_size)

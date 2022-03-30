@@ -71,7 +71,8 @@ class WindowSwitcher(Surface):
 			valign=Gtk.Align.START,
 			hexpand=True,
 			vexpand=True,
-			visible=False
+			visible=False,
+			top=32
 		)
 
 		global window_switcher
