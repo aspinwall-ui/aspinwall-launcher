@@ -31,6 +31,7 @@ class Panel(Surface):
 			application=app,
 			hexpand=True,
 			height=36,
+			focus_on_create=True,
 			type=SurfaceType.DOCK
 		)
 

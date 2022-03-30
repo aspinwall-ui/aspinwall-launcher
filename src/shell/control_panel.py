@@ -182,6 +182,7 @@ class ControlPanelContainer(Surface):
 		self.container.set_visible(True)
 		self.container_revealer.set_reveal_child(True)
 		self.fullscreen()
+		self.focus()
 
 		# Fade in background
 		anim = Adw.TimedAnimation.new(
@@ -193,7 +194,6 @@ class ControlPanelContainer(Surface):
 
 	def hide_control_panel(self, *args):
 		"""Hides the control panel."""
-		self.unfullscreen()
 		self.container_revealer.set_reveal_child(False)
 
 		# Fade out background
@@ -211,6 +211,7 @@ class ControlPanelContainer(Surface):
 			self.set_visible(True)
 		else:
 			self.set_visible(False)
+			self.unfullscreen()
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/shell/ui/controlpanel.ui')
 class ControlPanel(Gtk.Box):

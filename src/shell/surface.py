@@ -45,7 +45,8 @@ class Surface(Gtk.Window):
 	def __init__(self, application,
 			valign=Gtk.Align.START, halign=Gtk.Align.END,
 			vexpand=False, hexpand=False, width=0, height=0,
-			visible=True, top=0, type=SurfaceType.DEFAULT):
+			visible=True, focus_on_create=False, top=0,
+			type=SurfaceType.DEFAULT):
 		"""Initializes a shell surface."""
 		super().__init__(
 			application=application,
@@ -145,6 +146,9 @@ class Surface(Gtk.Window):
 				x11_display.intern_atom('ATOM'),
 				0, 32
 			)
+
+		if focus_on_create:
+			self.focus()
 
 		if not visible:
 			self.set_visible(False)
