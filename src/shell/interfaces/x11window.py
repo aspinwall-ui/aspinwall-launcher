@@ -4,6 +4,8 @@ Contains code for the X11 window list/interaction interface.
 """
 from gi.repository import GdkPixbuf
 from ewmh import EWMH
+import Xlib
+from Xlib import X
 
 from aspinwall.shell.interfaces.window import Window, ProtocolSpecificInterface
 
@@ -19,11 +21,41 @@ class X11Window(Window):
 
 	def focus(self):
 		"""Focuses the window."""
-		self.ewmh.setActiveWindow(self.x11_window)
+		display = self.ewmh.display
+		focus_event = Xlib.protocol.event.ClientMessage(
+			window=self.x11_window,
+			client_type=display.intern_atom('_NET_ACTIVE_WINDOW'),
+			data=(
+				32, [2, X.CurrentTime, 0, 0, 0]
+			)
+		)
+
+		mask = (X.SubstructureRedirectMask | X.SubstructureNotifyMask)
+		display.send_event(
+			destination=display.screen().root,
+			propagate=False,
+			event_mask=mask,
+			event=focus_event
+		)
 
 	def close(self):
 		"""Closes the window."""
-		self.ewmh.setCloseWindow(self.x11_window)
+		display = self.ewmh.display
+		focus_event = Xlib.protocol.event.ClientMessage(
+			window=self.x11_window,
+			client_type=display.intern_atom('_NET_CLOSE_WINDOW'),
+			data=(
+				32, [X.CurrentTime, 2, 0, 0, 0]
+			)
+		)
+
+		mask = (X.SubstructureRedirectMask | X.SubstructureNotifyMask)
+		display.send_event(
+			destination=display.screen().root,
+			propagate=False,
+			event_mask=mask,
+			event=focus_event
+		)
 
 class X11WindowInterface(ProtocolSpecificInterface):
 	"""
