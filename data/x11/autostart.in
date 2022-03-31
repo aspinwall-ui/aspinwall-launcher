@@ -32,15 +32,31 @@ alias hc=herbstclient
 
 hc set always_show_frame false
 hc set default_frame_layout max
+hc floating off
 
 hc rule ewmhrequests=on
 hc rule ewmhnotify=on
 hc rule focus=on
 hc apply_rules --all
 
-# Colors
+# Sizing
+hc attr theme.border_width 0
+hc attr theme.floating.border_width 0
+hc attr theme.floating.outer_width 0
+hc set frame_padding 0
+hc set smart_window_surroundings 0
+hc set smart_frame_surroundings 0
+hc set mouse_recenter_gap 0
 hc set frame_border_width 0
+hc set always_show_frame 0
+hc set frame_bg_transparent 1
+hc set frame_transparent_width 0
+
+hc detect_monitors
 
 # Start necessary applications
 hc spawn picom --backend xrender
 hc spawn @bindir@/aspinwall-shell
+
+# Launcher keybind
+hc keybind Mod4-l spawn aspinwall-launcher
