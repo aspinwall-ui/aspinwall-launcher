@@ -54,6 +54,10 @@ def load_widgets():
 
 					module._widget_class.widget_path = widget_path
 
+					if not module._widget_class:
+						print("No widget class in " + widget_file)
+						continue
+
 					loaded_ids[module_id] = module._widget_class
 					available_widgets.append(module._widget_class)
 

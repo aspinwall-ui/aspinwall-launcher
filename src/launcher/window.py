@@ -9,6 +9,7 @@ import os
 
 from aspinwall.launcher.config import config
 from aspinwall.widgets.loader import load_widgets
+from aspinwall.shell.surface import Surface, SurfaceType
 
 # The ClockBox, WidgetBox and AppChooser classes are imported to avoid
 # "invalid object type" errors.
@@ -37,9 +38,18 @@ class Launcher(Gtk.ApplicationWindow):
 	app_chooser = Gtk.Template.Child()
 	app_chooser_show = Gtk.Template.Child()
 
-	def __init__(self, app):
+	def __init__(self, app, in_shell=False):
 		"""Initializes the launcher window."""
-		super().__init__(title='Aspinwall Launcher', application=app)
+		super().__init__(
+			application=app,
+			title='aspinwall-shell'
+		)
+
+		#	hexpand=True,
+		#	vexpand=True,
+		#	type=SurfaceType.LAUNCHER
+
+		self.app_chooser_show.connect('clicked', self.show_app_chooser)
 
 		self.open_settings_action = Gio.SimpleAction.new("open_settings", None)
 		self.open_settings_action.connect('activate', self.open_settings)
@@ -54,7 +64,6 @@ class Launcher(Gtk.ApplicationWindow):
 
 		self.launcher_wallpaper_overlay.set_measure_overlay(self.launcher_flap, True)
 
-	@Gtk.Template.Callback()
 	def show_app_chooser(self, *args):
 		"""Shows the app chooser."""
 		# Reload apps, clear search
@@ -87,12 +96,9 @@ def on_theme_preference_change(*args):
 	else:
 		style_manager.set_color_scheme(Adw.ColorScheme.DEFAULT)
 
-def on_activate(app):
-	global running
-	if running:
-		return False
-	running = True
-
+def launcher_setup():
+	"""Commands that are launched before the launcher window is created."""
+	# Set up default wallpapers
 	if config['available-wallpapers'][0] == 'fixme':
 		wallpaper_files = []
 		wallpaper_paths = []
@@ -112,6 +118,14 @@ def on_activate(app):
 			config['wallpaper-style'] = 0 # solid color
 
 	load_widgets()
+
+def on_activate(app):
+	global running
+	if running:
+		return False
+	running = True
+
+	launcher_setup()
 
 	global win
 	win = Launcher(app)

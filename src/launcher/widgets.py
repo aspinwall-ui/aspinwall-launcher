@@ -109,7 +109,11 @@ class LauncherWidget(Gtk.Box):
 		"""Initializes a widget display."""
 		super().__init__()
 
-		self._widget = widget_class(instance)
+		try:
+			self._widget = widget_class(instance)
+		except TypeError:
+			print("FAIL!!!")
+			return
 		self._widgetbox = widgetbox
 
 		# Set up drag source

@@ -14,6 +14,8 @@ from aspinwall.shell.notification_popup import NotificationPopup
 from aspinwall.shell.window_switcher import WindowSwitcher
 from aspinwall.shell.panel import Panel
 
+from aspinwall.launcher.window import Launcher, launcher_setup
+
 running = False
 
 class ShellManager:
@@ -41,12 +43,16 @@ class ShellManager:
 		self.panel = Panel(app)
 		self.windows.add_window(self.panel)
 
+		launcher_setup()
+		self.launcher = Launcher(app, in_shell=True)
+		self.windows.add_window(self.launcher)
+		self.launcher.close()
 		self.panel.show()
 
 		self.window_switcher.set_transient_for(self.panel)
 		self.control_panel.set_transient_for(self.panel)
 		self.notification_popup.set_transient_for(self.panel)
-		self.panel.present()
+		self.panel.show()
 
 def on_activate(app):
 	global running

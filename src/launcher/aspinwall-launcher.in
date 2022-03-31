@@ -59,5 +59,8 @@ if __name__ == '__main__':
 	launcher_resource = Gio.Resource.load(os.path.join(pkgdatadir, 'aspinwall.launcher.gresource'))
 	launcher_resource._register()
 
+	shell_resource = Gio.Resource.load(os.path.join(pkgdatadir, 'aspinwall.shell.gresource'))
+	shell_resource._register()
+
 	from aspinwall.launcher.window import main
 	sys.exit(main(VERSION))

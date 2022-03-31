@@ -78,8 +78,12 @@ class Surface(Gtk.Window):
 
 		self.width = width
 		self.height = height
+		self.type = type
 
-		# Set surface info and alignment
+		self.setup_surface_alignment(focus_on_create, visible)
+
+	def setup_surface_alignment(self, focus_on_create=False, visible=True):
+		"""Sets up the surface alignment."""
 		try:
 			EWMH().getActiveWindow()
 		except: # noqa: E722
@@ -125,7 +129,7 @@ class Surface(Gtk.Window):
 				x11_display.intern_atom('_NET_WM_WINDOW_TYPE'),
 				x11_display.intern_atom('ATOM'),
 				32, [
-					x11_atom_for_type(ewmh, type),
+					x11_atom_for_type(ewmh, self.type),
 					x11_display.intern_atom('_NET_WM_WINDOW_TYPE_NORMAL')
 				]
 			)

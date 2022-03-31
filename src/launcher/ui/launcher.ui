@@ -44,7 +44,7 @@
 										<property name="margin-end">10</property>
 										<property name="icon-name">view-grid-symbolic</property>
 
-										<signal name="clicked" handler="show_app_chooser"/>
+										<!--<signal name="clicked" handler="show_app_chooser"/>-->
 
 										<style>
 											<class name="osd"/>
