@@ -30,12 +30,13 @@
 
 alias hc=herbstclient
 
-#hc set theme.title_when never
 hc set always_show_frame false
+hc set default_frame_layout max
+hc rule focus=on
 
 # Colors
 hc set frame_border_width 0
 
 # Start necessary applications
 hc spawn picom
-hc spawn aspinwall-shell
+hc spawn @bindir@/aspinwall-shell

@@ -26,6 +26,8 @@ $ sudo meson install -C build
 
 For development purposes, the launcher can be started using the provided `./run` script, which will automatically launch the GTK4 debugger.
 
+You can also preview the entire shell with ./run-xnest (this assumes you have Xnest installed). Note that compositing does not work in Xnest; if you want a more accurate representation, edit the file and replace "Xnest" with "Xephyr".
+
 Before you can use the `./run` script, you will need to install Meson.
 
 ## Requirements

@@ -1,0 +1,29 @@
+#!/bin/sh
+if [ ! -e src ]; then echo "Not in aspinwall source directory"; exit 1; fi
+
+if [ -e output ]; then rm -r output; fi
+
+set -e
+meson --prefix=/tmp/aspinwall . output
+meson compile -C output
+meson install -C output
+
+Xnest :1 &
+xnest_pid=$!
+
+export DISPLAY=:1
+export GSETTINGS_SCHEMA_DIR=/tmp/aspinwall/share/glib-2.0/schemas
+export GTK_DEBUG=interactive
+export ASPINWALL_WIDGET_DIR=/tmp/aspinwall/share/aspinwall/widgets
+
+herbstluftwm -c /tmp/aspinwall/share/aspinwall/x11/autostart &
+herbst_pid=$!
+
+trap_ctrlc() {
+	kill $xnest_pid
+	kill $herbst_pid
+}
+
+trap trap_ctrlc INT
+
+wait

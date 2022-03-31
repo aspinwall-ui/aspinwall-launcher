@@ -1,10 +1,16 @@
 pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
 
-x11_sources = [
-  'autostart',
-]
+conf = configuration_data()
+conf.set('VERSION', meson.project_version())
+conf.set('bindir', join_paths(get_option('prefix'), get_option('bindir')))
 
-install_data(x11_sources, install_dir: join_paths(pkgdatadir, 'aspinwall', 'x11'))
+configure_file(
+  input: 'autostart.in',
+  output: 'autostart',
+  configuration: conf,
+  install: true,
+  install_dir: join_paths(pkgdatadir, 'x11')
+)
 
 install_data('aspinwall.desktop',
   install_dir: join_paths(get_option('datadir'), 'xsession')
