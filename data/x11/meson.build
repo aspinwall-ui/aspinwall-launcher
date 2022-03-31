@@ -13,5 +13,5 @@ configure_file(
 )
 
 install_data('aspinwall.desktop',
-  install_dir: join_paths(get_option('datadir'), 'xsession')
+  install_dir: join_paths(get_option('datadir'), 'xsessions')
 )
