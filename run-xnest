@@ -8,7 +8,7 @@ meson --prefix=/tmp/aspinwall . output
 meson compile -C output
 meson install -C output
 
-Xnest :1 &
+Xnest :1 +extension XFIXES +extension RENDER +extension X-Resource &
 xnest_pid=$!
 
 export DISPLAY=:1

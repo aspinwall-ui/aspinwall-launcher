@@ -138,6 +138,8 @@ class X11WindowInterface(ProtocolSpecificInterface):
 			self.clients = new_clients
 			scan_clients = self.clients
 
+		display = self.ewmh.display
+
 		for window in scan_clients:
 			visible = True
 
@@ -165,6 +167,12 @@ class X11WindowInterface(ProtocolSpecificInterface):
 					else:
 						title = result
 					break
+
+			# FIXME: all states are seemingly ignored in herbst (or at least
+			# in my xnest session), so we need to manually set an override
+			# for shell windows.
+			if title == 'aspinwall-shell':
+				visible = False
 
 			# The icon data is provided as an array of "32-bit packed CARDINAL
 			# ARGB with high byte being A, low byte being B". We need to

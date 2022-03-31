@@ -53,7 +53,8 @@ class Surface(Gtk.Window):
 			resizable=False,
 			decorated=False,
 			deletable=False,
-			visible=visible
+			visible=visible,
+			title='aspinwall-shell'
 		)
 
 		self._hexpand = hexpand
@@ -119,8 +120,6 @@ class Surface(Gtk.Window):
 					32, [0, 0, height, 0]
 				)
 
-			ewmh.setWmState(x11_window, 2, '_NET_WM_STATE_SKIP_TASKBAR')
-
 			# Set window type
 			x11_window.change_property(
 				x11_display.intern_atom('_NET_WM_WINDOW_TYPE'),
@@ -140,12 +139,23 @@ class Surface(Gtk.Window):
 			x11_window.send_event(remap_event)
 			self.map()
 
-			# FIXME: Not sure why, but this prevents the panel from disappearing.
-			x11_window.get_property(
-				x11_display.intern_atom('_NET_WM_WINDOW_TYPE'),
-				x11_display.intern_atom('ATOM'),
-				0, 32
+			# Set state
+			state_event = Xlib.protocol.event.ClientMessage(
+				window=self.x11_window,
+				client_type=self.x11_display.intern_atom('_NET_WM_STATE'),
+				data=(
+					32, [
+						1,
+						x11_display.intern_atom('_NET_WM_STATE_SKIP_TASKBAR'),
+						x11_display.intern_atom('_NET_WM_STATE_SKIP_PAGER'),
+						2,
+						0
+					]
+				)
 			)
+			x11_window.send_event(state_event)
+
+			ewmh.display.flush()
 
 		if focus_on_create:
 			self.focus()
