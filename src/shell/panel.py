@@ -93,4 +93,3 @@ class Panel(Surface):
 	def update_time(self, *args):
 		"""Updates the time on the clock."""
 		self.clock.set_label(time.strftime('%H:%M'))
-

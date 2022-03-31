@@ -42,5 +42,5 @@ hc apply_rules --all
 hc set frame_border_width 0
 
 # Start necessary applications
-hc spawn picom
+hc spawn picom --backend xrender
 hc spawn @bindir@/aspinwall-shell

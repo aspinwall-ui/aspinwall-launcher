@@ -80,10 +80,10 @@ class X11WindowInterface(ProtocolSpecificInterface):
 		"""Handles events."""
 		root = self.ewmh.display.screen().root
 		mask = (
-			X.StructureNotifyMask |
-			X.PropertyChangeMask |
-			X.VisibilityChangeMask |
-			X.FocusChangeMask |
+			X.StructureNotifyMask | # noqa: W504
+			X.PropertyChangeMask | # noqa: W504
+			X.VisibilityChangeMask | # noqa: W504
+			X.FocusChangeMask | # noqa: W504
 			X.SubstructureNotifyMask
 		)
 		root.change_attributes(event_mask=mask)
@@ -137,8 +137,6 @@ class X11WindowInterface(ProtocolSpecificInterface):
 		else:
 			self.clients = new_clients
 			scan_clients = self.clients
-
-		display = self.ewmh.display
 
 		for window in scan_clients:
 			visible = True

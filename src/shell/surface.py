@@ -80,9 +80,9 @@ class Surface(Gtk.Window):
 		self.height = height
 		self.type = type
 
-		self.setup_surface_alignment(focus_on_create, visible)
+		self.setup_surface_alignment(focus_on_create, visible, height)
 
-	def setup_surface_alignment(self, focus_on_create=False, visible=True):
+	def setup_surface_alignment(self, focus_on_create=False, visible=True, height=0):
 		"""Sets up the surface alignment."""
 		try:
 			EWMH().getActiveWindow()
