@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-20 14:46+0100\n"
-"PO-Revision-Date: 2022-04-03 10:27+0000\n"
+"PO-Revision-Date: 2022-04-03 10:55+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "aspinwall-ui/aspinwall-shell/nb_NO/>\n"
@@ -56,6 +56,8 @@ msgid ""
 "background for scaled images), stored as an array of three integers: Red, "
 "Green, Blue (0-255)."
 msgstr ""
+"Bakgrunnsbildefarge (for «Ensfarget» modus eller for bakgrunn for skalerte "
+"bilder), lagret som knippe av tre heltall: rød, grønn, blå (0-255)."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:40
 #: src/launcher/ui/settings.ui:141 src/launcher/ui/settings.ui:169
@@ -67,6 +69,8 @@ msgid ""
 "List of wallpaper files available in the wallpaper picker in settings. Also "
 "used for the slideshow mode."
 msgstr ""
+"Liste over bakgrunnsbildefiler tilgjengelig i bakgrunnsbildevelgeren i "
+"innstillinger. Brukes også for lysbildevisningsmodus."
 
 #. TRANSLATORS: This settings option allows users to automatically use the background file provided by GNOME, allowing better integration with GNOME's control center.
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:50
@@ -80,6 +84,8 @@ msgid ""
 "If enabled, the launcher inherits the wallpaper from GNOME settings. (Note "
 "that this setting only works with GNOME's control center.)"
 msgstr ""
+"Nedarver bakgrunnsbildet fra GNOME-innstillingene. (merk at denne "
+"innstillingen fungerer med GNOME sitt kontrollsenter.)"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:59
 #: src/launcher/ui/settings.ui:244
@@ -93,22 +99,25 @@ msgid ""
 "In slideshow mode, the launcher automatically loops over available "
 "wallpapers."
 msgstr ""
+"I lysbildemodus vil oppstarteren automatisk gjenta tilgjengelige "
+"bakgrunnsbilder."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:68
 msgid "Slideshow switch delay"
-msgstr ""
+msgstr "Bytteforsinkelse for lysbildevisning"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:69
 msgid "Time between each wallpaper switch in slideshow mode, in seconds."
-msgstr ""
+msgstr "Antall sekunder mellom hvert bytte i lysbildemodus."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:76
 msgid "Slideshow switch counter"
-msgstr ""
+msgstr "Lysbildebytte-teller"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:77
+#, fuzzy
 msgid "Keeps the last slideshow switch countdown position."
-msgstr ""
+msgstr "Holder øye med nedtellingsposisjon for siste lysbildebytte."
 
 #. TRANSLATORS: This is for the light/dark mode switch; can be translated as "Preferred theme"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:86
@@ -121,20 +130,24 @@ msgid ""
 "Whether to use light theme, dark theme or follow system theme. (0 - follow "
 "system theme, 1 - light, 2 - dark)"
 msgstr ""
+"Hvorvidt lys, mørk, eller systemets draktvalg skal iføres. (0 - følg "
+"systemdrakt, 1 - lys, 2 - mørk)"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:96
 msgid "Widget autorefresh delay"
-msgstr ""
+msgstr "Forsinkelse for automatisk gjenoppfrisking av miniprogram"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:97
 msgid ""
 "Amount of time (in seconds) between automatic widget refreshing. Set to 0 to "
 "disable autorefresh. (Default: 900 seconds - 15 minutes)"
 msgstr ""
+"Mengden tid (sekunder) mellom automatisk gjenoppfriskning av miniprogram. "
+"Sett til 9 for å skru av. (Forvalg: 900 sekunder - 15 minutter)"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:104
 msgid "Favorite apps"
-msgstr ""
+msgstr "Favorittprogrammer"
 
 #. TRANSLATORS: ".desktop files" refers to a specific filetype. Do not translate the ".desktop" bit.
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:106
@@ -142,12 +155,14 @@ msgid ""
 "List of favorite apps for the app chooser, stored as paths to their .desktop "
 "files."
 msgstr ""
+"Liste over favorittprogrammer for programvelgeren, lagret som stier til "
+"respektive .desktop-filer."
 
 #. TRANSLATORS: This can also be translated as just "time format"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:113
 #: src/launcher/ui/settings.ui:422
 msgid "Time format string"
-msgstr ""
+msgstr "Tidsformatstreng"
 
 #. TRANSLATORS: Default time format string for your locale; should only contain the hour and minutes. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:115
@@ -178,11 +193,13 @@ msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
 msgstr ""
+"Datoformatsstreng for klokken, som bruker formatet beskrevet i "
+"dokumentasjonen i https://docs.python.org/3/library/time.html#time.strftime."
 
 #. TRANSLATORS: This is the description, as seen in the about dialog.
 #: src/launcher/ui/about.ui:28
 msgid "Linux tablet UI with smart hub capabilities"
-msgstr ""
+msgstr "Linux-nettbrettsgrensesnitt med smarthub-muligheter"
 
 #. TRANSLATORS: You can also translate "contributors" as "programmers" or "developers".
 #: src/launcher/ui/about.ui:30
@@ -225,7 +242,7 @@ msgstr "Forhåndsvisning av bakgrunnsbilde"
 #. TRANSLATOR: For the "Available wallpapers" option; box can be translated as field
 #: src/launcher/ui/settings.ui:181
 msgid "The images in this box are used for the slideshow mode if it's enabled."
-msgstr ""
+msgstr "Bilder i denne boksen brukes for lysbildemodus hvis det er påslått."
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency
 #: src/launcher/ui/settings.ui:258
@@ -290,6 +307,8 @@ msgid ""
 "Used for the “Solid Color” wallpaper style, as well as the backdrop for the "
 "“Scaled” style."
 msgstr ""
+"Brukt for «Ensfarget»-bakgrunnsbildestil, og også som bakgrunn for «Skalert» "
+"stil."
 
 #: src/launcher/ui/settings.ui:345
 msgid "Theme"
@@ -330,8 +349,9 @@ msgid "Reset to defaults"
 msgstr "Tilbakestill til forvalg"
 
 #: src/launcher/ui/settings.ui:407
+#, fuzzy
 msgid "Sets the time format to default settings."
-msgstr ""
+msgstr "Setter tidsformatet til forvalgte innstillinger."
 
 #. TRANSLATORS: Used for the "reset time format to default" option.
 #: src/launcher/ui/settings.ui:412
@@ -391,8 +411,9 @@ msgstr "Wi-Fi"
 
 #. TRANSLATORS: Used for the inactive state of the battery button in the control panel
 #: src/shell/ui/controlpanel.ui:119
+#, fuzzy
 msgid "No battery"
-msgstr ""
+msgstr "Uten batteri"
 
 #. TRANSLATORS: Used for the microphone enable/disable button in the control panel
 #: src/shell/ui/controlpanel.ui:127
