@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.dithernet.aspinwall.widgets.welcome\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-18 17:10+0100\n"
-"PO-Revision-Date: 2022-04-03 09:57+0000\n"
+"PO-Revision-Date: 2022-04-04 11:08+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "aspinwall-ui/widget-welcome/nb_NO/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:11
 msgid "Welcome"
-msgstr ""
+msgstr "Velkommen"
 
 #: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:13
 msgid "Displays basic information about Aspinwall."
