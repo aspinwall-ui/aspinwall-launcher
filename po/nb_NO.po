@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-20 14:46+0100\n"
-"PO-Revision-Date: 2022-04-03 10:55+0000\n"
+"PO-Revision-Date: 2022-04-04 11:08+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "aspinwall-ui/aspinwall-shell/nb_NO/>\n"
@@ -342,6 +342,9 @@ msgid ""
 "href='https://docs.python.org/3/library/time.html#time.strftime'>the time "
 "format string specification</a>."
 msgstr ""
+"Sett formatet å bruke ved visning av tid og dato, i overensstemmelse med <a "
+"href=\"https://docs.python.org/3/library/time.html#time.strftime\""
+">spesifikasjonene for tidsformatsstrenger</a>."
 
 #. TRANSLATORS: Used for the "reset time format to default" option.
 #: src/launcher/ui/settings.ui:406
