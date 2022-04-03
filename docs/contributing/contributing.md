@@ -19,4 +19,4 @@ Take a look at [our bug tracker](https://github.com/aspinwall-ui/aspinwall/issue
 
 ## Contributing translations
 
-TODO: Fill this in once Weblate is set up
+We use [Hosted Weblate](https://hosted.weblate.org/projects/aspinwall-ui/) to manage translations. Built-in widget translations are split to their own sub-components; the main shell and launcher translation can be found in the [Aspinwall Shell](https://hosted.weblate.org/projects/aspinwall-ui/aspinwall-shell/) component.

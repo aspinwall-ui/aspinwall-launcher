@@ -1,4 +1,4 @@
-# Aspinwall
+# Aspinwall <a href="https://hosted.weblate.org/engage/aspinwall-ui/"><img src="https://hosted.weblate.org/widgets/aspinwall-ui/-/aspinwall-shell/svg-badge.svg" alt="Translation status" /></a>
 
 Linux tablet shell that turns your device into a smart hub when not in use
 
@@ -62,7 +62,7 @@ These are also needed if you're planning to use the provided run scripts.
 
 The project is still in early development; we'd recommend holding off from contributing for the next month or so, until the basic features are fully implemented.
 
-We plan to add translations for Aspinwall projects, which will most likely be hosted on Weblate; however, this has not been set up yet.
+However, we are accepting initial translations; we use [Hosted Weblate](https://hosted.weblate.org/projects/aspinwall-ui/) to manage translations. Built-in widget translations are split to their own sub-components; the main shell and launcher translation can be found in the [Aspinwall Shell](https://hosted.weblate.org/projects/aspinwall-ui/aspinwall-shell/) component.
 
 The current TODO list for the shell can be found [here](https://github.com/aspinwall-ui/aspinwall/issues/1).
 
