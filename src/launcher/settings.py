@@ -95,6 +95,7 @@ class LauncherSettings(Adw.PreferencesWindow):
 
 	idle_mode_delay_combobox = Gtk.Template.Child()
 
+	clock_size_combobox = Gtk.Template.Child()
 	time_format_entry = Gtk.Template.Child()
 	date_format_entry = Gtk.Template.Child()
 
@@ -142,6 +143,7 @@ class LauncherSettings(Adw.PreferencesWindow):
 			self.system_wallpaper_settings_toggle.set_sensitive(False)
 
 		self.slideshow_mode_toggle.set_active(config['slideshow-mode'])
+		self.clock_size_combobox.set_active(config['clock-size'])
 		self.slideshow_switch_delay_combobox.set_active_id(str(config['slideshow-switch-delay']))
 		self.idle_mode_delay_combobox.set_active_id(str(config['idle-mode-delay']))
 
@@ -307,6 +309,11 @@ class LauncherSettings(Adw.PreferencesWindow):
 			config['theme-preference'] = 0
 		else:
 			self.toggle_theme(self.theme_toggle_start)
+
+	@Gtk.Template.Callback()
+	def set_clock_size(self, combobox, *args):
+		"""Sets the clock size.."""
+		config['clock-size'] = int(combobox.get_active_id())
 
 	@Gtk.Template.Callback()
 	def reset_time_format(self, *args):

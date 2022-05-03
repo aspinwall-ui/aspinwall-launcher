@@ -107,6 +107,14 @@
 			</description>
 		</key>
 
+		<key name="clock-size" type="i">
+			<default>1</default>
+			<summary>Clock size</summary>
+			<description>
+				Size of the clock in the launcher (0 - small, 1 - medium, 2 - large).
+			</description>
+		</key>
+
 		<key name="favorite-apps" type="as">
 			<default>[]</default>
 			<summary>Favorite apps</summary>

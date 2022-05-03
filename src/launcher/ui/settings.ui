@@ -430,6 +430,28 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
 						<property name="title" translatable="yes">Clock</property>
 
 						<child>
+							<object class="AdwActionRow">
+								<property name="title" translatable="yes">Clock size</property>
+
+								<child>
+									<object class="GtkComboBoxText" id="clock_size_combobox">
+										<property name="valign">center</property>
+										<signal name="changed" handler="set_clock_size"/>
+
+										<items>
+											<!-- TRANSLATORS: Clock size option -->
+											<item translatable="yes" id="0">Small</item>
+											<!-- TRANSLATORS: Clock size option -->
+											<item translatable="yes" id="1">Medium</item>
+											<!-- TRANSLATORS: Clock size option -->
+											<item translatable="yes" id="2">Large</item>
+										</items>
+									</object>
+								</child>
+							</object>
+						</child>
+
+						<child>
 							<object class="AdwExpanderRow">
 								<property name="title" translatable="yes">Time and date format</property>
 								<property name="subtitle" translatable="yes">Set the format to use when displaying the time and date, following &lt;a href='https://docs.python.org/3/library/time.html#time.strftime'&gt;the time format string specification&lt;/a&gt;.</property>

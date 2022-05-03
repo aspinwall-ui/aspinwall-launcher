@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-03 12:40+0200\n"
+"POT-Creation-Date: 2022-05-03 18:52+0200\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -147,11 +147,20 @@ msgstr ""
 "Amount of time (in seconds) after which the launcher goes into idle mode."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:112
+#: src/launcher/ui/settings.ui:434
+msgid "Clock size"
+msgstr "Clock size"
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:113
+msgid "Size of the clock in the launcher (0 - small, 1 - medium, 2 - large)."
+msgstr "Size of the clock in the launcher (0 - small, 1 - medium, 2 - large)."
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:120
 msgid "Favorite apps"
 msgstr "Favorite apps"
 
 #. TRANSLATORS: ".desktop files" refers to a specific filetype. Do not translate the ".desktop" bit.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:114
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:122
 msgid ""
 "List of favorite apps for the app chooser, stored as paths to their .desktop "
 "files."
@@ -160,17 +169,17 @@ msgstr ""
 "files."
 
 #. TRANSLATORS: This can also be translated as just "time format"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:121
-#: src/launcher/ui/settings.ui:456
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:129
+#: src/launcher/ui/settings.ui:478
 msgid "Time format string"
 msgstr "Time format string"
 
 #. TRANSLATORS: Default time format string for your locale; should only contain the hour and minutes. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:123
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:131
 msgid "\"%H:%M\""
 msgstr "\"%I:%M %p\""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:124
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:132
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -179,17 +188,17 @@ msgstr ""
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
 
 #. TRANSLATORS: This can also be translated as just "date format"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:131
-#: src/launcher/ui/settings.ui:469
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:139
+#: src/launcher/ui/settings.ui:491
 msgid "Date format string"
 msgstr "Date format string"
 
 #. TRANSLATORS: Default date format string for your locale; should contain the week day and date. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:133
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:141
 msgid "\"%A, %x\""
 msgstr "\"%A, %B %d %Y\""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:134
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:142
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -364,11 +373,26 @@ msgstr ""
 msgid "Clock"
 msgstr "Clock"
 
-#: src/launcher/ui/settings.ui:434
+#. TRANSLATORS: Clock size option
+#: src/launcher/ui/settings.ui:443
+msgid "Small"
+msgstr "Small"
+
+#. TRANSLATORS: Clock size option
+#: src/launcher/ui/settings.ui:445
+msgid "Medium"
+msgstr "Medium"
+
+#. TRANSLATORS: Clock size option
+#: src/launcher/ui/settings.ui:447
+msgid "Large"
+msgstr "Large"
+
+#: src/launcher/ui/settings.ui:456
 msgid "Time and date format"
 msgstr "Time and date format"
 
-#: src/launcher/ui/settings.ui:435
+#: src/launcher/ui/settings.ui:457
 msgid ""
 "Set the format to use when displaying the time and date, following <a "
 "href='https://docs.python.org/3/library/time.html#time.strftime'>the time "
@@ -379,16 +403,16 @@ msgstr ""
 "format string specification</a>."
 
 #. TRANSLATORS: Used for the "reset time format to default" option.
-#: src/launcher/ui/settings.ui:440
+#: src/launcher/ui/settings.ui:462
 msgid "Reset to defaults"
 msgstr "Reset to defaults"
 
-#: src/launcher/ui/settings.ui:441
+#: src/launcher/ui/settings.ui:463
 msgid "Sets the time format to default settings."
 msgstr "Sets the time format to default settings."
 
 #. TRANSLATORS: Used for the "reset time format to default" option.
-#: src/launcher/ui/settings.ui:446
+#: src/launcher/ui/settings.ui:468
 msgid "Reset"
 msgstr "Reset"
 
@@ -458,18 +482,18 @@ msgstr "Removed “%s”"
 msgid "Undo"
 msgstr "Undo"
 
-#: src/launcher/settings.py:241
+#: src/launcher/settings.py:243
 msgid "Add wallpaper"
 msgstr "Add wallpaper"
 
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:247
+#: src/launcher/settings.py:249
 msgid "_Cancel"
 msgstr "_Cancel"
 
 #. noqa: F821
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:249
+#: src/launcher/settings.py:251
 msgid "_Select"
 msgstr "_Select"
 

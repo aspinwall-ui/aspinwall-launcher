@@ -286,13 +286,31 @@ class ClockBox(Gtk.Box, Dimmable):
 	def __init__(self):
 		"""Initializes the clock box."""
 		super().__init__()
+		self.update_size()
+		config.connect('changed::clock-size', self.update_size)
 		clock_daemon.connect('notify::time', self.update)
+
+	def update_size(self, *args):
+		"""Updates the size of the clock based on the clock-size config."""
+		size = config['clock-size']
+		if size == 0:
+			self.add_css_class('small')
+			self.remove_css_class('medium')
+			self.remove_css_class('large')
+		elif size == 1:
+			self.add_css_class('medium')
+			self.remove_css_class('small')
+			self.remove_css_class('large')
+		elif size == 2:
+			self.add_css_class('large')
+			self.remove_css_class('small')
+			self.remove_css_class('medium')
 
 	def update(self, *args):
 		"""Updates the time and date on the clock."""
 		self.clockbox_time.set_markup(
-			'<span weight="bold" font="36">' + time.strftime(config["time-format"]) + '</span>'
+			'<span weight="bold">' + time.strftime(config['time-format']) + '</span>'
 		)
 		self.clockbox_date.set_markup(
-			'<span font="24">' + time.strftime(config['date-format']) + '</span>'
+			'<span>' + time.strftime(config['date-format']) + '</span>'
 		)

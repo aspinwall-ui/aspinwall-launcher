@@ -41,6 +41,28 @@
 	text-shadow: 2px 2px 2px @aspinwall_widget_shade;
 }
 
+.clockbox .time {
+	font-size: 2em;
+}
+
+.clockbox .date {
+	font-size: 1.5em;
+}
+
+/* Clock sizing modes */
+
+.clockbox.small {
+	font-size: 1.5em;
+}
+
+.clockbox.medium {
+	font-size: 1.75em;
+}
+
+.clockbox.large {
+	font-size: 2em;
+}
+
 /* Widgets */
 
 .aspinwall-widget-wrapper {
