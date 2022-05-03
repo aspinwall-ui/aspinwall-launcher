@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-03 11:16+0200\n"
+"POT-Creation-Date: 2022-05-03 12:19+0200\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -137,11 +137,21 @@ msgstr ""
 "disable autorefresh. (Default: 900 seconds - 15 minutes)"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:104
+msgid "Time until idle mode activation"
+msgstr "Time until idle mode activation"
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:105
+msgid ""
+"Amount of time (in seconds) after which the launcher goes into idle mode."
+msgstr ""
+"Amount of time (in seconds) after which the launcher goes into idle mode."
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:112
 msgid "Favorite apps"
 msgstr "Favorite apps"
 
 #. TRANSLATORS: ".desktop files" refers to a specific filetype. Do not translate the ".desktop" bit.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:106
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:114
 msgid ""
 "List of favorite apps for the app chooser, stored as paths to their .desktop "
 "files."
@@ -150,17 +160,17 @@ msgstr ""
 "files."
 
 #. TRANSLATORS: This can also be translated as just "time format"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:113
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:121
 #: src/launcher/ui/settings.ui:422
 msgid "Time format string"
 msgstr "Time format string"
 
 #. TRANSLATORS: Default time format string for your locale; should only contain the hour and minutes. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:115
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:123
 msgid "\"%H:%M\""
 msgstr "\"%I:%M %p\""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:116
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:124
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -169,17 +179,17 @@ msgstr ""
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
 
 #. TRANSLATORS: This can also be translated as just "date format"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:123
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:131
 #: src/launcher/ui/settings.ui:435
 msgid "Date format string"
 msgstr "Date format string"
 
 #. TRANSLATORS: Default date format string for your locale; should contain the week day and date. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:125
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:133
 msgid "\"%A, %x\""
 msgstr "\"%A, %B %d %Y\""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:126
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:134
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -218,7 +228,7 @@ msgid "_Add to favorites"
 msgstr "_Add to favorites"
 
 #. TRANSLATORS: Tooltip for the "open app chooser" button in the launcher
-#: src/launcher/ui/launcher.ui:47
+#: src/launcher/ui/launcher.ui:56
 msgid "Installed apps"
 msgstr "Installed apps"
 

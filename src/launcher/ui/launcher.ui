@@ -16,6 +16,10 @@
 				<child type="overlay">
 					<object class="AdwFlap" id="launcher_flap">
 						<property name="fold-policy">always</property>
+						<style>
+							<class name="aspinwall-launcher-flap"/>
+						</style>
+
 						<child type="content">
 							<object class="GtkOverlay">
 								<child>
@@ -36,21 +40,28 @@
 								</child>
 
 								<child type="overlay">
-									<object class="GtkButton" id="app_chooser_show">
-										<property name="valign">start</property>
+									<object class="GtkRevealer" id="app_chooser_button_revealer">
+										<property name="reveal-child">true</property>
 										<property name="halign">start</property>
-										<property name="margin-top">10</property>
-										<property name="margin-start">10</property>
-										<property name="margin-end">10</property>
-										<property name="icon-name">view-grid-symbolic</property>
-										<!-- TRANSLATORS: Tooltip for the "open app chooser" button in the launcher -->
-										<property name="tooltip-text" translatable="yes">Installed apps</property>
-										<!--<signal name="clicked" handler="show_app_chooser"/>-->
+										<property name="valign">start</property>
+										<child>
+											<object class="GtkButton" id="app_chooser_show">
+												<property name="valign">start</property>
+												<property name="halign">start</property>
+												<property name="margin-top">10</property>
+												<property name="margin-start">10</property>
+												<property name="margin-end">10</property>
+												<property name="icon-name">view-grid-symbolic</property>
+												<!-- TRANSLATORS: Tooltip for the "open app chooser" button in the launcher -->
+												<property name="tooltip-text" translatable="yes">Installed apps</property>
+												<!--<signal name="clicked" handler="show_app_chooser"/>-->
 
-										<style>
-											<class name="osd"/>
-											<class name="aspinwall-osd"/>
-										</style>
+												<style>
+													<class name="osd"/>
+													<class name="aspinwall-osd"/>
+												</style>
+											</object>
+										</child>
 									</object>
 								</child>
 							</object>

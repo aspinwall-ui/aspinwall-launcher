@@ -11,6 +11,19 @@
 	filter: brightness(0.75);
 }
 
+/* Launcher */
+
+.aspinwall-launcher-flap {
+	opacity: 1;
+	transition-property: opacity;
+	transition-duration: 0.3s;
+	transition-timing-function: ease-out;
+}
+
+.aspinwall-launcher-flap.unfocused {
+	opacity: 0.75;
+}
+
 /* Wallpaper */
 
 .wallpaper-container {

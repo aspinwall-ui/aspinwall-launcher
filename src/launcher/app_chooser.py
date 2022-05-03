@@ -289,3 +289,4 @@ class AppChooser(Gtk.Box):
 	def hide(self, *args):
 		"""Hides the app chooser."""
 		self.get_parent().set_reveal_flap(False)
+		self.get_native().pause_focus_manager = False

@@ -99,6 +99,14 @@
 			</description>
 		</key>
 
+		<key name="idle-mode-delay" type="i">
+			<default>60</default>
+			<summary>Time until idle mode activation</summary>
+			<description>
+				Amount of time (in seconds) after which the launcher goes into idle mode.
+			</description>
+		</key>
+
 		<key name="favorite-apps" type="as">
 			<default>[]</default>
 			<summary>Favorite apps</summary>

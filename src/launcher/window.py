@@ -6,6 +6,8 @@ gi_require_version('Adw', '1')
 from gi.repository import Adw, Gtk, Gio
 from pathlib import Path
 import os
+import time
+import threading
 
 from aspinwall.launcher.config import config
 from aspinwall.widgets.loader import load_widgets
@@ -36,6 +38,10 @@ class Launcher(Gtk.ApplicationWindow):
 	widgetbox = Gtk.Template.Child()
 	app_chooser = Gtk.Template.Child()
 	app_chooser_show = Gtk.Template.Child()
+	app_chooser_button_revealer = Gtk.Template.Child()
+
+	focused = True
+	pause_focus_manager = False
 
 	def __init__(self, app, in_shell=False):
 		"""Initializes the launcher window."""
@@ -59,14 +65,69 @@ class Launcher(Gtk.ApplicationWindow):
 
 		self.launcher_wallpaper_overlay.set_measure_overlay(self.launcher_flap, True)
 
+		# Set up idle mode
+
+		# The event controllers are added/removed as needed, to avoid lag
+		self.motion_controller = Gtk.EventControllerMotion.new()
+		self.motion_controller.connect('motion', self.on_focus)
+
+		self.click_controller = Gtk.GestureClick.new()
+		self.click_controller.connect('pressed', self.on_focus)
+		self.click_controller.connect('released', self.on_focus)
+
+		self.focus_manager_thread = threading.Thread(target=self.focus_manager_loop, daemon=True)
+		self.focus_manager_thread.start()
+
+		config.connect('changed::idle-mode-delay', self.update_unfocus_countdown)
+
 	def show_app_chooser(self, *args):
 		"""Shows the app chooser."""
+		self.pause_focus_manager = True
 		# Reload apps, clear search
 		self.app_chooser.search.set_text('')
 		self.app_chooser.update_model()
 		# Show chooser
 		self.launcher_flap.set_reveal_flap(True)
 		self.app_chooser.search.grab_focus()
+
+	def update_unfocus_countdown(self, *args):
+		"""
+		Used to update the unfocus countdown value whenever the setting
+		changes.
+		"""
+		self.unfocus_countdown = config['idle-mode-delay'] + 1
+
+	def focus_manager_loop(self):
+		"""Loop that manages focused/unfocused mode. Run as a thread."""
+		self.unfocus_countdown = config['idle-mode-delay'] + 1
+		while True:
+			if self.focused and not self.pause_focus_manager:
+				self.unfocus_countdown -= 1
+				if self.unfocus_countdown <= 0:
+					self.on_unfocus()
+			time.sleep(1)
+
+	def on_unfocus(self, *args):
+		"""Performs actions on unfocus."""
+		if self.focused:
+			self.focused = False
+			self.unfocus_countdown = config['idle-mode-delay'] + 1
+			self.app_chooser_button_revealer.set_reveal_child(False)
+			self.widgetbox.chooser_button_revealer.set_reveal_child(False)
+			self.launcher_flap.add_css_class('unfocused')
+			self.add_controller(self.motion_controller)
+			self.add_controller(self.click_controller)
+
+	def on_focus(self, *args):
+		"""Performs actions on focus."""
+		if not self.focused:
+			self.remove_controller(self.motion_controller)
+			self.remove_controller(self.click_controller)
+			self.focused = True
+			self.unfocus_countdown = config['idle-mode-delay'] + 1
+			self.app_chooser_button_revealer.set_reveal_child(True)
+			self.widgetbox.chooser_button_revealer.set_reveal_child(True)
+			self.launcher_flap.remove_css_class('unfocused')
 
 	def open_settings(self, *args):
 		"""Opens the launcher settings window."""
