@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-03 12:19+0200\n"
+"POT-Creation-Date: 2022-05-03 12:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,7 +153,7 @@ msgstr ""
 
 #. TRANSLATORS: This can also be translated as just "time format"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:121
-#: src/launcher/ui/settings.ui:422
+#: src/launcher/ui/settings.ui:456
 msgid "Time format string"
 msgstr ""
 
@@ -170,7 +170,7 @@ msgstr ""
 
 #. TRANSLATORS: This can also be translated as just "date format"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:131
-#: src/launcher/ui/settings.ui:435
+#: src/launcher/ui/settings.ui:469
 msgid "Date format string"
 msgstr ""
 
@@ -248,27 +248,32 @@ msgid "Switch wallpaper every:"
 msgstr ""
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:268
+#. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
+#: src/launcher/ui/settings.ui:268 src/launcher/ui/settings.ui:411
 msgid "1 minute"
 msgstr ""
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:270
+#. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
+#: src/launcher/ui/settings.ui:270 src/launcher/ui/settings.ui:413
 msgid "3 minutes"
 msgstr ""
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:272
+#. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
+#: src/launcher/ui/settings.ui:272 src/launcher/ui/settings.ui:415
 msgid "5 minutes"
 msgstr ""
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:274
+#. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
+#: src/launcher/ui/settings.ui:274 src/launcher/ui/settings.ui:417
 msgid "10 minutes"
 msgstr ""
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:276
+#. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
+#: src/launcher/ui/settings.ui:276 src/launcher/ui/settings.ui:419
 msgid "15 minutes"
 msgstr ""
 
@@ -324,14 +329,29 @@ msgid "Follow system theme"
 msgstr ""
 
 #: src/launcher/ui/settings.ui:396
+msgid "Launcher"
+msgstr ""
+
+#. TRANSLATORS: "Idle mode" refers to the mode where, after a set time of inactivity, the widgets reduce their opacity and the app chooser/menu buttons disappear.
+#: src/launcher/ui/settings.ui:401
+msgid "Switch to idle mode after:"
+msgstr ""
+
+#: src/launcher/ui/settings.ui:402
+msgid ""
+"In idle mode, after some time of inactivity, the opacity of the widgets is "
+"reduced, and the menu buttons are hidden."
+msgstr ""
+
+#: src/launcher/ui/settings.ui:430
 msgid "Clock"
 msgstr ""
 
-#: src/launcher/ui/settings.ui:400
+#: src/launcher/ui/settings.ui:434
 msgid "Time and date format"
 msgstr ""
 
-#: src/launcher/ui/settings.ui:401
+#: src/launcher/ui/settings.ui:435
 msgid ""
 "Set the format to use when displaying the time and date, following <a "
 "href='https://docs.python.org/3/library/time.html#time.strftime'>the time "
@@ -339,16 +359,16 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Used for the "reset time format to default" option.
-#: src/launcher/ui/settings.ui:406
+#: src/launcher/ui/settings.ui:440
 msgid "Reset to defaults"
 msgstr ""
 
-#: src/launcher/ui/settings.ui:407
+#: src/launcher/ui/settings.ui:441
 msgid "Sets the time format to default settings."
 msgstr ""
 
 #. TRANSLATORS: Used for the "reset time format to default" option.
-#: src/launcher/ui/settings.ui:412
+#: src/launcher/ui/settings.ui:446
 msgid "Reset"
 msgstr ""
 
@@ -418,18 +438,18 @@ msgstr ""
 msgid "Undo"
 msgstr ""
 
-#: src/launcher/settings.py:233
+#: src/launcher/settings.py:241
 msgid "Add wallpaper"
 msgstr ""
 
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:239
+#: src/launcher/settings.py:247
 msgid "_Cancel"
 msgstr ""
 
 #. noqa: F821
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:241
+#: src/launcher/settings.py:249
 msgid "_Select"
 msgstr ""
 

@@ -93,6 +93,8 @@ class LauncherSettings(Adw.PreferencesWindow):
 	theme_toggle_end = Gtk.Template.Child()
 	follow_system_theme_toggle = Gtk.Template.Child()
 
+	idle_mode_delay_combobox = Gtk.Template.Child()
+
 	time_format_entry = Gtk.Template.Child()
 	date_format_entry = Gtk.Template.Child()
 
@@ -141,6 +143,7 @@ class LauncherSettings(Adw.PreferencesWindow):
 
 		self.slideshow_mode_toggle.set_active(config['slideshow-mode'])
 		self.slideshow_switch_delay_combobox.set_active_id(str(config['slideshow-switch-delay']))
+		self.idle_mode_delay_combobox.set_active_id(str(config['idle-mode-delay']))
 
 		self.time_format_entry.set_text(config['time-format'])
 		self.date_format_entry.set_text(config['date-format'])
@@ -215,6 +218,11 @@ class LauncherSettings(Adw.PreferencesWindow):
 	def set_slideshow_switch_delay(self, combobox, *args):
 		"""Sets the slideshow switch delay."""
 		config['slideshow-switch-delay'] = int(combobox.get_active_id())
+
+	@Gtk.Template.Callback()
+	def set_idle_mode_delay(self, combobox, *args):
+		"""Sets the idle mode switch delay."""
+		config['idle-mode-delay'] = int(combobox.get_active_id())
 
 	@Gtk.Template.Callback()
 	def set_wallpaper_style(self, combobox, *args):
