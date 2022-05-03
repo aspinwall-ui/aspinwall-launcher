@@ -107,6 +107,8 @@ msgid ""
 "Used by the slideshow mode to keep track of the time remaining until the "
 "next wallpaper switch."
 msgstr ""
+"Used by the slideshow mode to keep track of the time remaining until the "
+"next wallpaper switch."
 
 #. TRANSLATORS: This is for the light/dark mode switch; can be translated as "Preferred theme"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:86
@@ -218,12 +220,11 @@ msgstr "_Add to favorites"
 #. TRANSLATORS: Tooltip for the "open app chooser" button in the launcher
 #: src/launcher/ui/launcher.ui:47
 msgid "Installed apps"
-msgstr ""
+msgstr "Installed apps"
 
 #: src/launcher/ui/launcherwidget.ui:72
-#, fuzzy
 msgid "Close widget settings"
-msgstr "Widget settings"
+msgstr "Close widget settings"
 
 #. TRANSLATORS: "Widget" here is singular; this is used for the widget-specific settings menu header
 #: src/launcher/ui/launcherwidget.ui:85 src/launcher/ui/widgetheader.ui:62
@@ -361,14 +362,13 @@ msgstr "Reset"
 
 #. TRANSLATORS: Tooltip for "Add widgets" button in widget management mode
 #: src/launcher/ui/widgetbox.ui:80
-#, fuzzy
 msgid "Add widgets"
-msgstr "_Add Widgets…"
+msgstr "Add Widgets"
 
 #. TRANSLATORS: Tooltip for "Exit" button in widget management mode
 #: src/launcher/ui/widgetbox.ui:99
 msgid "Exit widget management mode"
-msgstr ""
+msgstr "Exit widget management mode"
 
 #: src/launcher/ui/widgetbox.ui:133
 msgid "_Add Widgets…"
@@ -393,27 +393,27 @@ msgstr "Search widgets…"
 #. TRANSLATORS: Tooltip text for close button
 #: src/launcher/ui/widgetchooser.ui:39
 msgid "Close"
-msgstr ""
+msgstr "Close"
 
 #. TRANSLATORS: Tooltip for "remove widget" button
 #: src/launcher/ui/widgetheader.ui:18
 msgid "Remove"
-msgstr ""
+msgstr "Remove"
 
 #. TRANSLATORS: Tooltip for "move widget up" button in widget header
 #: src/launcher/ui/widgetheader.ui:88
 msgid "Move up"
-msgstr ""
+msgstr "Move up"
 
 #. TRANSLATORS: Tooltip for "move widget down" button in widget header
 #: src/launcher/ui/widgetheader.ui:103
 msgid "Move down"
-msgstr ""
+msgstr "Move down"
 
 #. TRANSLATORS: Tooltip for "exit widget edit mode"/close button on widget headers
 #: src/launcher/ui/widgetheader.ui:127
 msgid "Exit editing mode"
-msgstr ""
+msgstr "Exit editing mode"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
 #: src/launcher/launcher_boxes.py:140
@@ -442,14 +442,13 @@ msgid "_Select"
 msgstr "_Select"
 
 #: src/shell/ui/controlpanel.ui:27
-#, fuzzy
 msgid "Settings"
-msgstr "_Launcher Settings"
+msgstr "Settings"
 
 #. TRANSLATORS: Used for the "shut down" button in the control panel
 #: src/shell/ui/controlpanel.ui:70
 msgid "Shut down"
-msgstr ""
+msgstr "Shut down"
 
 #. TRANSLATORS: Used for the inactive state of the Wi-Fi button in the control panel
 #: src/shell/ui/controlpanel.ui:107
@@ -474,6 +473,3 @@ msgstr "Auto-rotation"
 #: src/shell/ui/controlpanel.ui:196
 msgid "No new notifications"
 msgstr "No new notifications"
-
-#~ msgid "Keeps the last slideshow switch countdown position."
-#~ msgstr "Keeps the last slideshow switch countdown position."
