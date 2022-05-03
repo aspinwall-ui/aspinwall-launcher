@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-20 14:46+0100\n"
+"POT-Creation-Date: 2022-05-03 11:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,11 +188,11 @@ msgstr ""
 msgid "Search apps…"
 msgstr ""
 
-#: src/launcher/ui/appchooser.ui:122 src/launcher/ui/widgetchooser.ui:65
+#: src/launcher/ui/appchooser.ui:122 src/launcher/ui/widgetchooser.ui:67
 msgid "No Results Found"
 msgstr ""
 
-#: src/launcher/ui/appchooser.ui:123 src/launcher/ui/widgetchooser.ui:66
+#: src/launcher/ui/appchooser.ui:123 src/launcher/ui/widgetchooser.ui:68
 msgid "Try a different search"
 msgstr ""
 
@@ -204,8 +204,17 @@ msgstr ""
 msgid "_Add to favorites"
 msgstr ""
 
+#. TRANSLATORS: Tooltip for the "open app chooser" button in the launcher
+#: src/launcher/ui/launcher.ui:47
+msgid "Installed apps"
+msgstr ""
+
+#: src/launcher/ui/launcherwidget.ui:72
+msgid "Close widget settings"
+msgstr ""
+
 #. TRANSLATORS: "Widget" here is singular; this is used for the widget-specific settings menu header
-#: src/launcher/ui/launcherwidget.ui:84
+#: src/launcher/ui/launcherwidget.ui:85 src/launcher/ui/widgetheader.ui:62
 msgid "Widget settings"
 msgstr ""
 
@@ -332,24 +341,59 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: src/launcher/ui/widgetbox.ui:127
+#. TRANSLATORS: Tooltip for "Add widgets" button in widget management mode
+#: src/launcher/ui/widgetbox.ui:80
+msgid "Add widgets"
+msgstr ""
+
+#. TRANSLATORS: Tooltip for "Exit" button in widget management mode
+#: src/launcher/ui/widgetbox.ui:99
+msgid "Exit widget management mode"
+msgstr ""
+
+#: src/launcher/ui/widgetbox.ui:133
 msgid "_Add Widgets…"
 msgstr ""
 
-#: src/launcher/ui/widgetbox.ui:132
+#: src/launcher/ui/widgetbox.ui:138
 msgid "_Manage Widgets"
 msgstr ""
 
-#: src/launcher/ui/widgetbox.ui:139
+#: src/launcher/ui/widgetbox.ui:145
 msgid "_Launcher Settings"
 msgstr ""
 
-#: src/launcher/ui/widgetbox.ui:144
+#: src/launcher/ui/widgetbox.ui:150
 msgid "A_bout Aspinwall"
 msgstr ""
 
 #: src/launcher/ui/widgetchooser.ui:30
 msgid "Search widgets…"
+msgstr ""
+
+#. TRANSLATORS: Tooltip text for close button
+#: src/launcher/ui/widgetchooser.ui:39
+msgid "Close"
+msgstr ""
+
+#. TRANSLATORS: Tooltip for "remove widget" button
+#: src/launcher/ui/widgetheader.ui:18
+msgid "Remove"
+msgstr ""
+
+#. TRANSLATORS: Tooltip for "move widget up" button in widget header
+#: src/launcher/ui/widgetheader.ui:88
+msgid "Move up"
+msgstr ""
+
+#. TRANSLATORS: Tooltip for "move widget down" button in widget header
+#: src/launcher/ui/widgetheader.ui:103
+msgid "Move down"
+msgstr ""
+
+#. TRANSLATORS: Tooltip for "exit widget edit mode"/close button on widget headers
+#: src/launcher/ui/widgetheader.ui:127
+msgid "Exit editing mode"
 msgstr ""
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
@@ -363,41 +407,50 @@ msgstr ""
 msgid "Undo"
 msgstr ""
 
-#: src/launcher/settings.py:224
+#: src/launcher/settings.py:233
 msgid "Add wallpaper"
 msgstr ""
 
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:230
+#: src/launcher/settings.py:239
 msgid "_Cancel"
 msgstr ""
 
 #. noqa: F821
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:232
+#: src/launcher/settings.py:241
 msgid "_Select"
 msgstr ""
 
+#: src/shell/ui/controlpanel.ui:27
+msgid "Settings"
+msgstr ""
+
+#. TRANSLATORS: Used for the "shut down" button in the control panel
+#: src/shell/ui/controlpanel.ui:70
+msgid "Shut down"
+msgstr ""
+
 #. TRANSLATORS: Used for the inactive state of the Wi-Fi button in the control panel
-#: src/shell/ui/controlpanel.ui:104
+#: src/shell/ui/controlpanel.ui:107
 msgid "Wi-Fi"
 msgstr ""
 
 #. TRANSLATORS: Used for the inactive state of the battery button in the control panel
-#: src/shell/ui/controlpanel.ui:119
+#: src/shell/ui/controlpanel.ui:122
 msgid "No battery"
 msgstr ""
 
 #. TRANSLATORS: Used for the microphone enable/disable button in the control panel
-#: src/shell/ui/controlpanel.ui:127
+#: src/shell/ui/controlpanel.ui:130
 msgid "Microphone"
 msgstr ""
 
 #. TRANSLATORS: Used for the automatic rotation button
-#: src/shell/ui/controlpanel.ui:135
+#: src/shell/ui/controlpanel.ui:138
 msgid "Auto-rotation"
 msgstr ""
 
-#: src/shell/ui/controlpanel.ui:168
+#: src/shell/ui/controlpanel.ui:196
 msgid "No new notifications"
 msgstr ""
