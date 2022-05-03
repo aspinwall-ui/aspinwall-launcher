@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-03 11:09+0200\n"
+"POT-Creation-Date: 2022-05-03 11:16+0200\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -106,8 +106,10 @@ msgid "Slideshow switch counter"
 msgstr "Odliczanie przełączenia tapety w trybie pokazu slajdów"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:77
-msgid "Keeps the last slideshow switch countdown position."
-msgstr "Przechowuje ostatnią pozycję odliczania przełączania tapety."
+msgid ""
+"Used by the slideshow mode to keep track of the time remaining until the "
+"next wallpaper switch."
+msgstr ""
 
 #. TRANSLATORS: This is for the light/dark mode switch; can be translated as "Preferred theme"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:86
@@ -473,3 +475,6 @@ msgstr "Automatyczny obrót"
 #: src/shell/ui/controlpanel.ui:196
 msgid "No new notifications"
 msgstr "Brak nowych powiadomień"
+
+#~ msgid "Keeps the last slideshow switch countdown position."
+#~ msgstr "Przechowuje ostatnią pozycję odliczania przełączania tapety."
