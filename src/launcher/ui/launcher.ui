@@ -43,7 +43,8 @@
 										<property name="margin-start">10</property>
 										<property name="margin-end">10</property>
 										<property name="icon-name">view-grid-symbolic</property>
-
+										<!-- TRANSLATORS: Tooltip for the "open app chooser" button in the launcher -->
+										<property name="tooltip-text" translatable="yes">Installed apps</property>
 										<!--<signal name="clicked" handler="show_app_chooser"/>-->
 
 										<style>

@@ -24,6 +24,7 @@
 						<property name="halign">start</property>
 						<property name="valign">start</property>
 						<property name="icon-name">preferences-system-symbolic</property>
+						<property name="tooltip-text" translatable="yes">Settings</property>
 						<style>
 							<class name="circular"/>
 						</style>
@@ -65,6 +66,8 @@
 						<property name="halign">end</property>
 						<property name="valign">start</property>
 						<property name="icon-name">system-shutdown-symbolic</property>
+						<!-- TRANSLATORS: Used for the "shut down" button in the control panel -->
+						<property name="tooltip-text" translatable="yes">Shut down</property>
 						<style>
 							<class name="circular"/>
 						</style>

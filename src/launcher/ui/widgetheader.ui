@@ -14,6 +14,8 @@
 		<child>
 			<object class="GtkButton" id="widget_header_remove">
 				<property name="icon-name">user-trash-symbolic</property>
+				<!-- TRANSLATORS: Tooltip for "remove widget" button -->
+				<property name="tooltip-text" translatable="yes">Remove</property>
 				<signal name="clicked" handler="remove"/>
 
 				<style>
@@ -57,6 +59,7 @@
 						<property name="icon-name">preferences-system-symbolic</property>
 						<property name="visible">false</property>
 						<property name="sensitive">false</property>
+						<property name="tooltip-text" translatable="yes">Widget settings</property>
 						<signal name="clicked" handler="show_widget_settings"/>
 					</object>
 				</child>
@@ -81,6 +84,8 @@
 								<property name="icon-name">pan-up-symbolic</property>
 								<property name="has-frame">false</property>
 								<property name="sensitive">false</property>
+								<!-- TRANSLATORS: Tooltip for "move widget up" button in widget header -->
+								<property name="tooltip-text" translatable="yes">Move up</property>
 								<signal name="clicked" handler="move_up"/>
 
 								<style>
@@ -94,6 +99,8 @@
 								<property name="icon-name">pan-down-symbolic</property>
 								<property name="has-frame">false</property>
 								<property name="sensitive">false</property>
+								<!-- TRANSLATORS: Tooltip for "move widget down" button in widget header -->
+								<property name="tooltip-text" translatable="yes">Move down</property>
 								<signal name="clicked" handler="move_down"/>
 
 								<style>
@@ -116,6 +123,8 @@
 						<property name="icon-name">window-close-symbolic</property>
 						<property name="has-frame">false</property>
 						<property name="valign">center</property>
+						<!-- TRANSLATORS: Tooltip for "exit widget edit mode"/close button on widget headers -->
+						<property name="tooltip-text" translatable="yes">Exit editing mode</property>
 						<signal name="clicked" handler="hide"/>
 
 						<style>

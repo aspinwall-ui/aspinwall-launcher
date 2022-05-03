@@ -69,6 +69,7 @@
 										<child>
 											<object class="GtkButton">
 												<property name="icon-name">go-previous-symbolic</property>
+												<property name="tooltip-text" translatable="yes">Close widget settings</property>
 												<signal name="clicked" handler="hide_widget_settings"/>
 											</object>
 										</child>

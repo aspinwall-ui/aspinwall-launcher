@@ -76,6 +76,8 @@
 										<property name="halign">start</property>
 										<property name="margin-top">10</property>
 										<property name="margin-end">10</property>
+										<!-- TRANSLATORS: Tooltip for "Add widgets" button in widget management mode -->
+										<property name="tooltip-text" translatable="yes">Add widgets</property>
 										<signal name="clicked" handler="show_chooser"/>
 
 										<style>
@@ -93,6 +95,8 @@
 										<property name="halign">end</property>
 										<property name="margin-top">10</property>
 										<property name="margin-end">10</property>
+										<!-- TRANSLATORS: Tooltip for "Exit" button in widget management mode -->
+										<property name="tooltip-text" translatable="yes">Exit widget management mode</property>
 										<signal name="clicked" handler="exit_management_mode"/>
 
 										<style>

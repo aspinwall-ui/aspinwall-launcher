@@ -35,6 +35,8 @@
 							<object class="GtkButton" id="close_widget_chooser">
 								<property name="halign">end</property>
 								<property name="icon-name">window-close-symbolic</property>
+								<!-- TRANSLATORS: Tooltip text for close button -->
+								<property name="tooltip-text" translatable="yes">Close</property>
 								<signal name="clicked" handler="hide"/>
 							</object>
 						</child>
