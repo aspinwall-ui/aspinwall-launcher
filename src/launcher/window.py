@@ -67,13 +67,14 @@ class Launcher(Gtk.ApplicationWindow):
 
 		# Set up idle mode
 
-		# The event controllers are added/removed as needed, to avoid lag
+		# The motion controller is added/removed as needed, to avoid lag
 		self.motion_controller = Gtk.EventControllerMotion.new()
 		self.motion_controller.connect('motion', self.on_focus)
 
 		self.click_controller = Gtk.GestureClick.new()
 		self.click_controller.connect('pressed', self.on_focus)
 		self.click_controller.connect('released', self.on_focus)
+		self.add_controller(self.click_controller)
 
 		self.focus_manager_thread = threading.Thread(target=self.focus_manager_loop, daemon=True)
 		self.focus_manager_thread.start()
@@ -116,18 +117,18 @@ class Launcher(Gtk.ApplicationWindow):
 			self.widgetbox.chooser_button_revealer.set_reveal_child(False)
 			self.launcher_flap.add_css_class('unfocused')
 			self.add_controller(self.motion_controller)
-			self.add_controller(self.click_controller)
 
 	def on_focus(self, *args):
 		"""Performs actions on focus."""
 		if not self.focused:
 			self.remove_controller(self.motion_controller)
-			self.remove_controller(self.click_controller)
 			self.focused = True
 			self.unfocus_countdown = config['idle-mode-delay'] + 1
 			self.app_chooser_button_revealer.set_reveal_child(True)
 			self.widgetbox.chooser_button_revealer.set_reveal_child(True)
 			self.launcher_flap.remove_css_class('unfocused')
+		else:
+			self.unfocus_countdown = config['idle-mode-delay'] + 1
 
 	def open_settings(self, *args):
 		"""Opens the launcher settings window."""
