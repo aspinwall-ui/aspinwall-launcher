@@ -140,7 +140,6 @@
 							<object class="AdwPreferencesRow" id="wallpaper_row">
 								<property name="title" translatable="yes">Available wallpapers</property>
 								<property name="activatable">False</property>
-								<property name="sensitive" bind-source="system_wallpaper_settings_toggle" bind-property="active" bind-flags="invert-boolean"/>
 
 								<child>
 									<object class="GtkBox">
@@ -243,7 +242,6 @@
 							<object class="AdwExpanderRow">
 								<property name="title" translatable="yes">Slideshow mode</property>
 								<property name="subtitle" translatable="yes">In slideshow mode, the launcher automatically loops over available wallpapers.</property>
-								<property name="sensitive" bind-source="system_wallpaper_settings_toggle" bind-property="active" bind-flags="invert-boolean"/>
 
 								<child type="action">
 									<object class="GtkSwitch" id="slideshow_mode_toggle">
@@ -319,20 +317,6 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
 									<object class="GtkColorButton" id="wallpaper_color_button">
 										<property name="valign">center</property>
 										<signal name="color-set" handler="set_wallpaper_color"/>
-									</object>
-								</child>
-							</object>
-						</child>
-
-						<child>
-							<object class="AdwActionRow">
-								<property name="title" translatable="yes">Use system wallpaper settings</property>
-								<property name="subtitle" translatable="yes">If enabled, the launcher inherits the wallpaper from GNOME settings. (Note that this setting only works with GNOME's control center.)</property>
-
-								<child>
-									<object class="GtkSwitch" id="system_wallpaper_settings_toggle">
-										<property name="valign">center</property>
-										<signal name="state-set" handler="toggle_use_system_wallpaper"/>
 									</object>
 								</child>
 							</object>

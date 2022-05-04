@@ -44,15 +44,6 @@
 			</description>
 		</key>
 
-		<key name="use-gnome-background" type="b">
-			<default>false</default>
-			<!-- TRANSLATORS: This settings option allows users to automatically use the background file provided by GNOME, allowing better integration with GNOME's control center. -->
-			<summary>Use system wallpaper settings</summary>
-			<description>
-				If enabled, the launcher inherits the wallpaper from GNOME settings. (Note that this setting only works with GNOME's control center.)
-			</description>
-		</key>
-
 		<!-- Slideshow -->
 		<key name="slideshow-mode" type="b">
 			<default>true</default>

@@ -3,7 +3,6 @@
 Contains code for handling wallpapers
 """
 from gi.repository import Gtk, Gdk, GdkPixbuf, GLib, GObject
-from urllib.parse import urlparse
 import math
 import os
 import threading
@@ -12,7 +11,7 @@ import time
 import uuid
 
 from aspinwall.utils.dimmable import Dimmable
-from aspinwall.launcher.config import config, bg_config
+from aspinwall.launcher.config import config
 
 def color_to_pixel(color):
 	"""Turns RGB color value to pixel value."""
@@ -104,12 +103,9 @@ class Wallpaper(Gtk.Box, Dimmable):
 
 		self.wallpaper_fade_drawable.set_draw_func(self.draw, 'fade_pixbuf')
 
-		config.connect('changed::wallpaper-path', self.load_and_update_aspinwall)
-		if bg_config:
-			bg_config.connect('changed::picture-uri', self.load_and_update_gnome)
+		config.connect('changed::wallpaper-path', self.load_image_and_update)
 		config.connect('changed::wallpaper-style', self.load_image_and_update)
 		config.connect('changed::wallpaper-color', self.load_image_and_update)
-		config.connect('changed::use-gnome-background', self.load_image_and_update)
 
 		self.connect('unrealize', self._destroy)
 
@@ -148,12 +144,7 @@ class Wallpaper(Gtk.Box, Dimmable):
 		Sets the image to a pixbuf created from the image file provided
 		in the config file.
 		"""
-		# Use GNOME settings if available and enabled
-		if bg_config and config['use-gnome-background']:
-			uri = urlparse(bg_config['picture-uri'])
-			wallpaper_path = os.path.abspath(os.path.join(uri.netloc, uri.path))
-		else:
-			wallpaper_path = config['wallpaper-path']
+		wallpaper_path = config['wallpaper-path']
 		if wallpaper_path and not wallpaper_path == '/' and os.path.exists(wallpaper_path):
 			try:
 				if not self._is_preview:
@@ -186,16 +177,6 @@ class Wallpaper(Gtk.Box, Dimmable):
 				self.pixbuf = self.scale_to_min(width, height)
 		else:
 			self.pixbuf = self.blank_bg(width, height)
-
-	def load_and_update_gnome(self, *args):
-		"""Reloads the GNOME background image if applicable."""
-		if config['use-gnome-background'] and bg_config:
-			self.load_image_and_update()
-
-	def load_and_update_aspinwall(self, *args):
-		"""Reloads the Aspinwall background image if applicable."""
-		if not config['use-gnome-background']:
-			self.load_image_and_update()
 
 	def update_background_color(self, *args):
 		"""Sets the background color based on the wallpaper-color setting."""
