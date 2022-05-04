@@ -233,6 +233,7 @@ class WidgetBox(Gtk.Box):
 		window.wallpaper.dim()
 		window.clockbox.dim()
 
+		window.app_chooser_button_revealer.set_reveal_child(False)
 		window.app_chooser_show.set_sensitive(False)
 		window.pause_focus_manager = True
 		self.chooser_button_revealer.set_reveal_child(False)
@@ -271,6 +272,8 @@ class WidgetBox(Gtk.Box):
 				window.app_chooser_show.set_sensitive(True)
 				window.pause_focus_manager = False
 				self.chooser_button_revealer.set_sensitive(True)
+
+			window.app_chooser_button_revealer.set_reveal_child(True)
 
 			self.management_mode = False
 			self.edit_mode = False
