@@ -81,6 +81,22 @@ class Launcher(Gtk.ApplicationWindow):
 
 		config.connect('changed::idle-mode-delay', self.update_unfocus_countdown)
 
+		self.connect('realize', self.on_realize)
+
+	def on_realize(self, *args):
+		surface = self.get_surface()
+		surface.connect('notify::width', self.set_widgetbox_width)
+
+	def set_widgetbox_width(self, *args):
+		"""Sets the widgetbox's width to match 50% of the screen."""
+		width_request = self.get_surface().get_width() / 2 - 40
+		if width_request > 0:
+			self.clockbox.set_size_request(width_request, 0)
+			self.widgetbox.set_size_request(width_request, 0)
+		else:
+			self.clockbox.set_size_request(0, 0)
+			self.widgetbox.set_size_request(0, 0)
+
 	def show_app_chooser(self, *args):
 		"""Shows the app chooser."""
 		self.pause_focus_manager = True
