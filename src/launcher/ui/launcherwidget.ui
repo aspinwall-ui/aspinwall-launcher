@@ -9,7 +9,7 @@
 		</style>
 
 		<child>
-			<object class="GtkOverlay">
+			<object class="GtkOverlay" id="container_overlay">
 				<child>
 					<object class="GtkBox" id="container">
 						<property name="orientation">vertical</property>
@@ -30,6 +30,28 @@
 						</child>
 
 						<!-- The widget content is added in-code, see launcher/widgets.py -->
+					</object>
+				</child>
+
+				<child type="overlay">
+					<object class="GtkRevealer" id="edit_button_revealer">
+						<property name="margin-top">8</property>
+						<property name="margin-end">14</property>
+						<property name="halign">end</property>
+						<property name="valign">start</property>
+						<property name="transition-type">crossfade</property>
+
+						<child>
+							<object class="GtkButton" id="edit_button">
+								<property name="icon-name">document-edit-symbolic</property>
+								<!-- TRANSLATORS: Tooltip for the "Edit widget" button that appears when hovering over a widget -->
+								<property name="tooltip-text" translatable="yes">Edit widget</property>
+								<signal name="clicked" handler="reveal_header"/>
+								<style>
+									<class name="edit-button"/>
+								</style>
+							</object>
+						</child>
 					</object>
 				</child>
 

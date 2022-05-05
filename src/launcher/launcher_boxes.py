@@ -242,6 +242,8 @@ class WidgetBox(Gtk.Box):
 		for widget in self._widgets:
 			widget.reveal_header()
 			widget.widget_content.set_sensitive(False)
+			widget.edit_button_revealer.set_visible(True)
+			widget.edit_button_revealer.set_sensitive(True)
 
 	@Gtk.Template.Callback()
 	def exit_management_mode(self, *args):

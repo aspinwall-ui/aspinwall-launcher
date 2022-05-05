@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-04 09:39+0200\n"
+"POT-Creation-Date: 2022-05-05 08:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -221,12 +221,17 @@ msgstr ""
 msgid "Installed apps"
 msgstr ""
 
-#: src/launcher/ui/launcherwidget.ui:72
+#. TRANSLATORS: Tooltip for the "Edit widget" button that appears when hovering over a widget
+#: src/launcher/ui/launcherwidget.ui:48
+msgid "Edit widget"
+msgstr ""
+
+#: src/launcher/ui/launcherwidget.ui:94
 msgid "Close widget settings"
 msgstr ""
 
 #. TRANSLATORS: "Widget" here is singular; this is used for the widget-specific settings menu header
-#: src/launcher/ui/launcherwidget.ui:85 src/launcher/ui/widgetheader.ui:62
+#: src/launcher/ui/launcherwidget.ui:107 src/launcher/ui/widgetheader.ui:62
 msgid "Widget settings"
 msgstr ""
 

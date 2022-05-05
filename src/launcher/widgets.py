@@ -51,9 +51,12 @@ class LauncherWidgetHeader(Gtk.Box):
 	@Gtk.Template.Callback()
 	def hide(self, *args):
 		"""Hides the widget header."""
+		self._aspwidget.edit_button_revealer.set_reveal_child(False)
 		if not self._aspwidget._widgetbox.management_mode:
 			for widget in self._aspwidget._widgetbox._widgets:
 				widget.container.remove_css_class('dim')
+				widget.edit_button_revealer.set_visible(True)
+				widget.edit_button_revealer.set_sensitive(True)
 
 			window = self.get_native()
 			window.wallpaper.undim()
@@ -101,9 +104,11 @@ class LauncherWidget(Gtk.Box):
 	__gtype_name__ = 'LauncherWidget'
 
 	container = Gtk.Template.Child()
+	container_overlay = Gtk.Template.Child()
 	widget_header_revealer = Gtk.Template.Child()
 	widget_settings_revealer = Gtk.Template.Child()
 	widget_settings_container = Gtk.Template.Child()
+	edit_button_revealer = Gtk.Template.Child()
 
 	def __init__(self, widget_class, widgetbox, instance):
 		"""Initializes a widget display."""
@@ -153,7 +158,11 @@ class LauncherWidget(Gtk.Box):
 		dismiss_click.connect('pressed', self._widgetbox.exit_management_mode)
 		self.widget_content.add_controller(dismiss_click)
 
-		# TODO: Set up hover target
+		# Set up hover target
+		hover = Gtk.EventControllerMotion()
+		hover.connect('enter', self.reveal_edit_button)
+		hover.connect('leave', self.hide_edit_button)
+		self.container_overlay.add_controller(hover)
 
 	def remove(self):
 		"""Removes the widget from its parent WidgetBox."""
@@ -163,8 +172,10 @@ class LauncherWidget(Gtk.Box):
 		"""Returns the LauncherWidget's position in its parent widgetbox."""
 		return self._widgetbox.get_widget_position(self)
 
+	@Gtk.Template.Callback()
 	def reveal_header(self, *args):
 		"""Reveals the widget's header."""
+		self.edit_button_revealer.set_visible(False)
 		if not self._widgetbox.management_mode:
 			# Dim the window and all other widgets; in the case of widget
 			# management mode, the window dimming part is done by the
@@ -177,6 +188,8 @@ class LauncherWidget(Gtk.Box):
 				if widget._widget.instance != self._widget.instance:
 					widget.widget_header_revealer.set_reveal_child(False)
 					widget.container.add_css_class('dim')
+					widget.edit_button_revealer.set_visible(False)
+					widget.edit_button_revealer.set_sensitive(False)
 				else:
 					widget.container.remove_css_class('dim')
 			self.get_native().app_chooser_show.set_sensitive(False)
@@ -189,6 +202,14 @@ class LauncherWidget(Gtk.Box):
 		"""Hides the widget's settings menu."""
 		self.widget_settings_revealer.set_reveal_child(False)
 		self.widget_settings_revealer.set_visible(False)
+
+	def reveal_edit_button(self, *args):
+		"""Reveals the edit button."""
+		self.edit_button_revealer.set_reveal_child(True)
+
+	def hide_edit_button(self, *args):
+		"""Hides the edit button."""
+		self.edit_button_revealer.set_reveal_child(False)
 
 	def drag_prepare(self, *args):
 		"""Returns the GdkContentProvider for the drag operation"""

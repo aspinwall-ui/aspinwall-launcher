@@ -85,6 +85,10 @@
 	opacity: 0.9;
 }
 
+.edit-button {
+	opacity: 0.5;
+}
+
 .aspinwall-widget-wrapper {
 	transition-property: opacity;
 	transition-duration: 0.2s;
