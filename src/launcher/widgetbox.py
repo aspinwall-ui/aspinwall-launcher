@@ -5,13 +5,11 @@ Contains code for the WidgetBox.
 from gi.repository import Adw, GLib, Gtk, Gio
 import threading
 import time
-import uuid
 
 from aspinwall.launcher.config import config
 from aspinwall.launcher.widgetmanager import widget_manager
 from aspinwall.launcher.widgetview import WidgetView
 import aspinwall.launcher.widget_chooser
-from aspinwall.widgets.loader import get_widget_class_by_id
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetbox.ui')
 class WidgetBox(Gtk.Box):

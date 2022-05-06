@@ -9,7 +9,6 @@ from aspinwall.launcher.config import config
 from aspinwall.widgets import Widget
 from aspinwall.widgets.loader import (
 	load_available_widgets,
-	available_widgets,
 	get_widget_class_by_id
 )
 
@@ -93,7 +92,7 @@ class LoadedWidgetManager:
 		(starting at 0), or None if the widget wasn't found.
 		"""
 		search = self.widgets.find(widgetview)
-		if search[0] == False:
+		if search[0] is False:
 			return None
 		return search[1]
 

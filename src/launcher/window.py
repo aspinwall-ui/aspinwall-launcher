@@ -10,7 +10,6 @@ import time
 import threading
 
 from aspinwall.launcher.config import config
-from aspinwall.widgets.loader import load_available_widgets
 
 # The ClockBox, WidgetBox and AppChooser classes are imported to avoid
 # "invalid object type" errors.
