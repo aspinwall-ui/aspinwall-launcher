@@ -80,8 +80,6 @@ class LoadedWidgetManager:
 
 	def remove_widget(self, widget):
 		"""Removes a widget from the loaded widget list."""
-		# TODO: this throws a "critical" warning, probably because the widget
-		# class doesn't exactly match Widget; probably an upstream bug
 		widget_position = self.widgets.find(widget)[1]
 		self.widgets.remove(widget_position)
 		self.save_widgets()
