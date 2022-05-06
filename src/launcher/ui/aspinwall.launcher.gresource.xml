@@ -6,13 +6,13 @@
 		<file preprocess="xml-stripblanks">ui/appicon.ui</file>
 		<file preprocess="xml-stripblanks">ui/clockbox.ui</file>
 		<file preprocess="xml-stripblanks">ui/launcher.ui</file>
-		<file preprocess="xml-stripblanks">ui/launcherwidget.ui</file>
 		<file preprocess="xml-stripblanks">ui/settings.ui</file>
 		<file preprocess="xml-stripblanks">ui/wallpaper.ui</file>
 		<file preprocess="xml-stripblanks">ui/wallpapericon.ui</file>
 		<file preprocess="xml-stripblanks">ui/widgetbox.ui</file>
 		<file preprocess="xml-stripblanks">ui/widgetchooser.ui</file>
-		<file preprocess="xml-stripblanks">ui/widgetheader.ui</file>
 		<file preprocess="xml-stripblanks">ui/widgetinfobox.ui</file>
+		<file preprocess="xml-stripblanks">ui/widgetview.ui</file>
+		<file preprocess="xml-stripblanks">ui/widgetviewheader.ui</file>
 	</gresource>
 </gresources>

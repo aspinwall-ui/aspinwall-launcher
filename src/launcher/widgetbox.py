@@ -8,7 +8,7 @@ import time
 import uuid
 
 from aspinwall.launcher.config import config
-from aspinwall.launcher.widgets import LauncherWidget
+from aspinwall.launcher.widgetview import WidgetView
 import aspinwall.launcher.widget_chooser
 from aspinwall.widgets.loader import get_widget_class_by_id
 
@@ -74,19 +74,19 @@ class WidgetBox(Gtk.Box):
 			widget_list.append((widget._widget.metadata['id'], widget._widget.instance))
 		config['widgets'] = widget_list
 
-	def add_launcherwidget(self, launcherwidget):
-		"""Adds a LauncherWidget to the WidgetBox."""
-		self._widgets.append(launcherwidget)
-		self.widget_container.append(launcherwidget)
+	def add_widgetview(self, widgetview):
+		"""Adds a WidgetView to the WidgetBox."""
+		self._widgets.append(widgetview)
+		self.widget_container.append(widgetview)
 		if self.management_mode:
-			launcherwidget.widget_header_revealer.set_reveal_child(True)
+			widgetview.widget_header_revealer.set_reveal_child(True)
 
 	def add_widget(self, widget_class, instance=None):
 		"""Adds a widget to the WidgetBox."""
 		if not instance:
 			instance = str(uuid.uuid4())
-		aspwidget = LauncherWidget(widget_class, self, instance)
-		self.add_launcherwidget(aspwidget)
+		widgetview = WidgetView(widget_class, self, instance)
+		self.add_widgetview(widgetview)
 
 		# We can only do this once the widget has been appended to the widgets list
 		self.update_move_buttons()
@@ -99,7 +99,7 @@ class WidgetBox(Gtk.Box):
 		if _instance not in self._removed_widgets.keys():
 			return False
 
-		self.add_launcherwidget(self._removed_widgets[_instance])
+		self.add_widgetview(self._removed_widgets[_instance])
 
 	def drop_from_remove_buffer(self, dummy, instance):
 		"""Removes a widget from the widget removal undo buffer."""
@@ -108,42 +108,42 @@ class WidgetBox(Gtk.Box):
 
 		self._removed_widgets.pop(instance)
 
-	def remove_widget(self, aspwidget):
+	def remove_widget(self, widgetview):
 		"""Removes a widget from the WidgetBox."""
 		if self.management_mode:
-			aspwidget.widget_header_revealer.set_reveal_child(False)
+			widgetview.widget_header_revealer.set_reveal_child(False)
 		else:
-			aspwidget.widget_header.hide()
-		self._widgets.remove(aspwidget)
-		self.widget_container.remove(aspwidget)
+			widgetview.widget_header.hide()
+		self._widgets.remove(widgetview)
+		self.widget_container.remove(widgetview)
 		self.update_move_buttons()
 
 		self.save_widgets()
 
-		self._removed_widgets[aspwidget._widget.instance] = aspwidget
+		self._removed_widgets[widgetview._widget.instance] = widgetview
 
 		# TRANSLATORS: Used in the popup that appears when you remove a widget
-		toast = Adw.Toast.new(_("Removed “%s”") % aspwidget._widget.name) # noqa: F821
+		toast = Adw.Toast.new(_("Removed “%s”") % widgetview._widget.name) # noqa: F821
 		toast.set_priority(Adw.ToastPriority.HIGH)
 		# TRANSLATORS: Used in the popup that appears when you remove a widget
 		toast.set_button_label(_('Undo')) # noqa: F821
 		toast.set_detailed_action_name('toast.undo_remove')
-		toast.set_action_target_value(GLib.Variant('s', aspwidget._widget.instance))
-		toast.connect('dismissed', self.drop_from_remove_buffer, aspwidget._widget.instance)
+		toast.set_action_target_value(GLib.Variant('s', widgetview._widget.instance))
+		toast.connect('dismissed', self.drop_from_remove_buffer, widgetview._widget.instance)
 		self.toast_overlay.add_toast(toast)
 
 	def update_move_buttons(self):
-		"""Updates the move buttons in all child LauncherWidget headers"""
+		"""Updates the move buttons in all child WidgetView headers"""
 		for widget in self._widgets:
 			widget.widget_header.update_move_buttons()
 
-	def get_widget_position(self, aspwidget):
+	def get_widget_position(self, widgetview):
 		"""
-		Returns the position of the LauncherWidget in the list (starting at 0),
+		Returns the position of the WidgetView in the list (starting at 0),
 		or None if the widget wasn't found.
 		"""
 		try:
-			return self._widgets.index(aspwidget)
+			return self._widgets.index(widgetview)
 		except ValueError:
 			return None
 
@@ -177,14 +177,14 @@ class WidgetBox(Gtk.Box):
 		self.save_widgets()
 
 	def move_up(self, widget):
-		"""Moves a LauncherWidget up in the box."""
+		"""Moves a WidgetView up in the box."""
 		old_pos = self.get_widget_position(widget)
 		if old_pos == 0:
 			return None
 		self.move_widget(old_pos, old_pos - 1)
 
 	def move_down(self, widget):
-		"""Moves a LauncherWidget down in the box."""
+		"""Moves a WidgetView down in the box."""
 		old_pos = self.get_widget_position(widget)
 		if old_pos == len(self._widgets) - 1:
 			return None

@@ -35,7 +35,7 @@ launcher_sources = [
   'wallpaper.py',
   'widget_chooser.py',
   'widgetbox.py',
-  'widgets.py',
+  'widgetview.py',
   'window.py',
 ]
 

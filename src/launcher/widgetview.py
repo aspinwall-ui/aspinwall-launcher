@@ -4,10 +4,10 @@ Contains basic code for the launcher's widget handling.
 """
 from gi.repository import Gtk, Gdk, GObject
 
-@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetheader.ui')
-class LauncherWidgetHeader(Gtk.Box):
-	"""Header for LauncherWidget."""
-	__gtype_name__ = 'LauncherWidgetHeader'
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetviewheader.ui')
+class WidgetViewHeader(Gtk.Box):
+	"""Header for a WidgetView."""
+	__gtype_name__ = 'WidgetViewHeader'
 
 	icon = Gtk.Template.Child('widget_header_icon')
 	title = Gtk.Template.Child('widget_header_title')
@@ -16,11 +16,11 @@ class LauncherWidgetHeader(Gtk.Box):
 	move_up_button = Gtk.Template.Child('widget_header_move_up')
 	move_down_button = Gtk.Template.Child('widget_header_move_down')
 
-	def __init__(self, widget, aspwidget):
-		"""Initializes a LauncherWidgetHeader."""
+	def __init__(self, widget, widgetview):
+		"""Initializes a WidgetViewHeader."""
 		super().__init__()
 		self._widget = widget
-		self._aspwidget = aspwidget
+		self._widgetview = widgetview
 
 		if self._widget.has_settings_menu:
 			self.widget_settings_button.set_visible(True)
@@ -29,31 +29,31 @@ class LauncherWidgetHeader(Gtk.Box):
 		self.icon.set_from_icon_name(self._widget.metadata['icon'])
 		self.title.set_label(self._widget.metadata['name'])
 
-		self.add_controller(self._aspwidget.drag_source)
+		self.add_controller(self._widgetview.drag_source)
 
 	@Gtk.Template.Callback()
 	def move_up(self, *args):
-		"""Moves the parent LauncherWidget up."""
-		self._aspwidget._widgetbox.move_up(self._aspwidget)
+		"""Moves the parent WidgetView up."""
+		self._widgetview._widgetbox.move_up(self._widgetview)
 		self.update_move_buttons()
 
 	@Gtk.Template.Callback()
 	def move_down(self, *args):
-		"""Moves the parent LauncherWidget down."""
-		self._aspwidget._widgetbox.move_down(self._aspwidget)
+		"""Moves the parent WidgetView down."""
+		self._widgetview._widgetbox.move_down(self._widgetview)
 		self.update_move_buttons()
 
 	@Gtk.Template.Callback()
 	def remove(self, *args):
-		"""Removes the parent AspWidget."""
-		self._aspwidget.remove()
+		"""Removes the parent WidgetView."""
+		self._widgetview.remove()
 
 	@Gtk.Template.Callback()
 	def hide(self, *args):
 		"""Hides the widget header."""
-		self._aspwidget.edit_button_revealer.set_reveal_child(False)
-		if not self._aspwidget._widgetbox.management_mode:
-			for widget in self._aspwidget._widgetbox._widgets:
+		self._widgetview.edit_button_revealer.set_reveal_child(False)
+		if not self._widgetview._widgetbox.management_mode:
+			for widget in self._widgetview._widgetbox._widgets:
 				widget.container.remove_css_class('dim')
 				widget.edit_button_revealer.set_visible(True)
 				widget.edit_button_revealer.set_sensitive(True)
@@ -61,47 +61,47 @@ class LauncherWidgetHeader(Gtk.Box):
 			window = self.get_native()
 			window.wallpaper.undim()
 			window.clockbox.undim()
-			self._aspwidget.widget_content.set_sensitive(True)
+			self._widgetview.widget_content.set_sensitive(True)
 
 			self.get_native().app_chooser_show.set_sensitive(True)
-			self._aspwidget._widgetbox.chooser_button_revealer.set_sensitive(True)
+			self._widgetview._widgetbox.chooser_button_revealer.set_sensitive(True)
 			self.get_parent().set_reveal_child(False)
-			self._aspwidget._widgetbox.edit_mode = False
+			self._widgetview._widgetbox.edit_mode = False
 		else:
-			self._aspwidget._widgetbox.exit_management_mode()
+			self._widgetview._widgetbox.exit_management_mode()
 
 	@Gtk.Template.Callback()
 	def show_widget_settings(self, *args):
 		"""Shows the widget settings overlay."""
-		self._aspwidget.widget_settings_revealer.set_visible(True)
-		self._aspwidget.widget_settings_revealer.set_reveal_child(True)
+		self._widgetview.widget_settings_revealer.set_visible(True)
+		self._widgetview.widget_settings_revealer.set_reveal_child(True)
 
 	def update_move_buttons(self):
 		"""
 		Makes the move buttons sensitive or non-sensitive based on whether
 		moving the widget up/down is possible.
 		"""
-		position = self._aspwidget.get_position()
+		position = self._widgetview.get_position()
 
 		if position == 0:
 			self.move_up_button.set_sensitive(False)
 		else:
 			self.move_up_button.set_sensitive(True)
 
-		if position == len(self._aspwidget._widgetbox._widgets) - 1:
+		if position == len(self._widgetview._widgetbox._widgets) - 1:
 			self.move_down_button.set_sensitive(False)
 		else:
 			self.move_down_button.set_sensitive(True)
 
-@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/launcherwidget.ui')
-class LauncherWidget(Gtk.Box):
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetview.ui')
+class WidgetView(Gtk.Box):
 	"""
 	Box containing a widget, alongside with its header.
 	This class is used in the launcher to display widgets.
 
 	For information on creating widgets, see docs/widgets/creating-widgets.md.
 	"""
-	__gtype_name__ = 'LauncherWidget'
+	__gtype_name__ = 'WidgetView'
 
 	container = Gtk.Template.Child()
 	container_overlay = Gtk.Template.Child()
@@ -138,7 +138,7 @@ class LauncherWidget(Gtk.Box):
 		self.drop_target.connect('leave', self.on_leave)
 		# End drop target setup
 
-		self.widget_header = LauncherWidgetHeader(self._widget, self)
+		self.widget_header = WidgetViewHeader(self._widget, self)
 		self.widget_header_revealer.set_child(self.widget_header)
 
 		self.widget_content = self._widget.content
@@ -169,7 +169,7 @@ class LauncherWidget(Gtk.Box):
 		self._widgetbox.remove_widget(self)
 
 	def get_position(self):
-		"""Returns the LauncherWidget's position in its parent widgetbox."""
+		"""Returns the WidgetView's position in its parent widgetbox."""
 		return self._widgetbox.get_widget_position(self)
 
 	@Gtk.Template.Callback()

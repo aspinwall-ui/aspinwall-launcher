@@ -7,14 +7,14 @@ launcher_ui_sources = [
   'appicon.ui',
   'clockbox.ui',
   'launcher.ui',
-  'launcherwidget.ui',
   'settings.ui',
   'wallpaper.ui',
   'wallpapericon.ui',
   'widgetbox.ui',
   'widgetchooser.ui',
-  'widgetheader.ui',
   'widgetinfobox.ui',
+  'widgetview.ui',
+  'widgetviewheader.ui',
 ]
 
 install_data(launcher_ui_sources, install_dir: join_paths(submoduledir, 'ui'))
