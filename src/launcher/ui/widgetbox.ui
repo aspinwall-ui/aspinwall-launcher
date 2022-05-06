@@ -49,6 +49,8 @@
 										<property name="margin-end">10</property>
 										<property name="menu-model">widgetbox-menu</property>
 										<property name="primary">true</property>
+										<!-- TRANSLATORS: Tooltip for menu button in the launcher -->
+										<property name="tooltip-text" translatable="yes">Launcher configuration</property>
 
 										<style>
 											<class name="osd"/>

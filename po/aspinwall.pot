@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-05 08:11+0200\n"
+"POT-Creation-Date: 2022-05-06 13:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -393,29 +393,34 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
+#. TRANSLATORS: Tooltip for menu button in the launcher
+#: src/launcher/ui/widgetbox.ui:53
+msgid "Launcher configuration"
+msgstr ""
+
 #. TRANSLATORS: Tooltip for "Add widgets" button in widget management mode
-#: src/launcher/ui/widgetbox.ui:80
+#: src/launcher/ui/widgetbox.ui:82
 msgid "Add widgets"
 msgstr ""
 
 #. TRANSLATORS: Tooltip for "Exit" button in widget management mode
-#: src/launcher/ui/widgetbox.ui:99
+#: src/launcher/ui/widgetbox.ui:101
 msgid "Exit widget management mode"
 msgstr ""
 
-#: src/launcher/ui/widgetbox.ui:133
+#: src/launcher/ui/widgetbox.ui:135
 msgid "_Add Widgets…"
 msgstr ""
 
-#: src/launcher/ui/widgetbox.ui:138
+#: src/launcher/ui/widgetbox.ui:140
 msgid "_Manage Widgets"
 msgstr ""
 
-#: src/launcher/ui/widgetbox.ui:145
+#: src/launcher/ui/widgetbox.ui:147
 msgid "_Launcher Settings"
 msgstr ""
 
-#: src/launcher/ui/widgetbox.ui:150
+#: src/launcher/ui/widgetbox.ui:152
 msgid "A_bout Aspinwall"
 msgstr ""
 

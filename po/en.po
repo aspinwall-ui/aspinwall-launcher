@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-05 08:11+0200\n"
+"POT-Creation-Date: 2022-05-06 13:03+0200\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -411,29 +411,34 @@ msgstr "Sets the time format to default settings."
 msgid "Reset"
 msgstr "Reset"
 
+#. TRANSLATORS: Tooltip for menu button in the launcher
+#: src/launcher/ui/widgetbox.ui:53
+msgid "Launcher configuration"
+msgstr "Launcher configuration"
+
 #. TRANSLATORS: Tooltip for "Add widgets" button in widget management mode
-#: src/launcher/ui/widgetbox.ui:80
+#: src/launcher/ui/widgetbox.ui:82
 msgid "Add widgets"
 msgstr "Add Widgets"
 
 #. TRANSLATORS: Tooltip for "Exit" button in widget management mode
-#: src/launcher/ui/widgetbox.ui:99
+#: src/launcher/ui/widgetbox.ui:101
 msgid "Exit widget management mode"
 msgstr "Exit widget management mode"
 
-#: src/launcher/ui/widgetbox.ui:133
+#: src/launcher/ui/widgetbox.ui:135
 msgid "_Add Widgets…"
 msgstr "_Add Widgets…"
 
-#: src/launcher/ui/widgetbox.ui:138
+#: src/launcher/ui/widgetbox.ui:140
 msgid "_Manage Widgets"
 msgstr "_Manage Widgets"
 
-#: src/launcher/ui/widgetbox.ui:145
+#: src/launcher/ui/widgetbox.ui:147
 msgid "_Launcher Settings"
 msgstr "_Launcher Settings"
 
-#: src/launcher/ui/widgetbox.ui:150
+#: src/launcher/ui/widgetbox.ui:152
 msgid "A_bout Aspinwall"
 msgstr "A_bout Aspinwall"
 
