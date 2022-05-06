@@ -8,6 +8,7 @@ import time
 import uuid
 
 from aspinwall.launcher.config import config
+from aspinwall.launcher.widgetmanager import widget_manager
 from aspinwall.launcher.widgetview import WidgetView
 import aspinwall.launcher.widget_chooser
 from aspinwall.widgets.loader import get_widget_class_by_id
@@ -17,7 +18,6 @@ class WidgetBox(Gtk.Box):
 	"""Box that contains the widgets."""
 	__gtype_name__ = 'WidgetBox'
 
-	_widgets = []
 	_drag_targets = []
 	_removed_widgets = {}
 	management_mode = False
@@ -58,48 +58,35 @@ class WidgetBox(Gtk.Box):
 		# Let the widget chooser know a widgetbox has been created
 		aspinwall.launcher.widget_chooser.widgetbox = self
 
-		self.load_widgets()
+		self.widget_container.bind_model(widget_manager.widgets, self.bind)
+		widget_manager.widgets.connect('items-changed', self.update_move_buttons)
 
-	def load_widgets(self):
-		"""Loads widgets from the config."""
-		widgets = config['widgets']
-		if widgets:
-			for widget in widgets:
-				self.add_widget(get_widget_class_by_id(widget[0]), widget[1])
-
-	def save_widgets(self):
-		"""Saves widgets to the config."""
-		widget_list = []
-		for widget in self._widgets:
-			widget_list.append((widget._widget.metadata['id'], widget._widget.instance))
-		config['widgets'] = widget_list
-
-	def add_widgetview(self, widgetview):
-		"""Adds a WidgetView to the WidgetBox."""
-		self._widgets.append(widgetview)
-		self.widget_container.append(widgetview)
-		if self.management_mode:
-			widgetview.widget_header_revealer.set_reveal_child(True)
-
-	def add_widget(self, widget_class, instance=None):
-		"""Adds a widget to the WidgetBox."""
-		if not instance:
-			instance = str(uuid.uuid4())
-		widgetview = WidgetView(widget_class, self, instance)
-		self.add_widgetview(widgetview)
-
-		# We can only do this once the widget has been appended to the widgets list
 		self.update_move_buttons()
 
-		self.save_widgets()
+	def iterate_over_all_widgetviews(self, iter_func):
+		"""
+		Runs a function against all widgetviews. Provides the widgetview
+		in the widgetview kwarg.
+		"""
+		for item_count in range(0, widget_manager.widgets.get_n_items()):
+			widgetview = self.widget_container.get_row_at_index(item_count).get_child()
+			iter_func(widgetview=widgetview)
 
+	def bind(self, widget, *args):
+		"""Binds the list items in the widget list."""
+		widgetview = WidgetView(self)
+		widgetview.bind_to_widget(widget)
+		return widgetview
+
+	# Code for handling widget removal undo
 	def undo_remove(self, a, b, instance):
 		"""Un-does a widget remove."""
 		_instance = instance.get_string()
 		if _instance not in self._removed_widgets.keys():
 			return False
 
-		self.add_widgetview(self._removed_widgets[_instance])
+		widget_manager.add_widget(self._removed_widgets[_instance])
+		self._removed_widgets.pop(_instance)
 
 	def drop_from_remove_buffer(self, dummy, instance):
 		"""Removes a widget from the widget removal undo buffer."""
@@ -114,13 +101,9 @@ class WidgetBox(Gtk.Box):
 			widgetview.widget_header_revealer.set_reveal_child(False)
 		else:
 			widgetview.widget_header.hide()
-		self._widgets.remove(widgetview)
-		self.widget_container.remove(widgetview)
-		self.update_move_buttons()
+		widget_manager.remove_widget(widgetview._widget)
 
-		self.save_widgets()
-
-		self._removed_widgets[widgetview._widget.instance] = widgetview
+		self._removed_widgets[widgetview._widget.instance] = widgetview._widget
 
 		# TRANSLATORS: Used in the popup that appears when you remove a widget
 		toast = Adw.Toast.new(_("Removed “%s”") % widgetview._widget.name) # noqa: F821
@@ -132,61 +115,31 @@ class WidgetBox(Gtk.Box):
 		toast.connect('dismissed', self.drop_from_remove_buffer, widgetview._widget.instance)
 		self.toast_overlay.add_toast(toast)
 
-	def update_move_buttons(self):
+	def update_move_buttons(self, *args):
 		"""Updates the move buttons in all child WidgetView headers"""
-		for widget in self._widgets:
-			widget.widget_header.update_move_buttons()
-
-	def get_widget_position(self, widgetview):
-		"""
-		Returns the position of the WidgetView in the list (starting at 0),
-		or None if the widget wasn't found.
-		"""
-		try:
-			return self._widgets.index(widgetview)
-		except ValueError:
-			return None
-
-	def get_widget_at_position(self, pos):
-		"""
-		Returns the widget at the given position.
-		"""
-		return self._widgets[pos]
+		self.iterate_over_all_widgetviews(
+			lambda widgetview: widgetview.widget_header.update_move_buttons()
+		)
 
 	def move_widget(self, old_pos, new_pos):
 		"""
 		Moves a widget from the provided position to the target position.
 		"""
-		if old_pos == new_pos:
-			return True
-
-		widget = self.get_widget_at_position(old_pos)
-
-		if new_pos == 0:
-			self.widget_container.reorder_child_after(widget)
-			self._widgets.insert(0, self._widgets.pop(old_pos))
-		else:
-			if new_pos > old_pos:
-				self.widget_container.reorder_child_after(widget, self.get_widget_at_position(new_pos))
-				self._widgets.insert(new_pos, self._widgets.pop(old_pos))
-			else:
-				self.widget_container.reorder_child_after(widget, self.get_widget_at_position(new_pos - 1))
-				self._widgets.insert(new_pos, self._widgets.pop(old_pos))
+		widget_manager.move_widget(old_pos, new_pos)
 
 		self.update_move_buttons()
-		self.save_widgets()
 
 	def move_up(self, widget):
 		"""Moves a WidgetView up in the box."""
-		old_pos = self.get_widget_position(widget)
+		old_pos = widget_manager.get_widget_position(widget._widget)
 		if old_pos == 0:
 			return None
 		self.move_widget(old_pos, old_pos - 1)
 
 	def move_down(self, widget):
 		"""Moves a WidgetView down in the box."""
-		old_pos = self.get_widget_position(widget)
-		if old_pos == len(self._widgets) - 1:
+		old_pos = widget_manager.get_widget_position(widget._widget)
+		if old_pos == widget_manager.widgets.get_n_items() - 1:
 			return None
 		self.move_widget(old_pos, old_pos + 1)
 
@@ -213,8 +166,8 @@ class WidgetBox(Gtk.Box):
 
 			self.autorefresh_timer -= 1
 			if self.autorefresh_timer <= 0:
-				for widget in self._widgets:
-					widget._widget.refresh()
+				for widget in widget_manager.widgets:
+					widget.refresh()
 				self.autorefresh_timer = self.autorefresh_delay
 			else:
 				# Reset count if the delay is changed
@@ -237,11 +190,9 @@ class WidgetBox(Gtk.Box):
 		self.chooser_button_revealer.set_reveal_child(False)
 		self.management_buttons_revealer.set_reveal_child(True)
 
-		for widget in self._widgets:
-			widget.reveal_header()
-			widget.widget_content.set_sensitive(False)
-			widget.edit_button_revealer.set_visible(False)
-			widget.edit_button_revealer.set_sensitive(False)
+		self.iterate_over_all_widgetviews(
+			self.widget_callback_enter_management_mode
+		)
 
 	@Gtk.Template.Callback()
 	def exit_management_mode(self, *args):
@@ -251,32 +202,36 @@ class WidgetBox(Gtk.Box):
 			window.wallpaper.undim()
 			window.clockbox.undim()
 
-			if self.management_mode:
-				for widget in self._widgets:
-					if widget._widget.has_settings_menu:
-						widget.hide_widget_settings()
-					widget.widget_header_revealer.set_reveal_child(False)
-					widget.widget_content.set_sensitive(True)
-					widget.edit_button_revealer.set_visible(True)
-					widget.edit_button_revealer.set_sensitive(True)
-				window.app_chooser_show.set_sensitive(True)
-				window.pause_focus_manager = False
-				self.management_buttons_revealer.set_reveal_child(False)
-				self.chooser_button_revealer.set_reveal_child(True)
-			else:
-				for widget in self._widgets:
-					if widget._widget.has_settings_menu:
-						widget.hide_widget_settings()
-					widget.widget_header_revealer.set_reveal_child(False)
-					widget.container.remove_css_class('dim')
-					widget.widget_content.set_sensitive(True)
-					widget.edit_button_revealer.set_visible(True)
-					widget.edit_button_revealer.set_sensitive(True)
-				window.app_chooser_show.set_sensitive(True)
-				window.pause_focus_manager = False
-				self.chooser_button_revealer.set_sensitive(True)
-
-			window.app_chooser_button_revealer.set_reveal_child(True)
+			self.iterate_over_all_widgetviews(
+				self.widget_callback_exit_management_mode
+			)
 
 			self.management_mode = False
 			self.edit_mode = False
+
+	def widget_callback_enter_management_mode(self, widgetview):
+		"""Functions to execute on every widgetview when entering management mode,"""
+		widgetview.reveal_header()
+		widgetview.widget_content.set_sensitive(False)
+		widgetview.edit_button_revealer.set_visible(False)
+		widgetview.edit_button_revealer.set_sensitive(False)
+
+	def widget_callback_exit_management_mode(self, widgetview):
+		"""Functions to execute on every widgetview when exiting management mode,"""
+		window = self.get_native()
+		if widgetview._widget.has_settings_menu:
+			widgetview.hide_widget_settings()
+
+		widgetview.widget_header_revealer.set_reveal_child(False)
+		widgetview.container.remove_css_class('dim')
+		widgetview.widget_content.set_sensitive(True)
+
+		widgetview.edit_button_revealer.set_visible(True)
+		widgetview.edit_button_revealer.set_sensitive(True)
+		window.app_chooser_button_revealer.set_reveal_child(True)
+		window.app_chooser_show.set_sensitive(True)
+		self.chooser_button_revealer.set_reveal_child(True)
+		self.chooser_button_revealer.set_sensitive(True)
+		self.management_buttons_revealer.set_reveal_child(False)
+
+		window.pause_focus_manager = False

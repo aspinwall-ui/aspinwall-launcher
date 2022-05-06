@@ -14,8 +14,7 @@
 					<object class="GtkScrolledWindow">
 						<property name="hscrollbar-policy">never</property>
 						<child>
-							<object class="GtkBox" id="widget-container">
-								<property name="orientation">vertical</property>
+							<object class="GtkListBox" id="widget-container">
 								<property name="valign">end</property>
 								<property name="halign">fill</property>
 								<property name="hexpand">True</property>

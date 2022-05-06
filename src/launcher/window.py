@@ -191,8 +191,6 @@ def launcher_setup():
 			config['wallpaper-path'] = ''
 			config['wallpaper-style'] = 0 # solid color
 
-	load_available_widgets()
-
 def on_activate(app):
 	global running
 	if running:
