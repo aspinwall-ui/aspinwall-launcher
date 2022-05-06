@@ -21,8 +21,8 @@ class WidgetBox(Gtk.Box):
 	management_mode = False
 	edit_mode = False
 
-	widget_container = Gtk.Template.Child('widget-container')
-	widget_chooser = Gtk.Template.Child('widget-chooser-container')
+	widget_container = Gtk.Template.Child()
+	widget_chooser = Gtk.Template.Child()
 	toast_overlay = Gtk.Template.Child()
 
 	chooser_button_revealer = Gtk.Template.Child()

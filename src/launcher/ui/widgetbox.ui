@@ -14,7 +14,7 @@
 					<object class="GtkScrolledWindow">
 						<property name="hscrollbar-policy">never</property>
 						<child>
-							<object class="GtkListBox" id="widget-container">
+							<object class="GtkListBox" id="widget_container">
 								<property name="valign">end</property>
 								<property name="halign">fill</property>
 								<property name="hexpand">True</property>
@@ -122,7 +122,7 @@
 				</child>
 
 				<child type="overlay">
-					<object class="WidgetChooser" id="widget-chooser-container"/>
+					<object class="WidgetChooser" id="widget_chooser"/>
 				</child>
 			</object>
 		</child>
