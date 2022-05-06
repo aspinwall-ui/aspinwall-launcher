@@ -23,7 +23,7 @@ if os.getenv('ASPINWALL_WIDGET_DIR'):
 
 available_widgets = []
 
-def load_widgets():
+def load_available_widgets():
 	"""
 	Loads widgets from files into the available_widgets variable, and
 	returns the list of available widgets.
