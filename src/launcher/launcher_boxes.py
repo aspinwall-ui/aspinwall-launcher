@@ -242,8 +242,8 @@ class WidgetBox(Gtk.Box):
 		for widget in self._widgets:
 			widget.reveal_header()
 			widget.widget_content.set_sensitive(False)
-			widget.edit_button_revealer.set_visible(True)
-			widget.edit_button_revealer.set_sensitive(True)
+			widget.edit_button_revealer.set_visible(False)
+			widget.edit_button_revealer.set_sensitive(False)
 
 	@Gtk.Template.Callback()
 	def exit_management_mode(self, *args):
@@ -259,7 +259,8 @@ class WidgetBox(Gtk.Box):
 						widget.hide_widget_settings()
 					widget.widget_header_revealer.set_reveal_child(False)
 					widget.widget_content.set_sensitive(True)
-
+					widget.edit_button_revealer.set_visible(True)
+					widget.edit_button_revealer.set_sensitive(True)
 				window.app_chooser_show.set_sensitive(True)
 				window.pause_focus_manager = False
 				self.management_buttons_revealer.set_reveal_child(False)
@@ -271,6 +272,8 @@ class WidgetBox(Gtk.Box):
 					widget.widget_header_revealer.set_reveal_child(False)
 					widget.container.remove_css_class('dim')
 					widget.widget_content.set_sensitive(True)
+					widget.edit_button_revealer.set_visible(True)
+					widget.edit_button_revealer.set_sensitive(True)
 				window.app_chooser_show.set_sensitive(True)
 				window.pause_focus_manager = False
 				self.chooser_button_revealer.set_sensitive(True)
