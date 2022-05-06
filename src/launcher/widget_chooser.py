@@ -4,13 +4,9 @@ Contains code for the widget chooser and widget infoboxes for the chooser.
 """
 from gi.repository import Gtk, Gio, GLib
 
+from aspinwall.launcher.widgetmanager import widget_manager
 from aspinwall.widgets.data import WidgetData
 from aspinwall.widgets.loader import available_widgets
-
-# Pointer to the widget box; set up by the WidgetBox __init__ function,
-# required by the widget chooser as the widget addition target
-# This is defined in this file and set externally to avoid circular imports.
-widgetbox = None
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetinfobox.ui')
 class WidgetInfobox(Gtk.Box):
@@ -42,7 +38,7 @@ class WidgetInfobox(Gtk.Box):
 	@Gtk.Template.Callback()
 	def add_widget_from_infobox(self, *args):
 		"""Adds the widget to the widget box."""
-		widgetbox.add_widget(self.widget_data.widget_class)
+		widget_manager.add_widget_by_class(self.widget_data.widget_class)
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetchooser.ui')
 class WidgetChooser(Gtk.Revealer):

@@ -4,6 +4,8 @@ Contains basic code for the launcher's widget handling.
 """
 from gi.repository import Gtk, Gdk, GObject
 
+from aspinwall.launcher.widgetmanager import widget_manager
+
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetviewheader.ui')
 class WidgetViewHeader(Gtk.Box):
 	"""Header for a WidgetView."""
@@ -48,15 +50,20 @@ class WidgetViewHeader(Gtk.Box):
 		"""Removes the parent WidgetView."""
 		self._widgetview.remove()
 
+	def _hide_widgetview_callback(self, widgetview):
+		"""Used by hide on all widgetviews."""
+		widgetview.container.remove_css_class('dim')
+		widgetview.edit_button_revealer.set_visible(True)
+		widgetview.edit_button_revealer.set_sensitive(True)
+
 	@Gtk.Template.Callback()
 	def hide(self, *args):
 		"""Hides the widget header."""
 		self._widgetview.edit_button_revealer.set_reveal_child(False)
 		if not self._widgetview._widgetbox.management_mode:
-			for widget in self._widgetview._widgetbox._widgets:
-				widget.container.remove_css_class('dim')
-				widget.edit_button_revealer.set_visible(True)
-				widget.edit_button_revealer.set_sensitive(True)
+			self._widgetview._widgetbox.iterate_over_all_widgetviews(
+				self._hide_widgetview_callback
+			)
 
 			window = self.get_native()
 			window.wallpaper.undim()
@@ -81,14 +88,14 @@ class WidgetViewHeader(Gtk.Box):
 		Makes the move buttons sensitive or non-sensitive based on whether
 		moving the widget up/down is possible.
 		"""
-		position = self._widgetview.get_position()
+		position = widget_manager.get_widget_position(self._widgetview._widget)
 
 		if position == 0:
 			self.move_up_button.set_sensitive(False)
 		else:
 			self.move_up_button.set_sensitive(True)
 
-		if position == len(self._widgetview._widgetbox._widgets) - 1:
+		if position == widget_manager.widgets.get_n_items() - 1:
 			self.move_down_button.set_sensitive(False)
 		else:
 			self.move_down_button.set_sensitive(True)
@@ -110,15 +117,10 @@ class WidgetView(Gtk.Box):
 	widget_settings_container = Gtk.Template.Child()
 	edit_button_revealer = Gtk.Template.Child()
 
-	def __init__(self, widget_class, widgetbox, instance):
+	def __init__(self, widgetbox):
 		"""Initializes a widget display."""
 		super().__init__()
-
-		try:
-			self._widget = widget_class(instance)
-		except TypeError:
-			print("FAIL!!!")
-			return
+		self._widget = None
 		self._widgetbox = widgetbox
 
 		# Set up drag source
@@ -138,6 +140,9 @@ class WidgetView(Gtk.Box):
 		self.drop_target.connect('leave', self.on_leave)
 		# End drop target setup
 
+	def bind_to_widget(self, widget):
+		"""Binds the WidgetView to a widget."""
+		self._widget = widget
 		self.widget_header = WidgetViewHeader(self._widget, self)
 		self.widget_header_revealer.set_child(self.widget_header)
 
@@ -166,11 +171,20 @@ class WidgetView(Gtk.Box):
 
 	def remove(self):
 		"""Removes the widget from its parent WidgetBox."""
+		self.container.remove(self._widget.content)
 		self._widgetbox.remove_widget(self)
 
-	def get_position(self):
-		"""Returns the WidgetView's position in its parent widgetbox."""
-		return self._widgetbox.get_widget_position(self)
+	# Header/buttons
+
+	def _reveal_header_callback(self, widgetview):
+		"""Used by reveal_header on all widgetviews."""
+		if widgetview._widget.instance != self._widget.instance:
+			widgetview.widget_header_revealer.set_reveal_child(False)
+			widgetview.container.add_css_class('dim')
+			widgetview.edit_button_revealer.set_visible(False)
+			widgetview.edit_button_revealer.set_sensitive(False)
+		else:
+			widgetview.container.remove_css_class('dim')
 
 	@Gtk.Template.Callback()
 	def reveal_header(self, *args):
@@ -184,15 +198,10 @@ class WidgetView(Gtk.Box):
 			window.wallpaper.dim()
 			window.clockbox.dim()
 			self.widget_content.set_sensitive(False)
-			for widget in self._widgetbox._widgets:
-				if widget._widget.instance != self._widget.instance:
-					widget.widget_header_revealer.set_reveal_child(False)
-					widget.container.add_css_class('dim')
-					widget.edit_button_revealer.set_visible(False)
-					widget.edit_button_revealer.set_sensitive(False)
-				else:
-					widget.container.remove_css_class('dim')
-			self.get_native().app_chooser_show.set_sensitive(False)
+			self._widgetbox.iterate_over_all_widgetviews(
+				self._reveal_header_callback
+			)
+			window.app_chooser_show.set_sensitive(False)
 			self._widgetbox.chooser_button_revealer.set_sensitive(False)
 			self._widgetbox.edit_mode = True
 		self.widget_header_revealer.set_reveal_child(True)
@@ -211,10 +220,12 @@ class WidgetView(Gtk.Box):
 		"""Hides the edit button."""
 		self.edit_button_revealer.set_reveal_child(False)
 
+	# Drag-and-drop
+
 	def drag_prepare(self, *args):
 		"""Returns the GdkContentProvider for the drag operation"""
 		return Gdk.ContentProvider.new_for_value(
-			self.get_position()
+			widget_manager.get_widget_position(self._widget)
 		)
 
 	def drag_begin(self, drag_source, *args):
@@ -237,7 +248,7 @@ class WidgetView(Gtk.Box):
 		thus, self in this context is the widget which the dragged widget was
 		dropped onto.
 		"""
-		drop_target_pos = self._widgetbox.get_widget_position(self)
+		drop_target_pos = widget_manager.get_widget_position(self._widget)
 		self._widgetbox.move_widget(dropped_widget_pos, drop_target_pos)
 		self.remove_css_class('on-enter')
 

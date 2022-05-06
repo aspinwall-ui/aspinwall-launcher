@@ -65,6 +65,11 @@
 
 /* Widgets */
 
+.widget-container, .widget-container > row {
+	background: none;
+	padding: 0;
+}
+
 .aspinwall-widget-wrapper {
 	padding: 5px 0;
 	border-radius: 10px;

@@ -36,6 +36,7 @@ launcher_sources = [
   'widget_chooser.py',
   'widgetbox.py',
   'widgetview.py',
+  'widgetmanager.py',
   'window.py',
 ]
 
