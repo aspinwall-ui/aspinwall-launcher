@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-06 13:07+0200\n"
+"POT-Creation-Date: 2022-05-06 13:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -221,20 +221,6 @@ msgstr ""
 msgid "Installed apps"
 msgstr ""
 
-#. TRANSLATORS: Tooltip for the "Edit widget" button that appears when hovering over a widget
-#: src/launcher/ui/launcherwidget.ui:48
-msgid "Edit widget"
-msgstr ""
-
-#: src/launcher/ui/launcherwidget.ui:94
-msgid "Close widget settings"
-msgstr ""
-
-#. TRANSLATORS: "Widget" here is singular; this is used for the widget-specific settings menu header
-#: src/launcher/ui/launcherwidget.ui:107 src/launcher/ui/widgetheader.ui:62
-msgid "Widget settings"
-msgstr ""
-
 #: src/launcher/ui/settings.ui:17
 msgid "Wallpaper"
 msgstr ""
@@ -428,34 +414,48 @@ msgstr ""
 msgid "Search widgets…"
 msgstr ""
 
+#. TRANSLATORS: Tooltip for the "Edit widget" button that appears when hovering over a widget
+#: src/launcher/ui/widgetview.ui:48
+msgid "Edit widget"
+msgstr ""
+
+#: src/launcher/ui/widgetview.ui:94
+msgid "Close widget settings"
+msgstr ""
+
+#. TRANSLATORS: "Widget" here is singular; this is used for the widget-specific settings menu header
+#: src/launcher/ui/widgetview.ui:107 src/launcher/ui/widgetviewheader.ui:62
+msgid "Widget settings"
+msgstr ""
+
 #. TRANSLATORS: Tooltip for "remove widget" button
-#: src/launcher/ui/widgetheader.ui:18
+#: src/launcher/ui/widgetviewheader.ui:18
 msgid "Remove"
 msgstr ""
 
 #. TRANSLATORS: Tooltip for "move widget up" button in widget header
-#: src/launcher/ui/widgetheader.ui:88
+#: src/launcher/ui/widgetviewheader.ui:88
 msgid "Move up"
 msgstr ""
 
 #. TRANSLATORS: Tooltip for "move widget down" button in widget header
-#: src/launcher/ui/widgetheader.ui:103
+#: src/launcher/ui/widgetviewheader.ui:103
 msgid "Move down"
 msgstr ""
 
 #. TRANSLATORS: Tooltip for "exit widget edit mode"/close button on widget headers
-#: src/launcher/ui/widgetheader.ui:127
+#: src/launcher/ui/widgetviewheader.ui:127
 msgid "Exit editing mode"
 msgstr ""
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/launcher_boxes.py:140
+#: src/launcher/widgetbox.py:126
 #, python-format
 msgid "Removed “%s”"
 msgstr ""
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/launcher_boxes.py:143
+#: src/launcher/widgetbox.py:129
 msgid "Undo"
 msgstr ""
 

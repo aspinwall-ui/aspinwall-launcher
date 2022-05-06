@@ -3,12 +3,13 @@ src/launcher/ui/about.ui
 src/launcher/ui/appchooser.ui
 src/launcher/ui/appicon.ui
 src/launcher/ui/launcher.ui
-src/launcher/ui/launcherwidget.ui
 src/launcher/ui/settings.ui
 src/launcher/ui/widgetbox.ui
 src/launcher/ui/widgetchooser.ui
-src/launcher/ui/widgetheader.ui
+src/launcher/ui/widgetview.ui
+src/launcher/ui/widgetviewheader.ui
 src/launcher/ui/widgetinfobox.ui
-src/launcher/launcher_boxes.py
+src/launcher/clockbox.py
+src/launcher/widgetbox.py
 src/launcher/settings.py
 src/shell/ui/controlpanel.ui
