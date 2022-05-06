@@ -1,14 +1,12 @@
 # coding: utf-8
 """
-Contains code for the ClockBox and WidgetBox.
+Contains code for the WidgetBox.
 """
 from gi.repository import Adw, GLib, Gtk, Gio
 import threading
 import time
 import uuid
 
-from aspinwall.utils.clock import clock_daemon
-from aspinwall.utils.dimmable import Dimmable
 from aspinwall.launcher.config import config
 from aspinwall.launcher.widgets import LauncherWidget
 import aspinwall.launcher.widget_chooser
@@ -62,31 +60,19 @@ class WidgetBox(Gtk.Box):
 
 		self.load_widgets()
 
-	def set_autorefresh_delay(self, *args):
-		"""Sets autorefresh delay from config."""
-		self.autorefresh_delay = config['autorefresh-delay']
+	def load_widgets(self):
+		"""Loads widgets from the config."""
+		widgets = config['widgets']
+		if widgets:
+			for widget in widgets:
+				self.add_widget(get_widget_class_by_id(widget[0]), widget[1])
 
-	def autorefresh(self):
-		"""Automatically refreshes widgets at a given interval."""
-		initial_delay = self.autorefresh_delay
-		self.autorefresh_timer = self.autorefresh_delay
-		while True:
-			# If autorefresh is disabled, don't do anything
-			if self.autorefresh_delay == 0:
-				while self.autorefresh_delay != 0:
-					time.sleep(1)
-
-			self.autorefresh_timer -= 1
-			if self.autorefresh_timer <= 0:
-				for widget in self._widgets:
-					widget._widget.refresh()
-				self.autorefresh_timer = self.autorefresh_delay
-			else:
-				# Reset count if the delay is changed
-				if initial_delay != self.autorefresh_delay:
-					initial_delay = self.autorefresh_delay
-					self.autorefresh_timer = self.autorefresh_delay
-			time.sleep(1)
+	def save_widgets(self):
+		"""Saves widgets to the config."""
+		widget_list = []
+		for widget in self._widgets:
+			widget_list.append((widget._widget.metadata['id'], widget._widget.instance))
+		config['widgets'] = widget_list
 
 	def add_launcherwidget(self, launcherwidget):
 		"""Adds a LauncherWidget to the WidgetBox."""
@@ -204,26 +190,38 @@ class WidgetBox(Gtk.Box):
 			return None
 		self.move_widget(old_pos, old_pos + 1)
 
-	def save_widgets(self):
-		"""Saves widgets to the config."""
-		widget_list = []
-		for widget in self._widgets:
-			widget_list.append((widget._widget.metadata['id'], widget._widget.instance))
-		config['widgets'] = widget_list
-
-	def load_widgets(self):
-		"""Loads widgets from the config."""
-		widgets = config['widgets']
-		if widgets:
-			for widget in widgets:
-				self.add_widget(get_widget_class_by_id(widget[0]), widget[1])
-
 	@Gtk.Template.Callback()
 	def show_chooser(self, *args):
 		"""Shows the widget chooser."""
 		self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
 		self.widget_chooser.search.grab_focus()
 		self.widget_chooser.set_reveal_child(True)
+
+	def set_autorefresh_delay(self, *args):
+		"""Sets autorefresh delay from config."""
+		self.autorefresh_delay = config['autorefresh-delay']
+
+	def autorefresh(self):
+		"""Automatically refreshes widgets at a given interval."""
+		initial_delay = self.autorefresh_delay
+		self.autorefresh_timer = self.autorefresh_delay
+		while True:
+			# If autorefresh is disabled, don't do anything
+			if self.autorefresh_delay == 0:
+				while self.autorefresh_delay != 0:
+					time.sleep(1)
+
+			self.autorefresh_timer -= 1
+			if self.autorefresh_timer <= 0:
+				for widget in self._widgets:
+					widget._widget.refresh()
+				self.autorefresh_timer = self.autorefresh_delay
+			else:
+				# Reset count if the delay is changed
+				if initial_delay != self.autorefresh_delay:
+					initial_delay = self.autorefresh_delay
+					self.autorefresh_timer = self.autorefresh_delay
+			time.sleep(1)
 
 	def enter_management_mode(self, *args):
 		"""Enters widget management mode."""
@@ -282,43 +280,3 @@ class WidgetBox(Gtk.Box):
 
 			self.management_mode = False
 			self.edit_mode = False
-
-@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/clockbox.ui')
-class ClockBox(Gtk.Box, Dimmable):
-	"""Box that contains the launcher's clock."""
-	__gtype_name__ = 'ClockBox'
-
-	clockbox_time = Gtk.Template.Child()
-	clockbox_date = Gtk.Template.Child()
-
-	def __init__(self):
-		"""Initializes the clock box."""
-		super().__init__()
-		self.update_size()
-		config.connect('changed::clock-size', self.update_size)
-		clock_daemon.connect('notify::time', self.update)
-
-	def update_size(self, *args):
-		"""Updates the size of the clock based on the clock-size config."""
-		size = config['clock-size']
-		if size == 0:
-			self.add_css_class('small')
-			self.remove_css_class('medium')
-			self.remove_css_class('large')
-		elif size == 1:
-			self.add_css_class('medium')
-			self.remove_css_class('small')
-			self.remove_css_class('large')
-		elif size == 2:
-			self.add_css_class('large')
-			self.remove_css_class('small')
-			self.remove_css_class('medium')
-
-	def update(self, *args):
-		"""Updates the time and date on the clock."""
-		self.clockbox_time.set_markup(
-			'<span weight="bold">' + time.strftime(config['time-format']) + '</span>'
-		)
-		self.clockbox_date.set_markup(
-			'<span>' + time.strftime(config['date-format']) + '</span>'
-		)

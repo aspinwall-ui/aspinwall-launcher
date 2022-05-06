@@ -14,7 +14,8 @@ from aspinwall.widgets.loader import load_widgets
 
 # The ClockBox, WidgetBox and AppChooser classes are imported to avoid
 # "invalid object type" errors.
-from aspinwall.launcher.launcher_boxes import ClockBox, WidgetBox # noqa: F401
+from aspinwall.launcher.clockbox import ClockBox # noqa: F401
+from aspinwall.launcher.widgetbox import WidgetBox # noqa: F401
 from aspinwall.launcher.app_chooser import AppChooser # noqa: F401
 from aspinwall.launcher.wallpaper import Wallpaper # noqa: F401
 from aspinwall.launcher.settings import LauncherSettings

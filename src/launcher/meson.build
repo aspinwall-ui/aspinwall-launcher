@@ -30,10 +30,11 @@ launcher_sources = [
   'about.py',
   'app_chooser.py',
   'config.py',
-  'launcher_boxes.py',
+  'clockbox.py',
   'settings.py',
   'wallpaper.py',
   'widget_chooser.py',
+  'widgetbox.py',
   'widgets.py',
   'window.py',
 ]
