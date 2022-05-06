@@ -382,7 +382,7 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
 						<child>
 							<object class="AdwActionRow">
 								<!-- TRANSLATORS: "Idle mode" refers to the mode where, after a set time of inactivity, the widgets reduce their opacity and the app chooser/menu buttons disappear. -->
-								<property name="title" translatable="yes">Switch to idle mode after:</property>
+								<property name="title" translatable="yes">Enter idle mode after:</property>
 								<property name="subtitle" translatable="yes">In idle mode, after some time of inactivity, the opacity of the widgets is reduced, and the menu buttons are hidden.</property>
 
 								<child>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-06 13:03+0200\n"
+"POT-Creation-Date: 2022-05-06 13:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -340,7 +340,7 @@ msgstr ""
 
 #. TRANSLATORS: "Idle mode" refers to the mode where, after a set time of inactivity, the widgets reduce their opacity and the app chooser/menu buttons disappear.
 #: src/launcher/ui/settings.ui:385
-msgid "Switch to idle mode after:"
+msgid "Enter idle mode after:"
 msgstr ""
 
 #: src/launcher/ui/settings.ui:386
