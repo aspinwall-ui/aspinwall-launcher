@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-04 09:39+0200\n"
+"POT-Creation-Date: 2022-05-06 13:47+0200\n"
 "PO-Revision-Date: 2022-05-03 10:41+0000\n"
 "Last-Translator: knuxify <knuxfanwin8.mail@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/aspinwall-ui/"
@@ -243,15 +243,6 @@ msgstr "_Dodaj do ulubionych"
 msgid "Installed apps"
 msgstr "Zainstalowane aplikacje"
 
-#: src/launcher/ui/launcherwidget.ui:72
-msgid "Close widget settings"
-msgstr "Zamknij ustawienia widżetu"
-
-#. TRANSLATORS: "Widget" here is singular; this is used for the widget-specific settings menu header
-#: src/launcher/ui/launcherwidget.ui:85 src/launcher/ui/widgetheader.ui:62
-msgid "Widget settings"
-msgstr "Ustawienia widżetu"
-
 #: src/launcher/ui/settings.ui:17
 msgid "Wallpaper"
 msgstr "Tapeta"
@@ -360,7 +351,7 @@ msgstr "_Ustawienia launchera"
 
 #. TRANSLATORS: "Idle mode" refers to the mode where, after a set time of inactivity, the widgets reduce their opacity and the app chooser/menu buttons disappear.
 #: src/launcher/ui/settings.ui:385
-msgid "Switch to idle mode after:"
+msgid "Enter idle mode after:"
 msgstr ""
 
 #: src/launcher/ui/settings.ui:386
@@ -415,29 +406,36 @@ msgstr "Ustawia format czasu na domyślne ustawienie."
 msgid "Reset"
 msgstr "Przywróć"
 
+#. TRANSLATORS: Tooltip for menu button in the launcher
+#: src/launcher/ui/widgetbox.ui:53
+#, fuzzy
+#| msgid "_Launcher Settings"
+msgid "Launcher configuration"
+msgstr "_Ustawienia launchera"
+
 #. TRANSLATORS: Tooltip for "Add widgets" button in widget management mode
-#: src/launcher/ui/widgetbox.ui:80
+#: src/launcher/ui/widgetbox.ui:82
 msgid "Add widgets"
 msgstr "Dodaj widżety"
 
 #. TRANSLATORS: Tooltip for "Exit" button in widget management mode
-#: src/launcher/ui/widgetbox.ui:99
+#: src/launcher/ui/widgetbox.ui:101
 msgid "Exit widget management mode"
 msgstr "Wyjdź z trybu zarządzania widżetami"
 
-#: src/launcher/ui/widgetbox.ui:133
+#: src/launcher/ui/widgetbox.ui:135
 msgid "_Add Widgets…"
 msgstr "_Dodaj widżety…"
 
-#: src/launcher/ui/widgetbox.ui:138
+#: src/launcher/ui/widgetbox.ui:140
 msgid "_Manage Widgets"
 msgstr "_Zarządzaj widżetami"
 
-#: src/launcher/ui/widgetbox.ui:145
+#: src/launcher/ui/widgetbox.ui:147
 msgid "_Launcher Settings"
 msgstr "_Ustawienia launchera"
 
-#: src/launcher/ui/widgetbox.ui:150
+#: src/launcher/ui/widgetbox.ui:152
 msgid "A_bout Aspinwall"
 msgstr "_O Aspinwall"
 
@@ -445,34 +443,50 @@ msgstr "_O Aspinwall"
 msgid "Search widgets…"
 msgstr "Szukaj widżetów…"
 
+#. TRANSLATORS: Tooltip for the "Edit widget" button that appears when hovering over a widget
+#: src/launcher/ui/widgetview.ui:48
+#, fuzzy
+#| msgid "Add widgets"
+msgid "Edit widget"
+msgstr "Dodaj widżety"
+
+#: src/launcher/ui/widgetview.ui:94
+msgid "Close widget settings"
+msgstr "Zamknij ustawienia widżetu"
+
+#. TRANSLATORS: "Widget" here is singular; this is used for the widget-specific settings menu header
+#: src/launcher/ui/widgetview.ui:107 src/launcher/ui/widgetviewheader.ui:62
+msgid "Widget settings"
+msgstr "Ustawienia widżetu"
+
 #. TRANSLATORS: Tooltip for "remove widget" button
-#: src/launcher/ui/widgetheader.ui:18
+#: src/launcher/ui/widgetviewheader.ui:18
 msgid "Remove"
 msgstr "Usuń"
 
 #. TRANSLATORS: Tooltip for "move widget up" button in widget header
-#: src/launcher/ui/widgetheader.ui:88
+#: src/launcher/ui/widgetviewheader.ui:88
 msgid "Move up"
 msgstr "Przesuń w górę"
 
 #. TRANSLATORS: Tooltip for "move widget down" button in widget header
-#: src/launcher/ui/widgetheader.ui:103
+#: src/launcher/ui/widgetviewheader.ui:103
 msgid "Move down"
 msgstr "Przesuń w dół"
 
 #. TRANSLATORS: Tooltip for "exit widget edit mode"/close button on widget headers
-#: src/launcher/ui/widgetheader.ui:127
+#: src/launcher/ui/widgetviewheader.ui:127
 msgid "Exit editing mode"
 msgstr "Wyjdź z trybu edytowania"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/launcher_boxes.py:140
+#: src/launcher/widgetbox.py:126
 #, python-format
 msgid "Removed “%s”"
 msgstr "Usunięto „%s”"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/launcher_boxes.py:143
+#: src/launcher/widgetbox.py:129
 msgid "Undo"
 msgstr "Przywróć"
 
