@@ -62,7 +62,7 @@ class X11WindowInterface(ProtocolSpecificInterface):
 	"""
 	Interface for getting information about open windows, compatible with EWMH.
 	"""
-	__gtype_name_ = 'X11WindowInterface'
+	__gtype_name__ = 'X11WindowInterface'
 
 	windows = None
 
