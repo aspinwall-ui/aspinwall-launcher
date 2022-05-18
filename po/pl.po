@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-06 13:47+0200\n"
-"PO-Revision-Date: 2022-05-03 10:41+0000\n"
+"PO-Revision-Date: 2022-05-18 20:29+0000\n"
 "Last-Translator: knuxify <knuxfanwin8.mail@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/aspinwall-ui/"
 "aspinwall-shell/pl/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.12.1\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:6
 msgid "Widgets"
@@ -134,23 +134,22 @@ msgstr ""
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:95
 msgid "Time until idle mode activation"
-msgstr ""
+msgstr "Czas do aktywacji trybu spoczynku"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:96
 msgid ""
 "Amount of time (in seconds) after which the launcher goes into idle mode."
 msgstr ""
+"Ilość czasu (w sekundach) po której launcher przechodzi w tryb spoczynku."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:103
 #: src/launcher/ui/settings.ui:418
-#, fuzzy
-#| msgid "Clock"
 msgid "Clock size"
-msgstr "Zegar"
+msgstr "Rozmiar zegara"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:104
 msgid "Size of the clock in the launcher (0 - small, 1 - medium, 2 - large)."
-msgstr ""
+msgstr "Rozmiar zegara w launcherze (0 - mały, 1 - średni, 2 - duży)."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:111
 msgid "Favorite apps"
@@ -344,21 +343,21 @@ msgid "Follow system theme"
 msgstr "Przestrzegaj motywu systemu"
 
 #: src/launcher/ui/settings.ui:380
-#, fuzzy
-#| msgid "_Launcher Settings"
 msgid "Launcher"
-msgstr "_Ustawienia launchera"
+msgstr "Launcher"
 
 #. TRANSLATORS: "Idle mode" refers to the mode where, after a set time of inactivity, the widgets reduce their opacity and the app chooser/menu buttons disappear.
 #: src/launcher/ui/settings.ui:385
 msgid "Enter idle mode after:"
-msgstr ""
+msgstr "Przejdź w tryb spoczynku po:"
 
 #: src/launcher/ui/settings.ui:386
 msgid ""
 "In idle mode, after some time of inactivity, the opacity of the widgets is "
 "reduced, and the menu buttons are hidden."
 msgstr ""
+"W trybie spoczynku, po chwili braku aktywności, przezroczystość widżetów "
+"zostaje zwiększona, i przyciski menu zostają ukryte."
 
 #: src/launcher/ui/settings.ui:414
 msgid "Clock"
@@ -367,17 +366,17 @@ msgstr "Zegar"
 #. TRANSLATORS: Clock size option
 #: src/launcher/ui/settings.ui:427
 msgid "Small"
-msgstr ""
+msgstr "Mały"
 
 #. TRANSLATORS: Clock size option
 #: src/launcher/ui/settings.ui:429
 msgid "Medium"
-msgstr ""
+msgstr "Średni"
 
 #. TRANSLATORS: Clock size option
 #: src/launcher/ui/settings.ui:431
 msgid "Large"
-msgstr ""
+msgstr "Duży"
 
 #: src/launcher/ui/settings.ui:440
 msgid "Time and date format"
@@ -408,10 +407,8 @@ msgstr "Przywróć"
 
 #. TRANSLATORS: Tooltip for menu button in the launcher
 #: src/launcher/ui/widgetbox.ui:53
-#, fuzzy
-#| msgid "_Launcher Settings"
 msgid "Launcher configuration"
-msgstr "_Ustawienia launchera"
+msgstr "Konfiguracja launchera"
 
 #. TRANSLATORS: Tooltip for "Add widgets" button in widget management mode
 #: src/launcher/ui/widgetbox.ui:82
@@ -445,10 +442,8 @@ msgstr "Szukaj widżetów…"
 
 #. TRANSLATORS: Tooltip for the "Edit widget" button that appears when hovering over a widget
 #: src/launcher/ui/widgetview.ui:48
-#, fuzzy
-#| msgid "Add widgets"
 msgid "Edit widget"
-msgstr "Dodaj widżety"
+msgstr "Edytuj widżet"
 
 #: src/launcher/ui/widgetview.ui:94
 msgid "Close widget settings"
