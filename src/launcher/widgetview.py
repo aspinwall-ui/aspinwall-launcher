@@ -116,6 +116,7 @@ class WidgetView(Gtk.Box):
 	widget_settings_revealer = Gtk.Template.Child()
 	widget_settings_container = Gtk.Template.Child()
 	edit_button_revealer = Gtk.Template.Child()
+	edit_button = Gtk.Template.Child()
 
 	def __init__(self, widgetbox):
 		"""Initializes a widget display."""
@@ -163,11 +164,15 @@ class WidgetView(Gtk.Box):
 		dismiss_click.connect('pressed', self._widgetbox.exit_management_mode)
 		self.widget_content.add_controller(dismiss_click)
 
-		# Set up hover target
-		hover = Gtk.EventControllerMotion()
-		hover.connect('enter', self.reveal_edit_button)
-		hover.connect('leave', self.hide_edit_button)
-		self.container_overlay.add_controller(hover)
+		if widget.hide_edit_button:
+			self.edit_button.set_visible(False)
+			self.edit_button.set_sensitive(False)
+		else:
+			# Set up hover target
+			hover = Gtk.EventControllerMotion()
+			hover.connect('enter', self.reveal_edit_button)
+			hover.connect('leave', self.hide_edit_button)
+			self.container_overlay.add_controller(hover)
 
 	def remove(self):
 		"""Removes the widget from its parent WidgetBox."""
