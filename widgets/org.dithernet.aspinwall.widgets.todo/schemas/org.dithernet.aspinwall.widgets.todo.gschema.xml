@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schemalist>
+	<schema id="org.dithernet.aspinwall.widgets.Todo">
+		<key name="items" type="a(bs)">
+			<default>[]</default>
+			<summary>To-do list items</summary>
+		</key>
+	</schema>
+</schemalist>
