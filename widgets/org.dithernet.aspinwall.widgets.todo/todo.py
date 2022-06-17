@@ -17,6 +17,7 @@ class TodoItemBox(Gtk.Box, Dimmable):
 	def __init__(self, _parent):
 		"""Initializes the to-do list item."""
 		super().__init__(orientation=Gtk.Orientation.HORIZONTAL, hexpand=True)
+		_ = self.l
 		self._parent = _parent
 		self.add_css_class('dimmable')
 
@@ -100,6 +101,7 @@ class Todo(Widget):
 
 	def __init__(self, instance=0):
 		super().__init__(instance)
+		_ = self.l
 
 		# Load to-do list items from config
 		self.todo_items = Gio.ListStore(item_type=TodoItem)
