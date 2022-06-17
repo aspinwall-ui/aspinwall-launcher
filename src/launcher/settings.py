@@ -56,6 +56,10 @@ class WallpaperIcon(Gtk.FlowBoxChild):
 		new_config = config['available-wallpapers'].copy()
 		new_config.remove(self.wallpaper)
 		config['available-wallpapers'] = new_config
+		# If the removed wallpaper was selected, switch away from it to avoid
+		# undefined behavior
+		if self.wallpaper == config['wallpaper-path'] and config['available-wallpapers']:
+			config['wallpaper-path'] = config['available-wallpapers'][0]
 
 	# Drag source
 	def drag_prepare(self, *args):
@@ -82,6 +86,7 @@ class LauncherSettings(Adw.PreferencesWindow):
 	"""Launcher settings window."""
 	__gtype_name__ = 'LauncherSettings'
 
+	wallpaper_row = Gtk.Template.Child()
 	wallpaper_grid = Gtk.Template.Child()
 	wallpaper_style_combobox = Gtk.Template.Child()
 	wallpaper_color_button = Gtk.Template.Child()
@@ -188,11 +193,19 @@ class LauncherSettings(Adw.PreferencesWindow):
 
 		self.queue_draw()
 
+		if config['wallpaper-style'] == 0:
+			self.wallpaper_grid.set_sensitive(False)
+		else:
+			self.wallpaper_grid.set_sensitive(True)
+
+		if config['wallpaper-path'] not in current_config and current_config:
+			config['wallpaper-path'] = current_config[0]
+
 	def refresh_wallpaper_grid_selection(self, *args):
 		"""
 		Selects the wallpaper provided in wallpaper-path in the wallpaper grid.
 		"""
-		try:
+		if config['wallpaper-path'] in config['available-wallpapers']:
 			self.wallpaper_grid.select_child(
 				self.wallpaper_grid.get_child_at_index(
 					config['available-wallpapers'].index(
@@ -200,7 +213,7 @@ class LauncherSettings(Adw.PreferencesWindow):
 					)
 				)
 			)
-		except ValueError:
+		else:
 			if config['available-wallpapers']:
 				self.wallpaper_grid.select_child(
 					self.wallpaper_grid.get_child_at_index(0)
@@ -223,6 +236,10 @@ class LauncherSettings(Adw.PreferencesWindow):
 	def set_wallpaper_style(self, combobox, *args):
 		"""Sets the wallpaper style settings."""
 		config['wallpaper-style'] = int(combobox.get_active_id())
+		if config['wallpaper-style'] == 0:
+			self.wallpaper_grid.set_sensitive(False)
+		else:
+			self.wallpaper_grid.set_sensitive(True)
 
 	@Gtk.Template.Callback()
 	def set_wallpaper_color(self, button, *args):

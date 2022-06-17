@@ -172,7 +172,7 @@ def on_theme_preference_change(*args):
 def launcher_setup():
 	"""Commands that are launched before the launcher window is created."""
 	# Set up default wallpapers
-	if config['available-wallpapers'][0] == 'fixme':
+	if config['available-wallpapers'] and config['available-wallpapers'][0] == 'fixme':
 		wallpaper_files = []
 		wallpaper_paths = []
 		for filetype in ['jpg', 'png']:
