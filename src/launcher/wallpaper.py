@@ -192,7 +192,7 @@ class Wallpaper(Gtk.Stack, Dimmable):
 		# Do the crossfade
 		self.set_transition_duration(0)
 		self.set_visible_child(self.wallpaper_fade)
-		self.set_transition_duration(1000)
+		self.set_transition_duration(config['slideshow-switch-length'])
 		self.set_visible_child(self.wallpaper)
 
 		self.update_background_color()

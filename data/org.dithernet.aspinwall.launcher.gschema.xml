@@ -54,6 +54,14 @@
 			</description>
 		</key>
 
+		<key name="slideshow-switch-length" type="i">
+			<default>1000</default>
+			<summary>Slideshow switch length</summary>
+			<description>
+				Length of the transition between the current and newly selected wallpaper, in miliseconds. Set to 0 to disable.
+			</description>
+		</key>
+
 		<key name="slideshow-switch-delay" type="i">
 			<default>300</default>
 			<summary>Slideshow switch delay</summary>

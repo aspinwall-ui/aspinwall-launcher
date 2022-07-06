@@ -3,7 +3,7 @@
 Contains code for the launcher settings window. Not to be confused with the
 settings access backend, which is set up in config.py.
 """
-from gi.repository import Adw, GdkPixbuf, Gtk, Gdk, GObject
+from gi.repository import Adw, GdkPixbuf, Gtk, Gdk, Gio, GObject
 import threading
 
 from aspinwall.launcher.config import config
@@ -92,6 +92,7 @@ class LauncherSettings(Adw.PreferencesWindow):
 	wallpaper_color_button = Gtk.Template.Child()
 	slideshow_mode_toggle = Gtk.Template.Child()
 	slideshow_switch_delay_combobox = Gtk.Template.Child()
+	slideshow_switch_length_spinbutton = Gtk.Template.Child()
 
 	theme_toggle_start = Gtk.Template.Child()
 	theme_toggle_end = Gtk.Template.Child()
@@ -132,6 +133,13 @@ class LauncherSettings(Adw.PreferencesWindow):
 
 		self.refresh_wallpaper_grid_selection()
 		config.connect('changed::wallpaper-path', self.refresh_wallpaper_grid_selection)
+
+		config.bind('slideshow-switch-length',
+			self.slideshow_switch_length_spinbutton, 'value',
+			Gio.SettingsBindFlags.DEFAULT
+		)
+		self.slideshow_switch_length_spinbutton.set_increments(100, 250)
+		self.slideshow_switch_length_spinbutton.set_range(0, 9999)
 
 		self.wallpaper_style_combobox.set_active_id(str(config['wallpaper-style']))
 

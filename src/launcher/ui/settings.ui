@@ -281,6 +281,22 @@
 										</child>
 									</object>
 								</child>
+
+								<child>
+									<object class="AdwActionRow">
+										<property name="title" translatable="yes">Slideshow switch length</property>
+										<property name="sensitive" bind-source="slideshow_mode_toggle" bind-property="active"/>
+										<property name="subtitle" translatable="yes">Length of the transition between the current and newly selected wallpaper, in miliseconds. Set to 0 to disable.</property>
+
+										<child>
+											<object class="GtkSpinButton" id="slideshow_switch_length_spinbutton">
+												<property name="valign">center</property>
+												<property name="numeric">true</property>
+												<property name="digits">0</property>
+											</object>
+										</child>
+									</object>
+								</child>
 							</object>
 						</child>
 
@@ -467,7 +483,7 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
 												<signal name="changed" handler="change_time_format"/>
 											</object>
 										</child>
-									</object>
+]									</object>
 								</child>
 
 								<child>
