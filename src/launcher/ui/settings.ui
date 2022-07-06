@@ -246,7 +246,6 @@
 								<child type="action">
 									<object class="GtkSwitch" id="slideshow_mode_toggle">
 										<property name="valign">center</property>
-										<signal name="state-set" handler="toggle_slideshow_mode"/>
 									</object>
 								</child>
 
@@ -436,7 +435,6 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
 								<child>
 									<object class="GtkComboBoxText" id="clock_size_combobox">
 										<property name="valign">center</property>
-										<signal name="changed" handler="set_clock_size"/>
 
 										<items>
 											<!-- TRANSLATORS: Clock size option -->
@@ -480,7 +478,6 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
 										<child>
 											<object class="GtkEntry" id="time_format_entry">
 												<property name="valign">center</property>
-												<signal name="changed" handler="change_time_format"/>
 											</object>
 										</child>
 ]									</object>
@@ -493,7 +490,6 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
 										<child>
 											<object class="GtkEntry" id="date_format_entry">
 												<property name="valign">center</property>
-												<signal name="changed" handler="change_date_format"/>
 											</object>
 										</child>
 									</object>

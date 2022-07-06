@@ -148,13 +148,17 @@ class LauncherSettings(Adw.PreferencesWindow):
 		bg_color.parse('rgb' + str(config['wallpaper-color']))
 		self.wallpaper_color_button.set_rgba(bg_color)
 
-		self.slideshow_mode_toggle.set_active(config['slideshow-mode'])
-		self.clock_size_combobox.set_active(config['clock-size'])
+		config.bind('slideshow-mode', self.slideshow_mode_toggle, 'active',
+			Gio.SettingsBindFlags.DEFAULT
+		)
+		config.bind('clock-size', self.clock_size_combobox, 'active',
+			Gio.SettingsBindFlags.DEFAULT
+		)
 		self.slideshow_switch_delay_combobox.set_active_id(str(config['slideshow-switch-delay']))
 		self.idle_mode_delay_combobox.set_active_id(str(config['idle-mode-delay']))
 
-		self.time_format_entry.set_text(config['time-format'])
-		self.date_format_entry.set_text(config['date-format'])
+		config.bind('time-format', self.time_format_entry, 'text', Gio.SettingsBindFlags.DEFAULT)
+		config.bind('date-format', self.date_format_entry, 'text', Gio.SettingsBindFlags.DEFAULT)
 
 	def wallpaper_bind(self, wallpaper_path_string, *args):
 		"""Returns a WallpaperIcon for the path in the given StringObject."""
@@ -291,14 +295,6 @@ class LauncherSettings(Adw.PreferencesWindow):
 		self.queue_draw()
 
 	@Gtk.Template.Callback()
-	def toggle_slideshow_mode(self, switch, *args):
-		"""Toggles slideshow mode based on the switch position."""
-		if switch.get_active():
-			config['slideshow-mode'] = True
-		else:
-			config['slideshow-mode'] = False
-
-	@Gtk.Template.Callback()
 	def toggle_theme(self, button, *args):
 		"""
 		Changes the theme to light/dark based on the toggle button position.
@@ -319,25 +315,7 @@ class LauncherSettings(Adw.PreferencesWindow):
 			self.toggle_theme(self.theme_toggle_start)
 
 	@Gtk.Template.Callback()
-	def set_clock_size(self, combobox, *args):
-		"""Sets the clock size.."""
-		config['clock-size'] = int(combobox.get_active_id())
-
-	@Gtk.Template.Callback()
 	def reset_time_format(self, *args):
 		"""Resets the clock format settings to defaults."""
 		config.reset('time-format')
-		self.time_format_entry.set_text(config['time-format'])
-
 		config.reset('date-format')
-		self.date_format_entry.set_text(config['date-format'])
-
-	@Gtk.Template.Callback()
-	def change_time_format(self, text_field, *args):
-		"""Changes the clockbox time format based on the text field content."""
-		config['time-format'] = text_field.get_text()
-
-	@Gtk.Template.Callback()
-	def change_date_format(self, text_field, *args):
-		"""Changes the clockbox date format based on the text field content."""
-		config['date-format'] = text_field.get_text()
