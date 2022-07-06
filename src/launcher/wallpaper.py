@@ -76,13 +76,12 @@ class SlideshowManager:
 slideshow_manager = SlideshowManager()
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/wallpaper.ui')
-class Wallpaper(Gtk.Box, Dimmable):
+class Wallpaper(Gtk.Stack, Dimmable):
 	"""Wallpaper image that reads wallpaper data from the config."""
 	__gtype_name__ = 'Wallpaper'
 
 	wallpaper = Gtk.Template.Child()
 	wallpaper_fade = Gtk.Template.Child()
-	wallpaper_fade_drawable = Gtk.Template.Child()
 
 	_is_preview = False
 
@@ -101,12 +100,13 @@ class Wallpaper(Gtk.Box, Dimmable):
 		self.wallpaper.set_draw_func(self.draw)
 		self.wallpaper.connect('resize', self.update)
 
-		self.wallpaper_fade_drawable.set_draw_func(self.draw, 'fade_pixbuf')
+		self.wallpaper_fade.set_draw_func(self.draw, 'fade_pixbuf')
 
 		config.connect('changed::wallpaper-path', self.load_image_and_update)
 		config.connect('changed::wallpaper-style', self.load_image_and_update)
 		config.connect('changed::wallpaper-color', self.load_image_and_update)
 
+		self.connect('notify::transition-running', self.cleanup_fade)
 		self.connect('unrealize', self._destroy)
 
 	@GObject.Property(type=bool, default=False)
@@ -187,29 +187,22 @@ class Wallpaper(Gtk.Box, Dimmable):
 		Convenience function to call when the wallpaper is changed.
 		Automatically takes care of the wallpaper transition.
 		"""
-		self.wallpaper_fade_drawable.queue_draw()
-		_fade_thread = threading.Thread(target=self.crossfade_wallpaper, daemon=True)
-		_fade_thread.start()
+		self.wallpaper_fade.queue_draw()
+
+		# Do the crossfade
+		self.set_transition_duration(0)
+		self.set_visible_child(self.wallpaper_fade)
+		self.set_transition_duration(1000)
+		self.set_visible_child(self.wallpaper)
 
 		self.update_background_color()
 		self.set_image_from_config()
 		self.update()
 		self.wallpaper.queue_draw()
 
-	def crossfade_wallpaper(self, *args):
-		"""Convenience function for fading out the wallpaper."""
-		fading_out = str(uuid.uuid4())
-		self.fading_out = fading_out
-
-		self.wallpaper_fade.set_opacity(1)
-		while self.wallpaper_fade.get_opacity() > 0:
-			# Make sure another fadeout thread isn't running; if it is, let it
-			# take over control.
-			if self.fading_out != fading_out:
-				return
-			self.wallpaper_fade.set_opacity(self.wallpaper_fade.get_opacity() - 0.01)
-			time.sleep(0.01)
-		self.fading_out = False
+	def cleanup_fade(self, *args):
+		"""Clears the wallpaper fade buffer."""
+		self.fade_pixbuf = None
 
 	def blank_bg(self, width, height):
 		"""Returns an empty pixbuf, filled with the background color."""
