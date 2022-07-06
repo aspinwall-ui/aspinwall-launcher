@@ -26,13 +26,7 @@ def window():
 
 	import aspinwall.launcher.window
 
-	app = Adw.Application(application_id='org.dithernet.aspinwall.Launcher')
-	app.connect('activate', aspinwall.launcher.window.on_activate)
-
-	aspinwall.launcher.window.on_activate(app)
-
-	assert aspinwall.launcher.window.win is not None
-	return aspinwall.launcher.window.win
+	return aspinwall.launcher.window.Launcher(None)
 
 def test_app_chooser(window):
 	"""Tests the app chooser revealer."""

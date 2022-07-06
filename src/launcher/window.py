@@ -43,10 +43,10 @@ class Launcher(Gtk.ApplicationWindow):
 	focused = True
 	pause_focus_manager = False
 
-	def __init__(self, app, in_shell=False):
+	def __init__(self, application, in_shell=False):
 		"""Initializes the launcher window."""
 		super().__init__(
-			application=app,
+			application=application,
 			title='aspinwall-shell'
 		)
 
@@ -190,34 +190,33 @@ def launcher_setup():
 			config['wallpaper-path'] = ''
 			config['wallpaper-style'] = 0 # solid color
 
-def on_activate(app):
-	global running
-	if running:
-		return False
-	running = True
+class Application(Adw.Application):
+	def __init__(self):
+		super().__init__(application_id='org.dithernet.aspinwall.Launcher',
+						 resource_base_path='/org/dithernet/aspinwall/stylesheet')
 
-	launcher_setup()
+		style_manager = self.get_style_manager()
+		on_theme_preference_change()
+		config.connect('changed::theme-preference', on_theme_preference_change)
+		style_manager.connect('notify::color-scheme', on_theme_preference_change)
 
-	global win
-	win = Launcher(app)
+	def do_activate(self):
+		win = self.props.active_window
+		if not win:
+			launcher_setup()
+			win = Launcher(application=self)
+		win.present()
 
-	win.present()
-
-	if 'GTK_DEBUG' not in os.environ or not os.environ['GTK_DEBUG']:
-		win_surface = win.get_surface()
-		win.set_size_request(win_surface.get_width(), win_surface.get_height())
-		win.fullscreen()
-	else:
-		win.set_size_request(1270, 720)
+		if 'GTK_DEBUG' not in os.environ or not os.environ['GTK_DEBUG']:
+			win_surface = win.get_surface()
+			win.set_size_request(win_surface.get_width(), win_surface.get_height())
+			win.fullscreen()
+		else:
+			win.set_size_request(1270, 720)
 
 def main(version):
 	global _version
 	_version = version
-	app = Adw.Application(application_id='org.dithernet.aspinwall.Launcher')
-	app.set_resource_base_path('/org/dithernet/aspinwall/stylesheet')
-	style_manager = app.get_style_manager()
-	on_theme_preference_change()
-	config.connect('changed::theme-preference', on_theme_preference_change)
-	style_manager.connect('notify::color-scheme', on_theme_preference_change)
-	app.connect('activate', on_activate)
-	app.run()
+
+	app = Application()
+	return app.run()
