@@ -42,7 +42,14 @@ class AppIcon(Gtk.FlowBoxChild):
 	def bind_to_app(self, app):
 		"""Fills the AppIcon with an app's information."""
 		self.app = app
-		self.app_icon.set_from_gicon(app.get_icon())
+		if app.get_icon().get_names()[0] != 'org.gnome.Nautilus':
+			self.app_icon.set_from_gicon(app.get_icon())
+		else:
+			# FIXME: I hit an incredibly bizzare bug where trying to
+			# diisplay the Nautilus icon (and only this icon specifically)
+			# segfaults the entire program. This fixes it for now, but
+			# some kind of proper fix would be in order.
+			self.app_icon.set_from_icon_name('folder')
 		self.app_name.set_label(app.get_name())
 
 		longpress_gesture = Gtk.GestureLongPress()
