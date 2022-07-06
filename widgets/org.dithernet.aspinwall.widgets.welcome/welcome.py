@@ -24,7 +24,7 @@ class Welcome(Widget):
 			use_markup=True, hexpand=True,
 			margin_top=10, margin_bottom=10
 		)
-		header.add_css_class('large-title')
+		header.add_css_class('title-1')
 		self.content.append(header)
 
 		info_clamp = Adw.Clamp(maximum_size=700)
