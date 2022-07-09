@@ -235,6 +235,7 @@ class WidgetView(Gtk.Box):
 
 	def drag_begin(self, drag_source, *args):
 		"""Operations to perform when the drag operation starts."""
+		print(args)
 		drag_source.set_icon(
 			Gtk.WidgetPaintable(widget=self.container),
 			self.container.get_allocation().width / 2, 10

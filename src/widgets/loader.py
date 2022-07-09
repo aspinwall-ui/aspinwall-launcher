@@ -33,33 +33,33 @@ def load_available_widgets():
 		for widget_dir in os.listdir(dir):
 			if widget_dir == '__pycache__':
 				continue
-			for widget_file in os.listdir(os.path.join(dir, widget_dir)):
-				if widget_file.endswith('.py'):
-					widget = os.path.splitext(widget_file)[0]
-					widget_path = os.path.join(dir, widget_dir, widget_file)
 
-					spec = importlib.util.spec_from_file_location(widget, widget_path)
-					module = importlib.util.module_from_spec(spec)
-					spec.loader.exec_module(module)
+			widget_path = os.path.join(dir, widget_dir, '__widget__.py')
+			if not os.path.exists(widget_path):
+				continue
 
-					module_id = module._widget_class.metadata['id']
-					if module_id in loaded_ids.keys():
-						print(
-							'WARN: ID conflict between %s (loaded) and %s (attempted to load) while loading %s; ignoring file' # noqa: E501
-							% (loaded_ids[module_id].widget_path,
-							widget_path,
-							module_id)
-						)
-						continue
+			spec = importlib.util.spec_from_file_location('__widget__', widget_path)
+			module = importlib.util.module_from_spec(spec)
+			spec.loader.exec_module(module)
 
-					module._widget_class.widget_path = widget_path
+			module_id = module._widget_class.metadata['id']
+			if module_id in loaded_ids.keys():
+				print(
+					'WARN: ID conflict between %s (loaded) and %s (attempted to load) while loading %s; ignoring file' # noqa: E501
+					% (loaded_ids[module_id].widget_path,
+					widget_path,
+					module_id)
+				)
+				continue
 
-					if not module._widget_class:
-						print("No widget class in " + widget_file)
-						continue
+			if not module._widget_class:
+				print("No widget class in " + widget_path)
+				continue
 
-					loaded_ids[module_id] = module._widget_class
-					available_widgets.append(module._widget_class)
+			module._widget_class.widget_path = widget_path
+
+			loaded_ids[module_id] = module._widget_class
+			available_widgets.append(module._widget_class)
 
 	return available_widgets
 

@@ -32,7 +32,9 @@ When displayed in the launcher, the widget is wrapped in a `LauncherWidget` obje
 
 > Note: You can use our [widget template](https://github.com/aspinwall-ui/aspinwall-example-widget) to get an initial file layout.
 
-Create a new file called `widget.py` in your widget directory. This will be where our widget's code is stored.
+Aspinwall looks for the widget class in the `__widget__.py` file, which contains the `_widget_class` variable containing the class reference.
+
+Create a new file called `__widget__.py` in your widget directory. This will be where our widget's code is stored.
 
 Now, add the widget class to the file:
 
@@ -87,7 +89,7 @@ The default local folder for widgets is `~/.local/share/aspinwall/widgets`.
 To prepare a widget for installation:
 
  * Create a folder with the widget's ID in lowercase as the name
- * Place your widget's `.py` file into the folder
+ * Place your widget's `__widget__.py` file into the folder
  * If your widgets have schemas, place the compiled `gschemas.compiled` file into a subfolder named `schemas`.
 
 To install the widget, move it to the widget folder, whether it's the local one or the system one.
