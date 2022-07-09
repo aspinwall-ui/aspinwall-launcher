@@ -134,12 +134,12 @@ class LauncherSettings(Adw.PreferencesWindow):
 		self.refresh_wallpaper_grid_selection()
 		config.connect('changed::wallpaper-path', self.refresh_wallpaper_grid_selection)
 
+		self.slideshow_switch_length_spinbutton.set_increments(100, 250)
+		self.slideshow_switch_length_spinbutton.set_range(0, 9999)
 		config.bind('slideshow-switch-length',
 			self.slideshow_switch_length_spinbutton, 'value',
 			Gio.SettingsBindFlags.DEFAULT
 		)
-		self.slideshow_switch_length_spinbutton.set_increments(100, 250)
-		self.slideshow_switch_length_spinbutton.set_range(0, 9999)
 
 		self.wallpaper_style_combobox.set_active_id(str(config['wallpaper-style']))
 

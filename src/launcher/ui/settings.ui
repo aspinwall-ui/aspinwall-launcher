@@ -8,9 +8,9 @@
 		</style>
 		<child>
 			<object class="AdwPreferencesPage">
-		        <property name="icon_name">preferences-window-layout-symbolic</property>
-		        <property name="title">L_auncher</property>
-		        <property name="use-underline">True</property>
+						<property name="icon_name">preferences-window-layout-symbolic</property>
+						<property name="title">L_auncher</property>
+						<property name="use-underline">True</property>
 
 				<child>
 					<object class="AdwPreferencesGroup">
@@ -292,6 +292,7 @@
 												<property name="valign">center</property>
 												<property name="numeric">true</property>
 												<property name="digits">0</property>
+												<property name="width-chars">4</property>
 											</object>
 										</child>
 									</object>
