@@ -78,31 +78,31 @@
 
 						<!-- Settings header -->
 						<child>
-							<object class="GtkBox">
+							<object class="GtkCenterBox">
 								<property name="hexpand">true</property>
-								<property name="spacing">5</property>
 
 								<style>
 									<class name="header"/>
 								</style>
 
-								<child>
+								<child type="start">
 									<object class="GtkButton">
 										<property name="icon-name">go-previous-symbolic</property>
 										<property name="tooltip-text" translatable="yes">Close widget settings</property>
 										<signal name="clicked" handler="hide_widget_settings"/>
+
+										<style>
+											<class name="flat"/>
+										</style>
 									</object>
 								</child>
 
-								<child>
-									<object class="GtkSeparator"/>
-								</child>
-
 								<!-- Settings header title -->
-								<child>
+								<child type="center">
 									<object class="GtkLabel">
 										<!-- TRANSLATORS: "Widget" here is singular; this is used for the widget-specific settings menu header -->
 										<property name="label" translatable="yes">Widget settings</property>
+										<property name="justify">center</property>
 										<property name="hexpand">true</property>
 									</object>
 								</child>

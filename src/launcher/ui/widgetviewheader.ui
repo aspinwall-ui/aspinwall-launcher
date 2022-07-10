@@ -1,66 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <interface>
 	<requires lib="gtk" version="4.0"/>
-	<template class="WidgetViewHeader" parent="GtkBox">
+	<template class="WidgetViewHeader" parent="GtkCenterBox">
 		<property name="hexpand">true</property>
-		<property name="spacing">5</property>
 
 		<style>
+			<class name="header"/>
 			<class name="aspinwall-widget-header"/>
 		</style>
 
 		<!-- Delete button -->
 
-		<child>
-			<object class="GtkButton" id="widget_header_remove">
-				<property name="icon-name">user-trash-symbolic</property>
-				<!-- TRANSLATORS: Tooltip for "remove widget" button -->
-				<property name="tooltip-text" translatable="yes">Remove</property>
-				<signal name="clicked" handler="remove"/>
-
-				<style>
-					<class name="aspinwall-widget-remove"/>
-				</style>
-			</object>
-		</child>
-
-		<child>
-			<object class="GtkSeparator"/>
-		</child>
-
-		<!-- Header icon and title -->
-		<child>
+		<child type="start">
 			<object class="GtkBox">
-				<property name="hexpand">true</property>
-				<property name="spacing">5</property>
 				<child>
-					<object class="GtkImage" id="widget_header_icon">
-						<property name="visible">true</property>
-						<property name="icon-name">list-drag-handle-symbolic</property>
-					</object>
-				</child>
+					<object class="GtkButton" id="widget_header_remove">
+						<property name="icon-name">user-trash-symbolic</property>
+						<!-- TRANSLATORS: Tooltip for "remove widget" button -->
+						<property name="tooltip-text" translatable="yes">Remove</property>
+						<signal name="clicked" handler="remove"/>
 
-				<child>
-					<object class="GtkLabel" id="widget_header_title">
-						<property name="label">Widget</property>
-					</object>
-				</child>
-			</object>
-		</child>
-
-		<!-- Edit mode buttons -->
-		<child>
-			<object class="GtkBox" id="widget_header_buttons">
-				<property name="halign">end</property>
-				<property name="hexpand">true</property>
-
-				<child>
-					<object class="GtkButton" id="widget_settings_button">
-						<property name="icon-name">preferences-system-symbolic</property>
-						<property name="visible">false</property>
-						<property name="sensitive">false</property>
-						<property name="tooltip-text" translatable="yes">Widget settings</property>
-						<signal name="clicked" handler="show_widget_settings"/>
+						<style>
+							<class name="destructive-action"/>
+						</style>
 					</object>
 				</child>
 
@@ -110,26 +72,46 @@
 						</child>
 					</object>
 				</child>
+			</object>
+		</child>
 
+
+		<!-- Header title -->
+		<child type="center">
+			<object class="GtkLabel" id="widget_header_title">
+				<property name="label">Widget</property>
+				<property name="ellipsize">end</property>
+				<style>
+					<class name="heading"/>
+				</style>
+			</object>
+		</child>
+
+		<!-- Edit mode buttons -->
+		<child type="end">
+			<object class="GtkBox">
+				<property name="spacing">5</property>
 				<child>
-					<object class="GtkSeparator">
-						<property name="margin-start">5</property>
-						<property name="margin-end">5</property>
+					<object class="GtkButton" id="widget_settings_button">
+						<property name="icon-name">preferences-system-symbolic</property>
+						<property name="tooltip-text" translatable="yes">Widget settings</property>
+						<signal name="clicked" handler="show_widget_settings"/>
+
+						<style>
+							<class name="flat"/>
+						</style>
 					</object>
 				</child>
 
 				<child>
 					<object class="GtkButton" id="widget_header_hide">
 						<property name="icon-name">window-close-symbolic</property>
-						<property name="has-frame">false</property>
-						<property name="valign">center</property>
 						<!-- TRANSLATORS: Tooltip for "exit widget edit mode"/close button on widget headers -->
 						<property name="tooltip-text" translatable="yes">Exit editing mode</property>
 						<signal name="clicked" handler="hide"/>
 
 						<style>
-							<class name="aspinwall-widget-hide"/>
-							<class name="close"/>
+							<class name="flat"/>
 						</style>
 					</object>
 				</child>

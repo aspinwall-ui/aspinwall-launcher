@@ -7,11 +7,10 @@ from gi.repository import Gtk, Gdk, GObject
 from aspinwall.launcher.widgetmanager import widget_manager
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetviewheader.ui')
-class WidgetViewHeader(Gtk.Box):
+class WidgetViewHeader(Gtk.CenterBox):
 	"""Header for a WidgetView."""
 	__gtype_name__ = 'WidgetViewHeader'
 
-	icon = Gtk.Template.Child('widget_header_icon')
 	title = Gtk.Template.Child('widget_header_title')
 
 	widget_settings_button = Gtk.Template.Child()
@@ -24,11 +23,9 @@ class WidgetViewHeader(Gtk.Box):
 		self._widget = widget
 		self._widgetview = widgetview
 
-		if self._widget.has_settings_menu:
-			self.widget_settings_button.set_visible(True)
-			self.widget_settings_button.set_sensitive(True)
+		if not self._widget.has_settings_menu:
+			self.widget_settings_button.set_sensitive(False)
 
-		self.icon.set_from_icon_name(self._widget.metadata['icon'])
 		self.title.set_label(self._widget.metadata['name'])
 
 		self.add_controller(self._widgetview.drag_source)
