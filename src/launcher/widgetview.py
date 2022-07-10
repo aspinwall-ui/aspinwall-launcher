@@ -80,8 +80,7 @@ class WidgetViewHeader(Gtk.Box):
 	@Gtk.Template.Callback()
 	def show_widget_settings(self, *args):
 		"""Shows the widget settings overlay."""
-		self._widgetview.widget_settings_revealer.set_visible(True)
-		self._widgetview.widget_settings_revealer.set_reveal_child(True)
+		self._widgetview.container_stack.set_visible_child(self._widgetview.widget_settings_container)
 
 	def update_move_buttons(self):
 		"""
@@ -111,9 +110,9 @@ class WidgetView(Gtk.Box):
 	__gtype_name__ = 'WidgetView'
 
 	container = Gtk.Template.Child()
+	container_stack = Gtk.Template.Child()
 	container_overlay = Gtk.Template.Child()
 	widget_header_revealer = Gtk.Template.Child()
-	widget_settings_revealer = Gtk.Template.Child()
 	widget_settings_container = Gtk.Template.Child()
 	edit_button_revealer = Gtk.Template.Child()
 	edit_button = Gtk.Template.Child()
@@ -214,8 +213,7 @@ class WidgetView(Gtk.Box):
 	@Gtk.Template.Callback()
 	def hide_widget_settings(self, *args):
 		"""Hides the widget's settings menu."""
-		self.widget_settings_revealer.set_reveal_child(False)
-		self.widget_settings_revealer.set_visible(False)
+		self.container_stack.set_visible_child(self.container_overlay)
 
 	def reveal_edit_button(self, *args):
 		"""Reveals the edit button."""
