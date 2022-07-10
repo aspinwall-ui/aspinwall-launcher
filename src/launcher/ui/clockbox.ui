@@ -10,8 +10,7 @@
 
 		<property name="margin-top">30</property>
 		<property name="margin-bottom">30</property>
-		<property name="margin-start">30</property>
-		<property name="margin-end">30</property>
+		<property name="margin-start">35</property>
 
 		<style>
 			<class name="clockbox"/>
@@ -24,6 +23,7 @@
 				<property name="halign">start</property>
 				<style>
 					<class name="time"/>
+					<class name="numeric"/>
 				</style>
 			</object>
 		</child>
@@ -33,6 +33,7 @@
 				<property name="halign">start</property>
 				<style>
 					<class name="date"/>
+					<class name="numeric"/>
 				</style>
 			</object>
 		</child>

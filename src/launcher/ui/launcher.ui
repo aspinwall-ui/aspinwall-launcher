@@ -11,8 +11,25 @@
 			<object class="GtkOverlay" id="launcher_wallpaper_overlay">
 				<property name="hexpand">true</property>
 				<child>
-					<object class="Wallpaper" id="launcher_wallpaper"/>
+					<object class="GtkOverlay" id="wallpaper_overlay">
+						<property name="hexpand">true</property>
+						<child type="overlay">
+							<object class="GtkBox" id="wallpaper_bottom_gradient">
+								<property name="hexpand">true</property>
+								<property name="vexpand">true</property>
+
+								<style>
+									<class name="wallpaper-gradient"/>
+								</style>
+							</object>
+						</child>
+
+						<child>
+							<object class="Wallpaper" id="launcher_wallpaper"/>
+						</child>
+					</object>
 				</child>
+
 				<child type="overlay">
 					<object class="AdwFlap" id="launcher_flap">
 						<property name="fold-policy">always</property>

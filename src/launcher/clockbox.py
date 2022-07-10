@@ -43,9 +43,5 @@ class ClockBox(Gtk.Box, Dimmable):
 
 	def update(self, *args):
 		"""Updates the time and date on the clock."""
-		self.clockbox_time.set_markup(
-			'<span weight="bold">' + time.strftime(config['time-format']) + '</span>'
-		)
-		self.clockbox_date.set_markup(
-			'<span>' + time.strftime(config['date-format']) + '</span>'
-		)
+		self.clockbox_time.set_label(time.strftime(config['time-format']))
+		self.clockbox_date.set_label(time.strftime(config['date-format']))
