@@ -12,4 +12,3 @@ src/launcher/ui/widgetinfobox.ui
 src/launcher/clockbox.py
 src/launcher/widgetbox.py
 src/launcher/settings.py
-src/shell/ui/controlpanel.ui

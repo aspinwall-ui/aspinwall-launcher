@@ -1,1 +1,1 @@
-i18n.gettext('aspinwall', preset: 'glib')
+i18n.gettext('org.dithernet.aspinwall.Launcher', preset: 'glib')

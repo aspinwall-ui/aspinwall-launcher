@@ -6,9 +6,9 @@ daemon (utils/clock.py).
 from gi.repository import Gtk
 import time
 
-from aspinwall.utils.clock import clock_daemon
-from aspinwall.utils.dimmable import Dimmable
-from aspinwall.launcher.config import config
+from ..config import config
+from ..utils.clock import clock_daemon
+from ..utils.dimmable import Dimmable
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/clockbox.ui')
 class ClockBox(Gtk.Box, Dimmable):

@@ -24,9 +24,9 @@ def window():
 	)
 	launcher_resource._register()
 
-	import aspinwall.launcher.window
+	import aspinwall_launcher.window
 
-	return aspinwall.launcher.window.Launcher(None)
+	return aspinwall_launcher.window.Launcher(None)
 
 def test_app_chooser(window):
 	"""Tests the app chooser revealer."""

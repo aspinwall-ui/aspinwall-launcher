@@ -1,0 +1,10 @@
+#!/bin/sh
+if [ ! -e src ]; then echo "Not in aspinwall source directory"; exit 1; fi
+
+if [ -e output ]; then rm -r output; fi
+
+set -e
+meson --prefix=/tmp/aspinwall-launcher . output
+meson compile -C output
+meson install -C output
+GSETTINGS_SCHEMA_DIR=/tmp/aspinwall-launcher/share/glib-2.0/schemas GTK_DEBUG=interactive ASPINWALL_WIDGET_DIR=/tmp/aspinwall-launcher/share/aspinwall-launcher/widgets /tmp/aspinwall-launcher/bin/aspinwall-launcher

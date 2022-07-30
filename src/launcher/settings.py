@@ -6,7 +6,7 @@ settings access backend, which is set up in config.py.
 from gi.repository import Adw, GdkPixbuf, Gtk, Gdk, Gio, GObject
 import threading
 
-from aspinwall.launcher.config import config
+from ..config import config
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/wallpapericon.ui')
 class WallpaperIcon(Gtk.FlowBoxChild):

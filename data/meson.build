@@ -1,3 +1,4 @@
+pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
 gnome = import('gnome')
 
 gnome.compile_resources('aspinwall',
@@ -7,11 +8,9 @@ gnome.compile_resources('aspinwall',
   install_dir: pkgdatadir,
 )
 
-install_data('org.dithernet.aspinwall.launcher.gschema.xml',
-  install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
-)
+message(pkgdatadir)
 
-install_data('org.dithernet.aspinwall.shell.gschema.xml',
+install_data('org.dithernet.aspinwall.launcher.gschema.xml',
   install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
 )
 
@@ -26,14 +25,5 @@ conf = configuration_data()
 conf.set('VERSION', meson.project_version())
 conf.set('pkgdatadir', pkgdatadir)
 
-configure_file(
-  input: 'start-aspinwall.in',
-  output: 'start-aspinwall',
-  configuration: conf,
-  install: true,
-  install_dir: get_option('bindir')
-)
-
 subdir('icons')
 subdir('stylesheet')
-subdir('x11')

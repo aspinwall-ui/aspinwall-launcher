@@ -1,6 +1,6 @@
-#!/bin/sh
+#!@PYTHON@
 
-# Aspinwall launch script
+# aspinwall.in
 #
 # Copyright 2022 Aspinwall developers
 #
@@ -28,20 +28,36 @@
 # use or other dealings in this Software without prior written
 # authorization.
 
-VERSION=@VERSION@
+import os
+import locale
+import sys
+import signal
+import gettext
 
-available_modes='x11'
-mode=$1
+VERSION = '@VERSION@'
+pkgdatadir = '@pkgdatadir@'
+localedir = '@localedir@'
 
-if [ $mode = 'x11' ]; then
-	# The autostart starts the shell and compositor.
-	herbstluftwm -c "@pkgdatadir@/x11/autostart"
-elif [ $mode = 'version' ]; then
-	echo "Aspinwall $VERSION"
-	exit 0
-else
-	echo "Incorrect mode provided. Usage: start-aspinwall <mode>"
-	echo "Available modes:"
-	echo $available_modes
-	exit 1
-fi
+sys.path.insert(1, pkgdatadir)
+signal.signal(signal.SIGINT, signal.SIG_DFL)
+try:
+	locale.bindtextdomain('org.dithernet.aspinwall.Launcher', localedir)
+	locale.textdomain('org.dithernet.aspinwall.Launcher')
+except:
+	print("Python built without locale support, some translations may not work!")
+gettext.bindtextdomain('org.dithernet.aspinwall.Launcher', localedir)
+gettext.textdomain('org.dithernet.aspinwall.Launcher')
+gettext.install('org.dithernet.aspinwall.Launcher', localedir)
+
+if __name__ == '__main__':
+	import gi
+
+	from gi.repository import Gio
+	resource = Gio.Resource.load(os.path.join(pkgdatadir, 'aspinwall.gresource'))
+	resource._register()
+
+	launcher_resource = Gio.Resource.load(os.path.join(pkgdatadir, 'aspinwall.launcher.gresource'))
+	launcher_resource._register()
+
+	from aspinwall_launcher.main import main
+	sys.exit(main(VERSION))

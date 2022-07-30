@@ -7,7 +7,7 @@ gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 from uuid import uuid4
 
-from aspinwall.widgets import Widget
+from aspinwall_launcher.widgets import Widget
 
 class ExampleWidget(Widget):
 	"""Example widget class used for tests."""

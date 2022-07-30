@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+	<requires lib="gtk" version="4.0"/>
+	<requires lib="libadwaita" version="1.0"/>
+	<template class="LauncherSettings" parent="AdwPreferencesWindow">
+		<style>
+			<class name="launcher-settings"/>
+		</style>
+		<child>
+			<object class="AdwPreferencesPage">
+						<property name="icon_name">preferences-window-layout-symbolic</property>
+						<property name="title">L_auncher</property>
+						<property name="use-underline">True</property>
+
+				<child>
+					<object class="AdwPreferencesGroup">
+						<property name="title" translatable="yes">Wallpaper</property>
+
+						<child>
+							<object class="AdwPreferencesRow">
+								<property name="title" translatable="yes">Wallpaper preview</property>
+								<property name="activatable">False</property>
+
+								<style>
+									<class name="view"/>
+								</style>
+
+								<child>
+									<object class="GtkBox" id="wallpaper_preview_box">
+										<property name="hexpand">true</property>
+										<property name="halign">center</property>
+
+										<style>
+											<class name="wallpaper-preview-container"/>
+										</style>
+
+										<child>
+											<object class="GtkOverlay" id="wallpaper_preview_overlay">
+												<style>
+													<class name="wallpaper-preview"/>
+												</style>
+
+												<child type="overlay">
+													<object class="GtkLabel">
+														<property name="label">&lt;span weight="bold" font="12"&gt;00:00&lt;/span&gt;</property>
+														<property name="use-markup">true</property>
+														<property name="halign">start</property>
+														<property name="valign">end</property>
+
+														<property name="margin-top">6</property>
+														<property name="margin-bottom">6</property>
+														<property name="margin-start">6</property>
+														<property name="margin-end">6</property>
+
+														<style>
+															<class name="clockbox"/>
+														</style>
+													</object>
+												</child>
+
+												<child type="overlay">
+													<object class="GtkBox">
+														<property name="halign">start</property>
+														<property name="valign">start</property>
+
+														<property name="margin-top">6</property>
+														<property name="margin-bottom">6</property>
+														<property name="margin-start">6</property>
+														<property name="margin-end">6</property>
+
+														<style>
+															<class name="osd"/>
+															<class name="settings-mock-button"/>
+														</style>
+
+														<child>
+															<object class="GtkImage">
+																<property name="icon-name">view-grid-symbolic</property>
+															</object>
+														</child>
+													</object>
+												</child>
+
+												<child type="overlay">
+													<object class="GtkBox">
+														<property name="halign">end</property>
+														<property name="valign">start</property>
+
+														<property name="margin-top">6</property>
+														<property name="margin-bottom">6</property>
+														<property name="margin-start">6</property>
+														<property name="margin-end">6</property>
+
+														<style>
+															<class name="osd"/>
+															<class name="settings-mock-button"/>
+														</style>
+
+														<child>
+															<object class="GtkImage">
+																<property name="icon-name">open-menu-symbolic</property>
+															</object>
+														</child>
+													</object>
+												</child>
+
+												<child type="overlay">
+													<object class="GtkBox">
+														<property name="width-request">114</property>
+														<property name="height-request">60</property>
+														<property name="halign">end</property>
+														<property name="valign">end</property>
+
+														<property name="margin-top">6</property>
+														<property name="margin-bottom">6</property>
+														<property name="margin-start">6</property>
+														<property name="margin-end">6</property>
+
+														<style>
+															<class name="settings-mock-widget"/>
+														</style>
+													</object>
+												</child>
+
+												<child>
+													<object class="Wallpaper" id="wallpaper_preview">
+														<property name="is-preview">true</property>
+														<property name="width-request">240</property>
+														<property name="height-request">135</property>
+													</object>
+												</child>
+											</object>
+										</child>
+									</object>
+								</child>
+							</object>
+						</child>
+
+						<child>
+							<object class="AdwPreferencesRow" id="wallpaper_row">
+								<property name="title" translatable="yes">Available wallpapers</property>
+								<property name="activatable">False</property>
+
+								<child>
+									<object class="GtkBox">
+										<property name="orientation">vertical</property>
+
+										<child>
+											<object class="GtkBox">
+												<style>
+													<class name="wallpaper-grid-header"/>
+												</style>
+												<child>
+													<object class="GtkBox">
+														<property name="orientation">vertical</property>
+														<property name="valign">center</property>
+														<property name="hexpand">true</property>
+														<child>
+															<object class="GtkBox" id="wallpaper_title_box">
+																<property name="halign">start</property>
+																<property name="orientation">vertical</property>
+																<style>
+																	<class name="title"/>
+																</style>
+
+																<child>
+																	<object class="GtkLabel">
+																		<property name="label" translatable="yes">Available wallpapers</property>
+																		<property name="ellipsize">none</property>
+																		<property name="lines">0</property>
+																		<property name="wrap">True</property>
+																		<property name="wrap-mode">word-char</property>
+																		<property name="xalign">0</property>
+																	</object>
+																</child>
+
+																<child>
+																	<object class="GtkLabel">
+																		<!-- TRANSLATOR: For the "Available wallpapers" option; box can be translated as field -->
+																		<property name="label" translatable="yes">The images in this box are used for the slideshow mode if it's enabled.</property>
+																		<property name="ellipsize">none</property>
+																		<property name="lines">0</property>
+																		<property name="wrap">True</property>
+																		<property name="wrap-mode">word-char</property>
+																		<property name="xalign">0</property>
+
+																		<style>
+																			<class name="subtitle"/>
+																		</style>
+																	</object>
+																</child>
+															</object>
+														</child>
+													</object>
+												</child>
+
+												<child>
+													<object class="GtkBox">
+														<property name="spacing">12</property>
+
+														<child>
+															<object class="GtkButton">
+																<property name="valign">center</property>
+																<property name="halign">end</property>
+																<signal name="clicked" handler="show_wallpaper_add_dialog"/>
+
+																<style>
+																	<class name="flat"/>
+																</style>
+
+																<child>
+																	<object class="AdwButtonContent">
+																		<property name="icon-name">list-add-symbolic</property>
+																		<property name="label">Add wallpaper</property>
+																	</object>
+																</child>
+															</object>
+														</child>
+													</object>
+												</child>
+											</object>
+										</child>
+
+										<child>
+											<object class="GtkFlowBox" id="wallpaper_grid">
+												<property name="column-spacing">12</property>
+												<property name="row-spacing">12</property>
+												<signal name="child-activated" handler="set_wallpaper_from_grid"/>
+
+												<style>
+													<class name="view"/>
+													<class name="wallpaper-grid"/>
+												</style>
+											</object>
+										</child>
+									</object>
+								</child>
+							</object>
+						</child>
+
+						<child>
+							<object class="AdwExpanderRow">
+								<property name="title" translatable="yes">Slideshow mode</property>
+								<property name="subtitle" translatable="yes">In slideshow mode, the launcher automatically loops over available wallpapers.</property>
+
+								<child type="action">
+									<object class="GtkSwitch" id="slideshow_mode_toggle">
+										<property name="valign">center</property>
+									</object>
+								</child>
+
+								<child>
+									<object class="AdwActionRow">
+										<!-- TRANSLATORS: Used for the slideshow mode switch frequency -->
+										<property name="title" translatable="yes">Switch wallpaper every:</property>
+										<property name="sensitive" bind-source="slideshow_mode_toggle" bind-property="active"/>
+
+										<child>
+											<object class="GtkComboBoxText" id="slideshow_switch_delay_combobox">
+												<property name="valign">center</property>
+												<signal name="changed" handler="set_slideshow_switch_delay"/>
+
+												<items>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="60">1 minute</item>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="180">3 minutes</item>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="300">5 minutes</item>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="600">10 minutes</item>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="900">15 minutes</item>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="1800">30 minutes</item>
+													<!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
+													<item translatable="yes" id="3600">1 hour</item>
+												</items>
+											</object>
+										</child>
+									</object>
+								</child>
+
+								<child>
+									<object class="AdwActionRow">
+										<property name="title" translatable="yes">Slideshow switch length</property>
+										<property name="sensitive" bind-source="slideshow_mode_toggle" bind-property="active"/>
+										<property name="subtitle" translatable="yes">Length of the transition between the current and newly selected wallpaper, in miliseconds. Set to 0 to disable.</property>
+
+										<child>
+											<object class="GtkSpinButton" id="slideshow_switch_length_spinbutton">
+												<property name="valign">center</property>
+												<property name="numeric">true</property>
+												<property name="digits">0</property>
+												<property name="width-chars">4</property>
+											</object>
+										</child>
+									</object>
+								</child>
+							</object>
+						</child>
+
+						<child>
+							<object class="AdwActionRow">
+								<property name="title" translatable="yes">Wallpaper style</property>
+
+								<child>
+									<object class="GtkComboBoxText" id="wallpaper_style_combobox">
+										<property name="valign">center</property>
+										<signal name="changed" handler="set_wallpaper_style"/>
+
+										<items>
+											<!-- TRANSLATORS: Wallpaper scaling option -->
+											<item translatable="yes" id="0">Solid color</item>
+											<!-- TRANSLATORS: Wallpaper scaling option -->
+											<item translatable="yes" id="1">Scaled</item>
+											<!-- TRANSLATORS: Wallpaper scaling option -->
+											<item translatable="yes" id="2">Zoomed</item>
+										</items>
+									</object>
+								</child>
+							</object>
+						</child>
+
+						<child>
+							<object class="AdwActionRow">
+								<property name="title" translatable="yes">Wallpaper background color</property>
+								<!-- TRANSLATORS: Please use the quotation mark symbols appropriate for your language, not the default '"' symbol. (In Weblate, you can find shortcuts to the quotation mark symbols in the right corner above the translation field for your language.)
+If it's easier, you can simply describe these as "modes" and omit the quotation marks entirely, but if you're refering to the wallpaper style verbatim please add the quotes. -->
+								<property name="subtitle" translatable="yes">Used for the “Solid Color” wallpaper style, as well as the backdrop for the “Scaled” style.</property>
+
+								<child>
+									<object class="GtkColorButton" id="wallpaper_color_button">
+										<property name="valign">center</property>
+										<signal name="color-set" handler="set_wallpaper_color"/>
+									</object>
+								</child>
+							</object>
+						</child>
+					</object>
+				</child>
+
+				<child>
+					<object class="AdwPreferencesGroup">
+						<property name="title" translatable="yes">Theme</property>
+
+						<child>
+							<object class="AdwActionRow">
+								<property name="title" translatable="yes">Theme preference</property>
+
+								<child>
+									<object class="GtkBox" id="theme_toggle_box">
+										<property name="sensitive" bind-source="follow_system_theme_toggle" bind-property="active" bind-flags="invert-boolean"/>
+										<style>
+											<class name="linked"/>
+										</style>
+
+										<child>
+											<object class="GtkToggleButton" id="theme_toggle_start">
+												<property name="valign">center</property>
+												<!-- TRANSLATORS: This refers to the light theme. -->
+												<property name="label" translatable="yes">Light</property>
+												<signal name="toggled" handler="toggle_theme"/>
+											</object>
+										</child>
+
+										<child>
+											<object class="GtkToggleButton" id="theme_toggle_end">
+												<property name="valign">center</property>
+												<!-- TRANSLATORS: This refers to the dark theme. -->
+												<property name="label" translatable="yes">Dark</property>
+												<property name="group">theme_toggle_start</property>
+											</object>
+										</child>
+									</object>
+								</child>
+							</object>
+						</child>
+
+						<child>
+							<object class="AdwActionRow">
+								<property name="title" translatable="yes">Follow system theme</property>
+
+								<child>
+									<object class="GtkCheckButton" id="follow_system_theme_toggle">
+										<signal name="toggled" handler="toggle_follow_system_theme"/>
+									</object>
+								</child>
+							</object>
+						</child>
+					</object>
+				</child>
+
+				<child>
+					<object class="AdwPreferencesGroup">
+						<property name="title" translatable="yes">Launcher</property>
+
+						<child>
+							<object class="AdwActionRow">
+								<!-- TRANSLATORS: "Idle mode" refers to the mode where, after a set time of inactivity, the widgets reduce their opacity and the app chooser/menu buttons disappear. -->
+								<property name="title" translatable="yes">Enter idle mode after:</property>
+								<property name="subtitle" translatable="yes">In idle mode, after some time of inactivity, the opacity of the widgets is reduced, and the menu buttons are hidden.</property>
+
+								<child>
+									<object class="GtkComboBoxText" id="idle_mode_delay_combobox">
+										<property name="valign">center</property>
+										<signal name="changed" handler="set_idle_mode_delay"/>
+
+										<items>
+											<!-- TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence. -->
+											<item translatable="yes" id="60">1 minute</item>
+											<!-- TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence. -->
+											<item translatable="yes" id="180">3 minutes</item>
+											<!-- TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence. -->
+											<item translatable="yes" id="300">5 minutes</item>
+											<!-- TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence. -->
+											<item translatable="yes" id="600">10 minutes</item>
+											<!-- TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence. -->
+											<item translatable="yes" id="900">15 minutes</item>
+										</items>
+									</object>
+								</child>
+							</object>
+						</child>
+					</object>
+				</child>
+
+				<child>
+					<object class="AdwPreferencesGroup">
+						<property name="title" translatable="yes">Clock</property>
+
+						<child>
+							<object class="AdwActionRow">
+								<property name="title" translatable="yes">Clock size</property>
+
+								<child>
+									<object class="GtkComboBoxText" id="clock_size_combobox">
+										<property name="valign">center</property>
+
+										<items>
+											<!-- TRANSLATORS: Clock size option -->
+											<item translatable="yes" id="0">Small</item>
+											<!-- TRANSLATORS: Clock size option -->
+											<item translatable="yes" id="1">Medium</item>
+											<!-- TRANSLATORS: Clock size option -->
+											<item translatable="yes" id="2">Large</item>
+										</items>
+									</object>
+								</child>
+							</object>
+						</child>
+
+						<child>
+							<object class="AdwExpanderRow">
+								<property name="title" translatable="yes">Time and date format</property>
+								<property name="subtitle" translatable="yes">Set the format to use when displaying the time and date, following &lt;a href='https://docs.python.org/3/library/time.html#time.strftime'&gt;the time format string specification&lt;/a&gt;.</property>
+
+								<child>
+									<object class="AdwActionRow">
+										<!-- TRANSLATORS: Used for the "reset time format to default" option. -->
+										<property name="title" translatable="yes">Reset to defaults</property>
+										<property name="subtitle" translatable="yes">Sets the time format to default settings.</property>
+
+										<child>
+											<object class="GtkButton">
+												<!-- TRANSLATORS: Used for the "reset time format to default" option. -->
+												<property name="label" translatable="yes">Reset</property>
+												<property name="valign">center</property>
+												<signal name="clicked" handler="reset_time_format"/>
+											</object>
+										</child>
+									</object>
+								</child>
+
+								<child>
+									<object class="AdwActionRow">
+										<property name="title" translatable="yes">Time format string</property>
+
+										<child>
+											<object class="GtkEntry" id="time_format_entry">
+												<property name="valign">center</property>
+											</object>
+										</child>
+]									</object>
+								</child>
+
+								<child>
+									<object class="AdwActionRow">
+										<property name="title" translatable="yes">Date format string</property>
+
+										<child>
+											<object class="GtkEntry" id="date_format_entry">
+												<property name="valign">center</property>
+											</object>
+										</child>
+									</object>
+								</child>
+							</object>
+						</child>
+					</object>
+				</child>
+			</object>
+		</child>
+	</template>
+</interface>

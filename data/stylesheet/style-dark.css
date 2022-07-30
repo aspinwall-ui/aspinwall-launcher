@@ -16,8 +16,3 @@
 
 @define-color aspinwall_menu_header_bg #303030; /* @headerbar_bg_color */
 @define-color aspinwall_menu_header_fg #ffffff; /* @headerbar_fg_color */
-
-/* Shell colors are inherited from style.css */
-
-@import url('launcher.css');
-@import url('shell.css');

@@ -2,7 +2,7 @@
 """
 Welcome plugin for Aspinwall
 """
-from aspinwall.widgets import Widget
+from aspinwall_launcher.widgets import Widget
 from gi.repository import Gtk, Adw
 translatable = lambda message: message
 

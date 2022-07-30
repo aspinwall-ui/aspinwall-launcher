@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-	<gresource prefix="/org/dithernet/aspinwall">
+	<gresource prefix="/org/dithernet/aspinwall/launcher">
 		<file>stylesheet/style.css</file>
 		<file>stylesheet/style-dark.css</file>
 		<file>stylesheet/style-hc.css</file>
-		<file>stylesheet/shell.css</file>
 		<file>stylesheet/launcher.css</file>
 	</gresource>
 </gresources>

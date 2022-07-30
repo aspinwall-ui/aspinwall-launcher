@@ -4,9 +4,9 @@ Contains code for the widget chooser and widget infoboxes for the chooser.
 """
 from gi.repository import Gtk, Gio, GLib
 
-from aspinwall.launcher.widgetmanager import widget_manager
-from aspinwall.widgets.data import WidgetData
-from aspinwall.widgets.loader import available_widgets
+from .widgetmanager import widget_manager
+from ..widgets.data import WidgetData
+from ..widgets.loader import available_widgets
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetinfobox.ui')
 class WidgetInfobox(Gtk.Box):

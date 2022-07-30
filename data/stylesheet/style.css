@@ -19,15 +19,4 @@
 
 @define-color aspinwall_widget_header_close_bg rgba(0, 0, 0, 0.08);
 
-/* Shell */
-@define-color aspinwall_shell_bg            black;
-@define-color aspinwall_shell_fg            white;
-@define-color aspinwall_shell_border        #181818;
-@define-color aspinwall_shell_bg_secondary  #0c0c0c;
-@define-color aspinwall_shell_fg_secondary  white;
-
-@define-color aspinwall_notification_bg #282828;
-@define-color aspinwall_notification_fg white;
-
 @import url('launcher.css');
-@import url('shell.css');

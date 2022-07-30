@@ -39,7 +39,7 @@ Create a new file called `__widget__.py` in your widget directory. This will be 
 Now, add the widget class to the file:
 
 ```python
-from aspinwall.widgets import Widget
+from aspinwall_launcher.widgets import Widget
 from gi.repository import Gtk
 
 class MyWidget(Widget):

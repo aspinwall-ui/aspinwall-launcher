@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+	<requires lib="gtk" version="4.0"/>
+	<template class="WidgetView" parent="GtkBox">
+		<property name="orientation">vertical</property>
+
+		<style>
+			<class name="aspinwall-widget-wrapper"/>
+		</style>
+
+		<child>
+			<object class="GtkStack" id="container_stack">
+				<property name="transition-type">crossfade</property>
+
+				<child>
+					<object class="GtkOverlay" id="container_overlay">
+						<child>
+							<object class="GtkBox" id="container">
+								<property name="orientation">vertical</property>
+								<property name="valign">end</property>
+								<property name="hexpand">true</property>
+
+								<style>
+									<class name="aspinwall-widget"/>
+									<class name="dimmable"/>
+								</style>
+
+								<child>
+									<object class="GtkRevealer" id="widget_header_revealer">
+										<property name="hexpand">true</property>
+										<property name="transition-type">slide-up</property>
+										<!-- The widget header is added in-code, see launcher/widgets.py -->
+									</object>
+								</child>
+
+								<!-- The widget content is added in-code, see launcher/widgets.py -->
+							</object>
+						</child>
+
+						<child type="overlay">
+							<object class="GtkRevealer" id="edit_button_revealer">
+								<property name="margin-top">8</property>
+								<property name="margin-end">14</property>
+								<property name="halign">end</property>
+								<property name="valign">start</property>
+								<property name="transition-type">crossfade</property>
+
+								<child>
+									<object class="GtkButton" id="edit_button">
+										<property name="icon-name">document-edit-symbolic</property>
+										<!-- TRANSLATORS: Tooltip for the "Edit widget" button that appears when hovering over a widget -->
+										<property name="tooltip-text" translatable="yes">Edit widget</property>
+										<signal name="clicked" handler="reveal_header"/>
+										<style>
+											<class name="edit-button"/>
+										</style>
+									</object>
+								</child>
+							</object>
+						</child>
+					</object>
+				</child>
+
+				<child>
+					<object class="GtkBox" id="widget_settings_container">
+						<property name="orientation">vertical</property>
+
+						<property name="margin-top">4</property>
+						<property name="margin-bottom">4</property>
+						<property name="margin-start">10</property>
+						<property name="margin-end">10</property>
+
+						<property name="vexpand">true</property>
+
+						<style>
+							<class name="aspinwall-widget-settings"/>
+						</style>
+
+						<!-- Settings header -->
+						<child>
+							<object class="GtkCenterBox">
+								<property name="hexpand">true</property>
+
+								<style>
+									<class name="header"/>
+								</style>
+
+								<child type="start">
+									<object class="GtkButton">
+										<property name="icon-name">go-previous-symbolic</property>
+										<property name="tooltip-text" translatable="yes">Close widget settings</property>
+										<signal name="clicked" handler="hide_widget_settings"/>
+
+										<style>
+											<class name="flat"/>
+										</style>
+									</object>
+								</child>
+
+								<!-- Settings header title -->
+								<child type="center">
+									<object class="GtkLabel">
+										<!-- TRANSLATORS: "Widget" here is singular; this is used for the widget-specific settings menu header -->
+										<property name="label" translatable="yes">Widget settings</property>
+										<property name="justify">center</property>
+										<property name="hexpand">true</property>
+									</object>
+								</child>
+							</object>
+						</child>
+
+						<!-- The widget settings container is added in-code, see launcher/widgets.py -->
+					</object>
+				</child>
+			</object>
+		</child>
+	</template>
+</interface>

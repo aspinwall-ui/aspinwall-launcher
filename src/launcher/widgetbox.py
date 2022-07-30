@@ -6,10 +6,10 @@ from gi.repository import Adw, GLib, Gtk, Gio
 import threading
 import time
 
-from aspinwall.launcher.config import config
-from aspinwall.launcher.widgetmanager import widget_manager
-from aspinwall.launcher.widgetview import WidgetView
-import aspinwall.launcher.widget_chooser
+from ..config import config
+from .widgetmanager import widget_manager
+from .widgetview import WidgetView
+from . import widget_chooser as _global_widget_chooser
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetbox.ui')
 class WidgetBox(Gtk.Box):
@@ -54,7 +54,7 @@ class WidgetBox(Gtk.Box):
 		self.autorefresh_thread.start()
 
 		# Let the widget chooser know a widgetbox has been created
-		aspinwall.launcher.widget_chooser.widgetbox = self
+		_global_widget_chooser.widgetbox = self
 
 		self.widget_container.bind_model(widget_manager.widgets, self.bind)
 		widget_manager.widgets.connect('items-changed', self.update_move_buttons)

@@ -10,8 +10,8 @@ import traceback
 import time
 import uuid
 
-from aspinwall.utils.dimmable import Dimmable
-from aspinwall.launcher.config import config
+from ..config import config
+from ..utils.dimmable import Dimmable
 
 def color_to_pixel(color):
 	"""Turns RGB color value to pixel value."""

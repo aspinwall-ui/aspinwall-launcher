@@ -5,9 +5,9 @@ Contains code for the widget manager.
 from gi.repository import Gio
 import uuid
 
-from aspinwall.launcher.config import config
-from aspinwall.widgets import Widget
-from aspinwall.widgets.loader import (
+from ..config import config
+from ..widgets import Widget
+from ..widgets.loader import (
 	load_available_widgets,
 	get_widget_class_by_id
 )

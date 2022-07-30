@@ -12,12 +12,12 @@ meson compile -C output
 set +e
 
 glib-compile-schemas data
-mv src aspinwall
+mv src aspinwall_launcher
 
 GSETTINGS_SCHEMA_DIR=data xvfb-run python3 -m pytest
 ret=$?
 
 rm data/gschemas.compiled
-mv aspinwall src
+mv aspinwall_launcher src
 
 exit $ret

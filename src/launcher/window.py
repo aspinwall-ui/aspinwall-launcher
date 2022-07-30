@@ -1,28 +1,21 @@
 # coding: utf-8
 """Contains window creation code for the Aspinwall launcher"""
-from gi import require_version as gi_require_version
-gi_require_version("Gtk", "4.0")
-gi_require_version('Adw', '1')
 from gi.repository import Adw, Gtk, Gio
 from pathlib import Path
 import os
 import time
 import threading
 
-from aspinwall.launcher.config import config
+from ..config import config
 
 # The ClockBox, WidgetBox and AppChooser classes are imported to avoid
 # "invalid object type" errors.
-from aspinwall.launcher.clockbox import ClockBox # noqa: F401
-from aspinwall.launcher.widgetbox import WidgetBox # noqa: F401
-from aspinwall.launcher.app_chooser import AppChooser # noqa: F401
-from aspinwall.launcher.wallpaper import Wallpaper # noqa: F401
-from aspinwall.launcher.settings import LauncherSettings
-from aspinwall.launcher.about import AboutAspinwall
-
-win = None
-running = False
-_version = 0
+from .clockbox import ClockBox # noqa: F401
+from .widgetbox import WidgetBox # noqa: F401
+from .app_chooser import AppChooser # noqa: F401
+from .wallpaper import Wallpaper # noqa: F401
+from .settings import LauncherSettings
+from .about import AboutAspinwall
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/launcher.ui')
 class Launcher(Gtk.ApplicationWindow):
@@ -43,12 +36,13 @@ class Launcher(Gtk.ApplicationWindow):
 	focused = True
 	pause_focus_manager = False
 
-	def __init__(self, application, in_shell=False):
+	def __init__(self, application, in_shell=False, version='development'):
 		"""Initializes the launcher window."""
 		super().__init__(
 			application=application,
-			title='aspinwall-shell'
+			title='Launcher'
 		)
+		self.version = version
 
 		self.app_chooser_show.connect('clicked', self.show_app_chooser)
 
@@ -155,68 +149,5 @@ class Launcher(Gtk.ApplicationWindow):
 	def open_about(self, *args):
 		"""Opens the about window."""
 		about_dialog = AboutAspinwall()
-		about_dialog.set_version(_version)
+		about_dialog.set_version(self.version)
 		about_dialog.show()
-
-def on_theme_preference_change(*args):
-	"""Called when the theme preference changes."""
-	theme_preference = config['theme-preference']
-	style_manager = Adw.StyleManager.get_default()
-	if theme_preference == 1:
-		style_manager.set_color_scheme(Adw.ColorScheme.FORCE_LIGHT)
-	elif theme_preference == 2:
-		style_manager.set_color_scheme(Adw.ColorScheme.FORCE_DARK)
-	else:
-		style_manager.set_color_scheme(Adw.ColorScheme.DEFAULT)
-
-def launcher_setup():
-	"""Commands that are launched before the launcher window is created."""
-	# Set up default wallpapers
-	if config['available-wallpapers'] and config['available-wallpapers'][0] == 'fixme':
-		wallpaper_files = []
-		wallpaper_paths = []
-		for filetype in ['jpg', 'png']:
-			wallpaper_paths += list(Path('/usr/share/backgrounds').rglob('*.' + filetype))
-
-		for wallpaper in wallpaper_paths:
-			wallpaper_files.append(str(wallpaper))
-		config['available-wallpapers'] = wallpaper_files
-
-	if config['wallpaper-path'] == 'fixme':
-		wallpaper_files = config['available-wallpapers']
-		if wallpaper_files:
-			config['wallpaper-path'] = wallpaper_files[0]
-		else:
-			config['wallpaper-path'] = ''
-			config['wallpaper-style'] = 0 # solid color
-
-class Application(Adw.Application):
-	def __init__(self):
-		super().__init__(application_id='org.dithernet.aspinwall.Launcher',
-						 resource_base_path='/org/dithernet/aspinwall/stylesheet')
-
-		style_manager = self.get_style_manager()
-		on_theme_preference_change()
-		config.connect('changed::theme-preference', on_theme_preference_change)
-		style_manager.connect('notify::color-scheme', on_theme_preference_change)
-
-	def do_activate(self):
-		win = self.props.active_window
-		if not win:
-			launcher_setup()
-			win = Launcher(application=self)
-		win.present()
-
-		if 'GTK_DEBUG' not in os.environ or not os.environ['GTK_DEBUG']:
-			win_surface = win.get_surface()
-			win.set_size_request(win_surface.get_width(), win_surface.get_height())
-			win.fullscreen()
-		else:
-			win.set_size_request(1270, 720)
-
-def main(version):
-	global _version
-	_version = version
-
-	app = Application()
-	return app.run()

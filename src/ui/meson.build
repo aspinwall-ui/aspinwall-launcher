@@ -1,5 +1,5 @@
 pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
-submoduledir = join_paths(pkgdatadir, 'aspinwall_launcher', 'launcher')
+submoduledir = join_paths(pkgdatadir, 'aspinwall', 'launcher')
 
 launcher_ui_sources = [
   'about.ui',

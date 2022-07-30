@@ -1,5 +1,5 @@
 pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
-submoduledir = join_paths(pkgdatadir, 'aspinwall', 'widgets')
+submoduledir = join_paths(pkgdatadir, 'aspinwall_launcher', 'widgets')
 python = import('python')
 
 widgets_sources = [

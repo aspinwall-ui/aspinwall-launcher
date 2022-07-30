@@ -4,7 +4,6 @@ stylesheet_sources = [
   'style.css',
   'style-dark.css',
   'style-hc.css',
-  'shell.css',
   'launcher.css',
 ]
 

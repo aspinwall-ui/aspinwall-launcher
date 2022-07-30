@@ -4,7 +4,7 @@ Contains code for the app chooser.
 """
 from gi.repository import Gdk, GLib, Gio, Gtk
 
-from aspinwall.launcher.config import config
+from ..config import config
 
 # Used by AppIcon to find the app chooser revealer
 app_chooser = None

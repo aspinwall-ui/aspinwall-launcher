@@ -2,8 +2,8 @@
 """
 Simple to-do list plugin for Aspinwall
 """
-from aspinwall.widgets import Widget
-from aspinwall.utils.dimmable import Dimmable
+from aspinwall_launcher.widgets import Widget
+from aspinwall_launcher.utils.dimmable import Dimmable
 from gi.repository import Adw, Gtk, Gio, GObject
 translatable = lambda message: message
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-06 13:47+0200\n"
+"POT-Creation-Date: 2022-07-30 15:44+0200\n"
 "PO-Revision-Date: 2022-05-18 20:29+0000\n"
 "Last-Translator: knuxify <knuxfanwin8.mail@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/aspinwall-ui/"
@@ -30,7 +30,7 @@ msgid "Path to a wallpaper file."
 msgstr "Ścieżka do pliku tapety."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:23
-#: src/launcher/ui/settings.ui:289
+#: src/launcher/ui/settings.ui:305
 msgid "Wallpaper style"
 msgstr "Styl tapety"
 
@@ -41,7 +41,7 @@ msgstr ""
 "przybliżona)."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:31
-#: src/launcher/ui/settings.ui:311
+#: src/launcher/ui/settings.ui:327
 msgid "Wallpaper background color"
 msgstr "Kolor tła dla tapety"
 
@@ -84,20 +84,33 @@ msgstr ""
 "dostępnych tapet.."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:59
+#: src/launcher/ui/settings.ui:286
+#, fuzzy
+msgid "Slideshow switch length"
+msgstr "Odliczanie przełączenia tapety w trybie pokazu slajdów"
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:60
+#: src/launcher/ui/settings.ui:288
+msgid ""
+"Length of the transition between the current and newly selected wallpaper, "
+"in miliseconds. Set to 0 to disable."
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:67
 msgid "Slideshow switch delay"
 msgstr "Częstotliwość przełączenia tapety w trybie pokazu slajdów"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:60
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:68
 msgid "Time between each wallpaper switch in slideshow mode, in seconds."
 msgstr ""
 "Czas między każdym przełączeniem tapety w trybie pokazu slajdów, podany w "
 "sekundach."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:67
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:75
 msgid "Slideshow switch counter"
 msgstr "Odliczanie przełączenia tapety w trybie pokazu slajdów"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:68
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:76
 msgid ""
 "Used by the slideshow mode to keep track of the time remaining until the "
 "next wallpaper switch."
@@ -106,12 +119,12 @@ msgstr ""
 "przełączenia tapety."
 
 #. TRANSLATORS: This is for the light/dark mode switch; can be translated as "Preferred theme"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:77
-#: src/launcher/ui/settings.ui:333
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:85
+#: src/launcher/ui/settings.ui:349
 msgid "Theme preference"
 msgstr "Preferowany motyw"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:78
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:86
 msgid ""
 "Whether to use light theme, dark theme or follow system theme. (0 - follow "
 "system theme, 1 - light, 2 - dark)"
@@ -119,11 +132,11 @@ msgstr ""
 "Czy używać jasnego motywu, ciemnego motywu czy przestrzegać ustawień systemu."
 "(0 - przestrzegaj ustawień systemu, 1 - jasny, 2 - ciemny)"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:87
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:95
 msgid "Widget autorefresh delay"
 msgstr "Opóźnienie automatycznego odświeżania widżetów"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:88
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:96
 msgid ""
 "Amount of time (in seconds) between automatic widget refreshing. Set to 0 to "
 "disable autorefresh. (Default: 900 seconds - 15 minutes)"
@@ -132,31 +145,31 @@ msgstr ""
 "na 0 żeby wyłączyć automatyczne odświeżanie. (Domyślnie: 900 sekund - 15 "
 "minut)"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:95
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:103
 msgid "Time until idle mode activation"
 msgstr "Czas do aktywacji trybu spoczynku"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:96
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:104
 msgid ""
 "Amount of time (in seconds) after which the launcher goes into idle mode."
 msgstr ""
 "Ilość czasu (w sekundach) po której launcher przechodzi w tryb spoczynku."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:103
-#: src/launcher/ui/settings.ui:418
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:111
+#: src/launcher/ui/settings.ui:434
 msgid "Clock size"
 msgstr "Rozmiar zegara"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:104
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:112
 msgid "Size of the clock in the launcher (0 - small, 1 - medium, 2 - large)."
 msgstr "Rozmiar zegara w launcherze (0 - mały, 1 - średni, 2 - duży)."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:111
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:119
 msgid "Favorite apps"
 msgstr "Ulubione aplikacje"
 
 #. TRANSLATORS: ".desktop files" refers to a specific filetype. Do not translate the ".desktop" bit.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:113
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:121
 msgid ""
 "List of favorite apps for the app chooser, stored as paths to their .desktop "
 "files."
@@ -165,17 +178,17 @@ msgstr ""
 "ścieżek do ich plików .desktop."
 
 #. TRANSLATORS: This can also be translated as just "time format"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:120
-#: src/launcher/ui/settings.ui:462
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:128
+#: src/launcher/ui/settings.ui:477
 msgid "Time format string"
 msgstr "Format czasu"
 
 #. TRANSLATORS: Default time format string for your locale; should only contain the hour and minutes. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:122
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:130
 msgid "\"%H:%M\""
 msgstr "\"%H:%M\""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:123
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:131
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -184,17 +197,17 @@ msgstr ""
 "dokumentacji: https://docs.python.org/3/library/time.html#time.strftime."
 
 #. TRANSLATORS: This can also be translated as just "date format"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:130
-#: src/launcher/ui/settings.ui:475
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:138
+#: src/launcher/ui/settings.ui:489
 msgid "Date format string"
 msgstr "Format daty"
 
 #. TRANSLATORS: Default date format string for your locale; should contain the week day and date. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:132
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:140
 msgid "\"%A, %x\""
 msgstr "%A, %d %B, %Y"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:133
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:141
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -238,7 +251,7 @@ msgid "_Add to favorites"
 msgstr "_Dodaj do ulubionych"
 
 #. TRANSLATORS: Tooltip for the "open app chooser" button in the launcher
-#: src/launcher/ui/launcher.ui:56
+#: src/launcher/ui/launcher.ui:73
 msgid "Installed apps"
 msgstr "Zainstalowane aplikacje"
 
@@ -257,101 +270,101 @@ msgstr ""
 "Obrazy w tym polu są używane w trybie pokazu slajdów, jeśli jest on włączony."
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency
-#: src/launcher/ui/settings.ui:256
+#: src/launcher/ui/settings.ui:255
 msgid "Switch wallpaper every:"
 msgstr "Zmień tapetę co:"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
 #. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:266 src/launcher/ui/settings.ui:395
+#: src/launcher/ui/settings.ui:265 src/launcher/ui/settings.ui:411
 msgid "1 minute"
 msgstr "1 minutę"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
 #. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:268 src/launcher/ui/settings.ui:397
+#: src/launcher/ui/settings.ui:267 src/launcher/ui/settings.ui:413
 msgid "3 minutes"
 msgstr "3 minuty"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
 #. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:270 src/launcher/ui/settings.ui:399
+#: src/launcher/ui/settings.ui:269 src/launcher/ui/settings.ui:415
 msgid "5 minutes"
 msgstr "5 minut"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
 #. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:272 src/launcher/ui/settings.ui:401
+#: src/launcher/ui/settings.ui:271 src/launcher/ui/settings.ui:417
 msgid "10 minutes"
 msgstr "10 minut"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
 #. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:274 src/launcher/ui/settings.ui:403
+#: src/launcher/ui/settings.ui:273 src/launcher/ui/settings.ui:419
 msgid "15 minutes"
 msgstr "15 minut"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:276
+#: src/launcher/ui/settings.ui:275
 msgid "30 minutes"
 msgstr "30 minut"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:278
+#: src/launcher/ui/settings.ui:277
 msgid "1 hour"
 msgstr "1 godzinę"
 
 #. TRANSLATORS: Wallpaper scaling option
-#: src/launcher/ui/settings.ui:298
+#: src/launcher/ui/settings.ui:314
 msgid "Solid color"
 msgstr "Jednolity kolor"
 
 #. TRANSLATORS: Wallpaper scaling option
-#: src/launcher/ui/settings.ui:300
+#: src/launcher/ui/settings.ui:316
 msgid "Scaled"
 msgstr "Skalowana"
 
 #. TRANSLATORS: Wallpaper scaling option
-#: src/launcher/ui/settings.ui:302
+#: src/launcher/ui/settings.ui:318
 msgid "Zoomed"
 msgstr "Przybliżona"
 
 #. TRANSLATORS: Please use the quotation mark symbols appropriate for your language, not the default '"' symbol. (In Weblate, you can find shortcuts to the quotation mark symbols in the right corner above the translation field for your language.)
 #. If it's easier, you can simply describe these as "modes" and omit the quotation marks entirely, but if you're refering to the wallpaper style verbatim please add the quotes.
-#: src/launcher/ui/settings.ui:314
+#: src/launcher/ui/settings.ui:330
 msgid ""
 "Used for the “Solid Color” wallpaper style, as well as the backdrop for the "
 "“Scaled” style."
 msgstr "Użyte w trybie jednolitego koloru oraz jako tło w trybie skalowania."
 
-#: src/launcher/ui/settings.ui:329
+#: src/launcher/ui/settings.ui:345
 msgid "Theme"
 msgstr "Motyw"
 
 #. TRANSLATORS: This refers to the light theme.
-#: src/launcher/ui/settings.ui:346
+#: src/launcher/ui/settings.ui:362
 msgid "Light"
 msgstr "Jasny"
 
 #. TRANSLATORS: This refers to the dark theme.
-#: src/launcher/ui/settings.ui:355
+#: src/launcher/ui/settings.ui:371
 msgid "Dark"
 msgstr "Ciemny"
 
-#: src/launcher/ui/settings.ui:366
+#: src/launcher/ui/settings.ui:382
 msgid "Follow system theme"
 msgstr "Przestrzegaj motywu systemu"
 
-#: src/launcher/ui/settings.ui:380
+#: src/launcher/ui/settings.ui:396
 msgid "Launcher"
 msgstr "Launcher"
 
 #. TRANSLATORS: "Idle mode" refers to the mode where, after a set time of inactivity, the widgets reduce their opacity and the app chooser/menu buttons disappear.
-#: src/launcher/ui/settings.ui:385
+#: src/launcher/ui/settings.ui:401
 msgid "Enter idle mode after:"
 msgstr "Przejdź w tryb spoczynku po:"
 
-#: src/launcher/ui/settings.ui:386
+#: src/launcher/ui/settings.ui:402
 msgid ""
 "In idle mode, after some time of inactivity, the opacity of the widgets is "
 "reduced, and the menu buttons are hidden."
@@ -359,30 +372,30 @@ msgstr ""
 "W trybie spoczynku, po chwili braku aktywności, przezroczystość widżetów "
 "zostaje zwiększona, i przyciski menu zostają ukryte."
 
-#: src/launcher/ui/settings.ui:414
+#: src/launcher/ui/settings.ui:430
 msgid "Clock"
 msgstr "Zegar"
 
 #. TRANSLATORS: Clock size option
-#: src/launcher/ui/settings.ui:427
+#: src/launcher/ui/settings.ui:442
 msgid "Small"
 msgstr "Mały"
 
 #. TRANSLATORS: Clock size option
-#: src/launcher/ui/settings.ui:429
+#: src/launcher/ui/settings.ui:444
 msgid "Medium"
 msgstr "Średni"
 
 #. TRANSLATORS: Clock size option
-#: src/launcher/ui/settings.ui:431
+#: src/launcher/ui/settings.ui:446
 msgid "Large"
 msgstr "Duży"
 
-#: src/launcher/ui/settings.ui:440
+#: src/launcher/ui/settings.ui:455
 msgid "Time and date format"
 msgstr "Format czasu i daty"
 
-#: src/launcher/ui/settings.ui:441
+#: src/launcher/ui/settings.ui:456
 msgid ""
 "Set the format to use when displaying the time and date, following <a "
 "href='https://docs.python.org/3/library/time.html#time.strftime'>the time "
@@ -392,47 +405,47 @@ msgstr ""
 "library/time.html#time.strftime'>specyfikacji ciągów formatowania dat</a>."
 
 #. TRANSLATORS: Used for the "reset time format to default" option.
-#: src/launcher/ui/settings.ui:446
+#: src/launcher/ui/settings.ui:461
 msgid "Reset to defaults"
 msgstr "Przywróć domyślne ustawienia"
 
-#: src/launcher/ui/settings.ui:447
+#: src/launcher/ui/settings.ui:462
 msgid "Sets the time format to default settings."
 msgstr "Ustawia format czasu na domyślne ustawienie."
 
 #. TRANSLATORS: Used for the "reset time format to default" option.
-#: src/launcher/ui/settings.ui:452
+#: src/launcher/ui/settings.ui:467
 msgid "Reset"
 msgstr "Przywróć"
 
 #. TRANSLATORS: Tooltip for menu button in the launcher
-#: src/launcher/ui/widgetbox.ui:53
+#: src/launcher/ui/widgetbox.ui:54
 msgid "Launcher configuration"
 msgstr "Konfiguracja launchera"
 
 #. TRANSLATORS: Tooltip for "Add widgets" button in widget management mode
-#: src/launcher/ui/widgetbox.ui:82
+#: src/launcher/ui/widgetbox.ui:83
 msgid "Add widgets"
 msgstr "Dodaj widżety"
 
 #. TRANSLATORS: Tooltip for "Exit" button in widget management mode
-#: src/launcher/ui/widgetbox.ui:101
+#: src/launcher/ui/widgetbox.ui:102
 msgid "Exit widget management mode"
 msgstr "Wyjdź z trybu zarządzania widżetami"
 
-#: src/launcher/ui/widgetbox.ui:135
+#: src/launcher/ui/widgetbox.ui:136
 msgid "_Add Widgets…"
 msgstr "_Dodaj widżety…"
 
-#: src/launcher/ui/widgetbox.ui:140
+#: src/launcher/ui/widgetbox.ui:141
 msgid "_Manage Widgets"
 msgstr "_Zarządzaj widżetami"
 
-#: src/launcher/ui/widgetbox.ui:147
+#: src/launcher/ui/widgetbox.ui:148
 msgid "_Launcher Settings"
 msgstr "_Ustawienia launchera"
 
-#: src/launcher/ui/widgetbox.ui:152
+#: src/launcher/ui/widgetbox.ui:153
 msgid "A_bout Aspinwall"
 msgstr "_O Aspinwall"
 
@@ -441,97 +454,85 @@ msgid "Search widgets…"
 msgstr "Szukaj widżetów…"
 
 #. TRANSLATORS: Tooltip for the "Edit widget" button that appears when hovering over a widget
-#: src/launcher/ui/widgetview.ui:48
+#: src/launcher/ui/widgetview.ui:52
 msgid "Edit widget"
 msgstr "Edytuj widżet"
 
-#: src/launcher/ui/widgetview.ui:94
+#: src/launcher/ui/widgetview.ui:91
 msgid "Close widget settings"
 msgstr "Zamknij ustawienia widżetu"
 
 #. TRANSLATORS: "Widget" here is singular; this is used for the widget-specific settings menu header
-#: src/launcher/ui/widgetview.ui:107 src/launcher/ui/widgetviewheader.ui:62
+#: src/launcher/ui/widgetview.ui:104 src/launcher/ui/widgetviewheader.ui:97
 msgid "Widget settings"
 msgstr "Ustawienia widżetu"
 
 #. TRANSLATORS: Tooltip for "remove widget" button
-#: src/launcher/ui/widgetviewheader.ui:18
+#: src/launcher/ui/widgetviewheader.ui:20
 msgid "Remove"
 msgstr "Usuń"
 
 #. TRANSLATORS: Tooltip for "move widget up" button in widget header
-#: src/launcher/ui/widgetviewheader.ui:88
+#: src/launcher/ui/widgetviewheader.ui:50
 msgid "Move up"
 msgstr "Przesuń w górę"
 
 #. TRANSLATORS: Tooltip for "move widget down" button in widget header
-#: src/launcher/ui/widgetviewheader.ui:103
+#: src/launcher/ui/widgetviewheader.ui:65
 msgid "Move down"
 msgstr "Przesuń w dół"
 
 #. TRANSLATORS: Tooltip for "exit widget edit mode"/close button on widget headers
-#: src/launcher/ui/widgetviewheader.ui:127
+#: src/launcher/ui/widgetviewheader.ui:110
 msgid "Exit editing mode"
 msgstr "Wyjdź z trybu edytowania"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/widgetbox.py:126
+#: src/launcher/widgetbox.py:107
 #, python-format
 msgid "Removed “%s”"
 msgstr "Usunięto „%s”"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/widgetbox.py:129
+#: src/launcher/widgetbox.py:110
 msgid "Undo"
 msgstr "Przywróć"
 
-#: src/launcher/settings.py:236
+#: src/launcher/settings.py:265
 msgid "Add wallpaper"
 msgstr "Dodaj tapetę"
 
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:242
+#: src/launcher/settings.py:271
 msgid "_Cancel"
 msgstr "_Anuluj"
 
 #. noqa: F821
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:244
+#: src/launcher/settings.py:273
 msgid "_Select"
 msgstr "_Wybierz"
 
-#: src/shell/ui/controlpanel.ui:27
-msgid "Settings"
-msgstr "Ustawienia"
+#~ msgid "Settings"
+#~ msgstr "Ustawienia"
 
-#. TRANSLATORS: Used for the "shut down" button in the control panel
-#: src/shell/ui/controlpanel.ui:70
-msgid "Shut down"
-msgstr "Wyłącz"
+#~ msgid "Shut down"
+#~ msgstr "Wyłącz"
 
-#. TRANSLATORS: Used for the inactive state of the Wi-Fi button in the control panel
-#: src/shell/ui/controlpanel.ui:107
-msgid "Wi-Fi"
-msgstr "Wi-Fi"
+#~ msgid "Wi-Fi"
+#~ msgstr "Wi-Fi"
 
-#. TRANSLATORS: Used for the inactive state of the battery button in the control panel
-#: src/shell/ui/controlpanel.ui:122
-msgid "No battery"
-msgstr "Brak baterii"
+#~ msgid "No battery"
+#~ msgstr "Brak baterii"
 
-#. TRANSLATORS: Used for the microphone enable/disable button in the control panel
-#: src/shell/ui/controlpanel.ui:130
-msgid "Microphone"
-msgstr "Mikrofon"
+#~ msgid "Microphone"
+#~ msgstr "Mikrofon"
 
-#. TRANSLATORS: Used for the automatic rotation button
-#: src/shell/ui/controlpanel.ui:138
-msgid "Auto-rotation"
-msgstr "Automatyczny obrót"
+#~ msgid "Auto-rotation"
+#~ msgstr "Automatyczny obrót"
 
-#: src/shell/ui/controlpanel.ui:196
-msgid "No new notifications"
-msgstr "Brak nowych powiadomień"
+#~ msgid "No new notifications"
+#~ msgstr "Brak nowych powiadomień"
 
 #~ msgid "Use system wallpaper settings"
 #~ msgstr "Użyj systemowych ustawień tapety"
