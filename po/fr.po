@@ -411,8 +411,8 @@ msgid ""
 "format string specification</a>."
 msgstr ""
 "Définissez le format à utiliser lors de l'affichage de l'heure et de la "
-"date, en suivant <a href='https://docs.python.org/3/library/time.html#"
-"time.strftime'>la spécification de la chaîne de format de l'heure</a>."
+"date, en suivant <a href='https://docs.python.org/3/library/time.html#time."
+"strftime'>la spécification de la chaîne de format de l'heure</a>."
 
 #. TRANSLATORS: Used for the "reset time format to default" option.
 #: src/launcher/ui/settings.ui:461
