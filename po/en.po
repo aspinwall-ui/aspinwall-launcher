@@ -491,36 +491,3 @@ msgstr "_Cancel"
 #: src/launcher/settings.py:244
 msgid "_Select"
 msgstr "_Select"
-
-#: src/shell/ui/controlpanel.ui:27
-msgid "Settings"
-msgstr "Settings"
-
-#. TRANSLATORS: Used for the "shut down" button in the control panel
-#: src/shell/ui/controlpanel.ui:70
-msgid "Shut down"
-msgstr "Shut down"
-
-#. TRANSLATORS: Used for the inactive state of the Wi-Fi button in the control panel
-#: src/shell/ui/controlpanel.ui:107
-msgid "Wi-Fi"
-msgstr "Wi-Fi"
-
-#. TRANSLATORS: Used for the inactive state of the battery button in the control panel
-#: src/shell/ui/controlpanel.ui:122
-msgid "No battery"
-msgstr "No battery"
-
-#. TRANSLATORS: Used for the microphone enable/disable button in the control panel
-#: src/shell/ui/controlpanel.ui:130
-msgid "Microphone"
-msgstr "Microphone"
-
-#. TRANSLATORS: Used for the automatic rotation button
-#: src/shell/ui/controlpanel.ui:138
-msgid "Auto-rotation"
-msgstr "Auto-rotation"
-
-#: src/shell/ui/controlpanel.ui:196
-msgid "No new notifications"
-msgstr "No new notifications"
