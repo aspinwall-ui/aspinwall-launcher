@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: org.dithernet.aspinwall.Launcher\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-30 15:44+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-08-06 13:20+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/aspinwall-ui/"
+"aspinwall-launcher/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:6
 msgid "Widgets"
@@ -67,7 +70,7 @@ msgstr ""
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:50
 #: src/launcher/ui/settings.ui:243
 msgid "Slideshow mode"
-msgstr ""
+msgstr "Mode diaporama"
 
 #. TRANSLATORS: Alternatively, this can be translated as "the launcher automatically switches between available wallpapers".
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:52
