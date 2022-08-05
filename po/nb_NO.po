@@ -526,7 +526,6 @@ msgid "_Select"
 msgstr "_Velg"
 
 #, fuzzy
-#~| msgid "_Launcher Settings"
 #~ msgid "Settings"
 #~ msgstr "_Oppstarterinnstillinger"
 
