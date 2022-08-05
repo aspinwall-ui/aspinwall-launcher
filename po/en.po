@@ -1,10 +1,16 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-30 15:44+0200\n"
+"PO-Revision-Date: 2022-08-05 11:58+0000\n"
+"Last-Translator: knuxify <knuxfanwin8.mail@gmail.com>\n"
+"Language-Team: English <https://hosted.weblate.org/projects/aspinwall-ui/"
+"aspinwall-launcher/en/>\n"
+"Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:6
 msgid "Widgets"
@@ -77,9 +83,8 @@ msgstr ""
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:59
 #: src/launcher/ui/settings.ui:286
-#, fuzzy
 msgid "Slideshow switch length"
-msgstr "Slideshow switch counter"
+msgstr "Slideshow switch length"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:60
 #: src/launcher/ui/settings.ui:288
@@ -87,6 +92,8 @@ msgid ""
 "Length of the transition between the current and newly selected wallpaper, "
 "in miliseconds. Set to 0 to disable."
 msgstr ""
+"Length of the transition between the current and newly selected wallpaper, "
+"in miliseconds. Set to 0 to disable."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:67
 msgid "Slideshow switch delay"
