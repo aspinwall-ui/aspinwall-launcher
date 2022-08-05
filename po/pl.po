@@ -544,6 +544,5 @@ msgstr "_Wybierz"
 #~ msgid "Keeps the last slideshow switch countdown position."
 #~ msgstr "Przechowuje ostatnią pozycję odliczania przełączania tapety."
 
-#: src/shell/ui/controlpanel.ui:27
-msgid "Settings"
-msgstr "Ustawienia"
+#~ msgid "Settings"
+#~ msgstr "Ustawienia"

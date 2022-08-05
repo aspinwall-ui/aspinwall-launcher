@@ -402,8 +402,8 @@ msgid ""
 "format string specification</a>."
 msgstr ""
 "Sett formatet å bruke ved visning av tid og dato, i overensstemmelse med <a "
-"href=\"https://docs.python.org/3/library/time.html#time."
-"strftime\">spesifikasjonene for tidsformatsstrenger</a>."
+"href=\"https://docs.python.org/3/library/time.html#time.strftime"
+"\">spesifikasjonene for tidsformatsstrenger</a>."
 
 #. TRANSLATORS: Used for the "reset time format to default" option.
 #: src/launcher/ui/settings.ui:461
