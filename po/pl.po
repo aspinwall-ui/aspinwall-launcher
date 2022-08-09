@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-30 15:44+0200\n"
-"PO-Revision-Date: 2022-08-05 09:18+0000\n"
+"PO-Revision-Date: 2022-08-10 13:14+0000\n"
 "Last-Translator: knuxify <knuxfanwin8.mail@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/aspinwall-ui/"
 "aspinwall-launcher/pl/>\n"
@@ -85,7 +85,6 @@ msgstr ""
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:59
 #: src/launcher/ui/settings.ui:286
-#, fuzzy
 msgid "Slideshow switch length"
 msgstr "Odliczanie przełączenia tapety w trybie pokazu slajdów"
 
@@ -95,6 +94,8 @@ msgid ""
 "Length of the transition between the current and newly selected wallpaper, "
 "in miliseconds. Set to 0 to disable."
 msgstr ""
+"Długość zmiany między aktualną i nowo wybraną tapetą, w milisekundach. Ustaw "
+"na 0 aby wyłączyć."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:67
 msgid "Slideshow switch delay"
