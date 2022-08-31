@@ -1,4 +1,4 @@
-# Aspinwall Launcher <a href="https://hosted.weblate.org/engage/aspinwall-ui/"><img src="https://hosted.weblate.org/widgets/aspinwall-ui/-/aspinwall-launncher/svg-badge.svg" alt="Translation status" /></a>
+# Aspinwall Launcher <a href="https://hosted.weblate.org/engage/aspinwall-ui/"><img src="https://hosted.weblate.org/widgets/aspinwall-ui/-/aspinwall-launcher/svg-badge.svg" alt="Translation status" /></a>
 
 Smart display-esque launcher for mobile Linux
 
