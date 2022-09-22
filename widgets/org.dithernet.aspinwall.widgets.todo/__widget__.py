@@ -17,7 +17,7 @@ class TodoItemBox(Gtk.Box, Dimmable):
 	def __init__(self, _parent):
 		"""Initializes the to-do list item."""
 		super().__init__(orientation=Gtk.Orientation.HORIZONTAL, hexpand=True)
-		_ = self.l
+		_ = _parent.l
 		self._parent = _parent
 		self.add_css_class('dimmable')
 
