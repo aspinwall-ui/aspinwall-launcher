@@ -225,6 +225,8 @@ msgstr ""
 #: src/launcher/ui/about.ui:28
 msgid "Linux tablet UI with smart hub capabilities"
 msgstr ""
+"Interface utilisateur pour tablettes Linux avec fonctionnalités de hub "
+"intelligent"
 
 #. TRANSLATORS: You can also translate "contributors" as "programmers" or "developers".
 #: src/launcher/ui/about.ui:30
