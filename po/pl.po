@@ -514,9 +514,8 @@ msgstr "_Anuluj"
 msgid "_Select"
 msgstr "_Wybierz"
 
-#: src/shell/ui/controlpanel.ui:27
-msgid "Settings"
-msgstr "Ustawienia"
+#~ msgid "Settings"
+#~ msgstr "Ustawienia"
 
 #~ msgid "Shut down"
 #~ msgstr "Wyłącz"

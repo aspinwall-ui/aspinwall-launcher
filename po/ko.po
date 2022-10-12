@@ -55,8 +55,8 @@ msgid ""
 "background for scaled images), stored as an array of three integers: Red, "
 "Green, Blue (0-255)."
 msgstr ""
-"바탕 화면의 배경색 (\"단색\" 모드 또는 크기가 조정된 이미지의 배경)으로 "
-"빨강, 녹색, 파랑 (0-255)의 세 가지 정수 배열로 저장됩니다."
+"바탕 화면의 배경색 (\"단색\" 모드 또는 크기가 조정된 이미지의 배경)으로 빨"
+"강, 녹색, 파랑 (0-255)의 세 가지 정수 배열로 저장됩니다."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:40
 #: src/launcher/ui/settings.ui:141 src/launcher/ui/settings.ui:168
@@ -67,8 +67,9 @@ msgstr "사용 가능한 바탕 화면"
 msgid ""
 "List of wallpaper files available in the wallpaper picker in settings. Also "
 "used for the slideshow mode."
-msgstr "설정의 바탕 화면 선택기에서 사용할 수 있는 바탕 화면 파일 목록입니다. "
-"슬라이드쇼 모드에도 사용됩니다."
+msgstr ""
+"설정의 바탕 화면 선택기에서 사용할 수 있는 바탕 화면 파일 목록입니다. 슬라이"
+"드쇼 모드에도 사용됩니다."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:50
 #: src/launcher/ui/settings.ui:243
@@ -81,7 +82,8 @@ msgstr "슬라이드쇼 모드"
 msgid ""
 "In slideshow mode, the launcher automatically loops over available "
 "wallpapers."
-msgstr "슬라이드쇼 모드에서 실행기는 사용 가능한 바탕 화면을 자동으로 반복합니다."
+msgstr ""
+"슬라이드쇼 모드에서 실행기는 사용 가능한 바탕 화면을 자동으로 반복합니다."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:59
 #: src/launcher/ui/settings.ui:286
@@ -93,8 +95,9 @@ msgstr "슬라이드쇼 전환 길이"
 msgid ""
 "Length of the transition between the current and newly selected wallpaper, "
 "in miliseconds. Set to 0 to disable."
-msgstr "현재 바탕 화면과 새로 선택한 바탕 화면 사이의 전환 길이 (밀리초)입니다. "
-"비활성화하려면 0으로 설정합니다."
+msgstr ""
+"현재 바탕 화면과 새로 선택한 바탕 화면 사이의 전환 길이 (밀리초)입니다. 비활"
+"성화하려면 0으로 설정합니다."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:67
 msgid "Slideshow switch delay"
@@ -112,8 +115,9 @@ msgstr "슬라이드쇼 전환 카운터"
 msgid ""
 "Used by the slideshow mode to keep track of the time remaining until the "
 "next wallpaper switch."
-msgstr "다음 바탕 화면 전환까지 남은 시간을 추적하기 위해 슬라이드쇼 모드에서 "
-"사용됩니다."
+msgstr ""
+"다음 바탕 화면 전환까지 남은 시간을 추적하기 위해 슬라이드쇼 모드에서 사용됩"
+"니다."
 
 #. TRANSLATORS: This is for the light/dark mode switch; can be translated as "Preferred theme"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:85
@@ -126,8 +130,8 @@ msgid ""
 "Whether to use light theme, dark theme or follow system theme. (0 - follow "
 "system theme, 1 - light, 2 - dark)"
 msgstr ""
-"밝은 테마를 사용할지, 어두운 테마를 사용할지 또는 시스템 테마를 따를지 "
-"여부입니다. (0 - 시스템 테마 따름, 1 - 밝음, 2 - 어두움)"
+"밝은 테마를 사용할지, 어두운 테마를 사용할지 또는 시스템 테마를 따를지 여부입"
+"니다. (0 - 시스템 테마 따름, 1 - 밝음, 2 - 어두움)"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:95
 msgid "Widget autorefresh delay"
@@ -138,8 +142,8 @@ msgid ""
 "Amount of time (in seconds) between automatic widget refreshing. Set to 0 to "
 "disable autorefresh. (Default: 900 seconds - 15 minutes)"
 msgstr ""
-"자동 위젯 새로 고침 사이의 시간 (초)입니다. 자동 새로 고침을 비활성화하려면 "
-"0으로 설정합니다. (기본값: 900 초 - 15 분)"
+"자동 위젯 새로 고침 사이의 시간 (초)입니다. 자동 새로 고침을 비활성화하려면 0"
+"으로 설정합니다. (기본값: 900 초 - 15 분)"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:103
 msgid "Time until idle mode activation"
@@ -327,7 +331,8 @@ msgstr "확대"
 msgid ""
 "Used for the “Solid Color” wallpaper style, as well as the backdrop for the "
 "“Scaled” style."
-msgstr "\"단색\" 바탕 화면 스타일과 \"크기 조절\" 스타일의 바탕 화면에 사용됩니다."
+msgstr ""
+"\"단색\" 바탕 화면 스타일과 \"크기 조절\" 스타일의 바탕 화면에 사용됩니다."
 
 #: src/launcher/ui/settings.ui:345
 msgid "Theme"
@@ -360,8 +365,9 @@ msgstr "다음 후 유휴 모드로 전환:"
 msgid ""
 "In idle mode, after some time of inactivity, the opacity of the widgets is "
 "reduced, and the menu buttons are hidden."
-msgstr "유휴 모드에서 일정 시간 동안 활동이 없으면 위젯의 불투명도가 감소하고 메뉴 "
-"버튼이 숨겨집니다."
+msgstr ""
+"유휴 모드에서 일정 시간 동안 활동이 없으면 위젯의 불투명도가 감소하고 메뉴 버"
+"튼이 숨겨집니다."
 
 #: src/launcher/ui/settings.ui:430
 msgid "Clock"
@@ -392,8 +398,8 @@ msgid ""
 "href='https://docs.python.org/3/library/time.html#time.strftime'>the time "
 "format string specification</a>."
 msgstr ""
-"<a href='https://docs.python.org/3/library/time.html#time.strftime'>시간 "
-"형식 문자열 사양</a>에 따라 시간과 날짜를 표시할 때 사용할 형식을 설정합니다."
+"<a href='https://docs.python.org/3/library/time.html#time.strftime'>시간 형"
+"식 문자열 사양</a>에 따라 시간과 날짜를 표시할 때 사용할 형식을 설정합니다."
 
 #. TRANSLATORS: Used for the "reset time format to default" option.
 #: src/launcher/ui/settings.ui:461
