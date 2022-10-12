@@ -4,6 +4,7 @@ from gi import require_version as gi_require_version
 gi_require_version("Gtk", "4.0")
 gi_require_version('Adw', '1')
 import os
+from pathlib import Path
 
 from gi.repository import Adw, Gtk
 from .launcher.window import Launcher
