@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-12 19:46+0200\n"
-"PO-Revision-Date: 2022-08-05 11:58+0000\n"
+"PO-Revision-Date: 2022-10-17 00:56+0000\n"
 "Last-Translator: knuxify <knuxfanwin8.mail@gmail.com>\n"
 "Language-Team: English <https://hosted.weblate.org/projects/aspinwall-ui/"
 "aspinwall-launcher/en/>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.15-dev\n"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:6
 msgid "Widgets"
@@ -478,7 +478,7 @@ msgstr "Exit editing mode"
 
 #: src/launcher/ui/widgetinfobox.ui:44
 msgid "_Add"
-msgstr ""
+msgstr "_Add"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
 #: src/launcher/widgetbox.py:107
@@ -493,16 +493,14 @@ msgstr "Undo"
 
 #. TRANSLATORS: This can also be translated as "developers".
 #: src/launcher/window.py:154
-#, fuzzy
-#| msgid "Copyright © 2022 Aspinwall contributors"
 msgid "Aspinwall contributors"
-msgstr "Copyright © 2022 Aspinwall contributors"
+msgstr "Aspinwall contributors"
 
 #. TRANSLATORS: Set this to your name (and optionally the e-mail address).
 #. noqa: F821
 #: src/launcher/window.py:159 src/launcher/window.py:160
 msgid "translator-credits"
-msgstr ""
+msgstr "translator-credits"
 
 #: src/launcher/settings.py:265
 msgid "Add wallpaper"
