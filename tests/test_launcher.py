@@ -13,33 +13,33 @@ from gi.repository.Adw import Flap, ToastOverlay, ButtonContent, Leaflet, Status
 
 @pytest.fixture
 def window():
-	"""Creates the launcher window for use in later tests"""
-	resource = Gio.Resource.load(
-		os.path.join(os.getenv('PWD'), 'output', 'data', 'aspinwall.gresource')
-	)
-	resource._register()
+    """Creates the launcher window for use in later tests"""
+    resource = Gio.Resource.load(
+        os.path.join(os.getenv('PWD'), 'output', 'data', 'aspinwall.gresource')
+    )
+    resource._register()
 
-	launcher_resource = Gio.Resource.load(
-		os.path.join(os.getenv('PWD'), 'output', 'src', 'launcher', 'aspinwall.launcher.gresource')
-	)
-	launcher_resource._register()
+    launcher_resource = Gio.Resource.load(
+        os.path.join(os.getenv('PWD'), 'output', 'src', 'launcher', 'aspinwall.launcher.gresource')
+    )
+    launcher_resource._register()
 
-	import aspinwall_launcher.window
+    import aspinwall_launcher.window
 
-	return aspinwall_launcher.window.Launcher(None)
+    return aspinwall_launcher.window.Launcher(None)
 
 def test_app_chooser(window):
-	"""Tests the app chooser revealer."""
-	assert window.launcher_flap
+    """Tests the app chooser revealer."""
+    assert window.launcher_flap
 
-	window.show_app_chooser()
-	time.sleep(0.1)
-	window.launcher_flap.hide()
+    window.show_app_chooser()
+    time.sleep(0.1)
+    window.launcher_flap.hide()
 
 def test_widget_chooser(window):
-	"""Tests the widget chooser."""
-	assert window.widgetbox.widget_chooser
+    """Tests the widget chooser."""
+    assert window.widgetbox.widget_chooser
 
-	window.widgetbox.show_chooser()
-	time.sleep(0.1)
-	window.widgetbox.widget_chooser.hide()
+    window.widgetbox.show_chooser()
+    time.sleep(0.1)
+    window.widgetbox.widget_chooser.hide()
