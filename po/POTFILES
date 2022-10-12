@@ -1,5 +1,4 @@
 data/org.dithernet.aspinwall.launcher.gschema.xml
-src/launcher/ui/about.ui
 src/launcher/ui/appchooser.ui
 src/launcher/ui/appicon.ui
 src/launcher/ui/launcher.ui
@@ -11,4 +10,5 @@ src/launcher/ui/widgetviewheader.ui
 src/launcher/ui/widgetinfobox.ui
 src/launcher/clockbox.py
 src/launcher/widgetbox.py
+src/launcher/window.py
 src/launcher/settings.py

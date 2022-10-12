@@ -1,7 +1,6 @@
 # coding: utf-8
 """Contains window creation code for the Aspinwall launcher"""
 from gi.repository import Adw, Gtk, Gio
-from pathlib import Path
 import os
 import time
 import threading
@@ -15,7 +14,6 @@ from .widgetbox import WidgetBox # noqa: F401
 from .app_chooser import AppChooser # noqa: F401
 from .wallpaper import Wallpaper # noqa: F401
 from .settings import LauncherSettings
-from .about import AboutAspinwall
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/launcher.ui')
 class Launcher(Gtk.ApplicationWindow):
@@ -148,6 +146,17 @@ class Launcher(Gtk.ApplicationWindow):
 
     def open_about(self, *args):
         """Opens the about window."""
-        about_dialog = AboutAspinwall()
-        about_dialog.set_version(self.version)
+        about_dialog = Adw.AboutWindow(
+            modal=True, transient_for=self,
+            version=self.version,
+            application_name='Aspinwall Launcher',
+            # TRANSLATORS: This can also be translated as "developers".
+            developer_name=_('Aspinwall contributors'), # noqa: F821
+            license_type=Gtk.License.MIT_X11
+        )
+
+        # TRANSLATORS: Set this to your name (and optionally the e-mail address).
+        if _('translator-credits') != 'translator-credits': # noqa: F821
+            about_dialog.set_translator_credits(_('translator-credits')) # noqa: F821
+
         about_dialog.show()

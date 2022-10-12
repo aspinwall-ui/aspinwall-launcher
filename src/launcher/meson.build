@@ -11,7 +11,6 @@ gnome.compile_resources('aspinwall.launcher',
 
 launcher_sources = [
   '__init__.py',
-  'about.py',
   'app_chooser.py',
   'clockbox.py',
   'settings.py',
