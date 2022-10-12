@@ -49,6 +49,10 @@ class TodoItemBox(Gtk.Box, Dimmable):
             self.dim()
         else:
             self.undim()
+        # Workaround for issue where pressing the checkbox would trigger the
+        # long-press gesture
+        self.set_sensitive(False)
+        self.set_sensitive(True)
 
     def remove(self, *args):
         """Removes the item from the to-do list."""
@@ -115,7 +119,7 @@ class Todo(Widget):
 
         list_container = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         list_scroll = Gtk.ScrolledWindow(
-            height_request=220,
+            height_request=230,
             hscrollbar_policy=Gtk.PolicyType.NEVER
         )
         list_scroll.set_child(list_container)
