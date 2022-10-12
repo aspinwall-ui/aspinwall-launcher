@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.dithernet.aspinwall.Launcher\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-30 15:44+0200\n"
+"POT-Creation-Date: 2022-10-12 19:46+0200\n"
 "PO-Revision-Date: 2022-08-23 03:37+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/aspinwall-ui/"
@@ -220,18 +220,6 @@ msgstr ""
 "Chaîne de format de date pour l'horloge, utilisant le format décrit dans la "
 "documentation à l'adresse https://docs.python.org/3/library/time.html#time."
 "strftime."
-
-#. TRANSLATORS: This is the description, as seen in the about dialog.
-#: src/launcher/ui/about.ui:28
-msgid "Linux tablet UI with smart hub capabilities"
-msgstr ""
-"Interface utilisateur pour tablettes Linux avec fonctionnalités de hub "
-"intelligent"
-
-#. TRANSLATORS: You can also translate "contributors" as "programmers" or "developers".
-#: src/launcher/ui/about.ui:30
-msgid "Copyright © 2022 Aspinwall contributors"
-msgstr "Copyright © 2022 les contributeurs d'Aspinwall"
 
 #: src/launcher/ui/appchooser.ui:24
 msgid "Search apps…"
@@ -499,6 +487,10 @@ msgstr "Déplacer vers le bas"
 msgid "Exit editing mode"
 msgstr "Quitter le mode d'édition"
 
+#: src/launcher/ui/widgetinfobox.ui:44
+msgid "_Add"
+msgstr ""
+
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
 #: src/launcher/widgetbox.py:107
 #, python-format
@@ -509,6 +501,19 @@ msgstr "« %s » retiré"
 #: src/launcher/widgetbox.py:110
 msgid "Undo"
 msgstr "Annuler"
+
+#. TRANSLATORS: This can also be translated as "developers".
+#: src/launcher/window.py:154
+#, fuzzy
+#| msgid "Copyright © 2022 Aspinwall contributors"
+msgid "Aspinwall contributors"
+msgstr "Copyright © 2022 les contributeurs d'Aspinwall"
+
+#. TRANSLATORS: Set this to your name (and optionally the e-mail address).
+#. noqa: F821
+#: src/launcher/window.py:159 src/launcher/window.py:160
+msgid "translator-credits"
+msgstr ""
 
 #: src/launcher/settings.py:265
 msgid "Add wallpaper"
@@ -524,3 +529,8 @@ msgstr "_Annuler"
 #: src/launcher/settings.py:273
 msgid "_Select"
 msgstr "_Sélectionner"
+
+#~ msgid "Linux tablet UI with smart hub capabilities"
+#~ msgstr ""
+#~ "Interface utilisateur pour tablettes Linux avec fonctionnalités de hub "
+#~ "intelligent"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.dithernet.aspinwall.Launcher\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-30 15:44+0200\n"
+"POT-Creation-Date: 2022-10-12 19:46+0200\n"
 "PO-Revision-Date: 2022-10-07 10:17+0000\n"
 "Last-Translator: Hoseok Seo <ddinghoya@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/aspinwall-ui/"
@@ -211,16 +211,6 @@ msgid ""
 msgstr ""
 "https://docs.python.org/3/library/time.html#time.strftime의 설명서에 설명된 "
 "형식을 사용하는 시계의 날짜 형식 문자열입니다."
-
-#. TRANSLATORS: This is the description, as seen in the about dialog.
-#: src/launcher/ui/about.ui:28
-msgid "Linux tablet UI with smart hub capabilities"
-msgstr "스마트 허브 기능이 있는 리눅스 태블릿 UI"
-
-#. TRANSLATORS: You can also translate "contributors" as "programmers" or "developers".
-#: src/launcher/ui/about.ui:30
-msgid "Copyright © 2022 Aspinwall contributors"
-msgstr "저작권 © 2022 Aspinwall 기여자"
 
 #: src/launcher/ui/appchooser.ui:24
 msgid "Search apps…"
@@ -484,6 +474,10 @@ msgstr "아래로 이동"
 msgid "Exit editing mode"
 msgstr "편집 모드 종료"
 
+#: src/launcher/ui/widgetinfobox.ui:44
+msgid "_Add"
+msgstr ""
+
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
 #: src/launcher/widgetbox.py:107
 #, python-format
@@ -494,6 +488,19 @@ msgstr "제거된 \"%s\""
 #: src/launcher/widgetbox.py:110
 msgid "Undo"
 msgstr "실행 취소"
+
+#. TRANSLATORS: This can also be translated as "developers".
+#: src/launcher/window.py:154
+#, fuzzy
+#| msgid "Copyright © 2022 Aspinwall contributors"
+msgid "Aspinwall contributors"
+msgstr "저작권 © 2022 Aspinwall 기여자"
+
+#. TRANSLATORS: Set this to your name (and optionally the e-mail address).
+#. noqa: F821
+#: src/launcher/window.py:159 src/launcher/window.py:160
+msgid "translator-credits"
+msgstr ""
 
 #: src/launcher/settings.py:265
 msgid "Add wallpaper"
@@ -509,3 +516,6 @@ msgstr "_취소"
 #: src/launcher/settings.py:273
 msgid "_Select"
 msgstr "_선택"
+
+#~ msgid "Linux tablet UI with smart hub capabilities"
+#~ msgstr "스마트 허브 기능이 있는 리눅스 태블릿 UI"

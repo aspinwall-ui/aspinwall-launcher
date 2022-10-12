@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-30 15:44+0200\n"
+"POT-Creation-Date: 2022-10-12 19:46+0200\n"
 "PO-Revision-Date: 2022-08-05 11:58+0000\n"
 "Last-Translator: knuxify <knuxfanwin8.mail@gmail.com>\n"
 "Language-Team: English <https://hosted.weblate.org/projects/aspinwall-ui/"
@@ -210,16 +210,6 @@ msgid ""
 msgstr ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
-
-#. TRANSLATORS: This is the description, as seen in the about dialog.
-#: src/launcher/ui/about.ui:28
-msgid "Linux tablet UI with smart hub capabilities"
-msgstr "Linux tablet UI with smart hub capabilities"
-
-#. TRANSLATORS: You can also translate "contributors" as "programmers" or "developers".
-#: src/launcher/ui/about.ui:30
-msgid "Copyright © 2022 Aspinwall contributors"
-msgstr "Copyright © 2022 Aspinwall contributors"
 
 #: src/launcher/ui/appchooser.ui:24
 msgid "Search apps…"
@@ -486,6 +476,10 @@ msgstr "Move down"
 msgid "Exit editing mode"
 msgstr "Exit editing mode"
 
+#: src/launcher/ui/widgetinfobox.ui:44
+msgid "_Add"
+msgstr ""
+
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
 #: src/launcher/widgetbox.py:107
 #, python-format
@@ -496,6 +490,19 @@ msgstr "Removed “%s”"
 #: src/launcher/widgetbox.py:110
 msgid "Undo"
 msgstr "Undo"
+
+#. TRANSLATORS: This can also be translated as "developers".
+#: src/launcher/window.py:154
+#, fuzzy
+#| msgid "Copyright © 2022 Aspinwall contributors"
+msgid "Aspinwall contributors"
+msgstr "Copyright © 2022 Aspinwall contributors"
+
+#. TRANSLATORS: Set this to your name (and optionally the e-mail address).
+#. noqa: F821
+#: src/launcher/window.py:159 src/launcher/window.py:160
+msgid "translator-credits"
+msgstr ""
 
 #: src/launcher/settings.py:265
 msgid "Add wallpaper"
@@ -511,6 +518,9 @@ msgstr "_Cancel"
 #: src/launcher/settings.py:273
 msgid "_Select"
 msgstr "_Select"
+
+#~ msgid "Linux tablet UI with smart hub capabilities"
+#~ msgstr "Linux tablet UI with smart hub capabilities"
 
 #~ msgid "Settings"
 #~ msgstr "Settings"
