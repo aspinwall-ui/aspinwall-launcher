@@ -1,158 +1,158 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <interface>
-	<requires lib="adw" version="1.0"/>
-	<requires lib="gtk" version="4.0"/>
-	<template class="WidgetBox" parent="GtkBox">
-		<style>
-			<class name="widgetbox"/>
-		</style>
+  <requires lib="adw" version="1.0"/>
+  <requires lib="gtk" version="4.0"/>
+  <template class="WidgetBox" parent="GtkBox">
+    <style>
+      <class name="widgetbox"/>
+    </style>
 
-		<child>
-			<object class="GtkOverlay">
-				<property name="vexpand">True</property>
-				<child>
-					<object class="GtkScrolledWindow">
-						<property name="margin-bottom">15</property>
-						<property name="hscrollbar-policy">never</property>
+    <child>
+      <object class="GtkOverlay">
+        <property name="vexpand">True</property>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="margin-bottom">15</property>
+            <property name="hscrollbar-policy">never</property>
 
-						<child>
-							<object class="GtkListBox" id="widget_container">
-								<property name="valign">end</property>
-								<property name="halign">fill</property>
-								<property name="hexpand">True</property>
-								<property name="vexpand">True</property>
+            <child>
+              <object class="GtkListBox" id="widget_container">
+                <property name="valign">end</property>
+                <property name="halign">fill</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
 
-								<property name="margin-top">50</property>
-								<property name="margin-start">10</property>
-								<property name="margin-end">10</property>
+                <property name="margin-top">50</property>
+                <property name="margin-start">10</property>
+                <property name="margin-end">10</property>
 
-								<style>
-									<class name="widget-container"/>
-								</style>
-							</object>
-						</child>
-					</object>
-				</child>
+                <style>
+                  <class name="widget-container"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
 
-				<child type="overlay">
-					<object class="GtkRevealer" id="chooser_button_revealer">
-						<property name="valign">start</property>
-						<property name="halign">end</property>
-						<property name="reveal-child">true</property>
-						<child>
-							<object class="GtkBox">
-								<child>
-									<object class="GtkMenuButton">
-										<property name="icon-name">open-menu-symbolic</property>
-										<property name="valign">start</property>
-										<property name="halign">end</property>
-										<property name="margin-top">10</property>
-										<property name="margin-end">10</property>
-										<property name="menu-model">widgetbox-menu</property>
-										<property name="primary">true</property>
-										<!-- TRANSLATORS: Tooltip for menu button in the launcher -->
-										<property name="tooltip-text" translatable="yes">Launcher configuration</property>
+        <child type="overlay">
+          <object class="GtkRevealer" id="chooser_button_revealer">
+            <property name="valign">start</property>
+            <property name="halign">end</property>
+            <property name="reveal-child">true</property>
+            <child>
+              <object class="GtkBox">
+                <child>
+                  <object class="GtkMenuButton">
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="valign">start</property>
+                    <property name="halign">end</property>
+                    <property name="margin-top">10</property>
+                    <property name="margin-end">10</property>
+                    <property name="menu-model">widgetbox-menu</property>
+                    <property name="primary">true</property>
+                    <!-- TRANSLATORS: Tooltip for menu button in the launcher -->
+                    <property name="tooltip-text" translatable="yes">Launcher configuration</property>
 
-										<style>
-											<class name="osd"/>
-											<class name="aspinwall-osd"/>
-										</style>
-									</object>
-								</child>
-							</object>
-						</child>
-					</object>
-				</child>
+                    <style>
+                      <class name="osd"/>
+                      <class name="aspinwall-osd"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
 
-				<child type="overlay">
-					<object class="GtkRevealer" id="management_buttons_revealer">
-						<property name="valign">start</property>
-						<property name="reveal-child">false</property>
-						<child>
-							<object class="GtkBox">
-								<property name="hexpand">true</property>
+        <child type="overlay">
+          <object class="GtkRevealer" id="management_buttons_revealer">
+            <property name="valign">start</property>
+            <property name="reveal-child">false</property>
+            <child>
+              <object class="GtkBox">
+                <property name="hexpand">true</property>
 
-								<child>
-									<object class="GtkButton">
-										<property name="icon-name">list-add-symbolic</property>
-										<property name="valign">start</property>
-										<property name="halign">start</property>
-										<property name="margin-top">10</property>
-										<property name="margin-start">10</property>
-										<!-- TRANSLATORS: Tooltip for "Add widgets" button in widget management mode -->
-										<property name="tooltip-text" translatable="yes">Add widgets</property>
-										<signal name="clicked" handler="show_chooser"/>
+                <child>
+                  <object class="GtkButton">
+                    <property name="icon-name">list-add-symbolic</property>
+                    <property name="valign">start</property>
+                    <property name="halign">start</property>
+                    <property name="margin-top">10</property>
+                    <property name="margin-start">10</property>
+                    <!-- TRANSLATORS: Tooltip for "Add widgets" button in widget management mode -->
+                    <property name="tooltip-text" translatable="yes">Add widgets</property>
+                    <signal name="clicked" handler="show_chooser"/>
 
-										<style>
-											<class name="osd"/>
-											<class name="aspinwall-osd"/>
-										</style>
-									</object>
-								</child>
+                    <style>
+                      <class name="osd"/>
+                      <class name="aspinwall-osd"/>
+                    </style>
+                  </object>
+                </child>
 
-								<child>
-									<object class="GtkButton">
-										<property name="icon-name">window-close-symbolic</property>
-										<property name="valign">start</property>
-										<property name="hexpand">true</property>
-										<property name="halign">end</property>
-										<property name="margin-top">10</property>
-										<property name="margin-end">10</property>
-										<!-- TRANSLATORS: Tooltip for "Exit" button in widget management mode -->
-										<property name="tooltip-text" translatable="yes">Exit widget management mode</property>
-										<signal name="clicked" handler="exit_management_mode"/>
+                <child>
+                  <object class="GtkButton">
+                    <property name="icon-name">window-close-symbolic</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">true</property>
+                    <property name="halign">end</property>
+                    <property name="margin-top">10</property>
+                    <property name="margin-end">10</property>
+                    <!-- TRANSLATORS: Tooltip for "Exit" button in widget management mode -->
+                    <property name="tooltip-text" translatable="yes">Exit widget management mode</property>
+                    <signal name="clicked" handler="exit_management_mode"/>
 
-										<style>
-											<class name="osd"/>
-											<class name="aspinwall-osd"/>
-										</style>
-									</object>
-								</child>
-							</object>
-						</child>
-					</object>
-				</child>
+                    <style>
+                      <class name="osd"/>
+                      <class name="aspinwall-osd"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
 
-				<child type="overlay">
-					<object class="AdwToastOverlay" id="toast_overlay">
-						<property name="valign">start</property>
-						<!--<property name="halign">center</property>
-						<property name="hexpand">true</property>-->
-						<property name="margin-start">72</property>
-						<property name="margin-end">72</property>
-					</object>
-				</child>
+        <child type="overlay">
+          <object class="AdwToastOverlay" id="toast_overlay">
+            <property name="valign">start</property>
+            <!--<property name="halign">center</property>
+            <property name="hexpand">true</property>-->
+            <property name="margin-start">72</property>
+            <property name="margin-end">72</property>
+          </object>
+        </child>
 
-				<child type="overlay">
-					<object class="WidgetChooser" id="widget_chooser"/>
-				</child>
-			</object>
-		</child>
-	</template>
-	<menu id="widgetbox-menu">
-		<section>
-			<item>
-				<attribute name='icon'>list-add-symbolic</attribute>
-				<attribute name='label' translatable='yes'>_Add Widgets…</attribute>
-				<attribute name='action'>win.show_widget_chooser</attribute>
-			</item>
-			<item>
-				<attribute name='icon'>list-add-symbolic</attribute>
-				<attribute name='label' translatable='yes'>_Manage Widgets</attribute>
-				<attribute name='action'>win.enter_widget_management</attribute>
-			</item>
-		</section>
-		<section>
-			<item>
-				<attribute name='icon'>preferences-system-symbolic</attribute>
-				<attribute name='label' translatable='yes'>_Launcher Settings</attribute>
-				<attribute name='action'>win.open_settings</attribute>
-			</item>
-			<item>
-				<attribute name='icon'>help-about-symbolic</attribute>
-				<attribute name='label' translatable='yes'>A_bout Aspinwall</attribute>
-				<attribute name='action'>win.about_aspinwall</attribute>
-			</item>
-		</section>
-	</menu>
+        <child type="overlay">
+          <object class="WidgetChooser" id="widget_chooser"/>
+        </child>
+      </object>
+    </child>
+  </template>
+  <menu id="widgetbox-menu">
+    <section>
+      <item>
+        <attribute name='icon'>list-add-symbolic</attribute>
+        <attribute name='label' translatable='yes'>_Add Widgets…</attribute>
+        <attribute name='action'>win.show_widget_chooser</attribute>
+      </item>
+      <item>
+        <attribute name='icon'>list-add-symbolic</attribute>
+        <attribute name='label' translatable='yes'>_Manage Widgets</attribute>
+        <attribute name='action'>win.enter_widget_management</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name='icon'>preferences-system-symbolic</attribute>
+        <attribute name='label' translatable='yes'>_Launcher Settings</attribute>
+        <attribute name='action'>win.open_settings</attribute>
+      </item>
+      <item>
+        <attribute name='icon'>help-about-symbolic</attribute>
+        <attribute name='label' translatable='yes'>A_bout Aspinwall</attribute>
+        <attribute name='action'>win.about_aspinwall</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>

@@ -10,65 +10,65 @@ user_widget_dir = os.path.join(GLib.get_user_data_dir(), 'aspinwall', 'widgets')
 widget_dirs = [user_widget_dir]
 
 if not os.path.exists(user_widget_dir):
-	os.makedirs(user_widget_dir)
+    os.makedirs(user_widget_dir)
 
 for data_dir in GLib.get_system_data_dirs():
-	dir = os.path.join(data_dir, 'aspinwall', 'widgets')
-	if not os.path.exists(dir):
-		continue
-	widget_dirs.append(dir)
+    dir = os.path.join(data_dir, 'aspinwall', 'widgets')
+    if not os.path.exists(dir):
+        continue
+    widget_dirs.append(dir)
 
 if os.getenv('ASPINWALL_WIDGET_DIR'):
-	widget_dirs += [os.getenv('ASPINWALL_WIDGET_DIR')]
+    widget_dirs += [os.getenv('ASPINWALL_WIDGET_DIR')]
 
 available_widgets = []
 
 def load_available_widgets():
-	"""
-	Loads widgets from files into the available_widgets variable, and
-	returns the list of available widgets.
-	"""
-	loaded_ids = {}
-	for dir in widget_dirs:
-		for widget_dir in os.listdir(dir):
-			if widget_dir == '__pycache__':
-				continue
+    """
+    Loads widgets from files into the available_widgets variable, and
+    returns the list of available widgets.
+    """
+    loaded_ids = {}
+    for dir in widget_dirs:
+        for widget_dir in os.listdir(dir):
+            if widget_dir == '__pycache__':
+                continue
 
-			widget_path = os.path.join(dir, widget_dir, '__widget__.py')
-			if not os.path.exists(widget_path):
-				continue
+            widget_path = os.path.join(dir, widget_dir, '__widget__.py')
+            if not os.path.exists(widget_path):
+                continue
 
-			spec = importlib.util.spec_from_file_location('__widget__', widget_path)
-			module = importlib.util.module_from_spec(spec)
-			spec.loader.exec_module(module)
+            spec = importlib.util.spec_from_file_location('__widget__', widget_path)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
 
-			module_id = module._widget_class.metadata['id']
-			if module_id in loaded_ids.keys():
-				print(
-					'WARN: ID conflict between %s (loaded) and %s (attempted to load) while loading %s; ignoring file' # noqa: E501
-					% (loaded_ids[module_id].widget_path,
-					widget_path,
-					module_id)
-				)
-				continue
+            module_id = module._widget_class.metadata['id']
+            if module_id in loaded_ids.keys():
+                print(
+                    'WARN: ID conflict between %s (loaded) and %s (attempted to load) while loading %s; ignoring file' # noqa: E501
+                    % (loaded_ids[module_id].widget_path,
+                    widget_path,
+                    module_id)
+                )
+                continue
 
-			if not module._widget_class:
-				print("No widget class in " + widget_path)
-				continue
+            if not module._widget_class:
+                print("No widget class in " + widget_path)
+                continue
 
-			module._widget_class.widget_path = widget_path
+            module._widget_class.widget_path = widget_path
 
-			loaded_ids[module_id] = module._widget_class
-			available_widgets.append(module._widget_class)
+            loaded_ids[module_id] = module._widget_class
+            available_widgets.append(module._widget_class)
 
-	return available_widgets
+    return available_widgets
 
 def get_widget_class_by_id(widget_id):
-	"""
-	Takes a widget ID and returns the widget class of the widget with the
-	provided ID, if available. Returns None if not found.
-	"""
-	for widget in available_widgets:
-		if widget.metadata['id'] == widget_id:
-			return widget
-	return None
+    """
+    Takes a widget ID and returns the widget class of the widget with the
+    provided ID, if available. Returns None if not found.
+    """
+    for widget in available_widgets:
+        if widget.metadata['id'] == widget_id:
+            return widget
+    return None

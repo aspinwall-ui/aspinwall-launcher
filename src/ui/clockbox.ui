@@ -1,41 +1,41 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <interface>
-	<requires lib="gtk" version="4.0"/>
-	<template class="ClockBox" parent="GtkBox">
-		<property name="orientation">vertical</property>
-		<property name="visible">True</property>
-		<property name="valign">end</property>
-		<property name="halign">start</property>
-		<property name="vexpand">True</property>
+  <requires lib="gtk" version="4.0"/>
+  <template class="ClockBox" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <property name="visible">True</property>
+    <property name="valign">end</property>
+    <property name="halign">start</property>
+    <property name="vexpand">True</property>
 
-		<property name="margin-top">30</property>
-		<property name="margin-bottom">30</property>
-		<property name="margin-start">35</property>
+    <property name="margin-top">30</property>
+    <property name="margin-bottom">30</property>
+    <property name="margin-start">35</property>
 
-		<style>
-			<class name="clockbox"/>
-			<class name="dimmable"/>
-		</style>
+    <style>
+      <class name="clockbox"/>
+      <class name="dimmable"/>
+    </style>
 
-		<child>
-			<object class="GtkLabel" id="clockbox_time">
-				<property name="label">00:00</property>
-				<property name="halign">start</property>
-				<style>
-					<class name="time"/>
-					<class name="numeric"/>
-				</style>
-			</object>
-		</child>
+    <child>
+      <object class="GtkLabel" id="clockbox_time">
+        <property name="label">00:00</property>
+        <property name="halign">start</property>
+        <style>
+          <class name="time"/>
+          <class name="numeric"/>
+        </style>
+      </object>
+    </child>
 
-		<child>
-			<object class="GtkLabel" id="clockbox_date">
-				<property name="halign">start</property>
-				<style>
-					<class name="date"/>
-					<class name="numeric"/>
-				</style>
-			</object>
-		</child>
-	</template>
+    <child>
+      <object class="GtkLabel" id="clockbox_date">
+        <property name="halign">start</property>
+        <style>
+          <class name="date"/>
+          <class name="numeric"/>
+        </style>
+      </object>
+    </child>
+  </template>
 </interface>

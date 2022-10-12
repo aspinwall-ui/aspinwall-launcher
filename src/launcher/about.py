@@ -7,8 +7,8 @@ from gi.repository import Gtk
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/about.ui')
 class AboutAspinwall(Gtk.AboutDialog):
-	"""About dialog."""
-	__gtype_name__ = 'AboutAspinwall'
+    """About dialog."""
+    __gtype_name__ = 'AboutAspinwall'
 
-	def _about_response(self, *args):
-		self.destroy()
+    def _about_response(self, *args):
+        self.destroy()
