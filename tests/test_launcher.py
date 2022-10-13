@@ -15,7 +15,7 @@ from gi.repository.Adw import Flap, ToastOverlay, ButtonContent, Leaflet, Status
 def window():
     """Creates the launcher window for use in later tests"""
     resource = Gio.Resource.load(
-        os.path.join(os.getenv('PWD'), 'output', 'data', 'aspinwall-launcher.gresource')
+        os.path.join(os.getenv('PWD'), 'output', 'src', 'aspinwall-launcher.gresource')
     )
     resource._register()
 
