@@ -101,6 +101,7 @@ class LauncherSettings(Adw.PreferencesWindow):
     idle_mode_delay_combobox = Gtk.Template.Child()
 
     clock_size_combobox = Gtk.Template.Child()
+    clock_ampm_toggle = Gtk.Template.Child()
     time_format_entry = Gtk.Template.Child()
     date_format_entry = Gtk.Template.Child()
 
@@ -159,6 +160,8 @@ class LauncherSettings(Adw.PreferencesWindow):
 
         config.bind('time-format', self.time_format_entry, 'text', Gio.SettingsBindFlags.DEFAULT)
         config.bind('date-format', self.date_format_entry, 'text', Gio.SettingsBindFlags.DEFAULT)
+
+        config.bind('clock-ampm', self.clock_ampm_toggle, 'active', Gio.SettingsBindFlags.DEFAULT)
 
     def wallpaper_bind(self, wallpaper_path_string, *args):
         """Returns a WallpaperIcon for the path in the given StringObject."""

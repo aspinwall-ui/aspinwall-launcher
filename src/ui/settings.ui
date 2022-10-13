@@ -8,9 +8,9 @@
     </style>
     <child>
       <object class="AdwPreferencesPage">
-            <property name="icon_name">preferences-window-layout-symbolic</property>
-            <property name="title">L_auncher</property>
-            <property name="use-underline">True</property>
+        <property name="icon_name">preferences-window-layout-symbolic</property>
+        <property name="title">L_auncher</property>
+        <property name="use-underline">True</property>
 
         <child>
           <object class="AdwPreferencesGroup">
@@ -446,6 +446,16 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
                       <item translatable="yes" id="2">Large</item>
                     </items>
                   </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Show AM/PM indicator next to the clock</property>
+
+                <child>
+                  <object class="GtkCheckButton" id="clock_ampm_toggle"/>
                 </child>
               </object>
             </child>

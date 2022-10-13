@@ -36,6 +36,8 @@
           <object class="GtkLabel" id="clockbox_ampm">
             <property name="label">AM</property>
             <property name="halign">start</property>
+            <property name="valign">end</property>
+            <property name="visible">false</property>
             <style>
               <class name="time-ampm"/>
             </style>

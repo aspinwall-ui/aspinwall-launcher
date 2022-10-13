@@ -114,6 +114,11 @@
 			</description>
 		</key>
 
+		<key name="clock-ampm" type="b">
+			<default>false</default>
+			<summary>Show AM/PM indicator next to the clock</summary>
+		</key>
+
 		<key name="favorite-apps" type="as">
 			<default>[]</default>
 			<summary>Favorite apps</summary>

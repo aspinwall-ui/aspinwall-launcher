@@ -54,6 +54,12 @@
 	opacity: 0.85;
 }
 
+.clockbox .time-ampm {
+	font-size: 1.75em;
+	font-weight: 600;
+	margin-bottom: 3px;
+}
+
 .clockbox .date {
 	font-size: 0.85em;
 	font-weight: 500;
