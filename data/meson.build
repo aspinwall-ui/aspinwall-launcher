@@ -1,15 +1,6 @@
 pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
 gnome = import('gnome')
 
-gnome.compile_resources('aspinwall',
-  join_paths('stylesheet', 'aspinwall.gresource.xml'),
-  gresource_bundle: true,
-  install: true,
-  install_dir: pkgdatadir,
-)
-
-message(pkgdatadir)
-
 install_data('org.dithernet.aspinwall.launcher.gschema.xml',
   install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
 )
@@ -26,4 +17,3 @@ conf.set('VERSION', meson.project_version())
 conf.set('pkgdatadir', pkgdatadir)
 
 subdir('icons')
-subdir('stylesheet')

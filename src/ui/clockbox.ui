@@ -18,13 +18,29 @@
     </style>
 
     <child>
-      <object class="GtkLabel" id="clockbox_time">
-        <property name="label">00:00</property>
-        <property name="halign">start</property>
-        <style>
-          <class name="time"/>
-          <class name="numeric"/>
-        </style>
+      <object class="GtkBox" id="time_ampm_container">
+        <property name="spacing">6</property>
+
+        <child>
+          <object class="GtkLabel" id="clockbox_time">
+            <property name="label">00:00</property>
+            <property name="halign">start</property>
+            <style>
+              <class name="time"/>
+              <class name="numeric"/>
+            </style>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="clockbox_ampm">
+            <property name="label">AM</property>
+            <property name="halign">start</property>
+            <style>
+              <class name="time-ampm"/>
+            </style>
+          </object>
+        </child>
       </object>
     </child>
 
