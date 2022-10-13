@@ -152,7 +152,9 @@ class Launcher(Gtk.ApplicationWindow):
             application_name='Aspinwall Launcher',
             # TRANSLATORS: This can also be translated as "developers".
             developer_name=_('Aspinwall contributors'), # noqa: F821
-            license_type=Gtk.License.MIT_X11
+            license_type=Gtk.License.MIT_X11,
+            website='https://github.com/aspinwall-ui/aspinwall-launcher',
+            issue_url='https://github.com/aspinwall-ui/aspinwall-launcher/issues'
         )
 
         # TRANSLATORS: Set this to your name (and optionally the e-mail address).
