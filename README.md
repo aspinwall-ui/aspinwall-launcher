@@ -28,11 +28,11 @@ Before you can use the `./run-*` scripts, you will need to install Meson.
 
 ### Runtime
 
-- GTK 4.0 (>4.5.0 required for libadwaita 1.0.0)
-- libadwaita >= 1.0.0
-- GLib
-- Python >= 3.6
+- Python >= 3.8
 - PyGObject
+- GTK4 >= 4.8.0
+- libadwaita >= 1.2.0
+- GLib
 
 ### Build
 
