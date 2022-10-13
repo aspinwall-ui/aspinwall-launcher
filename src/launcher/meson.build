@@ -2,13 +2,6 @@ pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.proje
 submoduledir = join_paths(pkgdatadir, 'aspinwall_launcher', 'launcher')
 gnome = import('gnome')
 
-gnome.compile_resources('aspinwall.launcher',
-  join_paths('ui', 'aspinwall.launcher.gresource.xml'),
-  gresource_bundle: true,
-  install: true,
-  install_dir: pkgdatadir,
-)
-
 launcher_sources = [
   '__init__.py',
   'app_chooser.py',
@@ -23,5 +16,3 @@ launcher_sources = [
 ]
 
 install_data(launcher_sources, install_dir: submoduledir)
-
-subdir('ui')
