@@ -250,34 +250,33 @@
                 </child>
 
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwComboRow" id="slideshow_switch_delay_combobox">
                     <!-- TRANSLATORS: Used for the slideshow mode switch frequency -->
                     <property name="title" translatable="yes">Switch wallpaper every:</property>
                     <property name="sensitive" bind-source="slideshow_mode_toggle" bind-property="active"/>
 
-                    <child>
-                      <object class="GtkComboBoxText" id="slideshow_switch_delay_combobox">
-                        <property name="valign">center</property>
-                        <signal name="changed" handler="set_slideshow_switch_delay"/>
+                    <signal name="notify::selected" handler="set_slideshow_switch_delay"/>
 
+                    <property name="model">
+                      <object class="GtkStringList">
                         <items>
                           <!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
-                          <item translatable="yes" id="60">1 minute</item>
+                          <item translatable="yes">1 minute</item>
                           <!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
-                          <item translatable="yes" id="180">3 minutes</item>
+                          <item translatable="yes">3 minutes</item>
                           <!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
-                          <item translatable="yes" id="300">5 minutes</item>
+                          <item translatable="yes">5 minutes</item>
                           <!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
-                          <item translatable="yes" id="600">10 minutes</item>
+                          <item translatable="yes">10 minutes</item>
                           <!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
-                          <item translatable="yes" id="900">15 minutes</item>
+                          <item translatable="yes">15 minutes</item>
                           <!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
-                          <item translatable="yes" id="1800">30 minutes</item>
+                          <item translatable="yes">30 minutes</item>
                           <!-- TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence. -->
-                          <item translatable="yes" id="3600">1 hour</item>
+                          <item translatable="yes">1 hour</item>
                         </items>
                       </object>
-                    </child>
+                    </property>
                   </object>
                 </child>
 
@@ -286,6 +285,7 @@
                     <property name="title" translatable="yes">Slideshow switch length</property>
                     <property name="sensitive" bind-source="slideshow_mode_toggle" bind-property="active"/>
                     <property name="subtitle" translatable="yes">Length of the transition between the current and newly selected wallpaper, in miliseconds. Set to 0 to disable.</property>
+                    <property name="activatable-widget">slideshow_switch_length_spinbutton</property>
 
                     <child>
                       <object class="GtkSpinButton" id="slideshow_switch_length_spinbutton">
@@ -301,24 +301,21 @@
             </child>
 
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwComboRow" id="wallpaper_style_combobox">
                 <property name="title" translatable="yes">Wallpaper style</property>
 
-                <child>
-                  <object class="GtkComboBoxText" id="wallpaper_style_combobox">
-                    <property name="valign">center</property>
-                    <signal name="changed" handler="set_wallpaper_style"/>
-
+                <property name="model">
+                  <object class="GtkStringList">
                     <items>
                       <!-- TRANSLATORS: Wallpaper scaling option -->
-                      <item translatable="yes" id="0">Solid color</item>
+                      <item translatable="yes">Solid color</item>
                       <!-- TRANSLATORS: Wallpaper scaling option -->
-                      <item translatable="yes" id="1">Scaled</item>
+                      <item translatable="yes">Scaled</item>
                       <!-- TRANSLATORS: Wallpaper scaling option -->
-                      <item translatable="yes" id="2">Zoomed</item>
+                      <item translatable="yes">Zoomed</item>
                     </items>
                   </object>
-                </child>
+                </property>
               </object>
             </child>
 
@@ -328,6 +325,7 @@
                 <!-- TRANSLATORS: Please use the quotation mark symbols appropriate for your language, not the default '"' symbol. (In Weblate, you can find shortcuts to the quotation mark symbols in the right corner above the translation field for your language.)
 If it's easier, you can simply describe these as "modes" and omit the quotation marks entirely, but if you're refering to the wallpaper style verbatim please add the quotes. -->
                 <property name="subtitle" translatable="yes">Used for the “Solid Color” wallpaper style, as well as the backdrop for the “Scaled” style.</property>
+                <property name="activatable-widget">wallpaper_color_button</property>
 
                 <child>
                   <object class="GtkColorButton" id="wallpaper_color_button">
@@ -380,6 +378,7 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
             <child>
               <object class="AdwActionRow">
                 <property name="title" translatable="yes">Follow system theme</property>
+                <property name="activatable-widget">follow_system_theme_toggle</property>
 
                 <child>
                   <object class="GtkSwitch" id="follow_system_theme_toggle">
@@ -397,30 +396,29 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
             <property name="title" translatable="yes">Launcher</property>
 
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwComboRow" id="idle_mode_delay_combobox">
                 <!-- TRANSLATORS: "Idle mode" refers to the mode where, after a set time of inactivity, the widgets reduce their opacity and the app chooser/menu buttons disappear. -->
                 <property name="title" translatable="yes">Enter idle mode after:</property>
                 <property name="subtitle" translatable="yes">In idle mode, after some time of inactivity, the opacity of the widgets is reduced, and the menu buttons are hidden.</property>
 
-                <child>
-                  <object class="GtkComboBoxText" id="idle_mode_delay_combobox">
-                    <property name="valign">center</property>
-                    <signal name="changed" handler="set_idle_mode_delay"/>
+                <signal name="notify::selected" handler="set_idle_mode_delay"/>
 
+                <property name="model">
+                  <object class="GtkStringList">
                     <items>
                       <!-- TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence. -->
-                      <item translatable="yes" id="60">1 minute</item>
+                      <item translatable="yes">1 minute</item>
                       <!-- TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence. -->
-                      <item translatable="yes" id="180">3 minutes</item>
+                      <item translatable="yes">3 minutes</item>
                       <!-- TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence. -->
-                      <item translatable="yes" id="300">5 minutes</item>
+                      <item translatable="yes">5 minutes</item>
                       <!-- TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence. -->
-                      <item translatable="yes" id="600">10 minutes</item>
+                      <item translatable="yes">10 minutes</item>
                       <!-- TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence. -->
-                      <item translatable="yes" id="900">15 minutes</item>
+                      <item translatable="yes">15 minutes</item>
                     </items>
                   </object>
-                </child>
+                </property>
               </object>
             </child>
           </object>
@@ -431,29 +429,28 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
             <property name="title" translatable="yes">Clock</property>
 
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwComboRow" id="clock_size_combobox">
                 <property name="title" translatable="yes">Clock size</property>
 
-                <child>
-                  <object class="GtkComboBoxText" id="clock_size_combobox">
-                    <property name="valign">center</property>
-
+                <property name="model">
+                  <object class="GtkStringList">
                     <items>
                       <!-- TRANSLATORS: Clock size option -->
-                      <item translatable="yes" id="0">Small</item>
+                      <item translatable="yes">Small</item>
                       <!-- TRANSLATORS: Clock size option -->
-                      <item translatable="yes" id="1">Medium</item>
+                      <item translatable="yes">Medium</item>
                       <!-- TRANSLATORS: Clock size option -->
-                      <item translatable="yes" id="2">Large</item>
+                      <item translatable="yes">Large</item>
                     </items>
                   </object>
-                </child>
+                </property>
               </object>
             </child>
 
             <child>
               <object class="AdwActionRow">
                 <property name="title" translatable="yes">Show AM/PM indicator next to the clock</property>
+                <property name="activatable-widget">clock_ampm_toggle</property>
 
                 <child>
                   <object class="GtkSwitch" id="clock_ampm_toggle">
@@ -475,7 +472,7 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
                     <property name="subtitle" translatable="yes">Sets the time format to default settings.</property>
 
                     <child>
-                      <object class="GtkButton">
+                      <object class="GtkButton" id="reset_time_format_button">
                         <!-- TRANSLATORS: Used for the "reset time format to default" option. -->
                         <property name="label" translatable="yes">Reset</property>
                         <property name="valign">center</property>
@@ -486,26 +483,14 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
                 </child>
 
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwEntryRow" id="time_format_entry">
                     <property name="title" translatable="yes">Time format string</property>
-
-                    <child>
-                      <object class="GtkEntry" id="time_format_entry">
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-]                 </object>
+                  </object>
                 </child>
 
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwEntryRow" id="date_format_entry">
                     <property name="title" translatable="yes">Date format string</property>
-
-                    <child>
-                      <object class="GtkEntry" id="date_format_entry">
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
               </object>

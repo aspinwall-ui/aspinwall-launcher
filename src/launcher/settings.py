@@ -105,6 +105,12 @@ class LauncherSettings(Adw.PreferencesWindow):
     time_format_entry = Gtk.Template.Child()
     date_format_entry = Gtk.Template.Child()
 
+    # Unfortunately GtkStringList doesn't let us set IDs like comboboxes did,
+    # so we need to manually maintain value lists:
+    slideshow_switch_delay_values = (60, 180, 300, 600, 900, 1800, 3600)
+    idle_mode_delay_values = (60, 180, 300, 600, 900)
+    # Keep these in sync with the order in the combobox!
+
     def __init__(self):
         """Initializes the settings window."""
         super().__init__()
@@ -142,7 +148,9 @@ class LauncherSettings(Adw.PreferencesWindow):
             Gio.SettingsBindFlags.DEFAULT
         )
 
-        self.wallpaper_style_combobox.set_active_id(str(config['wallpaper-style']))
+        config.bind('wallpaper-style', self.wallpaper_style_combobox, 'selected',
+            Gio.SettingsBindFlags.DEFAULT
+        )
 
         self.wallpaper_color_button.set_use_alpha(False)
         bg_color = Gdk.RGBA()
@@ -152,11 +160,15 @@ class LauncherSettings(Adw.PreferencesWindow):
         config.bind('slideshow-mode', self.slideshow_mode_toggle, 'active',
             Gio.SettingsBindFlags.DEFAULT
         )
-        config.bind('clock-size', self.clock_size_combobox, 'active',
+        config.bind('clock-size', self.clock_size_combobox, 'selected',
             Gio.SettingsBindFlags.DEFAULT
         )
-        self.slideshow_switch_delay_combobox.set_active_id(str(config['slideshow-switch-delay']))
-        self.idle_mode_delay_combobox.set_active_id(str(config['idle-mode-delay']))
+        self.slideshow_switch_delay_combobox.set_selected(
+          self.slideshow_switch_delay_values.index(config['slideshow-switch-delay'])
+        )
+        self.idle_mode_delay_combobox.set_selected(
+          self.idle_mode_delay_values.index(config['idle-mode-delay'])
+        )
 
         config.bind('time-format', self.time_format_entry, 'text', Gio.SettingsBindFlags.DEFAULT)
         config.bind('date-format', self.date_format_entry, 'text', Gio.SettingsBindFlags.DEFAULT)
@@ -208,11 +220,6 @@ class LauncherSettings(Adw.PreferencesWindow):
 
         self.queue_draw()
 
-        if config['wallpaper-style'] == 0:
-            self.wallpaper_grid.set_sensitive(False)
-        else:
-            self.wallpaper_grid.set_sensitive(True)
-
         if config['wallpaper-path'] not in current_config and current_config:
             config['wallpaper-path'] = current_config[0]
 
@@ -235,26 +242,17 @@ class LauncherSettings(Adw.PreferencesWindow):
                 )
             else:
                 config['wallpaper-style'] = 0
-                self.wallpaper_style_combobox.set_active_id("0")
+                self.wallpaper_style_combobox.set_selected(0)
 
     @Gtk.Template.Callback()
     def set_slideshow_switch_delay(self, combobox, *args):
         """Sets the slideshow switch delay."""
-        config['slideshow-switch-delay'] = int(combobox.get_active_id())
+        config['slideshow-switch-delay'] = self.slideshow_switch_delay_values[int(combobox.get_selected())]
 
     @Gtk.Template.Callback()
     def set_idle_mode_delay(self, combobox, *args):
         """Sets the idle mode switch delay."""
-        config['idle-mode-delay'] = int(combobox.get_active_id())
-
-    @Gtk.Template.Callback()
-    def set_wallpaper_style(self, combobox, *args):
-        """Sets the wallpaper style settings."""
-        config['wallpaper-style'] = int(combobox.get_active_id())
-        if config['wallpaper-style'] == 0:
-            self.wallpaper_grid.set_sensitive(False)
-        else:
-            self.wallpaper_grid.set_sensitive(True)
+        config['idle-mode-delay'] = self.idle_mode_delay_values[int(combobox.get_selected())]
 
     @Gtk.Template.Callback()
     def set_wallpaper_color(self, button, *args):
