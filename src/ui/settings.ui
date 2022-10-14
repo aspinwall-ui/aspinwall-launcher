@@ -382,8 +382,9 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
                 <property name="title" translatable="yes">Follow system theme</property>
 
                 <child>
-                  <object class="GtkCheckButton" id="follow_system_theme_toggle">
-                    <signal name="toggled" handler="toggle_follow_system_theme"/>
+                  <object class="GtkSwitch" id="follow_system_theme_toggle">
+                    <property name="valign">center</property>
+                    <signal name="notify::active" handler="toggle_follow_system_theme"/>
                   </object>
                 </child>
               </object>
@@ -455,7 +456,9 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
                 <property name="title" translatable="yes">Show AM/PM indicator next to the clock</property>
 
                 <child>
-                  <object class="GtkCheckButton" id="clock_ampm_toggle"/>
+                  <object class="GtkSwitch" id="clock_ampm_toggle">
+                    <property name="valign">center</property>
+                  </object>
                 </child>
               </object>
             </child>
