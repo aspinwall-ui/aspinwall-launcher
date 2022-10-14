@@ -205,7 +205,7 @@
 /* App chooser */
 
 .app-chooser {
-	background-color: @aspinwall_menu_bg;
+	background-color: alpha(@aspinwall_menu_bg, 0.5);
 	color: @aspinwall_menu_fg;
 }
 
@@ -216,29 +216,48 @@
 	padding: 10px;
 }
 
+.app-searchbox {
+	padding: 3px 12px;
+	border-radius: 32px;
+}
+
 .app-grid-separator {
 	color: rgba(128, 128, 128, 0.75);
 }
 
+.app-grid {
+	background-color: transparent;
+}
+
+.app-grid child {
+	margin: 12px;
+}
+
 .app-icon {
-	font-weight: 400;
+	padding: 6px;
 }
 
-.app-icon, .app-icon:hover {
-	background: none;
-	padding: 0;
-	margin: 0;
-	border: 1px solid transparent;
+.app-icon .app-icon-image {
+    -gtk-icon-size: 96px;
 }
 
-.app-icon:hover, .app-icon:focus {
-  background: @aspinwall_widget_shade;
-  border-radius: 5px;
+.app-grid.small-icons child {
+	margin: 3px;
 }
 
-.app-icon:focus {
-  border-color: @accent_color;
+.app-grid.small-icons .app-icon .app-icon-image {
+    -gtk-icon-size: 64px;
 }
+
+.app-grid.smaller-icons child {
+	margin: 3px;
+}
+
+.app-grid.smaller-icons .app-icon .app-icon-image {
+    -gtk-icon-size: 48px;
+}
+
+.favorites-grid .app-icon .app-name { font-size: 0; }
 
 /* Launcher settings window */
 .launcher-settings {

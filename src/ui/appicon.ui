@@ -1,73 +1,60 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="AppIcon" parent="GtkFlowBoxChild">
-    <property name="focusable">False</property>
+  <template class="AppIcon" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <!--<property name="valign">start</property>
+    <property name="vexpand">false</property>-->
+    <property name="spacing">6</property>
 
     <style>
-      <class name="app-icon-container"/>
+      <class name="app-icon"/>
     </style>
 
     <child>
-      <object class="GtkButton">
-        <property name="focusable">True</property>
-        <property name="receives-default">True</property>
-        <property name="focus-on-click">False</property>
-        <signal name="clicked" handler="run"/>
+      <object class="GtkPopoverMenu" id="popover">
+        <property name="autohide">true</property>
+        <property name="menu-model">appicon_fav_menu</property>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkImage" id="app_icon">
+        <property name="icon-name">image-missing</property>
 
         <style>
-          <class name="app-icon"/>
+          <class name="app-icon-image"/>
+          <class name="icon-dropshadow"/>
         </style>
+      </object>
+    </child>
 
-        <child>
-          <object class="GtkBox">
-            <property name="halign">center</property>
-            <property name="valign">start</property>
-            <property name="margin-start">3</property>
-            <property name="margin-end">3</property>
-            <property name="margin-top">3</property>
-            <property name="margin-bottom">3</property>
-            <property name="spacing">6</property>
-            <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkLabel" id="app_name">
+        <property name="wrap">true</property>
+        <property name="ellipsize">end</property>
+        <property name="justify">center</property>
+        <property name="width-chars">10</property>
+        <property name="max-width-chars">10</property>
+        <property name="lines">1</property>
 
-            <child>
-              <object class="GtkPopoverMenu" id="popover">
-                <property name="autohide">true</property>
-                <property name="menu-model">appicon-menu</property>
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkImage" id="app_icon">
-                <property name="pixel-size">48</property>
-                <property name="icon-name">image-missing</property>
-                <property name="icon-size">2</property>
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkLabel" id="app_name">
-                <property name="wrap">true</property>
-                <property name="justify">center</property>
-                <property name="width-chars">10</property>
-                <property name="max-width-chars">10</property>
-              </object>
-            </child>
-          </object>
-        </child>
+        <style>
+          <class name="app-name"/>
+        </style>
       </object>
     </child>
   </template>
-  <menu id="appicon-menu">
+
+  <menu id="appicon_fav_menu">
     <item>
       <attribute name="label" translatable="yes">_Remove from favorites</attribute>
       <attribute name="action">unfavorite</attribute>
-      <attribute name="hidden-when">action-disabled</attribute>
     </item>
+  </menu>
+  <menu id="appicon_notfav_menu">
     <item>
       <attribute name="label" translatable="yes">_Add to favorites</attribute>
       <attribute name="action">favorite</attribute>
-      <attribute name="hidden-when">action-disabled</attribute>
     </item>
   </menu>
 </interface>

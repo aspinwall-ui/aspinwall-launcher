@@ -23,7 +23,8 @@ class Launcher(Gtk.ApplicationWindow):
     launcher_wallpaper_overlay = Gtk.Template.Child()
     wallpaper = Gtk.Template.Child('launcher_wallpaper')
 
-    launcher_flap = Gtk.Template.Child()
+    launcher_stack = Gtk.Template.Child()
+    launcher_content = Gtk.Template.Child()
 
     clockbox = Gtk.Template.Child()
     widgetbox = Gtk.Template.Child()
@@ -55,7 +56,7 @@ class Launcher(Gtk.ApplicationWindow):
         self.add_action(self.open_settings_action)
         self.add_action(self.about_aspinwall_action)
 
-        self.launcher_wallpaper_overlay.set_measure_overlay(self.launcher_flap, True)
+        self.launcher_wallpaper_overlay.set_measure_overlay(self.launcher_stack, True)
 
         # Set up idle mode
 
@@ -95,8 +96,15 @@ class Launcher(Gtk.ApplicationWindow):
         # Reload apps, clear search
         self.app_chooser.search.set_text('')
         self.app_chooser.update_model()
+
+        # Select first item in list
+        self.app_chooser.selection_model.select_item(0, True)
+        # Scroll to top
+        vadjust = self.app_chooser.app_grid_container.get_vadjustment()
+        vadjust.set_value(vadjust.get_lower())
+
         # Show chooser
-        self.launcher_flap.set_reveal_flap(True)
+        self.launcher_stack.set_visible_child_name('app-chooser')
         self.app_chooser.search.grab_focus()
 
     def update_unfocus_countdown(self, *args):
@@ -123,7 +131,7 @@ class Launcher(Gtk.ApplicationWindow):
             self.unfocus_countdown = config['idle-mode-delay'] + 1
             self.app_chooser_button_revealer.set_reveal_child(False)
             self.widgetbox.chooser_button_revealer.set_reveal_child(False)
-            self.launcher_flap.add_css_class('unfocused')
+            self.launcher_content.add_css_class('unfocused')
             self.add_controller(self.motion_controller)
 
     def on_focus(self, *args):
@@ -134,7 +142,7 @@ class Launcher(Gtk.ApplicationWindow):
             self.unfocus_countdown = config['idle-mode-delay'] + 1
             self.app_chooser_button_revealer.set_reveal_child(True)
             self.widgetbox.chooser_button_revealer.set_reveal_child(True)
-            self.launcher_flap.remove_css_class('unfocused')
+            self.launcher_content.remove_css_class('unfocused')
         else:
             self.unfocus_countdown = config['idle-mode-delay'] + 1
 

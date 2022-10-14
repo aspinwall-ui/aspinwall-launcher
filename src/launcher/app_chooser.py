@@ -2,7 +2,7 @@
 """
 Contains code for the app chooser.
 """
-from gi.repository import Gdk, GLib, Gio, Gtk
+from gi.repository import Gdk, GLib, Gio, Gtk, GdkPixbuf
 
 from ..config import config
 
@@ -16,46 +16,24 @@ def app_info_to_filenames(appinfo):
         output[app.get_filename()] = app
     return output
 
+ICON_SIZE_BASELINE = 0
+
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/appicon.ui')
-class AppIcon(Gtk.FlowBoxChild):
+class AppIcon(Gtk.Box):
     """Contains an app icon for the app chooser."""
     __gtype_name__ = 'AppIcon'
 
-    app = None
     app_icon = Gtk.Template.Child()
     app_name = Gtk.Template.Child()
 
     popover = Gtk.Template.Child()
+    appicon_fav_menu = Gtk.Template.Child()
+    appicon_notfav_menu = Gtk.Template.Child()
 
     def __init__(self, app=None):
         """Initializes an AppIcon."""
+        self.app = None
         super().__init__()
-        self.popover.present()
-        if app.get_filename() in config['favorite-apps']:
-            self.is_favorite = True
-        else:
-            self.is_favorite = False
-
-        if app:
-            self.bind_to_app(app)
-
-    def bind_to_app(self, app):
-        """Fills the AppIcon with an app's information."""
-        self.app = app
-        icon = app.get_icon()
-        # FIXME: I hit an incredibly bizzare bug where trying to
-        # diisplay the Nautilus icon (and only this icon specifically)
-        # segfaults the entire program. This fixes it for now, but
-        # some kind of proper fix would be in order.
-        try:
-            if icon.get_names()[0] != 'org.gnome.Nautilus':
-                self.app_icon.set_from_gicon(app.get_icon())
-            else:
-                self.app_icon.set_from_icon_name('folder')
-        except AttributeError: # for Gio.FileIcon
-            self.app_icon.set_from_gicon(app.get_icon())
-        self.app_name.set_label(app.get_name())
-
         longpress_gesture = Gtk.GestureLongPress()
         longpress_gesture.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
         longpress_gesture.connect('pressed', self.show_menu)
@@ -65,20 +43,15 @@ class AppIcon(Gtk.FlowBoxChild):
         # Set up context menu actions
         self.install_action('favorite', None, self.favorite)
         self.install_action('unfavorite', None, self.unfavorite)
-
-        if self.is_favorite:
-            self.action_set_enabled('favorite', False)
-        else:
-            self.action_set_enabled('unfavorite', False)
+        self.popover.present()
 
     def favorite(self, app_icon, *args):
         """Adds the app to favorites."""
-        if app_icon.app.get_filename() not in config['favorite-apps']:
-            config['favorite-apps'] = config['favorite-apps'] + [app_icon.app.get_filename()]
+        if app_icon.app_filename not in config['favorite-apps']:
+            new_list = config['favorite-apps'].copy()
+            new_list.append(app_icon.app_filename)
+            config['favorite-apps'] = new_list
             self.is_favorite = True
-
-            self.action_set_enabled('unfavorite', True)
-            self.action_set_enabled('favorite', False)
 
             app_chooser.filter.changed(Gtk.FilterChange.MORE_STRICT)
             app_chooser.favorites_filter.changed(Gtk.FilterChange.LESS_STRICT)
@@ -88,14 +61,11 @@ class AppIcon(Gtk.FlowBoxChild):
 
     def unfavorite(self, app_icon, *args):
         """Removes the app from favorites."""
-        if app_icon.app.get_filename() in config['favorite-apps']:
+        if app_icon.app_filename in config['favorite-apps']:
             new_list = config['favorite-apps'].copy()
-            new_list.remove(app_icon.app.get_filename())
+            new_list.remove(app_icon.app_filename)
             config['favorite-apps'] = new_list
             self.is_favorite = False
-
-            self.action_set_enabled('favorite', True)
-            self.action_set_enabled('unfavorite', False)
 
             app_chooser.filter.changed(Gtk.FilterChange.LESS_STRICT)
             app_chooser.favorites_filter.changed(Gtk.FilterChange.MORE_STRICT)
@@ -103,21 +73,16 @@ class AppIcon(Gtk.FlowBoxChild):
             if not new_list:
                 app_chooser.favorites_revealer.set_reveal_child(False)
 
-    @Gtk.Template.Callback()
-    def run(self, *args):
-        """Opens the app represented by the app icon."""
-        context = Gdk.Display.get_app_launch_context(self.get_display())
-        self.app.launch(None, context)
-        app_chooser.hide()
-
     def show_menu(self, event_controller, *args):
         """Shows the app icon menu."""
-        # FIXME: Newly added icons seem to keep the unfavorite action enabled;
-        # this fixes it, but there is probably a deeper root cause
         if self.is_favorite:
-            self.action_set_enabled('favorite', False)
+            self.popover.set_menu_model(self.appicon_fav_menu)
         else:
-            self.action_set_enabled('unfavorite', False)
+            self.popover.set_menu_model(self.appicon_notfav_menu)
+            if len(config['favorite-apps']) >= 4:
+                self.action_set_enabled('favorite', False)
+            else:
+                self.action_set_enabled('favorite', True)
         self.popover.show()
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/appchooser.ui')
@@ -129,6 +94,8 @@ class AppChooser(Gtk.Box):
     in_search = False
 
     app_grid = Gtk.Template.Child()
+    app_grid_container = Gtk.Template.Child()
+    app_grid_status_stack = Gtk.Template.Child()
     favorites_revealer = Gtk.Template.Child()
     favorites_grid = Gtk.Template.Child()
     search = Gtk.Template.Child()
@@ -137,6 +104,11 @@ class AppChooser(Gtk.Box):
     def __init__(self):
         """Initializes an app chooser."""
         super().__init__()
+
+        # Set up factory for app icons
+        factory = Gtk.SignalListItemFactory()
+        factory.connect('setup', self.setup)
+        factory.connect('bind', self.bind)
 
         # Set up store for app model
         self.store = Gio.ListStore(item_type=Gio.AppInfo)
@@ -164,10 +136,13 @@ class AppChooser(Gtk.Box):
         self.model = filter_model
 
         # Set up app grid
-        self.app_grid.bind_model(self.model, self.bind, None)
+        self.selection_model = Gtk.SingleSelection(model=self.model)
+        self.app_grid.set_model(self.selection_model)
+        self.app_grid.set_factory(factory)
 
         # Set up favorites grid
-        self.favorites_grid.bind_model(self.favorites_model, self.bind, None)
+        self.favorites_grid.set_model(Gtk.NoSelection(model=self.favorites_model))
+        self.favorites_grid.set_factory(factory)
 
         # Show/hide the favorites depending on whether there are any
         if config['favorite-apps']:
@@ -175,18 +150,137 @@ class AppChooser(Gtk.Box):
         else:
             self.favorites_revealer.set_reveal_child(False)
 
+        self.late_init_done = False
+        self.connect('realize', self.late_init)
+
         global app_chooser
         app_chooser = self
+
+    def late_init(self, *args):
+        if not self.late_init_done:
+            surface = self.get_native().get_surface()
+            surface.connect('layout', self.handle_resize)
+            self.handle_resize(surface, surface.get_width(), surface.get_height())
+            self.late_init_done = True
+
+    def handle_resize(self, surface, width, height, *args):
+        """Workarounds for scaling."""
+        for grid in [self.app_grid, self.favorites_grid]:
+            if width <= 600:
+                if width >= 375:
+                    grid.add_css_class('small-icons')
+                    grid.remove_css_class('smaller-icons')
+                    grid.set_min_columns(3)
+                    grid.set_max_columns(3)
+                else:
+                    grid.add_css_class('smaller-icons')
+                    grid.remove_css_class('small-icons')
+                    grid.set_min_columns(2)
+                    grid.set_max_columns(2)
+            else:
+                grid.set_min_columns(4)
+                grid.set_max_columns(4)
+                if grid == self.favorites_grid:
+                    grid.add_css_class('small-icons')
+                else:
+                    grid.remove_css_class('small-icons')
+                grid.remove_css_class('smaller-icons')
+            grid.set_visible(True)
+
+    def setup(self, factory, list_item):
+        """Sets up the app list."""
+        list_item.set_child(AppIcon())
+
+    def bind(self, factory, list_item):
+        """Binds the list items in the app list."""
+        app_icon = list_item.get_child()
+        app = list_item.get_item()
+
+        # The following code is here to work around a bizzare bug I encountered
+        # where some SVGs would completely fail to load, segfaulting the entire
+        # program. This is a lazy fix that loads the icons manually in most cases,
+        # which should hopefully be enough to work around the issue.
+        icon_found = False
+        icon_name = app.get_icon().to_string()
+        if '/' in icon_name:
+            try:
+                app_icon.app_icon.set_from_pixbuf(
+                    GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                        icon_name, 96, 96, True
+                    )
+                )
+            except GLib.GError:
+                pass
+            else:
+                icon_found = True
+        elif '.' not in icon_name:
+            app_icon.app_icon.set_from_icon_name(icon_name)
+            icon_found = True
+        else:
+            icon_paths = Gtk.IconTheme.get_for_display(self.get_display()).get_search_path()
+            for path in ['/usr/share/icons/hicolor/scalable/apps'] + icon_paths:
+                try:
+                    app_icon.app_icon.set_from_pixbuf(
+                        GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                            path + '/' + icon_name + '.svg', 96, 96, True
+                        )
+                    )
+                except GLib.GError:
+                    try:
+                        app_icon.app_icon.set_from_pixbuf(
+                            GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                                path + '/' + icon_name + '.png', 96, 96, True
+                            )
+                        )
+                    except GLib.GError:
+                        continue
+                    else:
+                        icon_found = True
+                        break
+                else:
+                    icon_found = True
+                    break
+
+        if not icon_found:
+            app_icon.app_icon.set_from_icon_name(icon_name)
+
+        app_icon.app_name.set_label(app.get_name())
+
+        if app.get_filename() in config['favorite-apps']:
+            app_icon.is_favorite = True
+        else:
+            app_icon.is_favorite = False
+
+        app_icon.app_filename = app.get_filename()
+
+    @Gtk.Template.Callback()
+    def activate(self, grid, position, *args):
+        """Opens the app represented by the app icon."""
+        app = grid.get_model().get_item(position)
+        context = Gdk.Display.get_app_launch_context(self.get_display())
+        app.launch(None, context)
+        self.hide()
 
     def fill_model(self):
         """Fills the favorites and app grid models."""
         appinfo = Gio.AppInfo.get_all()
         self.store.remove_all()
 
+        filenames = []
+
         for app in appinfo:
             if not Gio.AppInfo.should_show(app):
                 continue
             self.store.append(app)
+            filenames.append(app.get_filename())
+
+        # Delete missing .desktop entries in favorite apps
+        favs_output = config['favorite-apps'].copy()
+        for file in config['favorite-apps']:
+            if file not in filenames:
+                favs_output.remove(file)
+        if config['favorite-apps'] != favs_output:
+            config['favorite-apps'] = favs_output
 
         self.previous_appinfo = self.store
 
@@ -228,10 +322,6 @@ class AppChooser(Gtk.Box):
             self.favorites_revealer.set_reveal_child(True)
         else:
             self.favorites_revealer.set_reveal_child(False)
-
-    def bind(self, app, *args):
-        """Binds the list items in the app grid."""
-        return AppIcon(app)
 
     def filter_by_name(self, appinfo, user_data):
         """Fill-in for custom filter for app grid."""
@@ -280,24 +370,25 @@ class AppChooser(Gtk.Box):
             self.favorites_revealer.set_reveal_child(False)
         else:
             self.in_search = False
-            self.favorites_revealer.set_reveal_child(True)
-            self.no_results.set_visible(False)
+            if config['favorite-apps']:
+                self.favorites_revealer.set_reveal_child(True)
+            self.app_grid_status_stack.set_visible_child_name('app-grid')
 
         self.filter.changed(Gtk.FilterChange.DIFFERENT)
 
         if self.model.get_n_items() == 0:
-            self.no_results.set_visible(True)
+            self.app_grid_status_stack.set_visible_child_name('no-results')
         else:
-            self.no_results.set_visible(False)
+            self.app_grid_status_stack.set_visible_child_name('app-grid')
 
         # Select first item in list
-        first_item = self.app_grid.get_first_child()
-        if first_item:
-            first_item.grab_focus()
-        # TODO: Scroll back to top of list
+        self.selection_model.select_item(0, True)
+
+        # TODO: Scroll back to the top. Currently we can't do this, because the
+        # gridview scroll position lags behind the scrollbar position.
 
     @Gtk.Template.Callback()
     def hide(self, *args):
         """Hides the app chooser."""
-        self.get_parent().set_reveal_flap(False)
+        self.get_parent().set_visible_child_name('content')
         self.get_native().pause_focus_manager = False

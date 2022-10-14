@@ -65,6 +65,7 @@ class Application(Adw.Application):
             win.fullscreen()
         else:
             win.set_size_request(1270, 720)
+            win.set_default_size(1270, 720)
 
 def main(version):
     app = Application(version)
