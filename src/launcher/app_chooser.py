@@ -16,8 +16,6 @@ def app_info_to_filenames(appinfo):
         output[app.get_filename()] = app
     return output
 
-ICON_SIZE_BASELINE = 0
-
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/appicon.ui')
 class AppIcon(Gtk.Box):
     """Contains an app icon for the app chooser."""
@@ -30,20 +28,32 @@ class AppIcon(Gtk.Box):
     appicon_fav_menu = Gtk.Template.Child()
     appicon_notfav_menu = Gtk.Template.Child()
 
-    def __init__(self, app=None):
+    actions_installed = False
+
+    def __init__(self):
         """Initializes an AppIcon."""
-        self.app = None
+        if not AppIcon.actions_installed:
+            print("actions installed")
+            self.install_action('favorite', None, self.favorite)
+            self.install_action('unfavorite', None, self.unfavorite)
+            AppIcon.actions_installed = True
         super().__init__()
-        longpress_gesture = Gtk.GestureLongPress()
-        longpress_gesture.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
-        longpress_gesture.connect('pressed', self.show_menu)
+        self.longpress_gesture = None
+        #self.popover.present()
+        self.connect('map', self.setup_controller)
+        self.connect('unmap', self.dismantle_controller)
+        self.connect('destroy', self.dismantle_controller)
 
-        self.add_controller(longpress_gesture)
+    def setup_controller(self, *args):
+        if not self.longpress_gesture:
+            self.longpress_gesture = Gtk.GestureLongPress(propagation_phase=Gtk.PropagationPhase.CAPTURE)
+            self.longpress_gesture.connect('pressed', self.show_menu)
+            self.add_controller(self.longpress_gesture)
 
-        # Set up context menu actions
-        self.install_action('favorite', None, self.favorite)
-        self.install_action('unfavorite', None, self.unfavorite)
-        self.popover.present()
+    def dismantle_controller(self, *args):
+        if self.longpress_gesture:
+            self.remove_controller(self.longpress_gesture)
+            self.longpress_gesture = None
 
     def favorite(self, app_icon, *args):
         """Adds the app to favorites."""
