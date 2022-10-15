@@ -143,7 +143,7 @@ class WidgetView(Gtk.Box):
         self.widget_header = WidgetViewHeader(self._widget, self)
         self.widget_header_revealer.set_child(self.widget_header)
 
-        self.widget_content = self._widget.content
+        self.widget_content = self._widget._container
         self.widget_content.add_css_class('aspinwall-widget-content')
         self.container.append(self.widget_content)
 

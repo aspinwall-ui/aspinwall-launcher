@@ -66,16 +66,16 @@ You will most likely want to change the widget class name to something that suit
 
 Widgets are basically small GTK apps - thus, creating the content is roughly equivalent to writing a regular pygobject app, just with the `Widget` object instead of a separate `Gtk.Window`.
 
-The widget's content is stored in the `content` variable. By default, this is initialized with an empty `GtkBox`; as such, items can be added with:
-
-```python
-    self.content.append(element)
-```
-
-However, the `content` variable can be overwritten with a custom container, be it a `GtkBox` or a different element entirely:
+You will need to create a **container** for your widget's content; this will usually be a `Gtk.Box` or `Gtk.ScrolledWindow`.
 
 ```python
     self.content = Gtk.Box(hexpand=True)
+```
+
+At the end of our ``__init__()`` function, we need to set it as the container of our widget. We can do this by adding the following line:
+
+```python
+    self.set_child(self.content)
 ```
 
 The code used for widget creation must be added to the `__init__()` function of the widget class.

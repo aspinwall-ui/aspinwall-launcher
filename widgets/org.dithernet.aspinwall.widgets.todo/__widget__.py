@@ -107,6 +107,8 @@ class Todo(Widget):
         super().__init__(instance)
         _ = self.l
 
+        self.content = Gtk.Box(hexpand=True, orientation=Gtk.Orientation.VERTICAL)
+
         # Load to-do list items from config
         self.todo_items = Gio.ListStore(item_type=TodoItem)
         for item in self.config['items']:
@@ -153,6 +155,8 @@ class Todo(Widget):
         self.update_status()
 
         self.content.append(list_scroll)
+
+        self.set_child(self.content)
 
     def update_status(self, *args):
         """Shows/hides the 'no tasks' page as needed."""

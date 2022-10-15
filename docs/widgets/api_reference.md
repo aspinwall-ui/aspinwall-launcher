@@ -31,11 +31,12 @@ These keys are also exposed as GObject properties; the property names for them a
 
 ### Other API properties
 
- * `content` - the widget's content. This is an empty GtkBox by default.
+ * `_container` - an AdwBin that contains the widget's content. Set this with `Widget.set_child()`.
  * `css_provider` - a GtkCssProvider. Can be used to style the widget.
  * `config` - a GSettings object. Used for storing/accessing the widget's configuration, if enabled. **This is undefined if `has_config` is set to false**; using `self.config` when it is not set is considered a programming error.
 
 ## Functions
 
+ * `set_child(self, widget)` - Sets the container of the widget.
  * `join_self_with_data_path(self, *args)` - Joins path relative to widget data directory. Arguments are provided as arguments for `os.path.join` (so, each argument is a separate subdirectory/file).
  * `refresh(self)` - Refreshes the widget. **Defined by the widgets**, by default does nothing.

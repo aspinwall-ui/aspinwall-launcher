@@ -30,7 +30,7 @@ class Notepad(Widget):
         self.textview.get_buffer().connect('changed', self.save)
 
         scroll.set_child(self.textview)
-        self.content.append(scroll)
+        self.set_child(scroll)
 
     def save(self, *args):
         """Saves the contents of the notepad."""

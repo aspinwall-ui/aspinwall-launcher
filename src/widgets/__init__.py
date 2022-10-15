@@ -4,7 +4,7 @@ Contains base class and helper functions for creating widgets.
 
 Code for loading widgets can be found in the loader submodule.
 """
-from gi.repository import Gtk, Gio, GObject
+from gi.repository import Adw, Gtk, Gio, GObject
 import os
 import gettext
 
@@ -39,7 +39,7 @@ class Widget(GObject.GObject):
 
     def __init__(self, instance=0):
         super().__init__()
-        self.content = Gtk.Box(hexpand=True, orientation=Gtk.Orientation.VERTICAL)
+        self._container = Adw.Bin(hexpand=True)
         self.instance = instance
 
         # Set up i18n
@@ -53,7 +53,7 @@ class Widget(GObject.GObject):
             self.metadata['tags'] = self.l(self.metadata['tags'])
 
         # Set up style context, CSS provider
-        style_context = self.content.get_style_context()
+        style_context = self._container.get_style_context()
         self.css_provider = Gtk.CssProvider()
         style_context.add_provider(self.css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
@@ -74,6 +74,10 @@ class Widget(GObject.GObject):
                 self.schema_base_path = '/' + self.metadata['id'].lower().replace('.', '/') + '/'
 
             self.config = Gio.Settings.new_full(schema, None, self.schema_base_path + str(instance) + '/')
+
+    def set_child(self, widget):
+        """Sets the child widget for the widget."""
+        self._container.set_child(widget)
 
     def join_with_data_path(self, *args):
         """Joins path relative to widget data directory."""

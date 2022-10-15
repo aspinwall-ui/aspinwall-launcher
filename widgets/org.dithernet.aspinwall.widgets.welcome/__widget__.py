@@ -19,6 +19,8 @@ class Welcome(Widget):
         super().__init__(instance)
         _ = self.l
 
+        self.content = Gtk.Box(hexpand=True, orientation=Gtk.Orientation.VERTICAL)
+
         header = Gtk.Label(
             label=_('Welcome to Aspinwall'),
             use_markup=True, hexpand=True,
@@ -54,5 +56,7 @@ class Welcome(Widget):
         info.append(widgetguide)
 
         self.content.append(info_clamp)
+
+        self.set_child(self.content)
 
 _widget_class = Welcome
