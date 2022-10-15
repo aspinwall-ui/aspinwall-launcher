@@ -123,7 +123,7 @@ class WidgetView(Gtk.Box):
         # Set up drag source
         self.drag_source = Gtk.DragSource(actions=Gdk.DragAction.MOVE)
         self.drag_source.connect("prepare", self.drag_prepare)
-        self.drag_source.connect("drag-begin", self.drag_begin)
+        #self.drag_source.connect("drag-begin", self.drag_begin)
         self.drag_source.connect("drag-end", self.drag_end)
         # End drag source setup
 
@@ -222,19 +222,16 @@ class WidgetView(Gtk.Box):
 
     # Drag-and-drop
 
-    def drag_prepare(self, *args):
+    def drag_prepare(self, drag_source, x, y, *args):
         """Returns the GdkContentProvider for the drag operation"""
+        drag_source.set_icon(
+            Gtk.WidgetPaintable(widget=self.container),
+            int(x), int(y)
+        )
+        self.add_css_class('dragged')
         return Gdk.ContentProvider.new_for_value(
             widget_manager.get_widget_position(self._widget)
         )
-
-    def drag_begin(self, drag_source, *args):
-        """Operations to perform when the drag operation starts."""
-        drag_source.set_icon(
-            Gtk.WidgetPaintable(widget=self.container),
-            self.container.get_allocation().width / 2, 10
-        )
-        self.add_css_class('dragged')
 
     def drag_end(self, *args):
         """Operations to perform when the drag operation ends."""
