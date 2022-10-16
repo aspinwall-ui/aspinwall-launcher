@@ -33,11 +33,13 @@ These keys are also exposed as GObject properties; the property names for them a
 ### Other API properties
 
  * `_container` - an AdwBin that contains the widget's content. Set this with `Widget.set_child()`.
+ * `_settings_container` - an AdwBin that contains the widget's content. Set this with `Widget.set_settings_child()`.
  * `config` - a GSettings object. Used for storing/accessing the widget's configuration, if enabled. **This is undefined if `has_config` is set to false**; using `self.config` when it is not set is considered a programming error.
 
 ## Functions
 
- * `set_child(self, widget)` - Sets the container of the widget
+ * `set_child(self, widget)` - Sets the container of the widget.
+ * `set_settings_child(self, widget)` - Sets the settings menu container of the widget. Only works if `has_settings_menu` is True.
  * `join_self_with_data_path(self, *args)` - Joins path relative to widget data directory. Arguments are provided as arguments for `os.path.join` (so, each argument is a separate subdirectory/file).
  * `refresh(self)` - Refreshes the widget. **Defined by the widgets**, by default does nothing.
  * `load_stylesheet_from_file(self, path)` - Loads a stylesheet from the given path.

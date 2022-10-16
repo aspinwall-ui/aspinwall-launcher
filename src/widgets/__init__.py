@@ -42,6 +42,8 @@ class Widget(GObject.GObject):
     def __init__(self, instance=0):
         super().__init__()
         self._container = Adw.Bin(hexpand=True)
+        if self.has_settings_menu:
+            self._settings_container = Adw.Bin(hexpand=True)
         self.instance = instance
 
         # Set up i18n
@@ -88,6 +90,12 @@ class Widget(GObject.GObject):
         """Sets the child widget for the widget."""
         self._container.set_child(widget)
 
+    def set_settings_child(self, widget):
+        """Sets the settings child widget for the widget."""
+        if not self.has_settings:
+            raise ValueError("Trying to set settings child, but has_settings is not True")
+        self._settings_container.set_child(widget)
+
     def join_with_data_path(self, *args):
         """Joins path relative to widget data directory."""
         return os.path.join(os.path.dirname(self.widget_path), *args)
@@ -128,7 +136,6 @@ class Widget(GObject.GObject):
                 )
 
     def _prepare_stylesheet_string(self, string, import_base=None):
-
         if not import_base:
             import_base = self.join_with_data_path('stylesheet')
 

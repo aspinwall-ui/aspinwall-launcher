@@ -122,7 +122,7 @@ If your widget has no configuration options, you don't need to set the `has_conf
 
 In some cases, a widget might need to have its own settings options. The widget API allows for the addition of a settings menu, which is created by the widget and can be opened through the settings button in the widget header.
 
-To add a settings menu, set `self.has_settings_menu` to True and set `self.settings_menu` to the widget to use as the settings container.
+To add a settings menu, set `self.has_settings_menu` to True, create a container widget (like `Gtk.Box`...) and use `self.set_settings_child()` to set the widget to use as the settings container.
 
 Note that in most cases, you will want to wrap your settings container widget in a `GtkScrolledWindow`. Make sure that the `GtkScrolledWindow` has the `vexpand` attribute set to `True`.
 

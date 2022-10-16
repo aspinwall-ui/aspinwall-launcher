@@ -148,7 +148,7 @@ class WidgetView(Gtk.Box):
         self.container.append(self.widget_content)
 
         if self._widget.has_settings_menu:
-            self.widget_settings_container.append(self._widget.settings_menu)
+            self.widget_settings_container.append(self._widget._settings_container)
 
         # Set up long-press target
         longpress = Gtk.GestureLongPress()
