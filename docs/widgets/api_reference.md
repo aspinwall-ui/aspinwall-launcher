@@ -25,7 +25,7 @@ These keys are also exposed as GObject properties; the property names for them a
 
  * `has_config` (bool, default=False) - whether the widget uses GSettings configuration.
  * `has_settings_menu` (bool, default=False) - whether the widget has a settings menu.
-  * `has_stylesheet` (bool, default=False) - whether the widget has stylesheets (`stylesheet/style.css`, `stylesheet/style-dark.css`, `stylesheet/style-hc.css`).
+ * `has_stylesheet` (bool, default=False) - whether the widget has stylesheets (`stylesheet/style.css`, `stylesheet/style-dark.css`, `stylesheet/style-hc.css`).
  * `schema_base_path` (string, default=None) - the GSettings schema base path. Set automatically from the widget's ID if this variable is unset.
  * `widget_path` (string, **set by initialization function**) - the path to the widget's files.
  * `instance` (string, **set by initialization function**) - the widget's unique instance ID (not to be confused with the widget's ID). The instance ID is used to differentiate instances of the same widget, and are used to keep configs separate between widgets.
@@ -33,7 +33,6 @@ These keys are also exposed as GObject properties; the property names for them a
 ### Other API properties
 
  * `_container` - an AdwBin that contains the widget's content. Set this with `Widget.set_child()`.
- * `css_provider` - a GtkCssProvider. Can be used to style the widget.
  * `config` - a GSettings object. Used for storing/accessing the widget's configuration, if enabled. **This is undefined if `has_config` is set to false**; using `self.config` when it is not set is considered a programming error.
 
 ## Functions
@@ -41,3 +40,5 @@ These keys are also exposed as GObject properties; the property names for them a
  * `set_child(self, widget)` - Sets the container of the widget
  * `join_self_with_data_path(self, *args)` - Joins path relative to widget data directory. Arguments are provided as arguments for `os.path.join` (so, each argument is a separate subdirectory/file).
  * `refresh(self)` - Refreshes the widget. **Defined by the widgets**, by default does nothing.
+ * `load_stylesheet_from_file(self, path)` - Loads a stylesheet from the given path.
+ * `load_stylesheet_from_string(self, string)` - Loads a stylesheet from the given string.

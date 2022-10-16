@@ -142,7 +142,7 @@ Using this function is not required, it is merely a suggestion to speed up devel
 
 Stylesheets should be placed in the `stylesheet` directory. When `has_stylesheet` is `True`, the launcher will automatically load the `style.css` file from this directory. If dark mode or high-contrast mode is enabled, `style-dark.css` or `style-hc.css` will be loaded **on top of `style.css`** accordingly.
 
-For more advanced uses, you can access the raw `GtkCssProvider`, which is stored in the `self.css_provider` variable.
+For more advanced uses, you can use the `load_stylesheet_from_file()` and `load_stylesheet_from_string()` functions in the widget.
 
 ### Translating widgets
 

@@ -54,16 +54,15 @@ class Widget(GObject.GObject):
             self.metadata['tags'] = self.l(self.metadata['tags'])
 
         # Set up style context, CSS provider
+        self.css_class = self.metadata['id'].replace('.', '-')
+        self._container.add_css_class(self.css_class)
+
+        self.css_providers = []
         if self.has_stylesheet:
-            self.css_provider = None
             style_manager = Adw.StyleManager.get_default()
             style_manager.connect('notify::dark', self.theme_update)
             style_manager.connect('notify::high-contrast', self.theme_update)
             self.theme_update(style_manager)
-        else:
-            style_context = self._container.get_style_context()
-            self.css_provider = Gtk.CssProvider()
-            style_context.add_provider(self.css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
         # Set up config
         if self.has_config:
@@ -98,35 +97,73 @@ class Widget(GObject.GObject):
 
     def theme_update(self, style_provider, *args):
         """Loads the correct stylesheets for the style provider."""
-        style_context = self._container.get_style_context()
-        if self.css_provider:
-            style_context.remove_provider(self.css_provider)
-        self.css_provider = Gtk.CssProvider()
-        self.css_provider.load_from_file(Gio.File.new_for_path(
+        for provider in self.css_providers:
+            Gtk.StyleContext.remove_provider_for_display(self._container.get_display(), provider)
+        self.load_stylesheet_from_file(
             self.join_with_data_path('stylesheet', 'style.css')
-        ))
+        )
         if style_provider.get_dark() and \
                 os.path.exists(self.join_with_data_path('stylesheet', 'style-dark.css')):
-            self.css_provider.load_from_file(Gio.File.new_for_path(
+            self.load_stylesheet_from_file(
                 self.join_with_data_path('stylesheet', 'style-dark.css')
-            ))
+            )
             if style_provider.get_high_contrast():
                 if os.path.exists(self.join_with_data_path('stylesheet', 'style-hc.css')):
-                    self.css_provider.load_from_file(Gio.File.new_for_path(
+                    self.load_stylesheet_from_file(
                         self.join_with_data_path('stylesheet', 'style-hc.css')
-                    ))
+                    )
 
                 if os.path.exists(self.join_with_data_path('stylesheet', 'style-hc-dark.css')):
-                    self.css_provider.load_from_file(Gio.File.new_for_path(
+                    self.load_stylesheet_from_file(
                         self.join_with_data_path('stylesheet', 'style-hc-dark.css')
-                    ))
+                    )
         else:
             if style_provider.get_high_contrast() and \
                     os.path.exists(self.join_with_data_path('stylesheet', 'style-hc.css')):
-                self.css_provider.load_from_file(Gio.File.new_for_path(
+                self.load_stylesheet_from_file(
                     self.join_with_data_path('stylesheet', 'style-hc.css')
-                ))
-        style_context.add_provider(self.css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+                )
+
+    def load_stylesheet_from_string(self, string):
+        """Loads a stylesheet from a string."""
+
+        # HACK: In order to make life easier, and make hijacking the launcher's CSS a bit
+        # more difficult, we do a little hack here that prefixes every rule with a class
+        # specific to the widget.
+        #
+        # Previously this was done using Gtk.StyleContext.add_provider, but there were
+        # two issues with it:
+        #  - It's due to be deprecated in GTK 4.10.
+        #  - It didn't work. Like, at all. And it took me far too long to realize.
+        # I'm assuming the way it was meant to be used was by having an individual CSS
+        # file for every element(!), or maybe there's also a prefix approach needed
+        # like the one we're doing here.
+        #
+        # This is a bit error-prone and I wish there was a different way to do it, but
+        # I doubt upstream would be interested (this is an *incredibly* niche use case).
+        # Might be worth asking though?
+
+        rules_split = [ rule.replace('\n', '') + '}' for rule in string.split('}') if rule.replace('\n', '') ]
+        rules = ''
+        for rule in rules_split:
+            if not rule:
+                continue
+            if '{' in rule:
+                rules += f' .{self.css_class} '
+            rules += rule
+
+        self.css_providers.append(Gtk.CssProvider())
+        self.css_providers[-1].load_from_data(bytes(rules, 'ascii'))
+        Gtk.StyleContext.add_provider_for_display(
+            self._container.get_display(),
+            self.css_providers[-1],
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION + len(self.css_providers)
+        )
+
+    def load_stylesheet_from_file(self, path):
+        """Loads a stylesheet from a file."""
+        with open(path, 'r') as css_file:
+            self.load_stylesheet_from_string(css_file.read())
 
     @GObject.Property
     def id(self):
