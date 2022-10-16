@@ -140,13 +140,9 @@ Using this function is not required, it is merely a suggestion to speed up devel
 
 ### Styling widgets
 
-Widgets are automatically set up with a `GtkCssProvider`, which is stored in the `self.css_provider` variable.
+Stylesheets should be placed in the `stylesheet` directory. When `has_stylesheet` is `True`, the launcher will automatically load the `style.css` file from this directory. If dark mode or high-contrast mode is enabled, `style-dark.css` or `style-hc.css` will be loaded **on top of `style.css`** accordingly.
 
-CSS properties can be loaded from a file (here we use `stylesheet.css` in the widget folder):
-
-```python
-    self.css_provider.load_from_path(self.join_with_data_path('stylesheet.css'))
-```
+For more advanced uses, you can access the raw `GtkCssProvider`, which is stored in the `self.css_provider` variable.
 
 ### Translating widgets
 

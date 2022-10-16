@@ -31,6 +31,7 @@ class Widget(GObject.GObject):
     metadata = {}
     has_config = False
     has_settings_menu = False
+    has_stylesheet = False
     hide_edit_button = False
     schema_base_path = None # set up automatically if not set
 
@@ -53,9 +54,16 @@ class Widget(GObject.GObject):
             self.metadata['tags'] = self.l(self.metadata['tags'])
 
         # Set up style context, CSS provider
-        style_context = self._container.get_style_context()
-        self.css_provider = Gtk.CssProvider()
-        style_context.add_provider(self.css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        if self.has_stylesheet:
+            self.css_provider = None
+            style_manager = Adw.StyleManager.get_default()
+            style_manager.connect('notify::dark', self.theme_update)
+            style_manager.connect('notify::high-contrast', self.theme_update)
+            self.theme_update(style_manager)
+        else:
+            style_context = self._container.get_style_context()
+            self.css_provider = Gtk.CssProvider()
+            style_context.add_provider(self.css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
         # Set up config
         if self.has_config:
@@ -87,6 +95,38 @@ class Widget(GObject.GObject):
         """(Optional) Runs in the background at the widget refresh interval.
         For more information, see docs/widgets/creating-widgets.md."""
         return None
+
+    def theme_update(self, style_provider, *args):
+        """Loads the correct stylesheets for the style provider."""
+        style_context = self._container.get_style_context()
+        if self.css_provider:
+            style_context.remove_provider(self.css_provider)
+        self.css_provider = Gtk.CssProvider()
+        self.css_provider.load_from_file(Gio.File.new_for_path(
+            self.join_with_data_path('stylesheet', 'style.css')
+        ))
+        if style_provider.get_dark() and \
+                os.path.exists(self.join_with_data_path('stylesheet', 'style-dark.css')):
+            self.css_provider.load_from_file(Gio.File.new_for_path(
+                self.join_with_data_path('stylesheet', 'style-dark.css')
+            ))
+            if style_provider.get_high_contrast():
+                if os.path.exists(self.join_with_data_path('stylesheet', 'style-hc.css')):
+                    self.css_provider.load_from_file(Gio.File.new_for_path(
+                        self.join_with_data_path('stylesheet', 'style-hc.css')
+                    ))
+
+                if os.path.exists(self.join_with_data_path('stylesheet', 'style-hc-dark.css')):
+                    self.css_provider.load_from_file(Gio.File.new_for_path(
+                        self.join_with_data_path('stylesheet', 'style-hc-dark.css')
+                    ))
+        else:
+            if style_provider.get_high_contrast() and \
+                    os.path.exists(self.join_with_data_path('stylesheet', 'style-hc.css')):
+                self.css_provider.load_from_file(Gio.File.new_for_path(
+                    self.join_with_data_path('stylesheet', 'style-hc.css')
+                ))
+        style_context.add_provider(self.css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
     @GObject.Property
     def id(self):
