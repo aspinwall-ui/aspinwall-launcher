@@ -108,8 +108,12 @@ class LoadedWidgetManager:
         old_pos_widget = self.get_widget_at_position(old_pos)
         new_pos_widget = self.get_widget_at_position(new_pos)
 
-        old_pos_widget.content.unparent()
-        new_pos_widget.content.unparent()
+        old_pos_widget._container.unparent()
+        if old_pos_widget.has_settings_menu:
+            old_pos_widget._settings_container.unparent()
+        new_pos_widget._container.unparent()
+        if new_pos_widget.has_settings_menu:
+            new_pos_widget._settings_container.unparent()
 
         self.widgets.splice(new_pos, 1, [old_pos_widget])
         self.widgets.splice(old_pos, 1, [new_pos_widget])

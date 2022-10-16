@@ -145,6 +145,7 @@ class WidgetView(Gtk.Box):
 
         self.widget_content = self._widget._container
         self.widget_content.add_css_class('aspinwall-widget-content')
+        self.widget_content.unparent()
         self.container.append(self.widget_content)
 
         if self._widget.has_settings_menu:
@@ -172,7 +173,9 @@ class WidgetView(Gtk.Box):
 
     def remove(self):
         """Removes the widget from its parent WidgetBox."""
-        self.container.remove(self._widget.content)
+        self.container.remove(self.widget_content)
+        if self._widget.has_settings_menu:
+            self.widget_settings_container.remove(self._widget._settings_container)
         self._widgetbox.remove_widget(self)
 
     # Header/buttons
