@@ -31,9 +31,6 @@ def test_widget():
     assert widget
     assert widget.instance
 
-    # Make sure style provider is created correctly
-    assert type(widget.css_provider) == Gtk.CssProvider
-
     # By default, widgets that don't set their own refresh function have an
     # empty placeholder function that always returns None:
     assert widget.refresh() is None
