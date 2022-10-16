@@ -7,6 +7,7 @@ Code for loading widgets can be found in the loader submodule.
 from gi.repository import Adw, Gtk, Gio, GObject
 import os
 import gettext
+import re
 
 class Widget(GObject.GObject):
     """
@@ -58,6 +59,7 @@ class Widget(GObject.GObject):
         self._container.add_css_class(self.css_class)
 
         self.css_providers = []
+        self.loaded_stylesheets = []
         if self.has_stylesheet:
             style_manager = Adw.StyleManager.get_default()
             style_manager.connect('notify::dark', self.theme_update)
@@ -99,6 +101,7 @@ class Widget(GObject.GObject):
         """Loads the correct stylesheets for the style provider."""
         for provider in self.css_providers:
             Gtk.StyleContext.remove_provider_for_display(self._container.get_display(), provider)
+        self.loaded_stylesheets = []
         self.load_stylesheet_from_file(
             self.join_with_data_path('stylesheet', 'style.css')
         )
@@ -124,8 +127,10 @@ class Widget(GObject.GObject):
                     self.join_with_data_path('stylesheet', 'style-hc.css')
                 )
 
-    def load_stylesheet_from_string(self, string):
-        """Loads a stylesheet from a string."""
+    def _prepare_stylesheet_string(self, string, import_base=None):
+
+        if not import_base:
+            import_base = self.join_with_data_path('stylesheet')
 
         # HACK: In order to make life easier, and make hijacking the launcher's CSS a bit
         # more difficult, we do a little hack here that prefixes every rule with a class
@@ -143,17 +148,62 @@ class Widget(GObject.GObject):
         # I doubt upstream would be interested (this is an *incredibly* niche use case).
         # Might be worth asking though?
 
-        rules_split = [ rule.replace('\n', '') + '}' for rule in string.split('}') if rule.replace('\n', '') ]
+        # Remove comments (both for minification reasons and for breakage prevention)
+        _string_clean = re.sub('/\*[^*]*\*+([^/][^*]*\*+)*/', '', string)
+
+        rules_split = [ rule.replace('\n', '') for rule in _string_clean.split('}') if rule.replace('\n', '') ] # noqa: E501
         rules = ''
         for rule in rules_split:
             if not rule:
                 continue
-            if '{' in rule:
-                rules += f' .{self.css_class} '
-            rules += rule
+
+            # Correctly handle defines and imports
+            if '@' in rule:
+                if '{' in rule:
+                    customs = rule.split('{')[0].split(';')
+                else:
+                    customs = rule.split(';')
+                # Defines/imports are tricky since they're essentially properties
+                # outside of a rule; since we only guess the boundaries of a rule
+                # based on the position of curly brackets (}), it's easy to lead to
+                # a scenario where the class is prepended to the define instead of
+                # the selector.
+                #
+                # This works around it by splitting out the individual defines,
+                # then only applying the class to the selector that's left.
+                n = 0
+                for cust in customs:
+                    if n == len(customs) - 1 and len(rule.split('{')) > 1 and \
+                            rule.split('{')[1].replace(' ', ''):
+                        rules += f' .{self.css_class} {cust} '
+                        break
+                    if '@import' in cust:
+                        import_filename = re.findall(r"['\"](.*?)['\"]", cust)[0]
+                        import_path = os.path.join(import_base, import_filename)
+                        if import_path in self.loaded_stylesheets:
+                            print(f"ERROR: Potential circular import in stylesheet found (trying to load {import_path} which is already loaded)") # noqa: E501
+                        else:
+                            self.loaded_stylesheets.append(import_path)
+                            with open(import_path, 'r') as import_file:
+                                raw_import = import_file.read()
+                            rules += ' ' + self._prepare_stylesheet_string(raw_import) + ' '
+                    elif cust.replace(' ', ''):
+                        rules += cust + ';'
+                    n += 1
+                if '{' in rule and len(rule.split('{')) > 1 and rule.split('{')[1].replace(' ', ''):
+                    rules += '{ ' + rule.split('{')[1] + '}'
+            else:
+                if '{' in rule:
+                    rules += f' .{self.css_class} ' + rule + '}'
+
+        return rules
+
+    def load_stylesheet_from_string(self, string, import_base=None):
+        """Loads a stylesheet from a string."""
+        rules = self._prepare_stylesheet_string(string, import_base)
 
         self.css_providers.append(Gtk.CssProvider())
-        self.css_providers[-1].load_from_data(bytes(rules, 'ascii'))
+        self.css_providers[-1].load_from_data(bytes(rules, 'utf-8'))
         Gtk.StyleContext.add_provider_for_display(
             self._container.get_display(),
             self.css_providers[-1],
@@ -162,8 +212,12 @@ class Widget(GObject.GObject):
 
     def load_stylesheet_from_file(self, path):
         """Loads a stylesheet from a file."""
+        if path in self.loaded_stylesheets:
+            print(f"ERROR: Potential circular import in stylesheet found (trying to load {path} which is already loaded)") # noqa: E501
+            return False
+        self.loaded_stylesheets.append(path)
         with open(path, 'r') as css_file:
-            self.load_stylesheet_from_string(css_file.read())
+            self.load_stylesheet_from_string(css_file.read(), os.path.dirname(path))
 
     @GObject.Property
     def id(self):
