@@ -90,7 +90,7 @@ class Widget(GObject.GObject):
 
     def set_settings_child(self, widget):
         """Sets the settings child widget for the widget."""
-        if not self.has_settings:
+        if not self.has_settings_menu:
             raise ValueError("Trying to set settings child, but has_settings is not True")
         self._settings_container.set_child(widget)
 
