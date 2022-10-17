@@ -22,8 +22,6 @@ class Widget(GObject.GObject):
                    - icon - contains GTK icon name string
       - refresh() - (function) runs in the background at the widget
                     refresh interval
-      - content - Widget content. This can be any GTK widget; by default,
-                  an empty GtkBox is created.
 
     For more information, see docs/widgets/creating-widgets.md.
     """
