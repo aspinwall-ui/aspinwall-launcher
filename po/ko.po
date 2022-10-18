@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.dithernet.aspinwall.Launcher\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-12 19:46+0200\n"
-"PO-Revision-Date: 2022-10-07 10:17+0000\n"
+"PO-Revision-Date: 2022-10-18 15:30+0000\n"
 "Last-Translator: Hoseok Seo <ddinghoya@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/aspinwall-ui/"
 "aspinwall-launcher/ko/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.15-dev\n"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:6
 msgid "Widgets"
@@ -231,11 +231,11 @@ msgstr "다른 검색 시도"
 
 #: src/launcher/ui/appicon.ui:63
 msgid "_Remove from favorites"
-msgstr "_즐겨 찾기에서 삭제"
+msgstr "즐겨찾기에서 삭제(_R)"
 
 #: src/launcher/ui/appicon.ui:68
 msgid "_Add to favorites"
-msgstr "_즐겨 찾기에 추가"
+msgstr "즐겨찾기에 추가(_A)"
 
 #. TRANSLATORS: Tooltip for the "open app chooser" button in the launcher
 #: src/launcher/ui/launcher.ui:73
@@ -422,19 +422,19 @@ msgstr "위젯 관리 모드 종료"
 
 #: src/launcher/ui/widgetbox.ui:136
 msgid "_Add Widgets…"
-msgstr "_위젯 추가…"
+msgstr "위젯 추가(_A)…"
 
 #: src/launcher/ui/widgetbox.ui:141
 msgid "_Manage Widgets"
-msgstr "_위젯 관리"
+msgstr "위젯 관리(_M)"
 
 #: src/launcher/ui/widgetbox.ui:148
 msgid "_Launcher Settings"
-msgstr "_실행기 설정"
+msgstr "실행기 설정(_L)"
 
 #: src/launcher/ui/widgetbox.ui:153
 msgid "A_bout Aspinwall"
-msgstr "Aspinwall 정보"
+msgstr "Aspinwall 정보(_B)"
 
 #: src/launcher/ui/widgetchooser.ui:30
 msgid "Search widgets…"
@@ -476,7 +476,7 @@ msgstr "편집 모드 종료"
 
 #: src/launcher/ui/widgetinfobox.ui:44
 msgid "_Add"
-msgstr ""
+msgstr "추가(_A)"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
 #: src/launcher/widgetbox.py:107
@@ -491,16 +491,14 @@ msgstr "실행 취소"
 
 #. TRANSLATORS: This can also be translated as "developers".
 #: src/launcher/window.py:154
-#, fuzzy
-#| msgid "Copyright © 2022 Aspinwall contributors"
 msgid "Aspinwall contributors"
-msgstr "저작권 © 2022 Aspinwall 기여자"
+msgstr "Aspinwall 기여자"
 
 #. TRANSLATORS: Set this to your name (and optionally the e-mail address).
 #. noqa: F821
 #: src/launcher/window.py:159 src/launcher/window.py:160
 msgid "translator-credits"
-msgstr ""
+msgstr "번역가-크레딧"
 
 #: src/launcher/settings.py:265
 msgid "Add wallpaper"
@@ -509,13 +507,13 @@ msgstr "바탕 화면 추가"
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
 #: src/launcher/settings.py:271
 msgid "_Cancel"
-msgstr "_취소"
+msgstr "취소(_C)"
 
 #. noqa: F821
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
 #: src/launcher/settings.py:273
 msgid "_Select"
-msgstr "_선택"
+msgstr "선택(_ S)"
 
 #~ msgid "Linux tablet UI with smart hub capabilities"
 #~ msgstr "스마트 허브 기능이 있는 리눅스 태블릿 UI"
