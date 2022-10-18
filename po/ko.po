@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.dithernet.aspinwall.Launcher\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-12 19:46+0200\n"
-"PO-Revision-Date: 2022-10-18 15:30+0000\n"
+"PO-Revision-Date: 2022-10-20 13:02+0000\n"
 "Last-Translator: 이정희 <daemul72@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/aspinwall-ui/"
 "aspinwall-launcher/ko/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.15-dev\n"
+"X-Generator: Weblate 4.14.2-dev\n"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:6
 msgid "Widgets"
@@ -81,7 +81,7 @@ msgstr "슬라이드쇼 모드"
 msgid ""
 "In slideshow mode, the launcher automatically loops over available "
 "wallpapers."
-msgstr "슬라이드쇼 모드에서 실행기는 사용 가능한 배경화면을 자동으로 반복합니다."
+msgstr "슬라이드쇼 모드에서, 런처는 사용 가능한 배경화면을 자동으로 반복합니다."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:59
 #: src/launcher/ui/settings.ui:286
@@ -93,9 +93,8 @@ msgstr "슬라이드쇼 전환 길이"
 msgid ""
 "Length of the transition between the current and newly selected wallpaper, "
 "in miliseconds. Set to 0 to disable."
-msgstr ""
-"현재 바탕 화면과 새로 선택한 바탕 화면 사이의 전환 길이 (밀리초)입니다. 비활"
-"성화하려면 0으로 설정합니다."
+msgstr "현재 배경화면과 새로 선택한 배경화면 사이의 전환 길이 (밀리초)입니다. "
+"비활성화하려면 0으로 설정합니다."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:67
 msgid "Slideshow switch delay"
@@ -149,7 +148,7 @@ msgstr "유휴 모드 활성화까지의 시간"
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:104
 msgid ""
 "Amount of time (in seconds) after which the launcher goes into idle mode."
-msgstr "실행기가 유휴 모드로 전환되는 시간 (초)입니다."
+msgstr "런처가 유휴 모드로 전환되는 시간 (초)입니다."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:111
 #: src/launcher/ui/settings.ui:434
@@ -228,11 +227,11 @@ msgstr "다른 검색 시도"
 
 #: src/launcher/ui/appicon.ui:63
 msgid "_Remove from favorites"
-msgstr "즐겨찾기에서 삭제(_R)"
+msgstr "즐겨찾기에서 제거하기(_R)"
 
 #: src/launcher/ui/appicon.ui:68
 msgid "_Add to favorites"
-msgstr "즐겨찾기에 추가(_A)"
+msgstr "즐겨찾기에 추가하기(_A)"
 
 #. TRANSLATORS: Tooltip for the "open app chooser" button in the launcher
 #: src/launcher/ui/launcher.ui:73
@@ -241,11 +240,11 @@ msgstr "설치된 앱"
 
 #: src/launcher/ui/settings.ui:17
 msgid "Wallpaper"
-msgstr "바탕 화면"
+msgstr "배경화면"
 
 #: src/launcher/ui/settings.ui:21
 msgid "Wallpaper preview"
-msgstr "바탕 화면 미리보기"
+msgstr "배경화면 미리보기"
 
 #. TRANSLATOR: For the "Available wallpapers" option; box can be translated as field
 #: src/launcher/ui/settings.ui:180
@@ -255,7 +254,7 @@ msgstr "이 상자의 이미지는 활성화된 경우 슬라이드쇼 모드에
 #. TRANSLATORS: Used for the slideshow mode switch frequency
 #: src/launcher/ui/settings.ui:255
 msgid "Switch wallpaper every:"
-msgstr "다음 간격으로 바탕 화면 전환:"
+msgstr "다음 간격으로 배경화면 전환:"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
 #. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
@@ -318,8 +317,7 @@ msgstr "확대"
 msgid ""
 "Used for the “Solid Color” wallpaper style, as well as the backdrop for the "
 "“Scaled” style."
-msgstr ""
-"\"단색\" 바탕 화면 스타일과 \"크기 조절\" 스타일의 바탕 화면에 사용됩니다."
+msgstr "\"단색\" 배경화면 스타일과 \"크기조정\" 스타일의 배경에 사용됩니다."
 
 #: src/launcher/ui/settings.ui:345
 msgid "Theme"
@@ -341,7 +339,7 @@ msgstr "시스템 테마 따름"
 
 #: src/launcher/ui/settings.ui:396
 msgid "Launcher"
-msgstr "실행기"
+msgstr "런처"
 
 #. TRANSLATORS: "Idle mode" refers to the mode where, after a set time of inactivity, the widgets reduce their opacity and the app chooser/menu buttons disappear.
 #: src/launcher/ui/settings.ui:401
@@ -405,7 +403,7 @@ msgstr "재설정"
 #. TRANSLATORS: Tooltip for menu button in the launcher
 #: src/launcher/ui/widgetbox.ui:54
 msgid "Launcher configuration"
-msgstr "실행기 구성"
+msgstr "런처 구성"
 
 #. TRANSLATORS: Tooltip for "Add widgets" button in widget management mode
 #: src/launcher/ui/widgetbox.ui:83
@@ -419,15 +417,15 @@ msgstr "위젯 관리 모드 종료"
 
 #: src/launcher/ui/widgetbox.ui:136
 msgid "_Add Widgets…"
-msgstr "위젯 추가(_A)…"
+msgstr "위젯 추가하기(_A)…"
 
 #: src/launcher/ui/widgetbox.ui:141
 msgid "_Manage Widgets"
-msgstr "위젯 관리(_M)"
+msgstr "위젯 관리하기(_M)"
 
 #: src/launcher/ui/widgetbox.ui:148
 msgid "_Launcher Settings"
-msgstr "실행기 설정(_L)"
+msgstr "런처 설정(_L)"
 
 #: src/launcher/ui/widgetbox.ui:153
 msgid "A_bout Aspinwall"
@@ -435,12 +433,12 @@ msgstr "Aspinwall 정보(_B)"
 
 #: src/launcher/ui/widgetchooser.ui:30
 msgid "Search widgets…"
-msgstr "위젯 검색…"
+msgstr "위젯 검색하기…"
 
 #. TRANSLATORS: Tooltip for the "Edit widget" button that appears when hovering over a widget
 #: src/launcher/ui/widgetview.ui:52
 msgid "Edit widget"
-msgstr "위젯 편집"
+msgstr "위젯 편집하기"
 
 #: src/launcher/ui/widgetview.ui:91
 msgid "Close widget settings"
@@ -454,26 +452,26 @@ msgstr "위젯 설정"
 #. TRANSLATORS: Tooltip for "remove widget" button
 #: src/launcher/ui/widgetviewheader.ui:20
 msgid "Remove"
-msgstr "제거"
+msgstr "제거하기"
 
 #. TRANSLATORS: Tooltip for "move widget up" button in widget header
 #: src/launcher/ui/widgetviewheader.ui:50
 msgid "Move up"
-msgstr "위로 이동"
+msgstr "위로 이동하기"
 
 #. TRANSLATORS: Tooltip for "move widget down" button in widget header
 #: src/launcher/ui/widgetviewheader.ui:65
 msgid "Move down"
-msgstr "아래로 이동"
+msgstr "아래로 이동하기"
 
 #. TRANSLATORS: Tooltip for "exit widget edit mode"/close button on widget headers
 #: src/launcher/ui/widgetviewheader.ui:110
 msgid "Exit editing mode"
-msgstr "편집 모드 종료"
+msgstr "편집 모드 종료하기"
 
 #: src/launcher/ui/widgetinfobox.ui:44
 msgid "_Add"
-msgstr "추가(_A)"
+msgstr "추가하기(_A)"
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
 #: src/launcher/widgetbox.py:107
@@ -495,22 +493,22 @@ msgstr "Aspinwall 기여자"
 #. noqa: F821
 #: src/launcher/window.py:159 src/launcher/window.py:160
 msgid "translator-credits"
-msgstr "번역가-크레딧"
+msgstr "이정희 <daemul72@gmail.com>"
 
 #: src/launcher/settings.py:265
 msgid "Add wallpaper"
-msgstr "바탕 화면 추가"
+msgstr "배경화면 추가하기"
 
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
 #: src/launcher/settings.py:271
 msgid "_Cancel"
-msgstr "취소(_C)"
+msgstr "취소하기(_C)"
 
 #. noqa: F821
 #. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
 #: src/launcher/settings.py:273
 msgid "_Select"
-msgstr "선택(_ S)"
+msgstr "선택하기(_ S)"
 
 #~ msgid "Linux tablet UI with smart hub capabilities"
 #~ msgstr "스마트 허브 기능이 있는 리눅스 태블릿 UI"
