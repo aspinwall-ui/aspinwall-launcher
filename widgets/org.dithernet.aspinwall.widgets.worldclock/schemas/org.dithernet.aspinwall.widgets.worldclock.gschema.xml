@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schemalist>
+	<schema id="org.dithernet.aspinwall.widgets.WorldClock">
+		<key name="location" type="av">
+            <default>[]</default>
+			<summary>Location {name, serialized representation of GWeather.Location}</summary>
+		</key>
+	</schema>
+</schemalist>
