@@ -97,7 +97,11 @@ class Todo(Widget):
         "icon": 'edit-paste-symbolic',
         "description": translatable("Editable tasks list"),
         "id": "org.dithernet.aspinwall.widgets.Todo",
-        "tags": translatable('notes,todo,to do,list')
+        "tags": translatable('notes,todo,to do,list'),
+        "author": translatable("Aspinwall developers"),
+        "url": "https://github.com/aspinwall-ui/aspinwall-launcher",
+        "issue_tracker": "https://github.com/aspinwall-ui/aspinwall-launcher",
+        "version": "0.0.1"
     }
 
     has_config = True

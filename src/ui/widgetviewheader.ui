@@ -104,6 +104,18 @@
         </child>
 
         <child>
+          <object class="GtkButton" id="widget_about_button">
+            <property name="icon-name">help-about-symbolic</property>
+            <property name="tooltip-text" translatable="yes">About this widget</property>
+            <signal name="clicked" handler="show_widget_about"/>
+
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+
+        <child>
           <object class="GtkButton" id="widget_header_hide">
             <property name="icon-name">window-close-symbolic</property>
             <!-- TRANSLATORS: Tooltip for "exit widget edit mode"/close button on widget headers -->

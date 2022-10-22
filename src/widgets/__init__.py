@@ -17,9 +17,13 @@ class Widget(GObject.GObject):
       - metadata - dict containing widget metadata:
                    - name
                    - description
+                   - author
+                   - version
                    - tags (comma-separated string)
                    - thumbnail (url to image)
                    - icon - contains GTK icon name string
+                   - url - link to repository, if applicable
+                   - issue_tracker - link to issue tracker, if applicable
       - refresh() - (function) runs in the background at the widget
                     refresh interval
 
@@ -224,10 +228,35 @@ class Widget(GObject.GObject):
         with open(path, 'r') as css_file:
             self.load_stylesheet_from_string(css_file.read(), os.path.dirname(path))
 
+    def show_about_window(self, transient_for=None):
+        """Displays an about window based on the metadata of the widget."""
+        about_window = Adw.AboutWindow(
+            application_name=self.metadata['name'],
+            application_icon=self.metadata['icon'],
+            developer_name=self.metadata['author'],
+            version=self.metadata['version']
+        )
+
+        if 'url' in self.metadata:
+            about_window.set_website(self.metadata['url'])
+        if 'issue_tracker' in self.metadata:
+            about_window.set_issue_url(self.metadata['issue_tracker'])
+
+        if transient_for:
+            about_window.set_transient_for(transient_for)
+            about_window.set_modal(True)
+
+        about_window.present()
+
     @GObject.Property
     def id(self):
         """The ID of the widget, as defined in its metadata."""
         return self.metadata['id']
+
+    @GObject.Property
+    def version(self):
+        """The version of the widget, as defined in its metadata."""
+        return self.metadata['version']
 
     @GObject.Property
     def name(self):
@@ -245,6 +274,29 @@ class Widget(GObject.GObject):
         return self.metadata['description']
 
     @GObject.Property
+    def author(self):
+        """The author of the widget, as defined in its metadata."""
+        return self.metadata['author']
+
+    @GObject.Property
     def tags(self):
         """The tags of the widget, as defined in its metadata."""
         return self.metadata['tags'].split(',')
+
+    @GObject.Property
+    def url(self):
+        """
+        A link to the repository/website of the widget, as defined in its metadata.
+
+        This value can be null.
+        """
+        return self.metadata['url']
+
+    @GObject.Property
+    def issue_tracker(self):
+        """
+        A link to the issue tracker of the widget, as defined in its metadata.
+
+        This value can be null.
+        """
+        return self.metadata['issue_tracker']

@@ -19,10 +19,13 @@ Every widget inherits from the `Widget` class, as defined in `aspinwall.widgets.
 A widget's content is provided through the `content` variable, and it contains a GTK widget (usually a `GtkBox`, `GtkGrid` or other type of container). Information about the widget is stored in the `metadata` variable, which is a dict. It contains the following values:
 
  * `id` - the widget's ID
+ * `version` - the widget's version
  * `name` - the widget's name
  * `icon` - string containing the icon name to use for the widget
  * `description` - the widget's description (shown in the widget chooser)
+ * `author` - the name of the widget's author(s)
  * `tags` - a string containing a list of tags, separated by commas
+ * `url` and `issue_tracker`, links to the widget's repository and issue tracker respectively. These are both optional.
 
 When displayed in the launcher, the widget is wrapped in a `LauncherWidget` object and given a `LauncherWidgetHeader`; this header displays the widget's name and icon, and provides buttons for removing the widget from the launcher and accessing its settings.
 
@@ -45,10 +48,13 @@ from gi.repository import Gtk
 class MyWidget(Widget):
     metadata = {
         'id': 'com.github.username.mywidget',
+        'version': '0.0.1',
         'name': 'My Widget',
         'icon': 'preferences-system-symbolic',
         'description': 'My first widget',
+        'author': 'Your Name Here',
         'tags': 'hello world,example'
+		# feel free to set 'url' and 'issue_tracker'
     }
 
     def __init__(self, instance):

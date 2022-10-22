@@ -11,10 +11,14 @@ For a more tutorial-esque approach to widgets, see [Creating a new widget](docs/
 Widgets have a `metadata` property, which is a dictionary containing the following keys:
 
  * `id` (string) - the widget's ID.
+ * `version` (string) - the widget's version.
  * `name` (string) - the widget's name
  * `icon` (string) - the widget's icon, as an icon name string
  * `description` (string) - the widget's description
+ * `author` (string) - the name of the widget's author
  * `tags` (string) - the widget's tags, separated by commas
+ * `url` (string) (optional) - an URL to the widget's repository.
+ * `issue_tracker` (string) (optional) - an URL to the widget's issue tracker.
 
 These keys are also exposed as GObject properties; the property names for them are the same as the key names, with two notable differences:
 

@@ -12,7 +12,11 @@ class Welcome(Widget):
         "icon": 'dialog-information-symbolic',
         "description": translatable("Displays basic information about Aspinwall."),
         "id": "org.dithernet.aspinwall.widgets.Welcome",
-        "tags": translatable('welcome,first startup')
+        "tags": translatable('welcome,first startup'),
+        "author": translatable("Aspinwall developers"),
+        "url": "https://github.com/aspinwall-ui/aspinwall-launcher",
+        "issue_tracker": "https://github.com/aspinwall-ui/aspinwall-launcher",
+        "version": "0.0.1"
     }
 
     def __init__(self, instance=0):

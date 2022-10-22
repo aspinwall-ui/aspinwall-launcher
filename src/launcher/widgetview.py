@@ -79,6 +79,11 @@ class WidgetViewHeader(Gtk.CenterBox):
         """Shows the widget settings overlay."""
         self._widgetview.container_stack.set_visible_child(self._widgetview.widget_settings_container)
 
+    @Gtk.Template.Callback()
+    def show_widget_about(self, *args):
+        """Shows the widget's about window."""
+        self._widgetview._widget.show_about_window(self.get_native())
+
     def update_move_buttons(self):
         """
         Makes the move buttons sensitive or non-sensitive based on whether

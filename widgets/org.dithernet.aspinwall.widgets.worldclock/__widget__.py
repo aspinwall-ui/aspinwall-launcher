@@ -33,7 +33,11 @@ class WorldClock(Widget):
         "icon": 'alarm-symbolic',
         "description": translatable("Clock with a custom timezone selector."),
         "id": "org.dithernet.aspinwall.widgets.WorldClock",
-        "tags": translatable('clock,timezone')
+        "tags": translatable('clock,timezone'),
+        "author": translatable("Aspinwall developers"),
+        "url": "https://github.com/aspinwall-ui/aspinwall-launcher",
+        "issue_tracker": "https://github.com/aspinwall-ui/aspinwall-launcher",
+        "version": "0.0.1"
     }
 
     has_config = True
