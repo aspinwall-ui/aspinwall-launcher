@@ -82,7 +82,7 @@
                 <property name="hexpand">true</property>
 
                 <style>
-                  <class name="header"/>
+                  <class name="aspinwall-widget-header"/>
                 </style>
 
                 <child type="start">
