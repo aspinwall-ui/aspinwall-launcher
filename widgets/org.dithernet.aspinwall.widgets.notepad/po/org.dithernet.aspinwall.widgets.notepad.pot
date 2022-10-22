@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.dithernet.aspinwall.widgets.notepad\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-18 17:10+0100\n"
+"POT-Creation-Date: 2022-10-22 16:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: widgets/org.dithernet.aspinwall.widgets.notepad/notepad.py:11
+#: widgets/org.dithernet.aspinwall.widgets.notepad/__widget__.py:11
 msgid "Notepad"
 msgstr ""
 
-#: widgets/org.dithernet.aspinwall.widgets.notepad/notepad.py:13
+#: widgets/org.dithernet.aspinwall.widgets.notepad/__widget__.py:13
 msgid "Simple notepad widget"
 msgstr ""
 
-#: widgets/org.dithernet.aspinwall.widgets.notepad/notepad.py:15
+#: widgets/org.dithernet.aspinwall.widgets.notepad/__widget__.py:15
 msgid "notes,todo,to do,list"
 msgstr ""

@@ -2,34 +2,34 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-17 12:15+0200\n"
+"POT-Creation-Date: 2022-10-22 16:38+0200\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: widgets/org.dithernet.aspinwall.widgets.todo/todo.py:29
+#: widgets/org.dithernet.aspinwall.widgets.todo/__widget__.py:29
 msgid "Remove task from list"
 msgstr ""
 
-#: widgets/org.dithernet.aspinwall.widgets.todo/todo.py:92
+#: widgets/org.dithernet.aspinwall.widgets.todo/__widget__.py:96
 msgid "To-do list"
 msgstr ""
 
-#: widgets/org.dithernet.aspinwall.widgets.todo/todo.py:94
+#: widgets/org.dithernet.aspinwall.widgets.todo/__widget__.py:98
 msgid "Editable tasks list"
 msgstr ""
 
-#: widgets/org.dithernet.aspinwall.widgets.todo/todo.py:96
+#: widgets/org.dithernet.aspinwall.widgets.todo/__widget__.py:100
 msgid "notes,todo,to do,list"
 msgstr "notes,todo,to do,list"
 
-#: widgets/org.dithernet.aspinwall.widgets.todo/todo.py:126
+#: widgets/org.dithernet.aspinwall.widgets.todo/__widget__.py:132
 msgid "Type in your task..."
 msgstr ""
 
-#: widgets/org.dithernet.aspinwall.widgets.todo/todo.py:136
+#: widgets/org.dithernet.aspinwall.widgets.todo/__widget__.py:142
 msgid "No Tasks"
 msgstr ""
 
-#: widgets/org.dithernet.aspinwall.widgets.todo/todo.py:137
+#: widgets/org.dithernet.aspinwall.widgets.todo/__widget__.py:143
 msgid "Start by adding a task in the text box above."
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.dithernet.aspinwall.widgets.welcome\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-18 17:10+0100\n"
+"POT-Creation-Date: 2022-10-22 16:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,30 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:11
+#: widgets/org.dithernet.aspinwall.widgets.welcome/__widget__.py:11
 msgid "Welcome"
 msgstr ""
 
-#: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:13
+#: widgets/org.dithernet.aspinwall.widgets.welcome/__widget__.py:13
 msgid "Displays basic information about Aspinwall."
 msgstr ""
 
-#: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:15
+#: widgets/org.dithernet.aspinwall.widgets.welcome/__widget__.py:15
 msgid "welcome,first startup"
 msgstr ""
 
-#: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:23
+#: widgets/org.dithernet.aspinwall.widgets.welcome/__widget__.py:25
 msgid "Welcome to Aspinwall"
 msgstr ""
 
-#: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:35
+#: widgets/org.dithernet.aspinwall.widgets.welcome/__widget__.py:37
 msgid ""
 "Thank you for trying out Aspinwall! The UI is still in active development, "
 "and some things may not work correctly - you can report bugs to <a "
 "href='https://github.com/aspinwall-ui/aspinwall/issues'>our bug tracker</a>."
 msgstr ""
 
-#: widgets/org.dithernet.aspinwall.widgets.welcome/welcome.py:43
+#: widgets/org.dithernet.aspinwall.widgets.welcome/__widget__.py:45
 msgid ""
 "\n"
 "• To add a new widget, press the menu button in the top right corner, then "
