@@ -33,7 +33,6 @@ class AppIcon(Gtk.Box):
     def __init__(self):
         """Initializes an AppIcon."""
         if not AppIcon.actions_installed:
-            print("actions installed")
             self.install_action('favorite', None, self.favorite)
             self.install_action('unfavorite', None, self.unfavorite)
             AppIcon.actions_installed = True
