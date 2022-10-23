@@ -15,7 +15,7 @@ class Welcome(Widget):
         "tags": translatable('welcome,first startup'),
         "author": translatable("Aspinwall developers"),
         "url": "https://github.com/aspinwall-ui/aspinwall-launcher",
-        "issue_tracker": "https://github.com/aspinwall-ui/aspinwall-launcher",
+        "issue_tracker": "https://github.com/aspinwall-ui/aspinwall-launcher/issues",
         "version": "0.0.1"
     }
 

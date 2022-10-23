@@ -36,7 +36,7 @@ class WorldClock(Widget):
         "tags": translatable('clock,timezone'),
         "author": translatable("Aspinwall developers"),
         "url": "https://github.com/aspinwall-ui/aspinwall-launcher",
-        "issue_tracker": "https://github.com/aspinwall-ui/aspinwall-launcher",
+        "issue_tracker": "https://github.com/aspinwall-ui/aspinwall-launcher/issues",
         "version": "0.0.1"
     }
 

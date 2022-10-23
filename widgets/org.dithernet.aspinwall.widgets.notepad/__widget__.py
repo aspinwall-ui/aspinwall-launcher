@@ -15,7 +15,7 @@ class Notepad(Widget):
         "tags": translatable('notes,todo,to do,list'),
         "author": translatable("Aspinwall developers"),
         "url": "https://github.com/aspinwall-ui/aspinwall-launcher",
-        "issue_tracker": "https://github.com/aspinwall-ui/aspinwall-launcher",
+        "issue_tracker": "https://github.com/aspinwall-ui/aspinwall-launcher/issues",
         "version": "0.0.1"
     }
 
