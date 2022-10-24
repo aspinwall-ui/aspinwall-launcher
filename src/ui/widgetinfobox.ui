@@ -4,63 +4,95 @@
   <requires lib="gtk" version="4.0"/>
   <template class="WidgetInfobox" parent="GtkBox">
     <property name="hexpand">True</property>
-    <property name="spacing">5</property>
-    <property name="orientation">vertical</property>
     <property name="focusable">true</property>
+
+    <property name="margin-top">8</property>
+    <property name="margin-bottom">8</property>
+    <property name="margin-start">4</property>
+    <property name="margin-end">4</property>
+
+    <property name="width-request">250</property>
 
     <style>
       <class name="widget-infobox"/>
+      <class name="card"/>
+      <class name="activatable"/>
     </style>
 
     <child>
       <object class="GtkBox">
-        <property name="spacing">5</property>
+        <property name="spacing">6</property>
         <property name="halign">fill</property>
         <property name="hexpand">true</property>
+        <property name="orientation">vertical</property>
 
         <child>
-          <object class="GtkImage" id="widget_infobox_icon"/>
+          <object class="GtkBox">
+            <property name="spacing">6</property>
+            <property name="halign">fill</property>
+            <property name="hexpand">true</property>
+            <property name="margin-top">6</property>
+
+            <child>
+              <object class="GtkImage" id="widget_infobox_icon"/>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="widget_infobox_name">
+                <property name="label">Widget name</property>
+                <property name="wrap">true</property>
+                <property name="xalign">0</property>
+                <property name="halign">start</property>
+                <property name="hexpand">false</property>
+              </object>
+            </child>
+          </object>
         </child>
 
         <child>
-          <object class="GtkLabel" id="widget_infobox_name">
-            <property name="label">Widget name</property>
+          <object class="GtkLabel" id="widget_infobox_description">
+            <property name="label">Widget description</property>
             <property name="wrap">true</property>
             <property name="xalign">0</property>
             <property name="halign">start</property>
             <property name="hexpand">false</property>
           </object>
         </child>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkBox">
+        <property name="halign">end</property>
+        <property name="spacing">6</property>
+        <property name="orientation">vertical</property>
 
         <child>
           <object class="GtkButton" id="widget_infobox_add">
-            <property name="halign">end</property>
-            <property name="hexpand">true</property>
+            <property name="icon-name">list-add-symbolic</property>
+            <property name="tooltip-text" translatable="true">Add this widget</property>
+            <property name="valign">start</property>
             <signal name="clicked" handler="add_widget_from_infobox"></signal>
-
-            <property name="child">
-              <object class="AdwButtonContent">
-                <property name="icon-name">list-add-symbolic</property>
-                <property name="label" translatable="true">_Add</property>
-                <property name="use_underline">true</property>
-              </object>
-            </property>
 
             <style>
               <class name="add"/>
             </style>
           </object>
         </child>
-      </object>
-    </child>
 
-    <child>
-      <object class="GtkLabel" id="widget_infobox_description">
-        <property name="label">Widget description</property>
-        <property name="wrap">true</property>
-        <property name="xalign">0</property>
-        <property name="halign">start</property>
-        <property name="hexpand">false</property>
+        <child>
+          <object class="GtkButton" id="widget_infobox_about">
+            <property name="icon-name">help-about-symbolic</property>
+            <property name="tooltip-text" translatable="true">About this widget</property>
+            <property name="valign">end</property>
+            <property name="vexpand">true</property>
+            <signal name="clicked" handler="about_widget_from_infobox"></signal>
+
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
       </object>
     </child>
   </template>

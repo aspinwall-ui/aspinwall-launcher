@@ -40,8 +40,13 @@ class WidgetInfobox(Gtk.Box):
         """Adds the widget to the widget box."""
         widget_manager.add_widget_by_class(self.widget_data.widget_class)
 
+    @Gtk.Template.Callback()
+    def about_widget_from_infobox(self, *args):
+        """Shows the About window for the widget."""
+        self.widget_data.show_about_window(self.get_native())
+
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetchooser.ui')
-class WidgetChooser(Gtk.Revealer):
+class WidgetChooser(Gtk.Box):
     """Widget chooser widget."""
     __gtype_name__ = 'WidgetChooser'
 
@@ -76,7 +81,7 @@ class WidgetChooser(Gtk.Revealer):
         self.model = filter_model
 
         # Set up widget list
-        self.widget_list.set_model(Gtk.SingleSelection(model=self.model))
+        self.widget_list.set_model(Gtk.NoSelection(model=self.model))
         self.widget_list.set_factory(factory)
 
     def setup(self, factory, list_item):
@@ -132,12 +137,9 @@ class WidgetChooser(Gtk.Revealer):
         else:
             self.no_results.set_visible(False)
 
-        # Select first item in list
-        selection_model = self.widget_list.get_model()
-        selection_model.set_selected(0)
-        # TODO: Scroll back to top of list
+        # TODO: Scroll back to start of list
 
     @Gtk.Template.Callback()
     def hide(self, *args):
         """Hides the widget chooser."""
-        self.set_reveal_child(False)
+        self.get_parent().set_reveal_flap(False)

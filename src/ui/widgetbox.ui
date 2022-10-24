@@ -81,7 +81,7 @@
                     <property name="margin-start">10</property>
                     <!-- TRANSLATORS: Tooltip for "Add widgets" button in widget management mode -->
                     <property name="tooltip-text" translatable="yes">Add widgets</property>
-                    <signal name="clicked" handler="show_chooser"/>
+                    <!--<signal name="clicked" handler="show_chooser"/>-->
 
                     <style>
                       <class name="osd"/>
@@ -121,10 +121,6 @@
             <property name="margin-start">72</property>
             <property name="margin-end">72</property>
           </object>
-        </child>
-
-        <child type="overlay">
-          <object class="WidgetChooser" id="widget_chooser"/>
         </child>
       </object>
     </child>

@@ -9,7 +9,6 @@ import time
 from ..config import config
 from .widgetmanager import widget_manager
 from .widgetview import WidgetView
-from . import widget_chooser as _global_widget_chooser
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetbox.ui')
 class WidgetBox(Gtk.Box):
@@ -22,7 +21,6 @@ class WidgetBox(Gtk.Box):
     edit_mode = False
 
     widget_container = Gtk.Template.Child()
-    widget_chooser = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
 
     chooser_button_revealer = Gtk.Template.Child()
@@ -32,13 +30,10 @@ class WidgetBox(Gtk.Box):
         """Initializes the widget box."""
         super().__init__()
 
-        self._show_chooser_action = Gio.SimpleAction.new("show_widget_chooser", None)
-        self._show_chooser_action.connect("activate", self.show_chooser)
-
         # WORKAROUND: For some reason, the revealer type in the widget chooser
         # resets itself to slide_down during this step. Force-set the type here
         # to avoid this.
-        self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
+        #self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
 
         self._management_mode_action = Gio.SimpleAction.new("enter_widget_management", None)
         self._management_mode_action.connect("activate", self.enter_management_mode)
@@ -54,7 +49,7 @@ class WidgetBox(Gtk.Box):
         self.autorefresh_thread.start()
 
         # Let the widget chooser know a widgetbox has been created
-        _global_widget_chooser.widgetbox = self
+        #_global_widget_chooser.widgetbox = self
 
         self.widget_container.bind_model(widget_manager.widgets, self.bind)
         widget_manager.widgets.connect('items-changed', self.update_move_buttons)
@@ -147,13 +142,6 @@ class WidgetBox(Gtk.Box):
         if old_pos == widget_manager.widgets.get_n_items() - 1:
             return None
         self.move_widget(old_pos, old_pos + 1)
-
-    @Gtk.Template.Callback()
-    def show_chooser(self, *args):
-        """Shows the widget chooser."""
-        self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
-        self.widget_chooser.search.grab_focus()
-        self.widget_chooser.set_reveal_child(True)
 
     def set_autorefresh_delay(self, *args):
         """Sets autorefresh delay from config."""

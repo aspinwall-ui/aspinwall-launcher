@@ -191,11 +191,16 @@
 	color: @aspinwall_menu_fg;
 }
 
+.widget-chooser-list row:hover {
+	background-color: @aspinwall_menu_bg;
+	color: @aspinwall_menu_fg;
+}
+
 .widget-chooser .header {
 	background-color: @aspinwall_menu_header_bg;
 	color: @aspinwall_menu_header_fg;
 	border-bottom: 1px @aspinwall_menu_border solid;
-	padding: 10px;
+	padding: 8px 12px;
 }
 
 .widget-infobox {
@@ -303,10 +308,4 @@
 	box-shadow: 2px 1px 5px @aspinwall_widget_shade;
 	border: 1px solid @aspinwall_widget_border;
 	opacity: 0.9;
-}
-
-/* About window */
-.aspinwall-about {
-	background-color: @aspinwall_menu_bg;
-	color: @aspinwall_menu_fg;
 }

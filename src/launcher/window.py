@@ -12,6 +12,7 @@ from ..config import config
 from .clockbox import ClockBox # noqa: F401
 from .widgetbox import WidgetBox # noqa: F401
 from .app_chooser import AppChooser # noqa: F401
+from .widget_chooser import WidgetChooser # noqa: F401
 from .wallpaper import Wallpaper # noqa: F401
 from .settings import LauncherSettings
 
@@ -31,6 +32,8 @@ class Launcher(Gtk.ApplicationWindow):
     app_chooser = Gtk.Template.Child()
     app_chooser_show = Gtk.Template.Child()
     app_chooser_button_revealer = Gtk.Template.Child()
+    widget_chooser = Gtk.Template.Child()
+    widget_chooser_flap = Gtk.Template.Child()
 
     focused = True
     pause_focus_manager = False
@@ -45,13 +48,16 @@ class Launcher(Gtk.ApplicationWindow):
 
         self.app_chooser_show.connect('clicked', self.show_app_chooser)
 
+        self._show_chooser_action = Gio.SimpleAction.new("show_widget_chooser", None)
+        self._show_chooser_action.connect("activate", self.show_chooser)
+
         self.open_settings_action = Gio.SimpleAction.new("open_settings", None)
         self.open_settings_action.connect('activate', self.open_settings)
 
         self.about_aspinwall_action = Gio.SimpleAction.new("about_aspinwall", None)
         self.about_aspinwall_action.connect('activate', self.open_about)
 
-        self.add_action(self.widgetbox._show_chooser_action)
+        self.add_action(self._show_chooser_action)
         self.add_action(self.widgetbox._management_mode_action)
         self.add_action(self.open_settings_action)
         self.add_action(self.about_aspinwall_action)
@@ -106,6 +112,10 @@ class Launcher(Gtk.ApplicationWindow):
         # Show chooser
         self.launcher_stack.set_visible_child_name('app-chooser')
         self.app_chooser.search.grab_focus()
+
+    def show_chooser(self, *args):
+        """Shows the widget chooser."""
+        self.widget_chooser_flap.set_reveal_flap(True)
 
     def update_unfocus_countdown(self, *args):
         """

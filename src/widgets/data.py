@@ -21,6 +21,10 @@ class WidgetData(GObject.Object):
         self.has_config = widget_class.has_config
         self.has_settings_menu = widget_class.has_settings_menu
 
+    def show_about_window(self, transient_for=None):
+        """Wrapper for widget_class.show_about_window."""
+        self.widget_class.show_about_window(self, transient_for)
+
     @GObject.Property
     def id(self):
         """The ID of the widget, as defined in its metadata."""
