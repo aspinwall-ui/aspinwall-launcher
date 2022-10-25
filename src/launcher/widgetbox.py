@@ -30,11 +30,6 @@ class WidgetBox(Gtk.Box):
         """Initializes the widget box."""
         super().__init__()
 
-        # WORKAROUND: For some reason, the revealer type in the widget chooser
-        # resets itself to slide_down during this step. Force-set the type here
-        # to avoid this.
-        #self.widget_chooser.set_transition_type(Gtk.RevealerTransitionType.SLIDE_LEFT)
-
         self._management_mode_action = Gio.SimpleAction.new("enter_widget_management", None)
         self._management_mode_action.connect("activate", self.enter_management_mode)
 
@@ -47,9 +42,6 @@ class WidgetBox(Gtk.Box):
 
         self.autorefresh_thread = threading.Thread(target=self.autorefresh, daemon=True)
         self.autorefresh_thread.start()
-
-        # Let the widget chooser know a widgetbox has been created
-        #_global_widget_chooser.widgetbox = self
 
         self.widget_container.bind_model(widget_manager.widgets, self.bind)
         widget_manager.widgets.connect('items-changed', self.update_move_buttons)
@@ -113,6 +105,10 @@ class WidgetBox(Gtk.Box):
         self.iterate_over_all_widgetviews(
             lambda widgetview: widgetview.widget_header.update_move_buttons()
         )
+
+    @Gtk.Template.Callback()
+    def show_widget_chooser(self, *args):
+        self.get_native().widget_chooser_flap.set_reveal_flap(True)
 
     def move_widget(self, old_pos, new_pos):
         """

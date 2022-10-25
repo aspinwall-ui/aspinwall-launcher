@@ -176,6 +176,10 @@ class WidgetView(Gtk.Box):
             hover.connect('leave', self.hide_edit_button)
             self.container_overlay.add_controller(hover)
 
+        if self._widgetbox.management_mode:
+            self.widget_content.set_sensitive(False)
+            self.reveal_header()
+
     def remove(self):
         """Removes the widget from its parent WidgetBox."""
         self.container.remove(self.widget_content)
