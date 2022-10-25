@@ -12,7 +12,6 @@
         <property name="vexpand">True</property>
         <child>
           <object class="GtkScrolledWindow">
-            <property name="margin-bottom">15</property>
             <property name="hscrollbar-policy">never</property>
 
             <child>
@@ -25,6 +24,7 @@
                 <property name="margin-top">50</property>
                 <property name="margin-start">10</property>
                 <property name="margin-end">10</property>
+                <property name="margin-bottom">15</property>
 
                 <style>
                   <class name="widget-container"/>
