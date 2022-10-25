@@ -84,6 +84,15 @@ class WidgetChooser(Gtk.Box):
         self.widget_list.set_model(Gtk.NoSelection(model=self.model))
         self.widget_list.set_factory(factory)
 
+    def show(self, *args):
+        self.get_parent().set_reveal_flap(True)
+        window = self.get_native()
+        window.wallpaper.dim()
+        window.clockbox.dim()
+
+        window.app_chooser_button_revealer.set_sensitive(False)
+        window.widgetbox.chooser_button_revealer.set_sensitive(False)
+
     def setup(self, factory, list_item):
         """Sets up the widget list."""
         list_item.set_child(WidgetInfobox())
@@ -143,3 +152,9 @@ class WidgetChooser(Gtk.Box):
     def hide(self, *args):
         """Hides the widget chooser."""
         self.get_parent().set_reveal_flap(False)
+        window = self.get_native()
+        if not window.widgetbox.management_mode:
+            window.wallpaper.undim()
+            window.clockbox.undim()
+        window.app_chooser_button_revealer.set_sensitive(True)
+        window.widgetbox.chooser_button_revealer.set_sensitive(True)

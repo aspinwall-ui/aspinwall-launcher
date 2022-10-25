@@ -63,12 +63,13 @@ class WidgetViewHeader(Gtk.CenterBox):
             )
 
             window = self.get_native()
-            window.wallpaper.undim()
-            window.clockbox.undim()
+            if not window.widget_chooser_flap.get_reveal_flap():
+                window.wallpaper.undim()
+                window.clockbox.undim()
+                self._widgetview._widgetbox.chooser_button_revealer.set_sensitive(True)
             self._widgetview.widget_content.set_sensitive(True)
 
             self.get_native().app_chooser_show.set_sensitive(True)
-            self._widgetview._widgetbox.chooser_button_revealer.set_sensitive(True)
             self.get_parent().set_reveal_child(False)
             self._widgetview._widgetbox.edit_mode = False
         else:

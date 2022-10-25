@@ -204,7 +204,7 @@
 }
 
 .widget-infobox {
-	padding: 5px 10px 10px 10px;
+	padding: 5px 10px;
 }
 
 /* App chooser */
@@ -265,11 +265,6 @@
 .favorites-grid .app-icon .app-name { font-size: 0; }
 
 /* Launcher settings window */
-.launcher-settings {
-	background-color: @aspinwall_menu_bg;
-	color: @aspinwall_menu_fg;
-}
-
 .wallpaper-grid-header {
 	margin-left: 12px;
 	margin-right: 12px;

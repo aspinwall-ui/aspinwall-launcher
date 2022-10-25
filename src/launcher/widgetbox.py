@@ -108,7 +108,7 @@ class WidgetBox(Gtk.Box):
 
     @Gtk.Template.Callback()
     def show_widget_chooser(self, *args):
-        self.get_native().widget_chooser_flap.set_reveal_flap(True)
+        self.get_native().widget_chooser.show()
 
     def move_widget(self, old_pos, new_pos):
         """
@@ -188,6 +188,8 @@ class WidgetBox(Gtk.Box):
         """Exits widget management mode."""
         if self.edit_mode:
             window = self.get_native()
+            if window.widget_chooser_flap.get_reveal_flap():
+                window.widget_chooser.hide()
             window.wallpaper.undim()
             window.clockbox.undim()
 

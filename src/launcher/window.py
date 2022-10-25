@@ -49,7 +49,7 @@ class Launcher(Gtk.ApplicationWindow):
         self.app_chooser_show.connect('clicked', self.show_app_chooser)
 
         self._show_chooser_action = Gio.SimpleAction.new("show_widget_chooser", None)
-        self._show_chooser_action.connect("activate", self.show_chooser)
+        self._show_chooser_action.connect("activate", self.show_widget_chooser)
 
         self.open_settings_action = Gio.SimpleAction.new("open_settings", None)
         self.open_settings_action.connect('activate', self.open_settings)
@@ -98,6 +98,9 @@ class Launcher(Gtk.ApplicationWindow):
 
     def show_app_chooser(self, *args):
         """Shows the app chooser."""
+        if self.widget_chooser_flap.get_reveal_flap():
+            self.widget_chooser.hide()
+
         self.pause_focus_manager = True
         # Reload apps, clear search
         self.app_chooser.search.set_text('')
@@ -113,9 +116,9 @@ class Launcher(Gtk.ApplicationWindow):
         self.launcher_stack.set_visible_child_name('app-chooser')
         self.app_chooser.search.grab_focus()
 
-    def show_chooser(self, *args):
+    def show_widget_chooser(self, *args):
         """Shows the widget chooser."""
-        self.widget_chooser_flap.set_reveal_flap(True)
+        self.widget_chooser.show()
 
     def update_unfocus_countdown(self, *args):
         """
@@ -143,6 +146,7 @@ class Launcher(Gtk.ApplicationWindow):
             self.widgetbox.chooser_button_revealer.set_reveal_child(False)
             self.launcher_content.add_css_class('unfocused')
             self.add_controller(self.motion_controller)
+            self.widget_chooser.hide()
 
     def on_focus(self, *args):
         """Performs actions on focus."""
