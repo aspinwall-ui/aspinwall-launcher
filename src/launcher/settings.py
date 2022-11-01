@@ -287,7 +287,15 @@ class LauncherSettings(Adw.PreferencesWindow):
             new_wallpapers = config['available-wallpapers'].copy()
             for file in dialog.get_files():
                 new_wallpapers.append(file.get_path())
+
+            set_first_wallpaper = True
+            if not config['available-wallpapers']:
+                set_first_wallpaper = True
+
             config['available-wallpapers'] = new_wallpapers
+
+            if set_first_wallpaper:
+                config['wallpaper-style'] = 2
 
         dialog.destroy()
         self.wallpaper_image_chooser = None
