@@ -115,6 +115,10 @@ class LauncherSettings(Adw.PreferencesWindow):
         """Initializes the settings window."""
         super().__init__()
 
+        self.wallpaper_image_filter = Gtk.FileFilter()
+        for mime in ('image/png', 'image/jpg'):
+            self.wallpaper_image_filter.add_mime_type(mime)
+
         # Set up settings
         if config['theme-preference'] == 2:
             self.theme_toggle_start.set_active(False)
@@ -174,6 +178,8 @@ class LauncherSettings(Adw.PreferencesWindow):
         config.bind('date-format', self.date_format_entry, 'text', Gio.SettingsBindFlags.DEFAULT)
 
         config.bind('clock-ampm', self.clock_ampm_toggle, 'active', Gio.SettingsBindFlags.DEFAULT)
+
+        self.wallpaper_image_chooser = None
 
     def wallpaper_bind(self, wallpaper_path_string, *args):
         """Returns a WallpaperIcon for the path in the given StringObject."""
@@ -262,33 +268,29 @@ class LauncherSettings(Adw.PreferencesWindow):
     @Gtk.Template.Callback()
     def show_wallpaper_add_dialog(self, *args):
         """Shows the wallpaper addition dialog."""
-        file_dialog = Gtk.FileChooserDialog(
+        if self.wallpaper_image_chooser:
+            return
+
+        self.wallpaper_image_chooser = Gtk.FileChooserNative(
             title=_('Add wallpaper'), # noqa: F821
+            transient_for=self,
             action=Gtk.FileChooserAction.OPEN,
+            filter=self.wallpaper_image_filter,
+            select_multiple=True
         )
-
-        file_dialog.add_buttons(
-            # TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-            _('_Cancel'), Gtk.ResponseType.CANCEL, # noqa: F821
-            # TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-            _('_Select'), Gtk.ResponseType.OK # noqa: F821
-        )
-
-        file_dialog.set_transient_for(self)
-        file_dialog.show()
-
-        file_dialog.connect('response', self.add_wallpaper)
+        self.wallpaper_image_chooser.connect('response', self.add_wallpaper)
+        self.wallpaper_image_chooser.show()
 
     def add_wallpaper(self, dialog, response):
         """Callback for the wallpaper addition dialog."""
-        if response == Gtk.ResponseType.OK:
-            file = dialog.get_file()
-            wallpaper_path = file.get_path()
+        if response == Gtk.ResponseType.ACCEPT:
             new_wallpapers = config['available-wallpapers'].copy()
-            new_wallpapers.append(wallpaper_path)
+            for file in dialog.get_files():
+                new_wallpapers.append(file.get_path())
             config['available-wallpapers'] = new_wallpapers
 
         dialog.destroy()
+        self.wallpaper_image_chooser = None
 
     @Gtk.Template.Callback()
     def set_wallpaper_from_grid(self, flowbox, wallpaper_icon):
