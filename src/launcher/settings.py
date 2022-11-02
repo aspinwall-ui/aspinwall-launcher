@@ -116,7 +116,7 @@ class LauncherSettings(Adw.PreferencesWindow):
         super().__init__()
 
         self.wallpaper_image_filter = Gtk.FileFilter()
-        for mime in ('image/png', 'image/jpg'):
+        for mime in ('image/png', 'image/jpeg', 'image/jpg'):
             self.wallpaper_image_filter.add_mime_type(mime)
 
         # Set up settings
