@@ -77,8 +77,8 @@ class Widget(GObject.GObject):
                 Gio.SettingsSchemaSource.get_default(),
                 False
             )
-            schema = self.schema_source.lookup(self.metadata['id'], False)
-            if not schema:
+            self.settings_schema = self.schema_source.lookup(self.metadata['id'], False)
+            if not self.settings_schema:
                 raise Exception(
                     "Plugin error: schema not found in schema source. Make sure that your schema ID matches the widget ID (note that both are case-sensitive)." # noqa: E501
                 )
@@ -86,7 +86,7 @@ class Widget(GObject.GObject):
             if not self.schema_base_path:
                 self.schema_base_path = '/' + self.metadata['id'].lower().replace('.', '/') + '/'
 
-            self.config = Gio.Settings.new_full(schema, None, self.schema_base_path + str(instance) + '/')
+            self.config = Gio.Settings.new_full(self.settings_schema, None, self.schema_base_path + str(instance) + '/')
 
     def set_child(self, widget):
         """Sets the child widget for the widget."""

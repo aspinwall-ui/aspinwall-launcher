@@ -82,6 +82,9 @@ class LoadedWidgetManager:
         """Removes a widget from the loaded widget list."""
         widget_position = self.widgets.find(widget)[1]
         self.widgets.remove(widget_position)
+        if widget.has_config:
+            for key in widget.settings_schema.list_keys():
+                widget.config.reset(key)
         self.save_widgets()
 
     def get_widget_position(self, widgetview):
