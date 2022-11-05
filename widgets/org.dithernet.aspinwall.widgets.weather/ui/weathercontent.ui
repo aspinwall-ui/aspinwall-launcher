@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+  <requires lib="adw" version="1.0"/>
+  <requires lib="gtk" version="4.0"/>
+  <template class="WeatherContent" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <property name="hexpand">true</property>
+    <property name="spacing">6</property>
+
+    <child>
+      <object class="AdwClamp" id="content_clamp">
+        <property name="margin-top">12</property>
+        <property name="margin-bottom">12</property>
+
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">24</property>
+            <property name="hexpand">true</property>
+
+            <child>
+              <object class="GtkStack" id="view_switcher">
+                <child>
+                  <object class="GtkBox" id="label_box">
+                    <property name="orientation">vertical</property>
+                    <property name="hexpand">true</property>
+
+                    <child>
+                      <object class="GtkLabel" id="location_name_label">
+                        <property name="halign">start</property>
+                        <property name="wrap">true</property>
+
+                        <style>
+                          <class name="location"/>
+                        </style>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkLabel" id="temperature_label">
+                        <property name="halign">start</property>
+                        <property name="wrap">true</property>
+
+                        <style>
+                          <class name="temperature"/>
+                          <class name="numeric"/>
+                        </style>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkLabel" id="weather_condition_label">
+                        <property name="halign">start</property>
+                        <property name="wrap">true</property>
+
+                        <style>
+                          <class name="weather-condition"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkBox" id="no_location">
+                    <property name="orientation">vertical</property>
+                    <property name="hexpand">true</property>
+
+                    <child>
+                      <object class="GtkLabel" id="no_location_title">
+                        <property name="label" translatable="yes">No Location</property>
+                        <property name="halign">start</property>
+                        <property name="wrap">true</property>
+
+                        <style>
+                          <class name="title-1"/>
+                        </style>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkLabel" id="no_location_description">
+                        <property name="label" translatable="yes">Go to Widget Settings to set the location to get weather data for.</property>
+                        <property name="halign">start</property>
+                        <property name="wrap">true</property>
+
+                        <style>
+                          <class name="no-location-description"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkImage" id="weather_condition_icon">
+                <property name="icon-name">weather-clear-symbolic</property>
+                <property name="pixel-size">96</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkLabel" id="attribution_label">
+        <property name="use-markup">true</property>
+        <property name="halign">end</property>
+        <property name="wrap">true</property>
+
+        <style>
+          <class name="dim-label"/>
+          <class name="subtitle"/>
+          <class name="attribution"/>
+        </style>
+      </object>
+    </child>
+  </template>
+</interface>
