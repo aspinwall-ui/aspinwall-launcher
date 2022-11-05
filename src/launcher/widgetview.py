@@ -78,6 +78,7 @@ class WidgetViewHeader(Gtk.CenterBox):
     @Gtk.Template.Callback()
     def show_widget_settings(self, *args):
         """Shows the widget settings overlay."""
+        self._widgetview.widget_settings_container.set_visible(True)
         self._widgetview.container_stack.set_visible_child(self._widgetview.widget_settings_container)
 
     @Gtk.Template.Callback()
@@ -156,6 +157,7 @@ class WidgetView(Gtk.Box):
 
         if self._widget.has_settings_menu:
             self.widget_settings_container.append(self._widget._settings_container)
+            self.widget_settings_container.set_visible(False)
 
         # Set up long-press target
         longpress = Gtk.GestureLongPress()
@@ -180,6 +182,11 @@ class WidgetView(Gtk.Box):
         if self._widgetbox.management_mode:
             self.widget_content.set_sensitive(False)
             self.reveal_header()
+
+        self.container_stack.connect(
+            'notify::transition-running',
+            self.handle_container_stack_transition_status
+        )
 
     def remove(self):
         """Removes the widget from its parent WidgetBox."""
@@ -224,6 +231,14 @@ class WidgetView(Gtk.Box):
     def hide_widget_settings(self, *args):
         """Hides the widget's settings menu."""
         self.container_stack.set_visible_child(self.container_overlay)
+
+    def handle_container_stack_transition_status(self, stack, *args):
+        # Transition to widget
+        if self.container_stack.get_visible_child() == self.container_overlay:
+            if not stack.get_transition_running():
+                self.widget_settings_container.set_visible(False)
+        else: # Transition to settings
+            self.widget_settings_container.set_visible(True)
 
     def reveal_edit_button(self, *args):
         """Reveals the edit button."""
