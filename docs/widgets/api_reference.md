@@ -1,6 +1,6 @@
 # Widget API reference
 
-All widgets are derived from a central [`Widget`](https://github.com/aspinwall-ui/aspinwall/blob/develop/src/widgets/__init__.py#L11) class. This document describes the properties and functions available in this class.
+All widgets are derived from a central [`Widget`](https://github.com/aspinwall-ui/aspinwall-launcher/blob/develop/src/widgets/__init__.py#L12) class. This document describes the properties and functions available in this class.
 
 For a more tutorial-esque approach to widgets, see [Creating a new widget](docs/widgets/creating_widgets.md).
 
