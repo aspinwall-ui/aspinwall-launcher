@@ -32,6 +32,7 @@ These keys are also exposed as GObject properties; the property names for them a
  * `has_stylesheet` (bool, default=False) - whether the widget has stylesheets (`stylesheet/style.css`, `stylesheet/style-dark.css`, `stylesheet/style-hc.css`).
  * `has_gresource` (bool, default=False) - whether the widget uses a GResource file.
  * `no_padding` (bool, default=False) - if True, this removes the 10px padding that is added to widgets by default (to wrap nicely around the rounded corners).
+ * `hide_edit_button` (bool, default=False) - whether to hide the edit button that appears when hovering over the widget with the mouse cursor. Useful for widgets that need the space in the corners for other buttons/content.
  * `schema_base_path` (string, default=None) - the GSettings schema base path. Set automatically from the widget's ID if this variable is unset.
  * `widget_path` (string, **set by initialization function**) - the path to the widget's files.
  * `instance` (string, **set by initialization function**) - the widget's unique instance ID (not to be confused with the widget's ID). The instance ID is used to differentiate instances of the same widget, and are used to keep configs separate between widgets.
