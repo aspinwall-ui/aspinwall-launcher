@@ -37,6 +37,7 @@ class Widget(GObject.GObject):
     has_stylesheet = False
     has_gresource = False
     hide_edit_button = False
+    no_padding = False
     schema_base_path = None # set up automatically if not set
 
     widget_path = None
@@ -45,6 +46,8 @@ class Widget(GObject.GObject):
     def __init__(self, instance=0):
         super().__init__()
         self._container = Adw.Bin(hexpand=True)
+        if self.no_padding:
+            self._container.add_css_class('no-padding')
         if self.has_settings_menu:
             self._settings_container = Adw.Bin(hexpand=True)
         self.instance = instance

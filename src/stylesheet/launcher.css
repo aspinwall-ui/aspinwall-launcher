@@ -152,6 +152,10 @@
 	border-radius: 0 0 10px 10px;
 }
 
+.aspinwall-widget-content.no-padding {
+	padding: 0;
+}
+
 .aspinwall-osd {
 	opacity: 0.75;
 }
