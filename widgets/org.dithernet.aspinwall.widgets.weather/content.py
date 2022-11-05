@@ -79,6 +79,8 @@ class WeatherSettings(Gtk.Box):
         super().__init__()
         self._parent = parent
         self._initialized = False
+        self.active_selection_box = None
+        self._ignore_sb_active_change = False
 
         self.temperature_unit_selector.set_selected(parent.config['temperature-unit'])
 
@@ -128,7 +130,7 @@ class WeatherSettings(Gtk.Box):
         selection_box.add_css_class('selection-mode')
         row.add_suffix(selection_box)
         row.set_activatable_widget(selection_box)
-        if self.parent.location and item == self.parent.location:
+        if self._parent.location and item == self._parent.location:
             selection_box.set_active(True)
             self.active_selection_box = selection_box
         selection_box.connect('toggled', self.location_update_selection, item)
