@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+  <requires lib="adw" version="1.0"/>
+  <requires lib="gtk" version="4.0"/>
+  <template class="ClockSettings" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <property name="hexpand">true</property>
+
+    <child>
+      <object class="AdwClamp">
+        <child>
+          <object class="GtkStack" id="settings_stack">
+            <property name="margin-top">12</property>
+            <property name="margin-bottom">12</property>
+
+            <child>
+              <object class="GtkListBox" id="preferences">
+                <property name="selection-mode">none</property>
+                <property name="valign">start</property>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
+
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="yes">Select location</property>
+                    <property name="activatable-widget">open_location_selector_button</property>
+
+                    <signal name="activated" handler="open_location_selector"/>
+
+                    <child type="suffix">
+                      <object class="GtkImage" id="open_location_selector_button">
+                        <property name="icon-name">go-next-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwActionRow" id="twelvehour_time_row">
+                    <property name="title" translatable="yes">Use 12-hour time</property>
+                    <property name="activatable-widget">twelvehour_time_checkbutton</property>
+
+                    <child type="suffix">
+                      <object class="GtkCheckButton" id="twelvehour_time_checkbutton">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkBox" id="location_selector">
+                <property name="orientation">vertical</property>
+                <property name="hexpand">true</property>
+                <property name="vexpand">true</property>
+                <property name="spacing">6</property>
+
+                <child>
+                  <object class="GtkBox">
+                    <property name="spacing">6</property>
+
+                    <child>
+                      <object class="GtkButton" id="close_location_selector_button">
+                        <property name="icon-name">go-previous-symbolic</property>
+                        <signal name="clicked" handler="close_location_selector"/>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkSearchEntry" id="location_search_entry">
+                        <property name="placeholder-text" translatable="yes">Search for a city</property>
+                        <property name="search-delay">500</property>
+                        <property name="hexpand">true</property>
+                        <signal name="search-changed" handler="location_update_search"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkScrolledWindow" id="location_list_scroll">
+                    <property name="hscrollbar-policy">never</property>
+                    <property name="hexpand">true</property>
+                    <property name="vexpand">true</property>
+
+                    <child>
+                      <object class="GtkListBox" id="location_list_box">
+                        <property name="margin-bottom">6</property>
+                        <property name="hexpand">true</property>
+                        <property name="selection-mode">none</property>
+
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

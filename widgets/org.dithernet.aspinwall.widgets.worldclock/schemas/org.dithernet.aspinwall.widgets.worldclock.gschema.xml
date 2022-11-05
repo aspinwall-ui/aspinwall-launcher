@@ -5,5 +5,10 @@
             <default>[]</default>
 			<summary>Location {name, serialized representation of GWeather.Location}</summary>
 		</key>
+
+		<key name="twelvehour-time" type="b">
+            <default>false</default>
+			<summary>Whether or not to use 12-hour time</summary>
+		</key>
 	</schema>
 </schemalist>

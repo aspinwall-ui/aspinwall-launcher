@@ -1,1 +1,3 @@
 widgets/org.dithernet.aspinwall.widgets.worldclock/__widget__.py
+widgets/org.dithernet.aspinwall.widgets.worldclock/settings.py
+widgets/org.dithernet.aspinwall.widgets.worldclock/ui/settings.ui
