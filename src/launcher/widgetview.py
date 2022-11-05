@@ -79,6 +79,8 @@ class WidgetViewHeader(Gtk.CenterBox):
     def show_widget_settings(self, *args):
         """Shows the widget settings overlay."""
         self._widgetview.widget_settings_container.set_visible(True)
+        self._widget._settings_toggled = True
+        self._widget.notify('settings-toggled')
         self._widgetview.container_stack.set_visible_child(self._widgetview.widget_settings_container)
 
     @Gtk.Template.Callback()
@@ -230,6 +232,8 @@ class WidgetView(Gtk.Box):
     @Gtk.Template.Callback()
     def hide_widget_settings(self, *args):
         """Hides the widget's settings menu."""
+        self._widget._settings_toggled = False
+        self._widget.notify('settings-toggled')
         self.container_stack.set_visible_child(self.container_overlay)
 
     def handle_container_stack_transition_status(self, stack, *args):

@@ -50,6 +50,7 @@ class Widget(GObject.GObject):
             self._container.add_css_class('no-padding')
         if self.has_settings_menu:
             self._settings_container = Adw.Bin(hexpand=True)
+            self._settings_toggled = False
         self.instance = instance
 
         # Set up i18n
@@ -318,3 +319,14 @@ class Widget(GObject.GObject):
         This value can be null.
         """
         return self.metadata['issue_tracker']
+
+    @GObject.Property(type=bool, default=False)
+    def settings_toggled(self):
+        """
+        Whether the widget settings are currently displayed or not.
+
+        Useful e.g. through catching the notify::settings_toggled
+        signal, for making the settings content behave in a specific way
+        when the settings are shown/hidden.
+        """
+        return self._settings_toggled

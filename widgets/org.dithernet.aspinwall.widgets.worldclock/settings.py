@@ -33,7 +33,13 @@ class ClockSettings(Gtk.Box):
             Gio.SettingsBindFlags.DEFAULT
         )
 
+        self._parent.connect('notify::settings-toggled', self.on_settings_toggle)
+
         self._initialized = True
+
+    def on_settings_toggle(self, widget, *args):
+        if widget._settings_toggled:
+            self.close_location_selector()
 
     def populate_locations_store(self):
         # Get world; this will allow us to iterate over all available locations

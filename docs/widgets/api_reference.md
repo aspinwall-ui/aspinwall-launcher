@@ -43,6 +43,7 @@ These keys are also exposed as GObject properties; the property names for them a
  * `_settings_container` - an AdwBin that contains the widget's content. Set this with `Widget.set_settings_child()`.
  * `config` - a GSettings object. Used for storing/accessing the widget's configuration, if enabled. **This is undefined if `has_config` is set to false**; using `self.config` when it is not set is considered a programming error.
  * `gresource` - a GResource object. **This is undefined if `has_gresource` is set to false**.
+ * `settings_toggled` (**GObject property**) - whether or not the widget settings are currently being displayed. **This is undefined if `has_settings_menu is set to false**.
 
 ## Functions
 
