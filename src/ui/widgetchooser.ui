@@ -46,8 +46,6 @@
 
             <child>
               <object class="GtkListView" id="widget_list">
-                <property name="margin-start">6</property>
-                <property name="margin-end">6</property>
                 <property name="enable-rubberband">false</property>
                 <property name="orientation">horizontal</property>
                 <style>

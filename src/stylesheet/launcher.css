@@ -183,12 +183,12 @@
 .widget-chooser {
 	background-color: @aspinwall_menu_bg;
 	color: @aspinwall_menu_fg;
-	border-left: 1px @aspinwall_menu_border solid;
 }
 
 .widget-chooser-list {
 	background-color: @aspinwall_menu_bg;
 	color: @aspinwall_menu_fg;
+	padding: 0 6px;
 }
 
 .widget-chooser-list row:hover {
@@ -204,7 +204,9 @@
 }
 
 .widget-infobox {
-	padding: 5px 10px;
+	padding: 5px;
+	padding-left: 12px;
+	padding-right: 12px;
 }
 
 /* App chooser */
