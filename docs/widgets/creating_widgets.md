@@ -150,6 +150,34 @@ Stylesheets should be placed in the `stylesheet` directory. When `has_stylesheet
 
 For more advanced uses, you can use the `load_stylesheet_from_file()` and `load_stylesheet_from_string()` functions in the widget.
 
+### Using .ui files
+
+To use UI files, you must first set up a `GResource`. You do this by creating the `<widget id>.gresource.xml` file (where `<widget id>` is your widget's ID - this is case sensitive!), placing it in the widget's directory, adding a build rule to compile the file, and setting `has_gresource` in your widget class to True.
+
+Then, you need to create a separate file for your UI widget classes; usually this is `content.py`, but other files may be used as well. The contents of this file will look something like this:
+
+```python
+from gi.repository import Gtk
+
+@Gtk.Template(resource_path='/my/widget/resource/ui/mywidget.ui'):
+class MyWidget(Gtk.Box):
+	...
+```
+
+Finally, import your new file **inside of the widget initialization function** and create the object:
+
+```python
+	import .content
+	self.set_child(MyWidget())
+```
+
+**You cannot use templates in the main `__widget__.py` file** - due to the way the gresource is loaded, it is only possible once the widget has been initialized, and as the main widget file is imported before this happens, you will get errors. However, **this limitation can be circumvented** if you manually initialize the GResource on the top of the file:
+
+```python
+<WIDGET_CLASS>.gresource = Gio.Resource.load(self.join_with_data_path('<WIDGET ID>.gresource'))
+<WIDGET_CLASS>.gresource._register()
+```
+
 ### Translating widgets
 
 The widget API sets a variable, `self.l`, which is akin to the traditional gettext `_`. It is automatically set if there's a `po` directory in the widget's data directory. This directory must contain the compiled `.mo` files.

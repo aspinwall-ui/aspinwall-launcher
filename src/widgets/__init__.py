@@ -35,6 +35,7 @@ class Widget(GObject.GObject):
     has_config = False
     has_settings_menu = False
     has_stylesheet = False
+    has_gresource = False
     hide_edit_button = False
     schema_base_path = None # set up automatically if not set
 
@@ -87,6 +88,20 @@ class Widget(GObject.GObject):
                 self.schema_base_path = '/' + self.metadata['id'].lower().replace('.', '/') + '/'
 
             self.config = Gio.Settings.new_full(self.settings_schema, None, self.schema_base_path + str(instance) + '/')
+
+        # Set up GResource
+        if self.has_gresource:
+            self.gresource = Gio.Resource.load(self.join_with_data_path(self.id + '.gresource'))
+            self.gresource._register()
+
+    def destroy(self):
+        """Cleans up after the widget is removed."""
+        if self.has_config:
+            for key in self.settings_schema.list_keys():
+                self.config.reset(key)
+
+        if self.has_gresource:
+            self.gresource._unregister()
 
     def set_child(self, widget):
         """Sets the child widget for the widget."""
