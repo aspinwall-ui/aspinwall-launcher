@@ -6,6 +6,7 @@ from gi.repository import Gio
 import uuid
 
 from ..config import config
+from ..utils.clock import clock_daemon
 from ..widgets import Widget
 from ..widgets.loader import (
     load_available_widgets,
@@ -24,6 +25,12 @@ class LoadedWidgetManager:
         self.widgets = Gio.ListStore(item_type=Widget)
         load_available_widgets()
         self.load_widgets()
+
+        # Set up autorefresh
+        self.set_autorefresh_frequency()
+        config.connect('changed::widget-automatic-refresh-frequency', self.set_autorefresh_frequency)
+
+        clock_daemon.connect('notify::time', self.autorefresh_tick)
 
     # Loading/saving
     def load_widgets(self):
@@ -48,7 +55,7 @@ class LoadedWidgetManager:
             loaded_widgets.append([widget.id, widget.instance])
         config['widgets'] = loaded_widgets
 
-    # Other operations
+    # Add/remove
     def add_widget_by_class(self, widget_class):
         """
         Takes the widget class, creates the widget object from it and adds
@@ -85,6 +92,7 @@ class LoadedWidgetManager:
         widget.destroy()
         self.save_widgets()
 
+    # Widget moving, positions
     def get_widget_position(self, widgetview):
         """
         Returns the position of the widget in the loaded widget list
@@ -120,5 +128,23 @@ class LoadedWidgetManager:
         self.widgets.splice(old_pos, 1, [new_pos_widget])
 
         self.save_widgets()
+
+    # Automatic refresh
+    def set_autorefresh_frequency(self, *args):
+        """Sets autorefresh delay from config."""
+        self.auto_refresh_frequency = config['widget-autorefresh-frequency']
+        self.auto_refresh_timer = self.auto_refresh_frequency
+
+    def autorefresh_tick(self, *args):
+        """Called every second to progress the autorefresh."""
+        if self.auto_refresh_frequency <= 0:
+            return
+
+        self.auto_refresh_timer -= 1
+        if self.auto_refresh_timer < 0:
+            for widget in self.widgets:
+                if widget.has_refresh and not widget.disable_autorefresh:
+                    widget.refresh()
+            self.auto_refresh_timer = self.auto_refresh_frequency
 
 widget_manager = LoadedWidgetManager()

@@ -3,8 +3,6 @@
 Contains code for the WidgetBox.
 """
 from gi.repository import Adw, GLib, Gtk, Gio
-import threading
-import time
 
 from ..config import config
 from .widgetmanager import widget_manager
@@ -35,13 +33,6 @@ class WidgetBox(Gtk.Box):
 
         # Set up the undo action
         self.install_action('toast.undo_remove', 's', self.undo_remove)
-
-        # Set up autorefresh
-        self.auto_refresh_frequency = config['widget-autorefresh-frequency']
-        config.connect('changed::autorefresh-delay', self.set_auto_refresh_frequency)
-
-        self.autorefresh_thread = threading.Thread(target=self.autorefresh, daemon=True)
-        self.autorefresh_thread.start()
 
         self.widget_container.bind_model(widget_manager.widgets, self.bind)
         widget_manager.widgets.connect('items-changed', self.update_move_buttons)
@@ -138,33 +129,6 @@ class WidgetBox(Gtk.Box):
         if old_pos == widget_manager.widgets.get_n_items() - 1:
             return None
         self.move_widget(old_pos, old_pos + 1)
-
-    def set_auto_refresh_frequency(self, *args):
-        """Sets autorefresh delay from config."""
-        self.auto_refresh_frequency = config['widget-autorefresh-frequency']
-
-    def autorefresh(self):
-        """Automatically refreshes widgets at a given interval."""
-        initial_delay = self.auto_refresh_frequency
-        self.auto_refresh_timer = self.auto_refresh_frequency
-        while True:
-            # If autorefresh is disabled, don't do anything
-            if self.auto_refresh_frequency == 0:
-                while self.auto_refresh_frequency != 0:
-                    time.sleep(1)
-
-            self.auto_refresh_timer -= 1
-            if self.auto_refresh_timer < 0:
-                for widget in widget_manager.widgets:
-                    if widget.has_refresh and not widget.disable_autorefresh:
-                        widget.refresh()
-                self.auto_refresh_timer = self.auto_refresh_frequency
-            else:
-                # Reset count if the delay is changed
-                if initial_delay != self.auto_refresh_frequency:
-                    initial_delay = self.auto_refresh_frequency
-                    self.auto_refresh_timer = self.auto_refresh_frequency
-            time.sleep(1)
 
     def enter_management_mode(self, *args):
         """Enters widget management mode."""
