@@ -13,6 +13,7 @@ class WidgetViewHeader(Gtk.CenterBox):
 
     title = Gtk.Template.Child('widget_header_title')
 
+    widget_refresh_button = Gtk.Template.Child()
     widget_settings_button = Gtk.Template.Child()
     move_up_button = Gtk.Template.Child('widget_header_move_up')
     move_down_button = Gtk.Template.Child('widget_header_move_down')
@@ -25,6 +26,9 @@ class WidgetViewHeader(Gtk.CenterBox):
 
         if not self._widget.has_settings_menu:
             self.widget_settings_button.set_sensitive(False)
+
+        if not self._widget.has_refresh:
+            self.widget_refresh_button.set_sensitive(False)
 
         self.title.set_label(self._widget.metadata['name'])
 
@@ -74,6 +78,11 @@ class WidgetViewHeader(Gtk.CenterBox):
             self._widgetview._widgetbox.edit_mode = False
         else:
             self._widgetview._widgetbox.exit_management_mode()
+
+    @Gtk.Template.Callback()
+    def refresh_widget(self, *args):
+        """Refreshes the widget represented by the widgetview."""
+        self._widget.refresh()
 
     @Gtk.Template.Callback()
     def show_widget_settings(self, *args):
