@@ -110,6 +110,8 @@ class Launcher(Gtk.ApplicationWindow):
         self.app_chooser.search.set_text('')
         self.app_chooser.update_model()
 
+        self.add_css_class('app-chooser-opened')
+
         # Select first item in list
         self.app_chooser.selection_model.select_item(0, True)
         # Scroll to top

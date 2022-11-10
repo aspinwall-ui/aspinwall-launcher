@@ -32,8 +32,8 @@
 
         <child type="overlay">
           <object class="GtkStack" id="launcher_stack">
-            <property name="transition-type">crossfade</property>
-            <property name="transition-duration">125</property>
+            <property name="transition-type">slide-up-down</property>
+            <property name="transition-duration">400</property>
 
             <child>
               <object class="GtkStackPage">

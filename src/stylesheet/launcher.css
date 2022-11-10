@@ -28,6 +28,14 @@
 
 .wallpaper-gradient {
 	background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 35%);
+	transition-property: background;
+	transition-duration: 0.5s;
+	transition-timing-function: ease-out;
+}
+
+.app-chooser-opened .wallpaper-gradient {
+	background: rgba(24,24,24,0.65);
+	transition-duration: 0.3s;
 }
 
 .wallpaper-container {
@@ -216,8 +224,8 @@
 /* App chooser */
 
 .app-chooser {
-	background-color: alpha(@aspinwall_menu_bg, 0.5);
-	color: @aspinwall_menu_fg;
+	background-color: transparent;
+	color: #ffffff;
 }
 
 .app-chooser .header {
@@ -241,15 +249,23 @@
 }
 
 .app-grid child {
-	margin: 12px;
+	margin: 8px;
 }
 
 .app-icon {
 	padding: 6px;
 }
 
+.app-name {
+	color: #fff;
+	font-size: 1.03em;
+	font-weight: 700;
+	margin-top: 4px;
+	opacity: 0.9;
+}
+
 .app-icon .app-icon-image {
-    -gtk-icon-size: 96px;
+    -gtk-icon-size: 72px;
 }
 
 .app-grid.small-icons child {
@@ -268,7 +284,13 @@
     -gtk-icon-size: 48px;
 }
 
-.favorites-grid .app-icon .app-name { font-size: 0; }
+.favorites-grid .app-icon .app-name { font-size: 0; margin-top: 0; }
+
+.favorites-grid-container {
+	background-color: @aspinwall_menu_bg;
+	color: @aspinwall_menu_fg;
+	padding: 4px;
+}
 
 /* Launcher settings window */
 .wallpaper-grid-header {

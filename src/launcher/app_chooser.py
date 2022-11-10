@@ -401,3 +401,4 @@ class AppChooser(Gtk.Box):
         """Hides the app chooser."""
         self.get_parent().set_visible_child_name('content')
         self.get_native().pause_focus_manager = False
+        self.get_native().remove_css_class('app-chooser-opened')
