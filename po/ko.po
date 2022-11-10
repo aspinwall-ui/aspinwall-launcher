@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.dithernet.aspinwall.Launcher\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 19:46+0200\n"
+"POT-Creation-Date: 2022-11-10 21:24+0100\n"
 "PO-Revision-Date: 2022-10-20 13:02+0000\n"
 "Last-Translator: 이정희 <daemul72@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/aspinwall-ui/"
@@ -35,8 +35,7 @@ msgstr "배경화면의 경로"
 msgid "Path to a wallpaper file."
 msgstr "배경화면 파일의 경로입니다."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:23
-#: src/launcher/ui/settings.ui:305
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:23 src/ui/settings.ui:305
 msgid "Wallpaper style"
 msgstr "배경화면 스타일"
 
@@ -44,8 +43,7 @@ msgstr "배경화면 스타일"
 msgid "Which wallpaper style to use (0 - solid color, 1 - scaled, 2 - zoomed)."
 msgstr "사용할 배경화면 스타일 (0 - 단색, 1 - 크기조정, 2 - 확대)."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:31
-#: src/launcher/ui/settings.ui:327
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:31 src/ui/settings.ui:324
 msgid "Wallpaper background color"
 msgstr "배경화면 배경색"
 
@@ -58,8 +56,8 @@ msgstr ""
 "배경화면의 배경색 (\"단색\" 모드 또는 크기가 조정된 이미지의 배경)으로 빨강, "
 "녹색, 파랑 (0-255)의 세 가지 정수 배열로 저장됩니다."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:40
-#: src/launcher/ui/settings.ui:141 src/launcher/ui/settings.ui:168
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:40 src/ui/settings.ui:141
+#: src/ui/settings.ui:168
 msgid "Available wallpapers"
 msgstr "사용 가능한 배경화면"
 
@@ -67,34 +65,33 @@ msgstr "사용 가능한 배경화면"
 msgid ""
 "List of wallpaper files available in the wallpaper picker in settings. Also "
 "used for the slideshow mode."
-msgstr "설정의 배경화면 선택기에서 사용할 수 있는 배경화면 파일 목록입니다. "
-"슬라이드쇼 모드에도 사용됩니다."
+msgstr ""
+"설정의 배경화면 선택기에서 사용할 수 있는 배경화면 파일 목록입니다. 슬라이드"
+"쇼 모드에도 사용됩니다."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:50
-#: src/launcher/ui/settings.ui:243
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:50 src/ui/settings.ui:243
 msgid "Slideshow mode"
 msgstr "슬라이드쇼 모드"
 
 #. TRANSLATORS: Alternatively, this can be translated as "the launcher automatically switches between available wallpapers".
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:52
-#: src/launcher/ui/settings.ui:244
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:52 src/ui/settings.ui:244
 msgid ""
 "In slideshow mode, the launcher automatically loops over available "
 "wallpapers."
-msgstr "슬라이드쇼 모드에서, 런처는 사용 가능한 배경화면을 자동으로 반복합니다."
+msgstr ""
+"슬라이드쇼 모드에서, 런처는 사용 가능한 배경화면을 자동으로 반복합니다."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:59
-#: src/launcher/ui/settings.ui:286
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:59 src/ui/settings.ui:285
 msgid "Slideshow switch length"
 msgstr "슬라이드쇼 전환 길이"
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:60
-#: src/launcher/ui/settings.ui:288
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:60 src/ui/settings.ui:287
 msgid ""
 "Length of the transition between the current and newly selected wallpaper, "
 "in miliseconds. Set to 0 to disable."
-msgstr "현재 배경화면과 새로 선택한 배경화면 사이의 전환 길이 (밀리초)입니다. "
-"비활성화하려면 0으로 설정합니다."
+msgstr ""
+"현재 배경화면과 새로 선택한 배경화면 사이의 전환 길이 (밀리초)입니다. 비활성"
+"화하려면 0으로 설정합니다."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:67
 msgid "Slideshow switch delay"
@@ -112,12 +109,12 @@ msgstr "슬라이드쇼 전환 카운터"
 msgid ""
 "Used by the slideshow mode to keep track of the time remaining until the "
 "next wallpaper switch."
-msgstr "다음 배경화면 전환까지 남은 시간을 추적하기 위해 슬라이드쇼 모드에서 "
-"사용됩니다."
+msgstr ""
+"다음 배경화면 전환까지 남은 시간을 추적하기 위해 슬라이드쇼 모드에서 사용됩니"
+"다."
 
 #. TRANSLATORS: This is for the light/dark mode switch; can be translated as "Preferred theme"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:85
-#: src/launcher/ui/settings.ui:349
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:85 src/ui/settings.ui:347
 msgid "Theme preference"
 msgstr "테마 환경설정"
 
@@ -150,8 +147,7 @@ msgid ""
 "Amount of time (in seconds) after which the launcher goes into idle mode."
 msgstr "런처가 유휴 모드로 전환되는 시간 (초)입니다."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:111
-#: src/launcher/ui/settings.ui:434
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:111 src/ui/settings.ui:433
 msgid "Clock size"
 msgstr "시계 크기"
 
@@ -159,29 +155,32 @@ msgstr "시계 크기"
 msgid "Size of the clock in the launcher (0 - small, 1 - medium, 2 - large)."
 msgstr "런처의 시계 크기 (0 - 작음, 1 - 중간, 2 - 큼)입니다."
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:119
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:119 src/ui/settings.ui:452
+msgid "Show AM/PM indicator next to the clock"
+msgstr ""
+
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:124
 msgid "Favorite apps"
 msgstr "즐겨찾는 앱"
 
 #. TRANSLATORS: ".desktop files" refers to a specific filetype. Do not translate the ".desktop" bit.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:121
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:126
 msgid ""
 "List of favorite apps for the app chooser, stored as paths to their .desktop "
 "files."
 msgstr ".desktop 파일의경로로 저장된 앱 선택기의 즐겨찾는 앱 목록입니다."
 
 #. TRANSLATORS: This can also be translated as just "time format"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:128
-#: src/launcher/ui/settings.ui:477
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:133 src/ui/settings.ui:487
 msgid "Time format string"
 msgstr "시간 형식 문자열"
 
 #. TRANSLATORS: Default time format string for your locale; should only contain the hour and minutes. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:130
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:135
 msgid "\"%H:%M\""
 msgstr "\"%I:%M %p\""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:131
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:136
 msgid ""
 "Time format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -190,17 +189,16 @@ msgstr ""
 "형식을 사용하는 시계의 시간 형식 문자열입니다."
 
 #. TRANSLATORS: This can also be translated as just "date format"
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:138
-#: src/launcher/ui/settings.ui:489
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:143 src/ui/settings.ui:493
 msgid "Date format string"
 msgstr "날짜 형식 문자열"
 
 #. TRANSLATORS: Default date format string for your locale; should contain the week day and date. For reference, see https://docs.python.org/3/library/time.html#time.strftime; see also how other desktop environments/operating systems handle this.
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:140
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:145
 msgid "\"%A, %x\""
 msgstr "\"%A, %B %d %Y\""
 
-#: data/org.dithernet.aspinwall.launcher.gschema.xml:141
+#: data/org.dithernet.aspinwall.launcher.gschema.xml:146
 msgid ""
 "Date format string for the clock, using the format described in the "
 "documentation at https://docs.python.org/3/library/time.html#time.strftime."
@@ -208,145 +206,145 @@ msgstr ""
 "https://docs.python.org/3/library/time.html#time.strftime의 설명서에 설명된 "
 "형식을 사용하는 시계의 날짜 형식 문자열입니다."
 
-#: src/launcher/ui/appchooser.ui:24
-msgid "Search apps…"
-msgstr "앱 검색…"
-
 #. TRANSLATORS: Tooltip text for close button
-#: src/launcher/ui/appchooser.ui:32 src/launcher/ui/widgetchooser.ui:39
+#: src/ui/appchooser.ui:22 src/ui/widgetchooser.ui:33
 msgid "Close"
 msgstr "닫기"
 
-#: src/launcher/ui/appchooser.ui:123 src/launcher/ui/widgetchooser.ui:67
+#: src/ui/appchooser.ui:50
+msgid "Search apps…"
+msgstr "앱 검색…"
+
+#: src/ui/appchooser.ui:160 src/ui/widgetchooser.ui:62
 msgid "No Results Found"
 msgstr "검색 결과 없음"
 
-#: src/launcher/ui/appchooser.ui:124 src/launcher/ui/widgetchooser.ui:68
+#: src/ui/appchooser.ui:161 src/ui/widgetchooser.ui:63
 msgid "Try a different search"
 msgstr "다른 검색 시도"
 
-#: src/launcher/ui/appicon.ui:63
+#: src/ui/appicon.ui:50
 msgid "_Remove from favorites"
 msgstr "즐겨찾기에서 제거하기(_R)"
 
-#: src/launcher/ui/appicon.ui:68
+#: src/ui/appicon.ui:56
 msgid "_Add to favorites"
 msgstr "즐겨찾기에 추가하기(_A)"
 
 #. TRANSLATORS: Tooltip for the "open app chooser" button in the launcher
-#: src/launcher/ui/launcher.ui:73
+#: src/ui/launcher.ui:91
 msgid "Installed apps"
 msgstr "설치된 앱"
 
-#: src/launcher/ui/settings.ui:17
+#: src/ui/settings.ui:17
 msgid "Wallpaper"
 msgstr "배경화면"
 
-#: src/launcher/ui/settings.ui:21
+#: src/ui/settings.ui:21
 msgid "Wallpaper preview"
 msgstr "배경화면 미리보기"
 
 #. TRANSLATOR: For the "Available wallpapers" option; box can be translated as field
-#: src/launcher/ui/settings.ui:180
+#: src/ui/settings.ui:180
 msgid "The images in this box are used for the slideshow mode if it's enabled."
 msgstr "이 상자의 이미지는 활성화된 경우 슬라이드쇼 모드에 사용됩니다."
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency
-#: src/launcher/ui/settings.ui:255
+#: src/ui/settings.ui:255
 msgid "Switch wallpaper every:"
 msgstr "다음 간격으로 배경화면 전환:"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
 #. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:265 src/launcher/ui/settings.ui:411
+#: src/ui/settings.ui:264 src/ui/settings.ui:410
 msgid "1 minute"
 msgstr "1 분"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
 #. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:267 src/launcher/ui/settings.ui:413
+#: src/ui/settings.ui:266 src/ui/settings.ui:412
 msgid "3 minutes"
 msgstr "3 분"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
 #. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:269 src/launcher/ui/settings.ui:415
+#: src/ui/settings.ui:268 src/ui/settings.ui:414
 msgid "5 minutes"
 msgstr "5 분"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
 #. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:271 src/launcher/ui/settings.ui:417
+#: src/ui/settings.ui:270 src/ui/settings.ui:416
 msgid "10 minutes"
 msgstr "10 분"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
 #. TRANSLATORS: Used for the idle mode frequency; this will be prefixed by the string you set for "Switch to idle mode after:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:273 src/launcher/ui/settings.ui:419
+#: src/ui/settings.ui:272 src/ui/settings.ui:418
 msgid "15 minutes"
 msgstr "15 분"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:275
+#: src/ui/settings.ui:274
 msgid "30 minutes"
 msgstr "30 분"
 
 #. TRANSLATORS: Used for the slideshow mode switch frequency; this will be prefixed by the string you set for "Switch wallpaper every:", so make sure to keep the correct form to continue that sentence.
-#: src/launcher/ui/settings.ui:277
+#: src/ui/settings.ui:276
 msgid "1 hour"
 msgstr "1 시간"
 
 #. TRANSLATORS: Wallpaper scaling option
-#: src/launcher/ui/settings.ui:314
+#: src/ui/settings.ui:311
 msgid "Solid color"
 msgstr "단색"
 
 #. TRANSLATORS: Wallpaper scaling option
-#: src/launcher/ui/settings.ui:316
+#: src/ui/settings.ui:313
 msgid "Scaled"
 msgstr "크기 조절"
 
 #. TRANSLATORS: Wallpaper scaling option
-#: src/launcher/ui/settings.ui:318
+#: src/ui/settings.ui:315
 msgid "Zoomed"
 msgstr "확대"
 
 #. TRANSLATORS: Please use the quotation mark symbols appropriate for your language, not the default '"' symbol. (In Weblate, you can find shortcuts to the quotation mark symbols in the right corner above the translation field for your language.)
 #. If it's easier, you can simply describe these as "modes" and omit the quotation marks entirely, but if you're refering to the wallpaper style verbatim please add the quotes.
-#: src/launcher/ui/settings.ui:330
+#: src/ui/settings.ui:327
 msgid ""
 "Used for the “Solid Color” wallpaper style, as well as the backdrop for the "
 "“Scaled” style."
 msgstr "\"단색\" 배경화면 스타일과 \"크기조정\" 스타일의 배경에 사용됩니다."
 
-#: src/launcher/ui/settings.ui:345
+#: src/ui/settings.ui:343
 msgid "Theme"
 msgstr "테마"
 
 #. TRANSLATORS: This refers to the light theme.
-#: src/launcher/ui/settings.ui:362
+#: src/ui/settings.ui:360
 msgid "Light"
 msgstr "밝음"
 
 #. TRANSLATORS: This refers to the dark theme.
-#: src/launcher/ui/settings.ui:371
+#: src/ui/settings.ui:369
 msgid "Dark"
 msgstr "어두움"
 
-#: src/launcher/ui/settings.ui:382
+#: src/ui/settings.ui:380
 msgid "Follow system theme"
 msgstr "시스템 테마 따름"
 
-#: src/launcher/ui/settings.ui:396
+#: src/ui/settings.ui:396
 msgid "Launcher"
 msgstr "런처"
 
 #. TRANSLATORS: "Idle mode" refers to the mode where, after a set time of inactivity, the widgets reduce their opacity and the app chooser/menu buttons disappear.
-#: src/launcher/ui/settings.ui:401
+#: src/ui/settings.ui:401
 msgid "Enter idle mode after:"
 msgstr "다음 후 유휴 모드로 전환:"
 
-#: src/launcher/ui/settings.ui:402
+#: src/ui/settings.ui:402
 msgid ""
 "In idle mode, after some time of inactivity, the opacity of the widgets is "
 "reduced, and the menu buttons are hidden."
@@ -354,30 +352,30 @@ msgstr ""
 "유휴 모드에서 일정 시간 동안 활동이 없으면 위젯의 불투명도가 감소하고 메뉴 버"
 "튼이 숨겨집니다."
 
-#: src/launcher/ui/settings.ui:430
+#: src/ui/settings.ui:429
 msgid "Clock"
 msgstr "시계"
 
 #. TRANSLATORS: Clock size option
-#: src/launcher/ui/settings.ui:442
+#: src/ui/settings.ui:439
 msgid "Small"
 msgstr "작음"
 
 #. TRANSLATORS: Clock size option
-#: src/launcher/ui/settings.ui:444
+#: src/ui/settings.ui:441
 msgid "Medium"
 msgstr "중간"
 
 #. TRANSLATORS: Clock size option
-#: src/launcher/ui/settings.ui:446
+#: src/ui/settings.ui:443
 msgid "Large"
 msgstr "큰"
 
-#: src/launcher/ui/settings.ui:455
+#: src/ui/settings.ui:465
 msgid "Time and date format"
 msgstr "시간 및 날짜 형식"
 
-#: src/launcher/ui/settings.ui:456
+#: src/ui/settings.ui:466
 msgid ""
 "Set the format to use when displaying the time and date, following <a "
 "href='https://docs.python.org/3/library/time.html#time.strftime'>the time "
@@ -387,128 +385,131 @@ msgstr ""
 "식 문자열 사양</a>에 따라 시간과 날짜를 표시할 때 사용할 형식을 설정합니다."
 
 #. TRANSLATORS: Used for the "reset time format to default" option.
-#: src/launcher/ui/settings.ui:461
+#: src/ui/settings.ui:471
 msgid "Reset to defaults"
 msgstr "기본값으로 재설정"
 
-#: src/launcher/ui/settings.ui:462
+#: src/ui/settings.ui:472
 msgid "Sets the time format to default settings."
 msgstr "시간 형식을 기본 설정으로 설정합니다."
 
 #. TRANSLATORS: Used for the "reset time format to default" option.
-#: src/launcher/ui/settings.ui:467
+#: src/ui/settings.ui:477
 msgid "Reset"
 msgstr "재설정"
 
 #. TRANSLATORS: Tooltip for menu button in the launcher
-#: src/launcher/ui/widgetbox.ui:54
+#: src/ui/widgetbox.ui:54
 msgid "Launcher configuration"
 msgstr "런처 구성"
 
 #. TRANSLATORS: Tooltip for "Add widgets" button in widget management mode
-#: src/launcher/ui/widgetbox.ui:83
+#: src/ui/widgetbox.ui:83
 msgid "Add widgets"
 msgstr "위젯 추가"
 
 #. TRANSLATORS: Tooltip for "Exit" button in widget management mode
-#: src/launcher/ui/widgetbox.ui:102
+#: src/ui/widgetbox.ui:102
 msgid "Exit widget management mode"
 msgstr "위젯 관리 모드 종료"
 
-#: src/launcher/ui/widgetbox.ui:136
+#: src/ui/widgetbox.ui:132
 msgid "_Add Widgets…"
 msgstr "위젯 추가하기(_A)…"
 
-#: src/launcher/ui/widgetbox.ui:141
+#: src/ui/widgetbox.ui:137
 msgid "_Manage Widgets"
 msgstr "위젯 관리하기(_M)"
 
-#: src/launcher/ui/widgetbox.ui:148
+#: src/ui/widgetbox.ui:144
 msgid "_Launcher Settings"
 msgstr "런처 설정(_L)"
 
-#: src/launcher/ui/widgetbox.ui:153
+#: src/ui/widgetbox.ui:149
 msgid "A_bout Aspinwall"
 msgstr "Aspinwall 정보(_B)"
 
-#: src/launcher/ui/widgetchooser.ui:30
+#: src/ui/widgetbox.ui:154
+#, fuzzy
+msgid "_Quit Launcher"
+msgstr "런처"
+
+#: src/ui/widgetchooser.ui:24
 msgid "Search widgets…"
 msgstr "위젯 검색하기…"
 
 #. TRANSLATORS: Tooltip for the "Edit widget" button that appears when hovering over a widget
-#: src/launcher/ui/widgetview.ui:52
+#: src/ui/widgetview.ui:52
 msgid "Edit widget"
 msgstr "위젯 편집하기"
 
-#: src/launcher/ui/widgetview.ui:91
+#: src/ui/widgetview.ui:91
 msgid "Close widget settings"
 msgstr "위젯 설정 닫기"
 
 #. TRANSLATORS: "Widget" here is singular; this is used for the widget-specific settings menu header
-#: src/launcher/ui/widgetview.ui:104 src/launcher/ui/widgetviewheader.ui:97
+#: src/ui/widgetview.ui:104 src/ui/widgetviewheader.ui:97
 msgid "Widget settings"
 msgstr "위젯 설정"
 
 #. TRANSLATORS: Tooltip for "remove widget" button
-#: src/launcher/ui/widgetviewheader.ui:20
+#: src/ui/widgetviewheader.ui:20
 msgid "Remove"
 msgstr "제거하기"
 
 #. TRANSLATORS: Tooltip for "move widget up" button in widget header
-#: src/launcher/ui/widgetviewheader.ui:50
+#: src/ui/widgetviewheader.ui:50
 msgid "Move up"
 msgstr "위로 이동하기"
 
 #. TRANSLATORS: Tooltip for "move widget down" button in widget header
-#: src/launcher/ui/widgetviewheader.ui:65
+#: src/ui/widgetviewheader.ui:65
 msgid "Move down"
 msgstr "아래로 이동하기"
 
+#: src/ui/widgetviewheader.ui:109
+msgid "About this widget"
+msgstr ""
+
 #. TRANSLATORS: Tooltip for "exit widget edit mode"/close button on widget headers
-#: src/launcher/ui/widgetviewheader.ui:110
+#: src/ui/widgetviewheader.ui:122
 msgid "Exit editing mode"
 msgstr "편집 모드 종료하기"
 
-#: src/launcher/ui/widgetinfobox.ui:44
-msgid "_Add"
-msgstr "추가하기(_A)"
-
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/widgetbox.py:107
+#: src/launcher/widgetbox.py:94
 #, python-format
 msgid "Removed “%s”"
 msgstr "제거된 \"%s\""
 
 #. TRANSLATORS: Used in the popup that appears when you remove a widget
-#: src/launcher/widgetbox.py:110
+#: src/launcher/widgetbox.py:97
 msgid "Undo"
 msgstr "실행 취소"
 
 #. TRANSLATORS: This can also be translated as "developers".
-#: src/launcher/window.py:154
+#: src/launcher/window.py:180
 msgid "Aspinwall contributors"
 msgstr "Aspinwall 기여자"
 
 #. TRANSLATORS: Set this to your name (and optionally the e-mail address).
 #. noqa: F821
-#: src/launcher/window.py:159 src/launcher/window.py:160
+#: src/launcher/window.py:187 src/launcher/window.py:188
 msgid "translator-credits"
 msgstr "이정희 <daemul72@gmail.com>"
 
-#: src/launcher/settings.py:265
+#: src/launcher/settings.py:275
 msgid "Add wallpaper"
 msgstr "배경화면 추가하기"
 
-#. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:271
-msgid "_Cancel"
-msgstr "취소하기(_C)"
+#~ msgid "_Add"
+#~ msgstr "추가하기(_A)"
 
-#. noqa: F821
-#. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
-#: src/launcher/settings.py:273
-msgid "_Select"
-msgstr "선택하기(_ S)"
+#~ msgid "_Cancel"
+#~ msgstr "취소하기(_C)"
+
+#~ msgid "_Select"
+#~ msgstr "선택하기(_ S)"
 
 #~ msgid "Linux tablet UI with smart hub capabilities"
 #~ msgstr "스마트 허브 기능이 있는 리눅스 태블릿 UI"
