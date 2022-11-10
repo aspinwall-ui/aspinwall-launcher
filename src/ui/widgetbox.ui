@@ -11,7 +11,7 @@
       <object class="GtkOverlay">
         <property name="vexpand">True</property>
         <child>
-          <object class="GtkScrolledWindow">
+          <object class="GtkScrolledWindow" id="widget_scroll">
             <property name="hscrollbar-policy">never</property>
 
             <child>
@@ -116,8 +116,9 @@
         <child type="overlay">
           <object class="AdwToastOverlay" id="toast_overlay">
             <property name="valign">start</property>
-            <!--<property name="halign">center</property>
-            <property name="hexpand">true</property>-->
+            <property name="halign">fill</property>
+            <property name="hexpand">true</property>
+            <property name="width-request">200</property>
             <property name="margin-start">72</property>
             <property name="margin-end">72</property>
           </object>

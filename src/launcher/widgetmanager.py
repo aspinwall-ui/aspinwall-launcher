@@ -2,7 +2,7 @@
 """
 Contains code for the widget manager.
 """
-from gi.repository import Gio
+from gi.repository import Gio, GObject
 import uuid
 
 from ..config import config
@@ -13,7 +13,7 @@ from ..widgets.loader import (
     get_widget_class_by_id
 )
 
-class LoadedWidgetManager:
+class LoadedWidgetManager(GObject.Object):
     """
     Manages loading widgets from/saving widgets to the config and keeps a
     list of loaded widgets.
@@ -22,6 +22,7 @@ class LoadedWidgetManager:
 
     def __init__(self):
         """Initializes the WidgetManager."""
+        super().__init__()
         self.widgets = Gio.ListStore(item_type=Widget)
         load_available_widgets()
         self.load_widgets()
@@ -84,6 +85,7 @@ class LoadedWidgetManager:
         """Adds a widget object directly to the loaded widget list."""
         self.widgets.append(widget)
         self.save_widgets()
+        self.emit("widget-added", widget)
 
     def remove_widget(self, widget):
         """Removes a widget from the loaded widget list."""
@@ -146,5 +148,9 @@ class LoadedWidgetManager:
                 if widget.has_refresh and not widget.disable_autorefresh:
                     widget.refresh()
             self.auto_refresh_timer = self.auto_refresh_frequency
+
+    @GObject.Signal(arg_types=(object,))
+    def widget_added(self, widget):
+        pass
 
 widget_manager = LoadedWidgetManager()

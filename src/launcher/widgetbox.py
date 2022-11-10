@@ -19,6 +19,7 @@ class WidgetBox(Gtk.Box):
     edit_mode = False
 
     widget_container = Gtk.Template.Child()
+    widget_scroll = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
 
     chooser_button_revealer = Gtk.Template.Child()
@@ -36,6 +37,7 @@ class WidgetBox(Gtk.Box):
 
         self.widget_container.bind_model(widget_manager.widgets, self.bind)
         widget_manager.widgets.connect('items-changed', self.update_move_buttons)
+        widget_manager.connect('widget-added', self.on_widget_added)
 
         self.update_move_buttons()
 
@@ -89,6 +91,20 @@ class WidgetBox(Gtk.Box):
         toast.set_detailed_action_name('toast.undo_remove')
         toast.set_action_target_value(GLib.Variant('s', widgetview._widget.instance))
         toast.connect('dismissed', self.drop_from_remove_buffer, widgetview._widget.instance)
+        self.toast_overlay.add_toast(toast)
+
+    def on_widget_added(self, _wm, widget):
+        """Called when a new widget is added."""
+        # Scroll to bottom
+        vadjustment = self.widget_scroll.get_vadjustment()
+        upper = vadjustment.get_upper()
+        page_size = vadjustment.get_page_size()
+
+        vadjustment.set_upper(upper + page_size)
+        vadjustment.set_value(vadjustment.get_upper())
+
+        toast = Adw.Toast.new(_("Added “%s”") % widget.get_property('name')) # noqa: F821
+        toast.set_priority(Adw.ToastPriority.HIGH)
         self.toast_overlay.add_toast(toast)
 
     def update_move_buttons(self, *args):
