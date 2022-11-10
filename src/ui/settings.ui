@@ -426,6 +426,38 @@ If it's easier, you can simply describe these as "modes" and omit the quotation 
 
         <child>
           <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Widgets</property>
+
+            <child>
+              <object class="AdwComboRow" id="widget_autorefresh_frequency_combobox">
+                <!-- TRANSLATORS: "Idle mode" refers to the mode where, after a set time of inactivity, the widgets reduce their opacity and the app chooser/menu buttons disappear. -->
+                <property name="title" translatable="yes">Widget automatic refresh frequency</property>
+                <property name="subtitle" translatable="yes">Sets how often widgets should be automatically refreshed.</property>
+
+                <signal name="notify::selected" handler="set_widget_autorefresh_frequency"/>
+
+                <property name="model">
+                  <object class="GtkStringList">
+                    <items>
+                      <!-- TRANSLATORS: For the "Widget automatic refresh frequency" switch -->
+                      <item translatable="yes">Disabled</item>
+                      <item translatable="yes">1 minute</item>
+                      <item translatable="yes">3 minutes</item>
+                      <item translatable="yes">5 minutes</item>
+                      <item translatable="yes">10 minutes</item>
+                      <item translatable="yes">15 minutes</item>
+                      <item translatable="yes">30 minutes</item>
+                      <item translatable="yes">1 hour</item>
+                    </items>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Clock</property>
 
             <child>

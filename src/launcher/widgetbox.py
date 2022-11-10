@@ -37,8 +37,8 @@ class WidgetBox(Gtk.Box):
         self.install_action('toast.undo_remove', 's', self.undo_remove)
 
         # Set up autorefresh
-        self.autorefresh_delay = config['autorefresh-delay']
-        config.connect('changed::autorefresh-delay', self.set_autorefresh_delay)
+        self.auto_refresh_frequency = config['widget-autorefresh-frequency']
+        config.connect('changed::autorefresh-delay', self.set_auto_refresh_frequency)
 
         self.autorefresh_thread = threading.Thread(target=self.autorefresh, daemon=True)
         self.autorefresh_thread.start()
@@ -139,30 +139,30 @@ class WidgetBox(Gtk.Box):
             return None
         self.move_widget(old_pos, old_pos + 1)
 
-    def set_autorefresh_delay(self, *args):
+    def set_auto_refresh_frequency(self, *args):
         """Sets autorefresh delay from config."""
-        self.autorefresh_delay = config['autorefresh-delay']
+        self.auto_refresh_frequency = config['widget-autorefresh-frequency']
 
     def autorefresh(self):
         """Automatically refreshes widgets at a given interval."""
-        initial_delay = self.autorefresh_delay
-        self.autorefresh_timer = self.autorefresh_delay
+        initial_delay = self.auto_refresh_frequency
+        self.auto_refresh_timer = self.auto_refresh_frequency
         while True:
             # If autorefresh is disabled, don't do anything
-            if self.autorefresh_delay == 0:
-                while self.autorefresh_delay != 0:
+            if self.auto_refresh_frequency == 0:
+                while self.auto_refresh_frequency != 0:
                     time.sleep(1)
 
-            self.autorefresh_timer -= 1
-            if self.autorefresh_timer <= 0:
+            self.auto_refresh_timer -= 1
+            if self.auto_refresh_timer < 0:
                 for widget in widget_manager.widgets:
                     widget.refresh()
-                self.autorefresh_timer = self.autorefresh_delay
+                self.auto_refresh_timer = self.auto_refresh_frequency
             else:
                 # Reset count if the delay is changed
-                if initial_delay != self.autorefresh_delay:
-                    initial_delay = self.autorefresh_delay
-                    self.autorefresh_timer = self.autorefresh_delay
+                if initial_delay != self.auto_refresh_frequency:
+                    initial_delay = self.auto_refresh_frequency
+                    self.auto_refresh_timer = self.auto_refresh_frequency
             time.sleep(1)
 
     def enter_management_mode(self, *args):

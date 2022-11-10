@@ -100,6 +100,8 @@ class LauncherSettings(Adw.PreferencesWindow):
 
     idle_mode_delay_combobox = Gtk.Template.Child()
 
+    widget_autorefresh_frequency_combobox = Gtk.Template.Child()
+
     clock_size_combobox = Gtk.Template.Child()
     clock_ampm_toggle = Gtk.Template.Child()
     time_format_entry = Gtk.Template.Child()
@@ -109,6 +111,7 @@ class LauncherSettings(Adw.PreferencesWindow):
     # so we need to manually maintain value lists:
     slideshow_switch_delay_values = (60, 180, 300, 600, 900, 1800, 3600)
     idle_mode_delay_values = (60, 180, 300, 600, 900)
+    widget_autorefresh_frequency_values = (0, 60, 180, 300, 600, 900, 1800, 3600)
     # Keep these in sync with the order in the combobox!
 
     def __init__(self):
@@ -172,6 +175,9 @@ class LauncherSettings(Adw.PreferencesWindow):
         )
         self.idle_mode_delay_combobox.set_selected(
           self.idle_mode_delay_values.index(config['idle-mode-delay'])
+        )
+        self.widget_autorefresh_frequency_combobox.set_selected(
+          self.widget_autorefresh_frequency_values.index(config['widget-autorefresh-frequency'])
         )
 
         config.bind('time-format', self.time_format_entry, 'text', Gio.SettingsBindFlags.DEFAULT)
@@ -259,6 +265,11 @@ class LauncherSettings(Adw.PreferencesWindow):
     def set_idle_mode_delay(self, combobox, *args):
         """Sets the idle mode switch delay."""
         config['idle-mode-delay'] = self.idle_mode_delay_values[int(combobox.get_selected())]
+
+    @Gtk.Template.Callback()
+    def set_widget_autorefresh_frequency(self, combobox, *args):
+        """Sets the widget autorefresh frequency."""
+        config['widget-autorefresh-frequency'] = self.widget_autorefresh_frequency_values[int(combobox.get_selected())]
 
     @Gtk.Template.Callback()
     def set_wallpaper_color(self, button, *args):
