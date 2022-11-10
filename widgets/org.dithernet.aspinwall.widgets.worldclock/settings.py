@@ -14,6 +14,7 @@ class ClockSettings(Gtk.Box):
     twelvehour_time_checkbutton = Gtk.Template.Child()
 
     def __init__(self, parent):
+        Adw.Clamp() # bizzare fix for a bizzare bug...
         super().__init__()
         self._parent = parent
         self._initialized = False
