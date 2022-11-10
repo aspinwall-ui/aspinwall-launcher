@@ -136,7 +136,7 @@ Adding a settings menu is completely optional, and you don't need to add a setti
 
 ### Refreshing widget content
 
-Widget classes can have a `refresh` function, which will automatically run in the background at a certain time, and/or whenever the launcher is started (this depends on user settings).
+Widget classes can have a `refresh()` function, which will automatically run in the background at a certain time, or per the user's request. To utilize these features, set the `has_refresh` value to True and define the `refresh()` functions.
 
 A refresh button will appear in the widget's header if this function is defined, which will allow the user to refresh the widget at any given moment.
 

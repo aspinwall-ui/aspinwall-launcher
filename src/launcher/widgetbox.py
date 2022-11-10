@@ -156,7 +156,8 @@ class WidgetBox(Gtk.Box):
             self.auto_refresh_timer -= 1
             if self.auto_refresh_timer < 0:
                 for widget in widget_manager.widgets:
-                    widget.refresh()
+                    if widget.has_refresh and not widget.disable_autorefresh:
+                        widget.refresh()
                 self.auto_refresh_timer = self.auto_refresh_frequency
             else:
                 # Reset count if the delay is changed

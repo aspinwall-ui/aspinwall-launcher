@@ -32,10 +32,12 @@ class Widget(GObject.GObject):
     __gtype_name__ = 'AspWidget'
 
     metadata = {}
+    disable_autorefresh = False
     has_config = False
     has_settings_menu = False
     has_stylesheet = False
     has_gresource = False
+    has_refresh = False
     hide_edit_button = False
     no_padding = False
     schema_base_path = None # set up automatically if not set

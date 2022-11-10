@@ -27,10 +27,12 @@ These keys are also exposed as GObject properties; the property names for them a
 
 ### Informational properties
 
+ * `disable_autorefresh` (bool, default=False) - whether or not to force-disable widget autorefresh on this widget. Doesn't do anything if `has_refresh` is False.
  * `has_config` (bool, default=False) - whether the widget uses GSettings configuration.
+ * `has_gresource` (bool, default=False) - whether the widget uses a GResource file.
+ * `has_refresh` (bool, default=False) - whether the widget defines and uses the `refresh()` function. This enables autorefresh and shows the refresh button in the widget header.
  * `has_settings_menu` (bool, default=False) - whether the widget has a settings menu.
  * `has_stylesheet` (bool, default=False) - whether the widget has stylesheets (`stylesheet/style.css`, `stylesheet/style-dark.css`, `stylesheet/style-hc.css`).
- * `has_gresource` (bool, default=False) - whether the widget uses a GResource file.
  * `no_padding` (bool, default=False) - if True, this removes the 10px padding that is added to widgets by default (to wrap nicely around the rounded corners).
  * `hide_edit_button` (bool, default=False) - whether to hide the edit button that appears when hovering over the widget with the mouse cursor. Useful for widgets that need the space in the corners for other buttons/content.
  * `schema_base_path` (string, default=None) - the GSettings schema base path. Set automatically from the widget's ID if this variable is unset.
@@ -50,6 +52,6 @@ These keys are also exposed as GObject properties; the property names for them a
  * `set_child(self, widget)` - Sets the container of the widget.
  * `set_settings_child(self, widget)` - Sets the settings menu container of the widget. Only works if `has_settings_menu` is True.
  * `join_self_with_data_path(self, *args)` - Joins path relative to widget data directory. Arguments are provided as arguments for `os.path.join` (so, each argument is a separate subdirectory/file).
- * `refresh(self)` - Refreshes the widget. **Defined by the widgets**, by default does nothing.
  * `load_stylesheet_from_file(self, path)` - Loads a stylesheet from the given path.
  * `load_stylesheet_from_string(self, string)` - Loads a stylesheet from the given string.
+ * `refresh(self)` - Refreshes the widget. **Defined by the widgets**, by default does nothing.

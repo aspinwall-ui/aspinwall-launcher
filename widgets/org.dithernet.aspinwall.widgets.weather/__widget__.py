@@ -24,9 +24,10 @@ class Weather(Widget):
     }
 
     has_config = True
+    has_gresource = True
+    has_refresh = True
     has_settings_menu = True
     has_stylesheet = True
-    has_gresource = True
 
     def __init__(self, instance):
         super().__init__(instance)
