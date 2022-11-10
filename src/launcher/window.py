@@ -57,10 +57,14 @@ class Launcher(Gtk.ApplicationWindow):
         self.about_aspinwall_action = Gio.SimpleAction.new("about_aspinwall", None)
         self.about_aspinwall_action.connect('activate', self.open_about)
 
+        self._quit_action = Gio.SimpleAction.new("quit", None)
+        self._quit_action.connect("activate", self.quit)
+
         self.add_action(self._show_chooser_action)
         self.add_action(self.widgetbox._management_mode_action)
         self.add_action(self.open_settings_action)
         self.add_action(self.about_aspinwall_action)
+        self.add_action(self._quit_action)
 
         self.launcher_wallpaper_overlay.set_measure_overlay(self.launcher_stack, True)
 
@@ -184,3 +188,7 @@ class Launcher(Gtk.ApplicationWindow):
             about_dialog.set_translator_credits(_('translator-credits')) # noqa: F821
 
         about_dialog.show()
+
+    def quit(self, *args):
+        """Closes the launcher window."""
+        self.close()

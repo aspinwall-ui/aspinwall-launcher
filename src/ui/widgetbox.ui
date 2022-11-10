@@ -149,6 +149,11 @@
         <attribute name='label' translatable='yes'>A_bout Aspinwall</attribute>
         <attribute name='action'>win.about_aspinwall</attribute>
       </item>
+      <item>
+        <attribute name='icon'>window-close-symbolic</attribute>
+        <attribute name='label' translatable='yes'>_Quit Launcher</attribute>
+        <attribute name='action'>win.quit</attribute>
+      </item>
     </section>
   </menu>
 </interface>
