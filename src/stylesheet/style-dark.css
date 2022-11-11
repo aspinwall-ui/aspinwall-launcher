@@ -16,3 +16,6 @@
 
 @define-color aspinwall_menu_header_bg #303030; /* @headerbar_bg_color */
 @define-color aspinwall_menu_header_fg #ffffff; /* @headerbar_fg_color */
+
+@define-color aspinwall_appchooser_favorites_bg #242424;
+@define-color aspinwall_appchooser_favorites_fg #ffffff;

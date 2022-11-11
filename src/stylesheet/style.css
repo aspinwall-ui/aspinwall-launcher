@@ -19,4 +19,7 @@
 
 @define-color aspinwall_widget_header_close_bg rgba(0, 0, 0, 0.08);
 
+@define-color aspinwall_appchooser_favorites_bg #303030;
+@define-color aspinwall_appchooser_favorites_fg #ffffff;
+
 @import url('launcher.css');
