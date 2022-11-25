@@ -24,6 +24,7 @@ class ClockBox(Gtk.Box, Dimmable):
         super().__init__()
         self.update_size()
         self.update()
+        self.toggle_ampm()
         config.connect('changed::clock-size', self.update_size)
         config.connect('changed::clock-ampm', self.toggle_ampm)
         clock_daemon.connect('notify::time', self.update)
@@ -48,6 +49,7 @@ class ClockBox(Gtk.Box, Dimmable):
         """Updates the time and date on the clock."""
         self.clockbox_time.set_label(time.strftime(config['time-format']))
         self.clockbox_date.set_label(time.strftime(config['date-format']))
+        self.clockbox_ampm.set_label(time.strftime('%p'))
 
     def toggle_ampm(self, *args):
         """Shows/hides the AM/PM indicator based on the config value."""
