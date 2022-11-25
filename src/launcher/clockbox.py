@@ -23,6 +23,7 @@ class ClockBox(Gtk.Box, Dimmable):
         """Initializes the clock box."""
         super().__init__()
         self.update_size()
+        self.update()
         config.connect('changed::clock-size', self.update_size)
         config.connect('changed::clock-ampm', self.toggle_ampm)
         clock_daemon.connect('notify::time', self.update)
