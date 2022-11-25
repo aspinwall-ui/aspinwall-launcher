@@ -2,8 +2,6 @@
 """Contains window creation code for the Aspinwall launcher"""
 from gi.repository import Adw, Gtk, Gio
 import os
-import time
-import threading
 
 from ..config import config
 
@@ -15,6 +13,8 @@ from .app_chooser import AppChooser # noqa: F401
 from .widget_chooser import WidgetChooser # noqa: F401
 from .wallpaper import Wallpaper # noqa: F401
 from .settings import LauncherSettings
+
+from ..utils.clock import clock_daemon
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/launcher.ui')
 class Launcher(Gtk.ApplicationWindow):
@@ -80,8 +80,8 @@ class Launcher(Gtk.ApplicationWindow):
         self.click_controller.connect('released', self.on_focus)
         self.add_controller(self.click_controller)
 
-        self.focus_manager_thread = threading.Thread(target=self.focus_manager_loop, daemon=True)
-        self.focus_manager_thread.start()
+        self.unfocus_countdown = config['idle-mode-delay'] + 1
+        clock_daemon.connect('notify::time', self.focus_manager_tick)
 
         config.connect('changed::idle-mode-delay', self.update_unfocus_countdown)
 
@@ -137,15 +137,12 @@ class Launcher(Gtk.ApplicationWindow):
         """
         self.unfocus_countdown = config['idle-mode-delay'] + 1
 
-    def focus_manager_loop(self):
-        """Loop that manages focused/unfocused mode. Run as a thread."""
-        self.unfocus_countdown = config['idle-mode-delay'] + 1
-        while True:
-            if self.focused and not self.pause_focus_manager:
-                self.unfocus_countdown -= 1
-                if self.unfocus_countdown <= 0:
-                    self.on_unfocus()
-            time.sleep(1)
+    def focus_manager_tick(self, *args):
+        """Called every second to update the focused/unfocused state."""
+        if self.focused and not self.pause_focus_manager:
+            self.unfocus_countdown -= 1
+            if self.unfocus_countdown <= 0:
+                self.on_unfocus()
 
     def on_unfocus(self, *args):
         """Performs actions on unfocus."""
