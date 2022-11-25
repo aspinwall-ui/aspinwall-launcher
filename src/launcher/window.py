@@ -25,12 +25,13 @@ class Launcher(Gtk.ApplicationWindow):
     wallpaper = Gtk.Template.Child('launcher_wallpaper')
 
     launcher_stack = Gtk.Template.Child()
-    launcher_content = Gtk.Template.Child()
 
     clockbox = Gtk.Template.Child()
     widgetbox = Gtk.Template.Child()
     app_chooser = Gtk.Template.Child()
     app_chooser_show = Gtk.Template.Child()
+    app_chooser_hide = Gtk.Template.Child()
+    app_chooser_button_stack = Gtk.Template.Child()
     app_chooser_button_revealer = Gtk.Template.Child()
     widget_chooser = Gtk.Template.Child()
     widget_chooser_flap = Gtk.Template.Child()
@@ -118,6 +119,9 @@ class Launcher(Gtk.ApplicationWindow):
         vadjust = self.app_chooser.app_grid_container.get_vadjustment()
         vadjust.set_value(vadjust.get_lower())
 
+        # Show "Close app chooser" button
+        self.app_chooser_button_stack.set_visible_child(self.app_chooser_hide)
+
         # Show chooser
         self.launcher_stack.set_visible_child_name('app-chooser')
         self.app_chooser.search.grab_focus()
@@ -150,7 +154,7 @@ class Launcher(Gtk.ApplicationWindow):
             self.unfocus_countdown = config['idle-mode-delay'] + 1
             self.app_chooser_button_revealer.set_reveal_child(False)
             self.widgetbox.chooser_button_revealer.set_reveal_child(False)
-            self.launcher_content.add_css_class('unfocused')
+            self.widget_chooser_flap.add_css_class('unfocused')
             self.add_controller(self.motion_controller)
             self.widget_chooser.hide()
 
@@ -162,7 +166,7 @@ class Launcher(Gtk.ApplicationWindow):
             self.unfocus_countdown = config['idle-mode-delay'] + 1
             self.app_chooser_button_revealer.set_reveal_child(True)
             self.widgetbox.chooser_button_revealer.set_reveal_child(True)
-            self.launcher_content.remove_css_class('unfocused')
+            self.widget_chooser_flap.remove_css_class('unfocused')
         else:
             self.unfocus_countdown = config['idle-mode-delay'] + 1
 
@@ -194,3 +198,7 @@ class Launcher(Gtk.ApplicationWindow):
     def quit(self, *args):
         """Closes the launcher window."""
         self.close()
+
+    @Gtk.Template.Callback()
+    def hide_app_chooser(self, *args):
+        self.app_chooser.hide()

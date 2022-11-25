@@ -10,23 +10,6 @@
 
     <child>
       <object class="GtkOverlay" id="buttons_overlay">
-        <child type="overlay">
-          <object class="GtkButton" id="close_app_chooser">
-            <property name="halign">start</property>
-            <property name="valign">start</property>
-            <property name="margin-top">10</property>
-            <property name="margin-start">10</property>
-            <property name="margin-end">10</property>
-            <property name="icon-name">window-close-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Close</property>
-            <signal name="clicked" handler="hide"/>
-            <style>
-              <class name="osd"/>
-              <class name="aspinwall-osd"/>
-            </style>
-          </object>
-        </child>
-
         <child>
           <object class="GtkBox" id="container">
             <property name="orientation">vertical</property>

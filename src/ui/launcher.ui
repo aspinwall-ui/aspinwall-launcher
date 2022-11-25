@@ -39,63 +39,37 @@
               <object class="GtkStackPage">
                 <property name="name">content</property>
                 <property name="child">
-                  <object class="GtkOverlay" id="launcher_content">
-                    <child>
-                      <object class="AdwFlap" id="widget_chooser_flap">
-                        <property name="fold-policy">never</property>
-                        <property name="orientation">vertical</property>
-                        <property name="flap-position">end</property>
-                        <property name="reveal-flap">false</property>
+                  <object class="AdwFlap" id="widget_chooser_flap">
+                    <property name="fold-policy">never</property>
+                    <property name="orientation">vertical</property>
+                    <property name="flap-position">end</property>
+                    <property name="reveal-flap">false</property>
 
-                        <child type="flap">
-                          <object class="WidgetChooser" id="widget_chooser">
-                            <property name="valign">end</property>
-                            <property name="vexpand">false</property>
-                            <property name="height-request">200</property>
-                          </object>
-                        </child>
+                    <style>
+                      <class name="aspinwall-launcher-flap"/>
+                    </style>
 
-                        <child type="content">
-                          <object class="AdwLeaflet">
-                            <property name="homogeneous">True</property>
-                            <property name="can-navigate-back">True</property>
-                            <property name="can-navigate-forward">True</property>
-                            <property name="transition-type">slide</property>
-
-                            <child>
-                              <object class="ClockBox" id="clockbox"/>
-                            </child>
-
-                            <child>
-                              <object class="WidgetBox" id="widgetbox"/>
-                            </child>
-                          </object>
-                        </child>
+                    <child type="flap">
+                      <object class="WidgetChooser" id="widget_chooser">
+                        <property name="valign">end</property>
+                        <property name="vexpand">false</property>
+                        <property name="height-request">200</property>
                       </object>
                     </child>
 
-                    <child type="overlay">
-                      <object class="GtkRevealer" id="app_chooser_button_revealer">
-                        <property name="reveal-child">true</property>
-                        <property name="halign">start</property>
-                        <property name="valign">start</property>
-                        <child>
-                          <object class="GtkButton" id="app_chooser_show">
-                            <property name="valign">start</property>
-                            <property name="halign">start</property>
-                            <property name="margin-top">10</property>
-                            <property name="margin-start">10</property>
-                            <property name="margin-end">10</property>
-                            <property name="icon-name">view-grid-symbolic</property>
-                            <!-- TRANSLATORS: Tooltip for the "open app chooser" button in the launcher -->
-                            <property name="tooltip-text" translatable="yes">Installed apps</property>
-                            <!--<signal name="clicked" handler="show_app_chooser"/>-->
+                    <child type="content">
+                      <object class="AdwLeaflet">
+                        <property name="homogeneous">True</property>
+                        <property name="can-navigate-back">True</property>
+                        <property name="can-navigate-forward">True</property>
+                        <property name="transition-type">slide</property>
 
-                            <style>
-                              <class name="osd"/>
-                              <class name="aspinwall-osd"/>
-                            </style>
-                          </object>
+                        <child>
+                          <object class="ClockBox" id="clockbox"/>
+                        </child>
+
+                        <child>
+                          <object class="WidgetBox" id="widgetbox"/>
                         </child>
                       </object>
                     </child>
@@ -110,6 +84,54 @@
                 <property name="child">
                   <object class="AppChooser" id="app_chooser"/>
                 </property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child type="overlay">
+          <object class="GtkRevealer" id="app_chooser_button_revealer">
+            <property name="reveal-child">true</property>
+            <property name="halign">start</property>
+            <property name="valign">start</property>
+            <child>
+              <object class="GtkStack" id="app_chooser_button_stack">
+                <property name="transition-type">crossfade</property>
+                <child>
+                  <object class="GtkButton" id="app_chooser_show">
+                    <property name="valign">start</property>
+                    <property name="halign">start</property>
+                    <property name="margin-top">10</property>
+                    <property name="margin-start">10</property>
+                    <property name="margin-end">10</property>
+                    <property name="icon-name">view-grid-symbolic</property>
+                    <!-- TRANSLATORS: Tooltip for the "open app chooser" button in the launcher -->
+                    <property name="tooltip-text" translatable="yes">Installed apps</property>
+                    <!--<signal name="clicked" handler="show_app_chooser"/>-->
+
+                    <style>
+                      <class name="osd"/>
+                      <class name="aspinwall-osd"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="app_chooser_hide">
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="margin-top">10</property>
+                    <property name="margin-start">10</property>
+                    <property name="margin-end">10</property>
+                    <property name="icon-name">window-close-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Close</property>
+                    <signal name="clicked" handler="hide_app_chooser"/>
+                    <style>
+                      <class name="osd"/>
+                      <class name="aspinwall-osd"/>
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

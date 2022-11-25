@@ -396,9 +396,10 @@ class AppChooser(Gtk.Box):
         # TODO: Scroll back to the top. Currently we can't do this, because the
         # gridview scroll position lags behind the scrollbar position.
 
-    @Gtk.Template.Callback()
     def hide(self, *args):
         """Hides the app chooser."""
         self.get_parent().set_visible_child_name('content')
-        self.get_native().pause_focus_manager = False
-        self.get_native().remove_css_class('app-chooser-opened')
+        win = self.get_native()
+        win.pause_focus_manager = False
+        win.remove_css_class('app-chooser-opened')
+        win.app_chooser_button_stack.set_visible_child(win.app_chooser_show)
