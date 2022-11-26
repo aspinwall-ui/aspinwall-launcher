@@ -75,6 +75,7 @@ def load_available_widgets():
     returns the list of available widgets.
     """
     loaded_ids = {}
+    errors = []
     for dir in widget_dirs:
         for widget_dir in os.listdir(dir):
             if widget_dir == '__pycache__':
@@ -94,9 +95,16 @@ def load_available_widgets():
                 widget_class = module._widget_class
             except AttributeError:
                 print("No widget class in " + widget_path)
+                errors.append((widget_path, 'No widget class'))
                 continue
 
-            module_id = widget_class.metadata['id']
+            try:
+                module_id = widget_class.metadata['id']
+            except:
+                print("No ID set in metadata of " + widget_path)
+                errors.append((widget_path, 'No widget class'))
+                continue
+
             if module_id in loaded_ids.keys():
                 print(
                     'WARN: ID conflict between %s (loaded) and %s (attempted to load) while loading %s; ignoring file' # noqa: E501
@@ -113,7 +121,7 @@ def load_available_widgets():
             loaded_ids[module_id] = module._widget_class
             available_widgets.append(module._widget_class)
 
-    return available_widgets
+    return (available_widgets, errors)
 
 def get_widget_class_by_id(widget_id):
     """

@@ -2,7 +2,7 @@
 """
 Contains code for the WidgetBox.
 """
-from gi.repository import Adw, GLib, Gtk, Gio
+from gi.repository import Adw, GLib, Gtk, Gio, Gdk
 
 from ..config import config
 from .widgetmanager import widget_manager
@@ -34,10 +34,15 @@ class WidgetBox(Gtk.Box):
 
         # Set up the undo action
         self.install_action('toast.undo_remove', 's', self.undo_remove)
+        self.install_action('toast.error_info', 's', self.error_info)
 
         self.widget_container.bind_model(widget_manager.widgets, self.bind)
         widget_manager.widgets.connect('items-changed', self.update_move_buttons)
         widget_manager.connect('widget-added', self.on_widget_added)
+        widget_manager.connect('widget-failed', self.show_widget_error)
+        if widget_manager.errors:
+            for widget_name, logs in widget_manager.errors.items():
+                self.show_widget_error(widget_manager, widget_name, logs)
 
         self.update_move_buttons()
 
@@ -207,3 +212,56 @@ class WidgetBox(Gtk.Box):
         self.management_buttons_revealer.set_reveal_child(False)
 
         window.pause_focus_manager = False
+
+    def error_info_copy(self, button, log):
+        clipboard = Gdk.Display.get_clipboard(Gdk.Display.get_default())
+        clipboard.set_content(Gdk.ContentProvider.new_for_value(log))
+
+    def error_info(self, a, b, _widget_name):
+        widget_name = _widget_name.get_string()
+        log = widget_manager.errors[widget_name] or ''
+
+        dialog = Adw.MessageDialog.new(self.get_native(),
+            _('Could Not Load Widget'), # noqa: F821
+            _(f'Widget {widget_name} could not be loaded. More information is provided below.') # noqa: F821
+        )
+        dialog.add_response("ok", _("OK"))
+        dialog.set_default_response('ok')
+        dialog.set_close_response('ok')
+
+        log_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+
+        textscroll = Gtk.ScrolledWindow(min_content_height=200)
+        textview = Gtk.TextView.new()
+        textview.set_editable(False)
+        textview.get_buffer().set_text(log)
+        textscroll.set_child(textview)
+        log_box.append(textscroll)
+
+        log_button = Gtk.Button(label=_("Copy to clipboard"))
+        log_box.append(log_button)
+
+        dialog.set_extra_child(log_box)
+
+        log_button.connect('clicked', self.error_info_copy, log)
+
+        dialog.present()
+
+    def drop_from_error_buffer(self, toast, widget_name):
+        if widget_name not in widget_manager.errors:
+            return False
+
+        widget_manager.errors.pop(widget_name)
+
+    def show_widget_error(self, widget_manager, widget_name, logs, *args):
+        """Shows an error toast when a widget fails to load."""
+        widget_manager.errors[widget_name] = logs
+
+        toast = Adw.Toast.new(_("A widget has failed to load.")) # noqa: F821
+        toast.set_priority(Adw.ToastPriority.HIGH)
+        toast.set_timeout(0)
+        toast.set_button_label(_('More Information')) # noqa: F821
+        toast.set_detailed_action_name('toast.error_info')
+        toast.set_action_target_value(GLib.Variant('s', widget_name))
+        toast.connect('dismissed', self.drop_from_error_buffer, widget_name)
+        self.toast_overlay.add_toast(toast)

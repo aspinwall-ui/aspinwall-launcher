@@ -3,6 +3,7 @@
 Contains code for the widget manager.
 """
 from gi.repository import Gio, GObject
+import traceback
 import uuid
 
 from ..config import config
@@ -23,9 +24,14 @@ class LoadedWidgetManager(GObject.Object):
     def __init__(self):
         """Initializes the WidgetManager."""
         super().__init__()
+        self.errors = {}
         self.widgets = Gio.ListStore(item_type=Widget)
-        load_available_widgets()
+        errors = load_available_widgets()[1]
         self.load_widgets()
+
+        if errors:
+            for error in errors:
+                self.emit('widget-failed', error[1], error[2])
 
         # Set up autorefresh
         self.set_autorefresh_frequency()
@@ -48,6 +54,11 @@ class LoadedWidgetManager(GObject.Object):
                 print("Removing from config.")
                 config['widgets'] = [x for x in config['widgets'] if x != widget]
                 continue
+            except:
+                print(widget_id)
+                self.emit("widget-failed", widget_id, traceback.format_exc())
+                config['widgets'] = [x for x in config['widgets'] if x != widget]
+                continue
 
     def save_widgets(self):
         """Saves the loaded widgets into the launcher config."""
@@ -63,7 +74,11 @@ class LoadedWidgetManager(GObject.Object):
         the resulting widget to the loaded widget list.
         """
         instance = str(uuid.uuid4())
-        widget = widget_class(instance)
+        try:
+            widget = widget_class(instance)
+        except:
+            self.emit("widget-failed", widget_class.metadata['name'], traceback.format_exc())
+            return
         self.add_widget(widget)
 
     def add_widget_by_id(self, widget_id, instance=None):
@@ -77,7 +92,12 @@ class LoadedWidgetManager(GObject.Object):
         widget_class = get_widget_class_by_id(widget_id)
         if not widget_class:
             raise KeyError('Attempted to add ' + widget_id + ', which does not exist!')
-        widget = widget_class(instance)
+
+        try:
+            widget = widget_class(instance)
+        except:
+            self.emit("widget-failed", widget_class.metadata['name'], traceback.format_exc())
+            return
 
         self.add_widget(widget)
 
@@ -151,6 +171,11 @@ class LoadedWidgetManager(GObject.Object):
 
     @GObject.Signal(arg_types=(object,))
     def widget_added(self, widget):
+        pass
+
+    @GObject.Signal(arg_types=(str,str))
+    def widget_failed(self, widget_name, logs):
+        self.errors[widget_name] = logs
         pass
 
 widget_manager = LoadedWidgetManager()
