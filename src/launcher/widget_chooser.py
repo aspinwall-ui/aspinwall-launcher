@@ -23,6 +23,11 @@ class WidgetInfobox(Gtk.Box):
         """Initializes a widget infobox."""
         super().__init__()
 
+        # Needed to recognize gestures; we don't actually do anything with it here,
+        # but it is used by clickout in the window
+        self.clickin_gesture = Gtk.GestureClick()
+        self.add_controller(self.clickin_gesture)
+
     def bind_to_widget(self, widget_data):
         """Binds the infobox to a widget."""
         self.widget_data = widget_data

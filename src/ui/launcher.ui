@@ -44,6 +44,8 @@
                     <property name="orientation">vertical</property>
                     <property name="flap-position">end</property>
                     <property name="reveal-flap">false</property>
+                    <property name="swipe-to-open">false</property>
+                    <property name="swipe-to-close">false</property>
 
                     <style>
                       <class name="aspinwall-launcher-flap"/>
