@@ -55,7 +55,6 @@ class LoadedWidgetManager(GObject.Object):
                 config['widgets'] = [x for x in config['widgets'] if x != widget]
                 continue
             except:
-                print(widget_id)
                 self.emit("widget-failed", widget_id, traceback.format_exc())
                 config['widgets'] = [x for x in config['widgets'] if x != widget]
                 continue
