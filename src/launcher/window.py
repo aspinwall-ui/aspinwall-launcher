@@ -47,6 +47,7 @@ class Launcher(Gtk.ApplicationWindow):
         )
         self.version = version
 
+        self.stop_clickout = False
         self.clickout_gesture = Gtk.GestureClick()
         self.clickout_gesture.connect('pressed', self.on_clickout)
         self.add_controller(self.clickout_gesture)
@@ -91,8 +92,16 @@ class Launcher(Gtk.ApplicationWindow):
 
         self.connect('realize', self.on_realize)
 
+    def _clickout_loop(self, widgetview):
+        point = self.clickout_gesture.get_bounding_box_center()
+        rel_point = Gtk.Widget.translate_coordinates(self, widgetview, point[1], point[2])
+        if widgetview.contains(rel_point[0], rel_point[1]):
+            return False
+
     def on_clickout(self, *args):
-        if not self.widgetbox.edited_widget_hovered:
+        if self.widgetbox.iterate_over_all_widgetviews(self._clickout_loop) == False:
+            return
+        if not self.stop_clickout:
             self.widgetbox.exit_management_mode()
 
     def on_realize(self, *args):

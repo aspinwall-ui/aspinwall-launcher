@@ -3,6 +3,7 @@
 Contains basic code for the launcher's widget handling.
 """
 from gi.repository import Gtk, Gdk, GObject
+import time
 
 from .widgetmanager import widget_manager
 
@@ -155,6 +156,11 @@ class WidgetView(Gtk.Box):
         self.drop_target.connect('leave', self.on_leave)
         # End drop target setup
 
+        # Needed to recognize gestures; we don't actually do anything with it here,
+        # but it is used by clickout in the window
+        self.clickin_gesture = Gtk.GestureClick()
+        self.add_controller(self.clickin_gesture)
+
     def bind_to_widget(self, widget):
         """Binds the WidgetView to a widget."""
         self._widget = widget
@@ -183,12 +189,12 @@ class WidgetView(Gtk.Box):
         if widget.hide_edit_button:
             self.edit_button.set_visible(False)
             self.edit_button.set_sensitive(False)
-
-        # Set up hover target
-        hover = Gtk.EventControllerMotion()
-        hover.connect('enter', self.on_hover)
-        hover.connect('leave', self.on_unhover)
-        self.container_stack.add_controller(hover)
+        else:
+            # Set up hover target
+            hover = Gtk.EventControllerMotion()
+            hover.connect('enter', self.on_hover)
+            hover.connect('leave', self.on_unhover)
+            self.container_stack.add_controller(hover)
 
         if self._widgetbox.management_mode:
             self.widget_content.set_sensitive(False)
@@ -254,15 +260,10 @@ class WidgetView(Gtk.Box):
             self.widget_settings_container.set_visible(True)
 
     def on_hover(self, *args):
-        self._widgetbox.edited_widget_hovered = True
-        if not self._widget.hide_edit_button:
-            self.edit_button_revealer.set_reveal_child(True)
+        self.edit_button_revealer.set_reveal_child(True)
 
     def on_unhover(self, *args):
-        """Hides the edit button."""
-        self._widgetbox.edited_widget_hovered = False
-        if not self._widget.hide_edit_button:
-            self.edit_button_revealer.set_reveal_child(False)
+        self.edit_button_revealer.set_reveal_child(False)
 
     # Drag-and-drop
 

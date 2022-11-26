@@ -54,7 +54,9 @@ class WidgetBox(Gtk.Box):
         """
         for item_count in range(0, widget_manager.widgets.get_n_items()):
             widgetview = self.widget_container.get_row_at_index(item_count).get_child()
-            iter_func(widgetview=widgetview)
+            res = iter_func(widgetview=widgetview)
+            if res == False:
+                return False
 
     def bind(self, widget, *args):
         """Binds the list items in the widget list."""
