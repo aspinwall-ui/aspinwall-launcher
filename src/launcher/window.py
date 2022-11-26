@@ -47,6 +47,10 @@ class Launcher(Gtk.ApplicationWindow):
         )
         self.version = version
 
+        self.clickout_gesture = Gtk.GestureClick()
+        self.clickout_gesture.connect('pressed', self.on_clickout)
+        self.add_controller(self.clickout_gesture)
+
         self.app_chooser_show.connect('clicked', self.show_app_chooser)
 
         self._show_chooser_action = Gio.SimpleAction.new("show_widget_chooser", None)
@@ -86,6 +90,10 @@ class Launcher(Gtk.ApplicationWindow):
         config.connect('changed::idle-mode-delay', self.update_unfocus_countdown)
 
         self.connect('realize', self.on_realize)
+
+    def on_clickout(self, *args):
+        if not self.widgetbox.edited_widget_hovered:
+            self.widgetbox.exit_management_mode()
 
     def on_realize(self, *args):
         surface = self.get_surface()

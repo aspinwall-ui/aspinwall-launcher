@@ -183,12 +183,12 @@ class WidgetView(Gtk.Box):
         if widget.hide_edit_button:
             self.edit_button.set_visible(False)
             self.edit_button.set_sensitive(False)
-        else:
-            # Set up hover target
-            hover = Gtk.EventControllerMotion()
-            hover.connect('enter', self.reveal_edit_button)
-            hover.connect('leave', self.hide_edit_button)
-            self.container_overlay.add_controller(hover)
+
+        # Set up hover target
+        hover = Gtk.EventControllerMotion()
+        hover.connect('enter', self.on_hover)
+        hover.connect('leave', self.on_unhover)
+        self.container_stack.add_controller(hover)
 
         if self._widgetbox.management_mode:
             self.widget_content.set_sensitive(False)
@@ -253,13 +253,16 @@ class WidgetView(Gtk.Box):
         else: # Transition to settings
             self.widget_settings_container.set_visible(True)
 
-    def reveal_edit_button(self, *args):
-        """Reveals the edit button."""
-        self.edit_button_revealer.set_reveal_child(True)
+    def on_hover(self, *args):
+        self._widgetbox.edited_widget_hovered = True
+        if not self._widget.hide_edit_button:
+            self.edit_button_revealer.set_reveal_child(True)
 
-    def hide_edit_button(self, *args):
+    def on_unhover(self, *args):
         """Hides the edit button."""
-        self.edit_button_revealer.set_reveal_child(False)
+        self._widgetbox.edited_widget_hovered = False
+        if not self._widget.hide_edit_button:
+            self.edit_button_revealer.set_reveal_child(False)
 
     # Drag-and-drop
 

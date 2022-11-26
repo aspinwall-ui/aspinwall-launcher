@@ -17,6 +17,7 @@ class WidgetBox(Gtk.Box):
     _removed_widgets = {}
     management_mode = False
     edit_mode = False
+    edited_widget_hovered = False
 
     widget_container = Gtk.Template.Child()
     widget_scroll = Gtk.Template.Child()
