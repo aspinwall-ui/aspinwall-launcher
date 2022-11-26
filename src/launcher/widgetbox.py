@@ -225,7 +225,7 @@ class WidgetBox(Gtk.Box):
             _('Could Not Load Widget'), # noqa: F821
             _(f'Widget {widget_name} could not be loaded. More information is provided below.') # noqa: F821
         )
-        dialog.add_response("ok", _("OK"))
+        dialog.add_response("ok", _("OK")) # noqa: F821
         dialog.set_default_response('ok')
         dialog.set_close_response('ok')
 
@@ -238,7 +238,7 @@ class WidgetBox(Gtk.Box):
         textscroll.set_child(textview)
         log_box.append(textscroll)
 
-        log_button = Gtk.Button(label=_("Copy to clipboard"))
+        log_button = Gtk.Button(label=_("Copy to clipboard")) # noqa: F821
         log_box.append(log_button)
 
         dialog.set_extra_child(log_box)
