@@ -3,7 +3,7 @@
 Contains code for the launcher settings window. Not to be confused with the
 settings access backend, which is set up in config.py.
 """
-from gi.repository import Adw, GdkPixbuf, Gtk, Gdk, Gio, GObject
+from gi.repository import Adw, GdkPixbuf, Gtk, Gdk, Gio, GObject, GLib
 import threading
 
 from ..config import config
@@ -48,7 +48,7 @@ class WallpaperIcon(Gtk.FlowBoxChild):
             144, 144
         )
 
-        self.picture.set_pixbuf(self.pixbuf)
+        GLib.idle_add(lambda *args: self.picture.set_pixbuf(self.pixbuf))
 
     @Gtk.Template.Callback()
     def remove_from_available(self, *args):
