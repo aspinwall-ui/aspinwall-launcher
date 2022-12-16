@@ -2,7 +2,7 @@
 """
 Contains common code for clock management
 """
-from gi.repository import GObject
+from gi.repository import GObject, GLib
 import time
 import threading
 
@@ -35,7 +35,7 @@ class ClockDaemon(GObject.Object):
 
         start_time = time.time()
         while True:
-            self.set_property('time', time.time())
+            GLib.idle_add(lambda *args: self.set_property('time', time.time()))
             time.sleep(1.0 - ((time.time() - start_time) % 1.0))
 
     @GObject.Property
