@@ -33,8 +33,6 @@ class WidgetViewHeader(Gtk.CenterBox):
 
         self.title.set_label(self._widget.metadata['name'])
 
-        self.add_controller(self._widgetview.drag_source)
-
     @Gtk.Template.Callback()
     def move_up(self, *args):
         """Moves the parent WidgetView up."""
@@ -138,23 +136,6 @@ class WidgetView(Gtk.Box):
         super().__init__()
         self._widget = None
         self._widgetbox = widgetbox
-
-        # Set up drag source
-        self.drag_source = Gtk.DragSource(actions=Gdk.DragAction.MOVE)
-        self.drag_source.connect("prepare", self.drag_prepare)
-        self.drag_source.connect("drag-begin", self.drag_begin)
-        self.drag_source.connect("drag-end", self.drag_end)
-        # End drag source setup
-
-        # Set up drop target
-        self.drop_target = Gtk.DropTarget(actions=Gdk.DragAction.MOVE)
-        self.drop_target.set_gtypes([GObject.TYPE_INT])
-        self.add_controller(self.drop_target)
-
-        self.drop_target.connect('drop', self.on_drop)
-        self.drop_target.connect('enter', self.on_enter)
-        self.drop_target.connect('leave', self.on_leave)
-        # End drop target setup
 
         # Needed to recognize gestures; we don't actually do anything with it here,
         # but it is used by clickout in the window
@@ -264,43 +245,3 @@ class WidgetView(Gtk.Box):
 
     def on_unhover(self, *args):
         self.edit_button_revealer.set_reveal_child(False)
-
-    # Drag-and-drop
-
-    def drag_prepare(self, *args):
-        """Returns the GdkContentProvider for the drag operation"""
-        return Gdk.ContentProvider.new_for_value(
-            widget_manager.get_widget_position(self._widget)
-        )
-
-    def drag_begin(self, drag_source, *args):
-        """Operations to perform when the drag operation starts."""
-        drag_source.set_icon(
-            Gtk.WidgetPaintable(widget=self.container),
-            self.container.get_allocation().width / 2, 10
-        )
-        self.add_css_class('dragged')
-
-    def drag_end(self, *args):
-        """Operations to perform when the drag operation ends."""
-        self.remove_css_class('dragged')
-
-    def on_drop(self, stub, dropped_widget_pos, x, y):
-        """
-        Performs the widget move when a dragged widget dropped.
-
-        Note that this is performed from the perspective of the drop target;
-        thus, self in this context is the widget which the dragged widget was
-        dropped onto.
-        """
-        drop_target_pos = widget_manager.get_widget_position(self._widget)
-        self._widgetbox.move_widget(dropped_widget_pos, drop_target_pos)
-        self.remove_css_class('on-enter')
-
-    def on_enter(self, *args):
-        self.add_css_class('on-enter')
-        return 0
-
-    def on_leave(self, *args):
-        self.remove_css_class('on-enter')
-        return 0
