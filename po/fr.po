@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.dithernet.aspinwall.Launcher\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-10 21:24+0100\n"
-"PO-Revision-Date: 2022-10-20 13:02+0000\n"
+"PO-Revision-Date: 2023-01-14 09:48+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/aspinwall-ui/"
 "aspinwall-launcher/fr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.2-dev\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:6
 msgid "Widgets"
@@ -516,16 +516,22 @@ msgstr ""
 msgid "Add wallpaper"
 msgstr "Ajouter un fond d'écran"
 
-#~ msgid "_Add"
-#~ msgstr "_Ajouter"
-
-#~ msgid "_Cancel"
-#~ msgstr "_Annuler"
-
-#~ msgid "_Select"
-#~ msgstr "_Sélectionner"
-
 #~ msgid "Linux tablet UI with smart hub capabilities"
 #~ msgstr ""
 #~ "Interface utilisateur pour tablettes Linux avec fonctionnalités de hub "
 #~ "intelligent"
+
+#. noqa: F821
+#. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
+#: src/launcher/settings.py:273
+msgid "_Select"
+msgstr "_Sélectionner"
+
+#: src/launcher/ui/widgetinfobox.ui:44
+msgid "_Add"
+msgstr "_Ajouter"
+
+#. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
+#: src/launcher/settings.py:271
+msgid "_Cancel"
+msgstr "_Annuler"
