@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+  <template class="GtkListItem">
+    <property name="child">
+      <object class="AppIcon">
+        <binding name="name">
+          <lookup name="name" type="DesktopAppInfo">
+            <lookup name="item">GtkListItem</lookup>
+          </lookup>
+        </binding>
+
+        <binding name="icon">
+          <lookup name="icon" type="DesktopAppInfo">
+            <lookup name="item">GtkListItem</lookup>
+          </lookup>
+        </binding>
+
+        <binding name="app-filename">
+          <lookup name="filename" type="DesktopAppInfo">
+            <lookup name="item">GtkListItem</lookup>
+          </lookup>
+        </binding>
+      </object>
+    </property>
+  </template>
+</interface>

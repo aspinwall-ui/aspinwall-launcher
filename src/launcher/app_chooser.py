@@ -2,7 +2,8 @@
 """
 Contains code for the app chooser.
 """
-from gi.repository import Gdk, GLib, Gio, Gtk, GdkPixbuf
+from gi.repository import Gdk, Gio, GLib, GObject, Gtk, GdkPixbuf
+import gi._gtktemplate
 
 from ..config import config
 
@@ -13,7 +14,7 @@ def app_info_to_filenames(appinfo):
     """Takes a list of apps and returns their filenames."""
     output = {}
     for app in appinfo:
-        output[app.get_filename()] = app
+        output[app.get_property("filename")] = app
     return output
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/appicon.ui')
@@ -60,7 +61,6 @@ class AppIcon(Gtk.Box):
             new_list = config['favorite-apps'].copy()
             new_list.append(app_icon.app_filename)
             config['favorite-apps'] = new_list
-            self.is_favorite = True
 
             app_chooser.filter.changed(Gtk.FilterChange.MORE_STRICT)
             app_chooser.favorites_filter.changed(Gtk.FilterChange.LESS_STRICT)
@@ -74,7 +74,6 @@ class AppIcon(Gtk.Box):
             new_list = config['favorite-apps'].copy()
             new_list.remove(app_icon.app_filename)
             config['favorite-apps'] = new_list
-            self.is_favorite = False
 
             app_chooser.filter.changed(Gtk.FilterChange.LESS_STRICT)
             app_chooser.favorites_filter.changed(Gtk.FilterChange.MORE_STRICT)
@@ -93,6 +92,131 @@ class AppIcon(Gtk.Box):
             else:
                 self.action_set_enabled('favorite', True)
         self.popover.show()
+
+    @GObject.Property(type=str)
+    def name(self):
+        """App name."""
+        return self.app_name.get_label()
+
+    @name.setter
+    def name(self, value):
+        return self.app_name.set_label(value)
+
+    @GObject.Property
+    def icon(self):
+        """App icon."""
+        return self.app_icon.get_gicon()
+
+    @icon.setter
+    def icon(self, value):
+        # The following code is here to work around a bizzare bug I encountered
+        # where some SVGs would completely fail to load, segfaulting the entire
+        # program. This is a lazy fix that loads the icons manually in most cases,
+        # which should hopefully be enough to work around the issue.
+        icon_found = False
+        icon_name = value.to_string()
+        if '/' in icon_name:
+            try:
+                self.app_icon.set_from_pixbuf(
+                    GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                        icon_name, 96, 96, True
+                    )
+                )
+            except GLib.GError:
+                pass
+            else:
+                icon_found = True
+        elif '.' not in icon_name:
+            self.app_icon.set_from_icon_name(icon_name)
+            icon_found = True
+        else:
+            icon_paths = Gtk.IconTheme.get_for_display(self.get_display()).get_search_path()
+            for path in ['/usr/share/icons/hicolor/scalable/apps'] + icon_paths:
+                try:
+                    self.app_icon.set_from_pixbuf(
+                        GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                            path + '/' + icon_name + '.svg', 96, 96, True
+                        )
+                    )
+                except GLib.GError:
+                    try:
+                        self.app_icon.set_from_pixbuf(
+                            GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                                path + '/' + icon_name + '.png', 96, 96, True
+                            )
+                        )
+                    except GLib.GError:
+                        continue
+                    else:
+                        icon_found = True
+                        break
+                else:
+                    icon_found = True
+                    break
+
+        if not icon_found:
+            self.app_icon.set_from_icon_name(icon_name)
+
+    @GObject.Property(type=str)
+    def icon_name(self):
+        """App icon name."""
+        return self.app_icon.get_icon_name()
+
+    @icon_name.setter
+    def icon_name(self, value):
+        return self.app_icon.set_from_icon_name(value)
+
+    @GObject.Property(type=str)
+    def app_filename(self):
+        """Path to the app's .desktop file."""
+        return self._app_filename
+
+    @app_filename.setter
+    def app_filename(self, value):
+        self._app_filename = value
+
+    @property
+    def is_favorite(self):
+        if self._app_filename in config['favorite-apps']:
+            return True
+        return False
+
+
+class AppInfo(GObject.Object):
+    """Shim for AppInfo that makes it usable in BuilderListItemFactory."""
+    __gtype_name__ = 'DesktopAppInfo'
+
+    def __init__(self, app):
+        super().__init__()
+        self._app = app
+
+    @GObject.Property
+    def app(self):
+        return self._app
+
+    @GObject.Property(type=str)
+    def name(self):
+        return self.app.get_name()
+
+    @GObject.Property
+    def icon(self):
+        return self.app.get_icon()
+
+    @GObject.Property(type=str)
+    def filename(self):
+        return self.app.get_filename()
+
+    @GObject.Property(type=str)
+    def icon_name(self):
+        return self.app.get_icon().to_string()
+
+    @GObject.Property
+    def keywords(self):
+        return self.app.get_keywords()
+
+    @GObject.Property(type=str)
+    def generic_name(self):
+        return self.app.get_generic_name()
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/appchooser.ui')
 class AppChooser(Gtk.Box):
@@ -114,13 +238,18 @@ class AppChooser(Gtk.Box):
         """Initializes an app chooser."""
         super().__init__()
 
+        Gio.AppInfo.__gtype_name__ = 'AppInfo'
+
         # Set up factory for app icons
-        factory = Gtk.SignalListItemFactory()
-        factory.connect('setup', self.setup)
-        factory.connect('bind', self.bind)
+        factory = Gtk.BuilderListItemFactory.new_from_resource(
+            None,
+            '/org/dithernet/aspinwall/launcher/ui/appiconfactory.ui'
+            )
+
+        # gi._gtktemplate.define_builder_scope()(),
 
         # Set up store for app model
-        self.store = Gio.ListStore(item_type=Gio.AppInfo)
+        self.store = Gio.ListStore(item_type=AppInfo)
         self.fill_model()
 
         # Set up sort model
@@ -196,78 +325,12 @@ class AppChooser(Gtk.Box):
                 grid.remove_css_class('smaller-icons')
             grid.set_visible(True)
 
-    def setup(self, factory, list_item):
-        """Sets up the app list."""
-        list_item.set_child(AppIcon())
-
-    def bind(self, factory, list_item):
-        """Binds the list items in the app list."""
-        app_icon = list_item.get_child()
-        app = list_item.get_item()
-
-        # The following code is here to work around a bizzare bug I encountered
-        # where some SVGs would completely fail to load, segfaulting the entire
-        # program. This is a lazy fix that loads the icons manually in most cases,
-        # which should hopefully be enough to work around the issue.
-        icon_found = False
-        icon_name = app.get_icon().to_string()
-        if '/' in icon_name:
-            try:
-                app_icon.app_icon.set_from_pixbuf(
-                    GdkPixbuf.Pixbuf.new_from_file_at_scale(
-                        icon_name, 96, 96, True
-                    )
-                )
-            except GLib.GError:
-                pass
-            else:
-                icon_found = True
-        elif '.' not in icon_name:
-            app_icon.app_icon.set_from_icon_name(icon_name)
-            icon_found = True
-        else:
-            icon_paths = Gtk.IconTheme.get_for_display(self.get_display()).get_search_path()
-            for path in ['/usr/share/icons/hicolor/scalable/apps'] + icon_paths:
-                try:
-                    app_icon.app_icon.set_from_pixbuf(
-                        GdkPixbuf.Pixbuf.new_from_file_at_scale(
-                            path + '/' + icon_name + '.svg', 96, 96, True
-                        )
-                    )
-                except GLib.GError:
-                    try:
-                        app_icon.app_icon.set_from_pixbuf(
-                            GdkPixbuf.Pixbuf.new_from_file_at_scale(
-                                path + '/' + icon_name + '.png', 96, 96, True
-                            )
-                        )
-                    except GLib.GError:
-                        continue
-                    else:
-                        icon_found = True
-                        break
-                else:
-                    icon_found = True
-                    break
-
-        if not icon_found:
-            app_icon.app_icon.set_from_icon_name(icon_name)
-
-        app_icon.app_name.set_label(app.get_name())
-
-        if app.get_filename() in config['favorite-apps']:
-            app_icon.is_favorite = True
-        else:
-            app_icon.is_favorite = False
-
-        app_icon.app_filename = app.get_filename()
-
     @Gtk.Template.Callback()
     def activate(self, grid, position, *args):
         """Opens the app represented by the app icon."""
         app = grid.get_model().get_item(position)
         context = Gdk.Display.get_app_launch_context(self.get_display())
-        app.launch(None, context)
+        app.app.launch(None, context)
         self.hide()
 
     def fill_model(self):
@@ -280,8 +343,9 @@ class AppChooser(Gtk.Box):
         for app in appinfo:
             if not Gio.AppInfo.should_show(app):
                 continue
-            self.store.append(app)
-            filenames.append(app.get_filename())
+            self.store.append(AppInfo(app))
+            #self.store.append(app)
+            filenames.append(app.get_property("filename"))
 
         # Delete missing .desktop entries in favorite apps
         favs_output = config['favorite-apps'].copy()
@@ -336,19 +400,19 @@ class AppChooser(Gtk.Box):
         """Fill-in for custom filter for app grid."""
         query = self.search.get_text()
         if not query:
-            if appinfo.get_filename() in config['favorite-apps']:
+            if appinfo.get_property('filename') in config['favorite-apps']:
                 return False
             return True
         query = query.casefold()
 
-        if query in appinfo.get_name().casefold():
+        if query in appinfo.get_property('name').casefold():
             return True
 
-        if appinfo.get_generic_name():
-            if query in appinfo.get_generic_name().casefold():
+        if appinfo.get_property('generic_name'):
+            if query in appinfo.get_property('generic_name').casefold():
                 return True
 
-        for keyword in appinfo.get_keywords():
+        for keyword in appinfo.app.get_keywords():
             if query in keyword.casefold():
                 return True
 
@@ -358,16 +422,16 @@ class AppChooser(Gtk.Box):
         """
         Takes a Gio.AppInfo and returns whether the app is in favorites or not.
         """
-        if appinfo.get_filename() in config['favorite-apps']:
+        if appinfo.get_property('filename') in config['favorite-apps']:
             return True
         return False
 
     def sort_func(self, a, b, *args):
         """Sort function for the app grid icon sorter."""
-        a_name = GLib.utf8_casefold(a.get_name(), -1)
+        a_name = GLib.utf8_casefold(a.get_property("name"), -1)
         if not a_name:
             a_name = ''
-        b_name = GLib.utf8_casefold(b.get_name(), -1)
+        b_name = GLib.utf8_casefold(b.get_property("name"), -1)
         if not b_name:
             b_name = ''
         return GLib.utf8_collate(a_name, b_name)
