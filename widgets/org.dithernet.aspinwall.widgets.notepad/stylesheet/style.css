@@ -1,0 +1,12 @@
+.notepad-text {
+	border-radius: 6px;
+	background-color: transparent;
+	margin: 10px;
+	padding: 0.2em;
+	font-size: 1.05em;
+
+	transition: background-color 0.15s ease-out;
+}
+.notepad-text:focus {
+	background-color: alpha(darker(@aspinwall_widget_bg), 0.5);
+}

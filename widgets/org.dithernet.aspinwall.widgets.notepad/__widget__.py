@@ -20,14 +20,23 @@ class Notepad(Widget):
     }
 
     has_config = True
+    has_stylesheet = True
+    no_padding = True
 
     def __init__(self, instance=0):
         super().__init__(instance)
 
         scroll = Gtk.ScrolledWindow(hexpand=True, min_content_height=200, max_content_height=200)
 
-        self.textview = Gtk.TextView(hexpand=True, vexpand=True)
+        self.textview = Gtk.TextView(
+            hexpand=True,
+            vexpand=True,
+            pixels_above_lines=6,
+            pixels_inside_wrap=2,
+            accepts_tab=False
+        )
         self.textview.set_wrap_mode(Gtk.WrapMode.WORD_CHAR)
+        self.textview.add_css_class('notepad-text')
         self.textview.get_buffer().set_enable_undo(True)
         self.textview.get_buffer().set_text(self.config['buffer'])
 
