@@ -94,7 +94,7 @@ class TodoItem(GObject.Object):
 class Todo(Widget):
     metadata = {
         "name": translatable("To-do list"),
-        "icon": 'edit-paste-symbolic',
+        "icon": 'view-list-symbolic',
         "description": translatable("Editable tasks list"),
         "id": "org.dithernet.aspinwall.widgets.Todo",
         "tags": translatable('notes,todo,to do,list'),
