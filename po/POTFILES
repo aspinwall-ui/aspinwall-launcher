@@ -1,3 +1,4 @@
+data/org.dithernet.aspinwall.launcher.desktop.in
 data/org.dithernet.aspinwall.launcher.gschema.xml
 src/ui/appchooser.ui
 src/ui/appicon.ui

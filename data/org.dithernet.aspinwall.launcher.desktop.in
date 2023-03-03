@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Aspinwall Launcher
+Comment=Smart display launcher
+Exec=aspinwall-launcher %U
+Icon=user-home-symbolic
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=GTK;Utility;
+Keywords=launcher;
