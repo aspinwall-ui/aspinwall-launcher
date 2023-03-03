@@ -51,6 +51,10 @@
                       <class name="aspinwall-launcher-flap"/>
                     </style>
 
+                    <child type="separator">
+                      <object class="GtkSeparator"/>
+                    </child>
+
                     <child type="flap">
                       <object class="WidgetChooser" id="widget_chooser">
                         <property name="valign">end</property>
