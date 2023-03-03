@@ -9,7 +9,7 @@ translatable = lambda message: message
 class Notepad(Widget):
     metadata = {
         "name": translatable("Notepad"),
-        "icon": 'edit-paste-symbolic',
+        "icon": 'accessories-text-editor-symbolic',
         "description": translatable("Simple notepad widget"),
         "id": "org.dithernet.aspinwall.widgets.Notepad",
         "tags": translatable('notes,todo,to do,list'),
