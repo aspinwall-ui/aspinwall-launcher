@@ -98,6 +98,8 @@ class WidgetChooser(Gtk.Box):
         window.app_chooser_button_revealer.set_sensitive(False)
         window.widgetbox.chooser_button_revealer.set_sensitive(False)
 
+        self.search.grab_focus()
+
     def setup(self, factory, list_item):
         """Sets up the widget list."""
         list_item.set_child(WidgetInfobox())
