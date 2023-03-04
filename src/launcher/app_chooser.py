@@ -229,8 +229,11 @@ class AppChooser(Gtk.Box):
     app_grid = Gtk.Template.Child()
     app_grid_container = Gtk.Template.Child()
     app_grid_status_stack = Gtk.Template.Child()
+
     favorites_revealer = Gtk.Template.Child()
     favorites_grid = Gtk.Template.Child()
+
+    searchbar_clamp = Gtk.Template.Child()
     search = Gtk.Template.Child()
     no_results = Gtk.Template.Child()
 
@@ -288,6 +291,8 @@ class AppChooser(Gtk.Box):
         else:
             self.favorites_revealer.set_reveal_child(False)
 
+        self._old_width = 0
+
         self.late_init_done = False
         self.connect('realize', self.late_init)
 
@@ -303,8 +308,14 @@ class AppChooser(Gtk.Box):
 
     def handle_resize(self, surface, width, height, *args):
         """Workarounds for scaling."""
+        if self._old_width == width:
+            return
+        self._old_width = width
+
         for grid in [self.app_grid, self.favorites_grid]:
             if width <= 600:
+                self.searchbar_clamp.set_margin_top(12)
+                self.search.set_margin_start(60)
                 if width >= 375:
                     grid.add_css_class('small-icons')
                     grid.remove_css_class('smaller-icons')
@@ -316,6 +327,8 @@ class AppChooser(Gtk.Box):
                     grid.set_min_columns(2)
                     grid.set_max_columns(2)
             else:
+                self.searchbar_clamp.set_margin_top(24)
+                self.search.set_margin_start(6)
                 grid.set_min_columns(4)
                 grid.set_max_columns(4)
                 if grid == self.favorites_grid:

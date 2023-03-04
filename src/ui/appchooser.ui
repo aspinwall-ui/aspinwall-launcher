@@ -15,23 +15,20 @@
             <property name="orientation">vertical</property>
 
             <child>
-              <object class="AdwClamp" id="content_clamp">
+              <object class="AdwClamp" id="searchbar_clamp">
                 <property name="margin-top">24</property>
-
+                <property name="maximum-size">412</property>
                 <child>
-                  <object class="AdwClamp">
-                    <property name="maximum-size">400</property>
-                    <child>
-                      <object class="GtkSearchEntry" id="search">
-                        <property name="valign">start</property>
-                        <property name="hexpand">true</property>
-                        <property name="placeholder-text" translatable="yes">Search apps…</property>
+                  <object class="GtkSearchEntry" id="search">
+                    <property name="valign">start</property>
+                    <property name="hexpand">true</property>
+                    <property name="placeholder-text" translatable="yes">Search apps…</property>
+                    <property name="margin-start">6</property>
+                    <property name="margin-end">6</property>
 
-                        <style>
-                          <class name="app-searchbox"/>
-                        </style>
-                      </object>
-                    </child>
+                    <style>
+                      <class name="app-searchbox"/>
+                    </style>
                   </object>
                 </child>
               </object>
