@@ -29,11 +29,11 @@ class WidgetInstallDialog(Adw.MessageDialog):
         for widget in chooser.store:
             if widget.id == package.id:
                 if widget.version == package.version:
-                    self.set_heading("Reinstall this widget?")
-                    self.set_response_label("install", "_Reinstall")
+                    self.set_heading(_("Reinstall this widget?")) # noqa: F821
+                    self.set_response_label("install", _("_Reinstall")) # noqa: F821
                 else:
-                    self.set_heading("Upgrade this widget?")
-                    self.set_response_label("install", "_Upgrade")
+                    self.set_heading(_("Upgrade this widget?")) # noqa: F821
+                    self.set_response_label("install", _("_Upgrade")) # noqa: F821
                 break
 
         self.package.bind_property('icon_name', self.icon, 'icon_name',
@@ -226,7 +226,7 @@ class WidgetChooser(Gtk.Box):
 
         self.file_chooser = Gtk.FileChooserNative(
                                 # TRANSLATORS: Title of window for opening package
-                                title=_("Open package file"),
+                                title=_("Open package file"), # noqa: F821
                                 transient_for=self.get_native(),
                                 action=Gtk.FileChooserAction.OPEN,
                                 select_multiple=True
