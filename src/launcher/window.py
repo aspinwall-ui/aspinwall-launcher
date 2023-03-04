@@ -1,7 +1,6 @@
 # coding: utf-8
 """Contains window creation code for the Aspinwall launcher"""
 from gi.repository import Adw, Gtk, Gio
-import os
 
 from ..config import config
 
@@ -101,10 +100,12 @@ class Launcher(Gtk.ApplicationWindow):
     def on_clickout(self, *args):
         if self.widget_chooser_flap.get_reveal_flap():
             point = self.clickout_gesture.get_bounding_box_center()
-            rel_point = Gtk.Widget.translate_coordinates(self, self.widget_chooser, point[1], point[2])
+            rel_point = Gtk.Widget.translate_coordinates(
+                self, self.widget_chooser, point[1], point[2]
+            )
             if not self.widget_chooser.contains(rel_point[0], rel_point[1]):
                 self.widget_chooser.hide()
-        if self.widgetbox.iterate_over_all_widgetviews(self._clickout_loop) == False:
+        if self.widgetbox.iterate_over_all_widgetviews(self._clickout_loop) is False:
             return
         if not self.stop_clickout:
             self.widgetbox.exit_management_mode()

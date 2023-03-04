@@ -95,7 +95,7 @@ class Todo(Widget):
     metadata = {
         "name": translatable("To-do list"),
         "icon": 'view-list-symbolic',
-        "description": translatable("Editable tasks list"),
+        "description": translatable("Create a list of your current tasks"),
         "id": "org.dithernet.aspinwall.widgets.Todo",
         "tags": translatable('notes,todo,to do,list'),
         "author": translatable("Aspinwall developers"),

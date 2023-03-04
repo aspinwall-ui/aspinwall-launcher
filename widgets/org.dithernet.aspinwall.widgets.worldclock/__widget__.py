@@ -6,7 +6,7 @@ from aspinwall_launcher.widgets import Widget
 from aspinwall_launcher.utils.clock import clock_daemon
 import gi
 gi.require_version('GWeather', '4.0')
-from gi.repository import Adw, GLib, Gtk, GWeather, Gio
+from gi.repository import Adw, GLib, Gtk, GWeather
 translatable = lambda message: message
 import gettext
 
@@ -31,7 +31,7 @@ class WorldClock(Widget):
     metadata = {
         "name": translatable("World Clock"),
         "icon": 'alarm-symbolic',
-        "description": translatable("Clock with a custom timezone selector."),
+        "description": translatable("Check the time in another timezone"),
         "id": "org.dithernet.aspinwall.widgets.WorldClock",
         "tags": translatable('clock,timezone'),
         "author": translatable("Aspinwall developers"),
@@ -53,7 +53,8 @@ class WorldClock(Widget):
         if self.config['location']:
             # We get it this way to prevent PyGObject from turning it
             # into a Python object (it has to be a GVariant)
-            location_variant = self.config.get_value('location').get_child_value(0).get_child_value(0)
+            location_variant = self.config.get_value('location').\
+                                get_child_value(0).get_child_value(0)
             self.location = GWeather.Location.get_world().deserialize(
                 location_variant
             )
@@ -89,7 +90,9 @@ class WorldClock(Widget):
         """Updates the clock data every second."""
         _ = self.l
         if not self.location:
-            self.timezone_label.set_label(_('No location selected. Open the widget settings and choose a location.'))
+            self.timezone_label.set_label(
+                _('No location selected. Open the widget settings and choose a location.')
+            )
             return
         time = GLib.DateTime.new_now(self.location.get_timezone())
         if self.config['twelvehour-time']:
@@ -98,7 +101,9 @@ class WorldClock(Widget):
             time_string = time.format('%H:%M')
         self.clock_label.set_label(time_string)
 
-        timezone_offset_hour = int(get_timezone_offset(self.location.get_timezone(), use_local=True) / 3600)
+        timezone_offset_hour = int(
+            get_timezone_offset(self.location.get_timezone(), use_local=True) / 3600
+        )
         if timezone_offset_hour > 0:
             timezone_offset_text = gettext.ngettext(
                 '{n} hour later', '{n} hours later',

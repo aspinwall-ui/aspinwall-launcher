@@ -3,7 +3,6 @@
 Contains code for the app chooser.
 """
 from gi.repository import Gdk, Gio, GLib, GObject, Gtk, GdkPixbuf
-import gi._gtktemplate
 
 from ..config import config
 
@@ -39,14 +38,15 @@ class AppIcon(Gtk.Box):
             AppIcon.actions_installed = True
         super().__init__()
         self.longpress_gesture = None
-        #self.popover.present()
         self.connect('map', self.setup_controller)
         self.connect('unmap', self.dismantle_controller)
         self.connect('destroy', self.dismantle_controller)
 
     def setup_controller(self, *args):
         if not self.longpress_gesture:
-            self.longpress_gesture = Gtk.GestureLongPress(propagation_phase=Gtk.PropagationPhase.CAPTURE)
+            self.longpress_gesture = Gtk.GestureLongPress(
+                propagation_phase=Gtk.PropagationPhase.CAPTURE
+            )
             self.longpress_gesture.connect('pressed', self.show_menu)
             self.add_controller(self.longpress_gesture)
 
@@ -357,7 +357,6 @@ class AppChooser(Gtk.Box):
             if not Gio.AppInfo.should_show(app):
                 continue
             self.store.append(AppInfo(app))
-            #self.store.append(app)
             filenames.append(app.get_property("filename"))
 
         # Delete missing .desktop entries in favorite apps

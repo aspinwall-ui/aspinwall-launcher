@@ -35,7 +35,10 @@ class LoadedWidgetManager(GObject.Object):
 
         # Set up autorefresh
         self.set_autorefresh_frequency()
-        config.connect('changed::widget-automatic-refresh-frequency', self.set_autorefresh_frequency)
+        config.connect(
+            'changed::widget-automatic-refresh-frequency',
+            self.set_autorefresh_frequency
+        )
 
         clock_daemon.connect('notify::time', self.autorefresh_tick)
 
@@ -54,7 +57,7 @@ class LoadedWidgetManager(GObject.Object):
                 print("Removing from config.")
                 config['widgets'] = [x for x in config['widgets'] if x != widget]
                 continue
-            except:
+            except: # noqa: E722
                 self.emit("widget-failed", widget_id, traceback.format_exc())
                 config['widgets'] = [x for x in config['widgets'] if x != widget]
                 continue
@@ -75,7 +78,7 @@ class LoadedWidgetManager(GObject.Object):
         instance = str(uuid.uuid4())
         try:
             widget = widget_class(instance)
-        except:
+        except: # noqa: E722
             self.emit("widget-failed", widget_class.metadata['name'], traceback.format_exc())
             return
         self.add_widget(widget)
@@ -94,7 +97,7 @@ class LoadedWidgetManager(GObject.Object):
 
         try:
             widget = widget_class(instance)
-        except:
+        except: # noqa: E722
             self.emit("widget-failed", widget_class.metadata['name'], traceback.format_exc())
             return
 
@@ -172,7 +175,7 @@ class LoadedWidgetManager(GObject.Object):
     def widget_added(self, widget):
         pass
 
-    @GObject.Signal(arg_types=(str,str))
+    @GObject.Signal(arg_types=(str, str))
     def widget_failed(self, widget_name, logs):
         self.errors[widget_name] = logs
         pass

@@ -8,7 +8,7 @@ import json
 import shutil
 import tarfile
 
-from .loader import user_widget_dir, load_available_widgets
+from .loader import user_widget_dir
 
 class WidgetPackage(GObject.Object):
     """Class for handling widget packages."""
@@ -44,8 +44,8 @@ class WidgetPackage(GObject.Object):
         with tarfile.open(self.path, 'r') as pkgfile:
             pkgfile.extractall(path=user_widget_dir,
                 members=[tarinfo for tarinfo in pkgfile.getmembers()
-                    if tarinfo.name.startswith(self.metadata['id'] + '/') and
-                        '/..' not in tarinfo.name and './' not in tarinfo.name
+                    if tarinfo.name.startswith(self.metadata['id'] + '/')
+                        and '/..' not in tarinfo.name and './' not in tarinfo.name # noqa: W503
                 ]
             )
 

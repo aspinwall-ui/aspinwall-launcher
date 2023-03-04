@@ -87,7 +87,10 @@ def load_available_widgets():
 
             widget_load_id = _COMMON_PREFIX + os.path.basename(widget_dir).replace('.', '_')
 
-            spec = importlib.util.spec_from_file_location(widget_load_id, widget_path, submodule_search_locations=[])
+            spec = importlib.util.spec_from_file_location(
+                    widget_load_id, widget_path,
+                    submodule_search_locations=[]
+            )
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
 
@@ -100,7 +103,7 @@ def load_available_widgets():
 
             try:
                 module_id = widget_class.metadata['id']
-            except:
+            except KeyError:
                 print("No ID set in metadata of " + widget_path)
                 errors.append((widget_path, 'No widget class'))
                 continue

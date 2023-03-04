@@ -129,8 +129,10 @@ class WeatherSettings(Gtk.Box):
     def location_bind(self, item):
         """Binds the list items in the app list."""
         row = Adw.ActionRow(
-            title=item.get_name(), # city name
-            subtitle=f'{item.get_parent().get_name()} • {item.get_timezone_str()}' # country name + timezone
+            # city name
+            title=item.get_name(),
+            # country name + timezone
+            subtitle=f'{item.get_parent().get_name()} • {item.get_timezone_str()}'
         )
         selection_box = Gtk.CheckButton()
         selection_box.add_css_class('selection-mode')
@@ -146,7 +148,7 @@ class WeatherSettings(Gtk.Box):
         if self._ignore_sb_active_change:
             return
 
-        if selection_box.get_active() == False:
+        if selection_box.get_active() is False:
             self._ignore_sb_active_change = True
             selection_box.set_active(True)
             self._ignore_sb_active_change = False

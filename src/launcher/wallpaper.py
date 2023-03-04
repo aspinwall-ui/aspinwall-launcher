@@ -6,7 +6,6 @@ from gi.repository import Gtk, Gdk, GdkPixbuf, GLib, GObject
 import math
 import os
 import traceback
-import uuid
 
 from ..config import config
 from ..utils.clock import clock_daemon

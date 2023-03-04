@@ -59,4 +59,3 @@ class WidgetData(GObject.Object):
     def tags(self):
         """The tags of the widget, as defined in its metadata."""
         return self.metadata['tags'].split(',')
-

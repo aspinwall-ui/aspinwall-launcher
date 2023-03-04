@@ -10,7 +10,7 @@ class Notepad(Widget):
     metadata = {
         "name": translatable("Notepad"),
         "icon": 'accessories-text-editor-symbolic',
-        "description": translatable("Simple notepad widget"),
+        "description": translatable("Take small notes"),
         "id": "org.dithernet.aspinwall.widgets.Notepad",
         "tags": translatable('notes,todo,to do,list'),
         "author": translatable("Aspinwall developers"),

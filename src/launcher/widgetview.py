@@ -2,8 +2,7 @@
 """
 Contains basic code for the launcher's widget handling.
 """
-from gi.repository import Gtk, Gdk, GObject
-import time
+from gi.repository import Gtk
 
 from .widgetmanager import widget_manager
 
@@ -89,7 +88,9 @@ class WidgetViewHeader(Gtk.CenterBox):
         self._widgetview.widget_settings_container.set_visible(True)
         self._widget._settings_toggled = True
         self._widget.notify('settings-toggled')
-        self._widgetview.container_stack.set_visible_child(self._widgetview.widget_settings_container)
+        self._widgetview.container_stack.set_visible_child(
+            self._widgetview.widget_settings_container
+        )
 
     @Gtk.Template.Callback()
     def show_widget_about(self, *args):

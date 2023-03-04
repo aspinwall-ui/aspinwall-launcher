@@ -6,7 +6,7 @@ gi_require_version('Adw', '1')
 import os
 from pathlib import Path
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw
 from .launcher.window import Launcher
 from .config import config
 

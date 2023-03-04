@@ -259,17 +259,20 @@ class LauncherSettings(Adw.PreferencesWindow):
     @Gtk.Template.Callback()
     def set_slideshow_switch_delay(self, combobox, *args):
         """Sets the slideshow switch delay."""
-        config['slideshow-switch-delay'] = self.slideshow_switch_delay_values[int(combobox.get_selected())]
+        config['slideshow-switch-delay'] = \
+            self.slideshow_switch_delay_values[int(combobox.get_selected())]
 
     @Gtk.Template.Callback()
     def set_idle_mode_delay(self, combobox, *args):
         """Sets the idle mode switch delay."""
-        config['idle-mode-delay'] = self.idle_mode_delay_values[int(combobox.get_selected())]
+        config['idle-mode-delay'] = \
+            self.idle_mode_delay_values[int(combobox.get_selected())]
 
     @Gtk.Template.Callback()
     def set_widget_autorefresh_frequency(self, combobox, *args):
         """Sets the widget autorefresh frequency."""
-        config['widget-autorefresh-frequency'] = self.widget_autorefresh_frequency_values[int(combobox.get_selected())]
+        config['widget-autorefresh-frequency'] = \
+            self.widget_autorefresh_frequency_values[int(combobox.get_selected())]
 
     @Gtk.Template.Callback()
     def set_wallpaper_color(self, button, *args):

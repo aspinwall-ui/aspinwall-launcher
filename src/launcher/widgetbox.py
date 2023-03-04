@@ -4,7 +4,6 @@ Contains code for the WidgetBox.
 """
 from gi.repository import Adw, GLib, Gtk, Gio, Gdk
 
-from ..config import config
 from .widgetmanager import widget_manager
 from .widgetview import WidgetView
 
@@ -55,7 +54,7 @@ class WidgetBox(Gtk.Box):
         for item_count in range(0, widget_manager.widgets.get_n_items()):
             widgetview = self.widget_container.get_row_at_index(item_count).get_child()
             res = iter_func(widgetview=widgetview)
-            if res == False:
+            if res is False:
                 return False
 
     def bind(self, widget, *args):
@@ -229,7 +228,7 @@ class WidgetBox(Gtk.Box):
 
         dialog = Adw.MessageDialog.new(self.get_native(),
             _('Could Not Load Widget'), # noqa: F821
-            _(f'Widget {widget_name} could not be loaded. More information is provided below.') # noqa: F821
+            _(f'Widget {widget_name} could not be loaded. More information is provided below.') # noqa: F821,E501
         )
         dialog.add_response("ok", _("OK")) # noqa: F821
         dialog.set_default_response('ok')

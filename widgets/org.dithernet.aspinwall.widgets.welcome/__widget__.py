@@ -10,7 +10,7 @@ class Welcome(Widget):
     metadata = {
         "name": translatable("Welcome"),
         "icon": 'dialog-information-symbolic',
-        "description": translatable("Displays basic information about Aspinwall."),
+        "description": translatable("Display basic information about Aspinwall"),
         "id": "org.dithernet.aspinwall.widgets.Welcome",
         "tags": translatable('welcome,first startup'),
         "author": translatable("Aspinwall developers"),

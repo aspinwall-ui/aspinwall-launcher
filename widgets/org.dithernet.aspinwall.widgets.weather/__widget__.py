@@ -3,18 +3,16 @@
 Weather widget for Aspinwall
 """
 from aspinwall_launcher.widgets import Widget
-from aspinwall_launcher.utils.clock import clock_daemon
 import gi
 gi.require_version('GWeather', '4.0')
-from gi.repository import Adw, Gtk, GWeather
+from gi.repository import Adw, Gtk, GWeather # noqa: F401
 translatable = lambda message: message
-import gettext
 
 class Weather(Widget):
     metadata = {
         "name": translatable("Weather"),
         "icon": 'weather-clear-symbolic',
-        "description": translatable("Shows the current weather forecast."),
+        "description": translatable("See the current weather forecast"),
         "id": "org.dithernet.aspinwall.widgets.Weather",
         "tags": translatable('weather,forecast'),
         "author": translatable("Aspinwall developers"),
@@ -39,7 +37,8 @@ class Weather(Widget):
         if self.config['location']:
             # We get it this way to prevent PyGObject from turning it
             # into a Python object (it has to be a GVariant)
-            location_variant = self.config.get_value('location').get_child_value(0).get_child_value(0)
+            location_variant = self.config.get_value('location').\
+                                get_child_value(0).get_child_value(0)
             self.location = GWeather.Location.get_world().deserialize(
                 location_variant
             )

@@ -93,7 +93,9 @@ class Widget(GObject.GObject):
             if not self.schema_base_path:
                 self.schema_base_path = '/' + self.metadata['id'].lower().replace('.', '/') + '/'
 
-            self.config = Gio.Settings.new_full(self.settings_schema, None, self.schema_base_path + str(instance) + '/')
+            self.config = Gio.Settings.new_full(self.settings_schema, None,
+                self.schema_base_path + str(instance) + '/'
+            )
 
         # Set up GResource
         if self.has_gresource:
@@ -179,9 +181,9 @@ class Widget(GObject.GObject):
         # Might be worth asking though?
 
         # Remove comments (both for minification reasons and for breakage prevention)
-        _string_clean = re.sub('/\*[^*]*\*+([^/][^*]*\*+)*/', '', string)
+        _string_clean = re.sub('/\*[^*]*\*+([^/][^*]*\*+)*/', '', string) # noqa: W605
 
-        rules_split = [ rule.replace('\n', '') for rule in _string_clean.split('}') if rule.replace('\n', '') ] # noqa: E501
+        rules_split = [ rule.replace('\n', '') for rule in _string_clean.split('}') if rule.replace('\n', '') ] # noqa: E501,E201,E202
         rules = ''
         for rule in rules_split:
             if not rule:
