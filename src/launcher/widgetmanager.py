@@ -110,7 +110,7 @@ class LoadedWidgetManager(GObject.Object):
         """Removes a widget from the loaded widget list."""
         widget_position = self.widgets.find(widget)[1]
         self.widgets.remove(widget_position)
-        widget.destroy()
+        # widget.destroy() # Users are responsible for calling this method
         self.save_widgets()
 
     # Widget moving, positions

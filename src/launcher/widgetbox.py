@@ -79,6 +79,9 @@ class WidgetBox(Gtk.Box):
         if instance not in self._removed_widgets.keys():
             return False
 
+        # Remove config, gresource
+        self._removed_widgets[instance].destroy()
+
         self._removed_widgets.pop(instance)
 
     def remove_widget(self, widgetview):
