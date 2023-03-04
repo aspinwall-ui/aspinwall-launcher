@@ -25,22 +25,32 @@ class WidgetData(GObject.Object):
         """Wrapper for widget_class.show_about_window."""
         self.widget_class.show_about_window(self, transient_for)
 
-    @GObject.Property
+    @GObject.Property(type=str)
     def id(self):
         """The ID of the widget, as defined in its metadata."""
         return self.metadata['id']
 
-    @GObject.Property
+    @GObject.Property(type=str)
+    def version(self):
+        """The version of the widget, as defined in its metadata."""
+        return self.metadata['version']
+
+    @GObject.Property(type=str)
     def name(self):
         """The name of the widget, as defined in its metadata."""
         return self.metadata['name']
 
-    @GObject.Property
+    @GObject.Property(type=str)
+    def author(self):
+        """The author of the widget, as defined in its metadata."""
+        return self.metadata['author']
+
+    @GObject.Property(type=str)
     def icon_name(self):
         """The icon name of the widget, as defined in its metadata."""
         return self.metadata['icon']
 
-    @GObject.Property
+    @GObject.Property(type=str)
     def description(self):
         """The description of the widget, as defined in its metadata."""
         return self.metadata['description']
@@ -49,3 +59,4 @@ class WidgetData(GObject.Object):
     def tags(self):
         """The tags of the widget, as defined in its metadata."""
         return self.metadata['tags'].split(',')
+

@@ -220,6 +220,14 @@
 	padding-left: 12px;
 }
 
+.installdialog-version {
+	background-color: alpha(@accent_bg_color, 0.15);
+	color: @accent_color;
+	border-radius: 24px;
+	padding: 2px 1em;
+	font-weight: 500;
+}
+
 /* App chooser */
 
 .app-chooser {
@@ -262,9 +270,10 @@
 .app-name {
 	color: #fff;
 	font-size: 1.03em;
-	font-weight: 700;
+	font-weight: 500;
 	margin-top: 4px;
 	opacity: 0.9;
+	text-shadow: 0 0 6px @aspinwall_widget_shade;
 }
 
 .app-icon .app-icon-image {
@@ -290,7 +299,7 @@
 .favorites-grid .app-icon .app-name { font-size: 0; margin-top: 0; }
 
 .favorites-grid-container {
-	background-color: alpha(@aspinwall_appchooser_favorites_bg, 0.75);
+	background-color: alpha(@aspinwall_appchooser_favorites_bg, 0.25);
 	color: @aspinwall_appchooser_favorites_fg;
 	padding: 4px;
 }

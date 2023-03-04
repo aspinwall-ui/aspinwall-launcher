@@ -269,42 +269,42 @@ class Widget(GObject.GObject):
 
         about_window.present()
 
-    @GObject.Property
+    @GObject.Property(type=str)
     def id(self):
         """The ID of the widget, as defined in its metadata."""
         return self.metadata['id']
 
-    @GObject.Property
+    @GObject.Property(type=str)
     def version(self):
         """The version of the widget, as defined in its metadata."""
         return self.metadata['version']
 
-    @GObject.Property
+    @GObject.Property(type=str)
     def name(self):
         """The name of the widget, as defined in its metadata."""
         return self.metadata['name']
 
-    @GObject.Property
+    @GObject.Property(type=str)
+    def author(self):
+        """The author of the widget, as defined in its metadata."""
+        return self.metadata['author']
+
+    @GObject.Property(type=str)
     def icon_name(self):
         """The icon name of the widget, as defined in its metadata."""
         return self.metadata['icon']
 
-    @GObject.Property
+    @GObject.Property(type=str)
     def description(self):
         """The description of the widget, as defined in its metadata."""
         return self.metadata['description']
-
-    @GObject.Property
-    def author(self):
-        """The author of the widget, as defined in its metadata."""
-        return self.metadata['author']
 
     @GObject.Property
     def tags(self):
         """The tags of the widget, as defined in its metadata."""
         return self.metadata['tags'].split(',')
 
-    @GObject.Property
+    @GObject.Property(type=str)
     def url(self):
         """
         A link to the repository/website of the widget, as defined in its metadata.
@@ -313,7 +313,7 @@ class Widget(GObject.GObject):
         """
         return self.metadata['url']
 
-    @GObject.Property
+    @GObject.Property(type=str)
     def issue_tracker(self):
         """
         A link to the issue tracker of the widget, as defined in its metadata.

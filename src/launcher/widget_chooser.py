@@ -2,11 +2,54 @@
 """
 Contains code for the widget chooser and widget infoboxes for the chooser.
 """
-from gi.repository import Gtk, Gio, GLib
+from gi.repository import Adw, Gtk, Gio, GLib, GObject
 
 from .widgetmanager import widget_manager
 from ..widgets.data import WidgetData
 from ..widgets.loader import available_widgets
+from ..widgets.package import WidgetPackage
+
+@Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetinstalldialog.ui')
+class WidgetInstallDialog(Adw.MessageDialog):
+    """
+    Dialog that appears when installing a new widget.
+    """
+    __gtype_name__ = 'WidgetInstallDialog'
+
+    icon = Gtk.Template.Child()
+    name = Gtk.Template.Child()
+    author = Gtk.Template.Child()
+    version = Gtk.Template.Child()
+
+    def __init__(self, package, chooser):
+        super().__init__(modal=True, transient_for=chooser.get_native())
+        self.package = package
+        self.chooser = chooser
+
+        for widget in chooser.store:
+            if widget.id == package.id:
+                if widget.version == package.version:
+                    self.set_heading("Reinstall this widget?")
+                    self.set_response_label("install", "_Reinstall")
+                else:
+                    self.set_heading("Upgrade this widget?")
+                    self.set_response_label("install", "_Upgrade")
+                break
+
+        self.package.bind_property('icon_name', self.icon, 'icon_name',
+            GObject.BindingFlags.SYNC_CREATE)
+        self.package.bind_property('name', self.name, 'label',
+            GObject.BindingFlags.SYNC_CREATE)
+        self.package.bind_property('author', self.author, 'label',
+            GObject.BindingFlags.SYNC_CREATE)
+        self.package.bind_property('version', self.version, 'label',
+            GObject.BindingFlags.SYNC_CREATE)
+
+    @Gtk.Template.Callback()
+    def handle_response(self, dialog, response):
+        if response == 'install':
+            self.package.install()
+        self.close()
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetinfobox.ui')
 class WidgetInfobox(Gtk.Box):
@@ -68,12 +111,12 @@ class WidgetChooser(Gtk.Box):
         factory.connect('bind', self.bind)
 
         # Set up model and factory
-        store = Gio.ListStore(item_type=WidgetData)
+        self.store = Gio.ListStore(item_type=WidgetData)
         for widget_class in available_widgets:
-            store.append(WidgetData(widget_class))
+            self.store.append(WidgetData(widget_class))
 
         # Set up sort model
-        self.sort_model = Gtk.SortListModel(model=store)
+        self.sort_model = Gtk.SortListModel(model=self.store)
         self.sorter = Gtk.CustomSorter.new(self.sort_func, None)
         self.sort_model.set_sorter(self.sorter)
 
@@ -88,6 +131,12 @@ class WidgetChooser(Gtk.Box):
         # Set up widget list
         self.widget_list.set_model(Gtk.NoSelection(model=self.model))
         self.widget_list.set_factory(factory)
+
+        # Set up file filter for widget install dialog
+        self.widget_pkg_filter = Gtk.FileFilter()
+        for mime in ('application/gzip', 'application/x-gzip', 'application/tar+gzip'):
+            self.widget_pkg_filter.add_mime_type(mime)
+        self.file_chooser = None
 
     def show(self, *args):
         self.get_parent().set_reveal_flap(True)
@@ -106,11 +155,11 @@ class WidgetChooser(Gtk.Box):
 
     def update_model(self):
         """Updates the widget list model."""
-        store = Gio.ListStore(item_type=WidgetData)
+        self.store = Gio.ListStore(item_type=WidgetData)
         for widget in available_widgets:
-            store.append(WidgetData(widget))
+            self.store.append(WidgetData(widget))
 
-        self.sort_model.set_model(store)
+        self.sort_model.set_model(self.store)
 
     def bind(self, factory, list_item):
         """Binds the list items in the widget list."""
@@ -165,3 +214,42 @@ class WidgetChooser(Gtk.Box):
             window.clockbox.undim()
         window.app_chooser_button_revealer.set_sensitive(True)
         window.widgetbox.chooser_button_revealer.set_sensitive(True)
+
+    @Gtk.Template.Callback()
+    def show_package_file_selector(self, *args):
+        """
+        Shows the widget package file selector for selecting a widget to
+        install.
+        """
+        if self.file_chooser:
+            return
+
+        self.file_chooser = Gtk.FileChooserNative(
+                                # TRANSLATORS: Title of window for opening package
+                                title=_("Open package file"),
+                                transient_for=self.get_native(),
+                                action=Gtk.FileChooserAction.OPEN,
+                                select_multiple=True
+                                )
+
+        self.file_chooser.set_filter(self.widget_pkg_filter)
+
+        self.file_chooser.connect('response', self.open_pkg_from_dialog)
+        self.file_chooser.show()
+
+    def open_pkg_from_dialog(self, dialog, response):
+        """
+        Callback for a FileChooser that takes the response and opens the
+        package selected in the dialog.
+        """
+        self.file_chooser.destroy()
+        self.file_chooser = None
+        if response == Gtk.ResponseType.ACCEPT:
+            window = self.get_native()
+            try:
+                package = WidgetPackage(dialog.get_file().get_path())
+            except ValueError as e:
+                toast = Adw.Toast.new(f"Malformed package: {e}")
+                window.widgetbox.toast_overlay.add_toast(toast)
+            install_dialog = WidgetInstallDialog(package, self)
+            install_dialog.present()

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="WidgetInstallDialog" parent="AdwMessageDialog">
+    <property name="heading" translatable="yes">Install this widget?</property>
+    <property name="body" translatable="yes">Make sure you trust the source you downloaded the package from.</property>
+    <property name="close-response">cancel</property>
+    <property name="default-response">install</property>
+    <signal name="response" handler="handle_response"/>
+
+    <responses>
+      <response id="cancel" translatable="yes">_Cancel</response>
+      <response id="install" translatable="yes" appearance="suggested">_Install</response>
+    </responses>
+
+    <property name="extra-child">
+      <object class="GtkBox" id="info_statuspage">
+        <property name="orientation">vertical</property>
+        <property name="spacing">6</property>
+        <property name="margin-top">6</property>
+
+        <child>
+          <object class="GtkImage" id="icon">
+            <property name="pixel-size">72</property>
+            <property name="halign">center</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="name">
+            <property name="justify">center</property>
+            <property name="hexpand">true</property>
+            <property name="wrap">true</property>
+            <property name="margin-top">6</property>
+            <style>
+              <class name="title-2"/>
+            </style>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="author">
+            <property name="justify">center</property>
+            <property name="hexpand">true</property>
+            <property name="wrap">true</property>
+            <style>
+              <class name="subtitle"/>
+            </style>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="version">
+            <property name="justify">center</property>
+            <property name="hexpand">true</property>
+            <property name="halign">center</property>
+            <property name="wrap">true</property>
+            <property name="margin-top">6</property>
+
+            <style>
+              <class name="installdialog-version"/>
+            </style>
+          </object>
+        </child>
+      </object>
+    </property>
+  </template>
+</interface>

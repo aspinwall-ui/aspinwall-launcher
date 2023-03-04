@@ -6,6 +6,7 @@ widgets_sources = [
   '__init__.py',
   'data.py',
   'loader.py',
+  'package.py',
 ]
 
 install_data(widgets_sources, install_dir: submoduledir)

@@ -18,6 +18,16 @@
         </style>
 
         <child>
+          <object class="GtkButton" id="install_widget_button">
+            <property name="halign">start</property>
+            <property name="icon-name">folder-download-symbolic</property>
+            <!-- TRANSLATORS: Tooltip text for button -->
+            <property name="tooltip-text" translatable="yes">Install widget from package…</property>
+            <signal name="clicked" handler="show_package_file_selector"/>
+          </object>
+        </child>
+
+        <child>
           <object class="GtkSearchEntry" id="search">
             <property name="valign">start</property>
             <property name="hexpand">true</property>
