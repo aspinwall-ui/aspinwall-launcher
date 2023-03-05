@@ -92,11 +92,6 @@ class WidgetViewHeader(Gtk.CenterBox):
             self._widgetview.widget_settings_container
         )
 
-    @Gtk.Template.Callback()
-    def show_widget_about(self, *args):
-        """Shows the widget's about window."""
-        self._widgetview._widget.show_about_window(self.get_native())
-
     def update_move_buttons(self):
         """
         Makes the move buttons sensitive or non-sensitive based on whether
@@ -232,6 +227,11 @@ class WidgetView(Gtk.Box):
         self._widget._settings_toggled = False
         self._widget.notify('settings-toggled')
         self.container_stack.set_visible_child(self.container_overlay)
+
+    @Gtk.Template.Callback()
+    def show_widget_about(self, *args):
+        """Shows the widget's about window."""
+        self._widget.show_about_window(self.get_native())
 
     def handle_container_stack_transition_status(self, stack, *args):
         # Transition to widget

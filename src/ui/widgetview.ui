@@ -106,6 +106,18 @@
                     <property name="hexpand">true</property>
                   </object>
                 </child>
+
+                <child type="end">
+                  <object class="GtkButton" id="widget_about_button">
+                    <property name="icon-name">help-about-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">About this widget</property>
+                    <signal name="clicked" handler="show_widget_about"/>
+
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
 

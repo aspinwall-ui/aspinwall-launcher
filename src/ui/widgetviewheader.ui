@@ -18,18 +18,11 @@
             <property name="icon-name">user-trash-symbolic</property>
             <!-- TRANSLATORS: Tooltip for "remove widget" button -->
             <property name="tooltip-text" translatable="yes">Remove</property>
+            <property name="margin-end">6</property>
             <signal name="clicked" handler="remove"/>
 
             <style>
-              <class name="destructive-action"/>
-            </style>
-          </object>
-        </child>
-
-        <child>
-          <object class="GtkSeparator">
-            <style>
-              <class name="spacer"/>
+              <class name="flat"/>
             </style>
           </object>
         </child>
@@ -72,19 +65,6 @@
             </child>
           </object>
         </child>
-
-        <child>
-          <object class="GtkButton" id="widget_refresh_button">
-            <property name="icon-name">view-refresh-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Refresh widget</property>
-            <property name="margin-start">5</property>
-            <signal name="clicked" handler="refresh_widget"/>
-
-            <style>
-              <class name="flat"/>
-            </style>
-          </object>
-        </child>
       </object>
     </child>
 
@@ -104,11 +84,12 @@
     <child type="end">
       <object class="GtkBox">
         <property name="spacing">5</property>
+
         <child>
-          <object class="GtkButton" id="widget_settings_button">
-            <property name="icon-name">preferences-system-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Widget settings</property>
-            <signal name="clicked" handler="show_widget_settings"/>
+          <object class="GtkButton" id="widget_refresh_button">
+            <property name="icon-name">view-refresh-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Refresh widget</property>
+            <signal name="clicked" handler="refresh_widget"/>
 
             <style>
               <class name="flat"/>
@@ -117,10 +98,10 @@
         </child>
 
         <child>
-          <object class="GtkButton" id="widget_about_button">
-            <property name="icon-name">help-about-symbolic</property>
-            <property name="tooltip-text" translatable="yes">About this widget</property>
-            <signal name="clicked" handler="show_widget_about"/>
+          <object class="GtkButton" id="widget_settings_button">
+            <property name="icon-name">preferences-system-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Widget settings</property>
+            <signal name="clicked" handler="show_widget_settings"/>
 
             <style>
               <class name="flat"/>
