@@ -16,6 +16,7 @@ class WidgetData(GObject.Object):
         """Initializes a new WidgetData object."""
         super().__init__()
         self.widget_class = widget_class
+        self.path = self.widget_class.widget_path
 
         self.metadata = widget_class.metadata
         self.has_config = widget_class.has_config

@@ -26,7 +26,7 @@ class LoadedWidgetManager(GObject.Object):
         super().__init__()
         self.errors = {}
         self.widgets = Gio.ListStore(item_type=Widget)
-        errors = load_available_widgets()[1]
+        errors = load_available_widgets()
         self.load_widgets()
 
         if errors:

@@ -8,7 +8,7 @@ import json
 import shutil
 import tarfile
 
-from .loader import user_widget_dir
+from .loader import user_widget_dir, update_available_widgets
 
 class WidgetPackage(GObject.Object):
     """Class for handling widget packages."""
@@ -48,6 +48,8 @@ class WidgetPackage(GObject.Object):
                         and '/..' not in tarinfo.name and './' not in tarinfo.name # noqa: W503
                 ]
             )
+
+        update_available_widgets()
 
     @GObject.Property(type=str)
     def id(self):

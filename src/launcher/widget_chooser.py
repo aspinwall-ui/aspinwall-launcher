@@ -2,11 +2,10 @@
 """
 Contains code for the widget chooser and widget infoboxes for the chooser.
 """
-from gi.repository import Adw, Gtk, Gio, GLib, GObject
+from gi.repository import Adw, Gtk, GLib, GObject
 
 from .widgetmanager import widget_manager
-from ..widgets.data import WidgetData
-from ..widgets.loader import available_widgets
+from ..widgets.loader import loaded_widgets_data, update_available_widgets
 from ..widgets.package import WidgetPackage
 
 @Gtk.Template(resource_path='/org/dithernet/aspinwall/launcher/ui/widgetinstalldialog.ui')
@@ -26,7 +25,7 @@ class WidgetInstallDialog(Adw.MessageDialog):
         self.package = package
         self.chooser = chooser
 
-        for widget in chooser.store:
+        for widget in loaded_widgets_data:
             if widget.id == package.id:
                 if widget.version == package.version:
                     self.set_heading(_("Reinstall this widget?")) # noqa: F821
@@ -110,13 +109,8 @@ class WidgetChooser(Gtk.Box):
         factory.connect('setup', self.setup)
         factory.connect('bind', self.bind)
 
-        # Set up model and factory
-        self.store = Gio.ListStore(item_type=WidgetData)
-        for widget_class in available_widgets:
-            self.store.append(WidgetData(widget_class))
-
         # Set up sort model
-        self.sort_model = Gtk.SortListModel(model=self.store)
+        self.sort_model = Gtk.SortListModel(model=loaded_widgets_data)
         self.sorter = Gtk.CustomSorter.new(self.sort_func, None)
         self.sort_model.set_sorter(self.sorter)
 
@@ -139,6 +133,8 @@ class WidgetChooser(Gtk.Box):
         self.file_chooser = None
 
     def show(self, *args):
+        update_available_widgets()
+
         self.get_parent().set_reveal_flap(True)
         window = self.get_native()
         window.wallpaper.dim()
@@ -152,14 +148,6 @@ class WidgetChooser(Gtk.Box):
     def setup(self, factory, list_item):
         """Sets up the widget list."""
         list_item.set_child(WidgetInfobox())
-
-    def update_model(self):
-        """Updates the widget list model."""
-        self.store = Gio.ListStore(item_type=WidgetData)
-        for widget in available_widgets:
-            self.store.append(WidgetData(widget))
-
-        self.sort_model.set_model(self.store)
 
     def bind(self, factory, list_item):
         """Binds the list items in the widget list."""
