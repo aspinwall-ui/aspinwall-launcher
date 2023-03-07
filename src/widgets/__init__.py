@@ -234,8 +234,13 @@ class Widget(GObject.GObject):
         """Loads a stylesheet from a string."""
         rules = self._prepare_stylesheet_string(string, import_base)
 
+        rule_bytes = bytes(rules, 'utf-8')
+
         self.css_providers.append(Gtk.CssProvider())
-        self.css_providers[-1].load_from_data(bytes(rules, 'utf-8'))
+        try:
+            self.css_providers[-1].load_from_data(rule_bytes)
+        except TypeError:
+            self.css_providers[-1].load_from_data(rules, len(rules))
         Gtk.StyleContext.add_provider_for_display(
             self._container.get_display(),
             self.css_providers[-1],
