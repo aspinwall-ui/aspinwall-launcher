@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: aspinwall\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-10 21:24+0100\n"
-"PO-Revision-Date: 2022-08-06 13:20+0000\n"
+"PO-Revision-Date: 2023-06-21 11:55+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "aspinwall-ui/aspinwall-launcher/nb_NO/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.18.1\n"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:6
 msgid "Widgets"
@@ -513,17 +513,11 @@ msgstr "Opphavsrett © 2022 Aspinwall-bidragsyterne"
 #. noqa: F821
 #: src/launcher/window.py:187 src/launcher/window.py:188
 msgid "translator-credits"
-msgstr ""
+msgstr "Allan Nordhøy <epost@anotheragency.no>"
 
 #: src/launcher/settings.py:275
 msgid "Add wallpaper"
 msgstr "Legg til bakgrunnsbilde"
-
-#~ msgid "_Cancel"
-#~ msgstr "_Avbryt"
-
-#~ msgid "_Select"
-#~ msgstr "_Velg"
 
 #~ msgid "Linux tablet UI with smart hub capabilities"
 #~ msgstr "Linux-nettbrettsgrensesnitt med smarthub-muligheter"
@@ -561,3 +555,18 @@ msgstr "Legg til bakgrunnsbilde"
 #, fuzzy
 #~ msgid "Keeps the last slideshow switch countdown position."
 #~ msgstr "Holder øye med nedtellingsposisjon for siste lysbildebytte."
+
+#: src/launcher/ui/widgetinfobox.ui:44
+msgid "_Add"
+msgstr "_Legg til"
+
+#. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
+#: src/launcher/settings.py:271
+msgid "_Cancel"
+msgstr "_Avbryt"
+
+#. noqa: F821
+#. TRANSLATORS: Used for the file chooser dialog for adding wallpapers
+#: src/launcher/settings.py:273
+msgid "_Select"
+msgstr "_Velg"
