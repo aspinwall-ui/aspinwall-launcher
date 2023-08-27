@@ -8,41 +8,46 @@ msgstr ""
 "Project-Id-Version: org.dithernet.aspinwall.Launcher\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-10 21:24+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-08-28 08:55+0000\n"
+"Last-Translator: Burak Orcun OZKABLAN <borcunozkablan@gmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/aspinwall-ui/"
+"aspinwall-launcher/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:6
 msgid "Widgets"
-msgstr ""
+msgstr "Araçlar"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:7
 msgid "List of added widgets."
-msgstr ""
+msgstr "Eklenmiş araçların listesi."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:15
 msgid "Path to wallpaper"
-msgstr ""
+msgstr "Duvar Kağıdı Dizin Yolu"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:16
 msgid "Path to a wallpaper file."
-msgstr ""
+msgstr "Bir duvar kağıdı dosyası dizin yolu."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:23 src/ui/settings.ui:305
 msgid "Wallpaper style"
-msgstr ""
+msgstr "Duvar kağıdı stili"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:24
 msgid "Which wallpaper style to use (0 - solid color, 1 - scaled, 2 - zoomed)."
 msgstr ""
+"Hangi duvar kağıdı stilinin kullanılacağı (0 - düz renk, 1 - ölçeklenmiş, 2 -"
+" yaklaşılmış)."
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:31 src/ui/settings.ui:324
 msgid "Wallpaper background color"
-msgstr ""
+msgstr "Duvar kağıdı arkaplan rengi"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:32
 msgid ""
@@ -54,7 +59,7 @@ msgstr ""
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:40 src/ui/settings.ui:141
 #: src/ui/settings.ui:168
 msgid "Available wallpapers"
-msgstr ""
+msgstr "Mevcut duvar kağıtları"
 
 #: data/org.dithernet.aspinwall.launcher.gschema.xml:41
 msgid ""
